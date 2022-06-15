@@ -3,7 +3,7 @@ using UnityEngine;
 public class FieldManager : MonoBehaviour
 {
     [SerializeField] private GameObject fieldPrefab;
-    [SerializeField] private bool canSpawnField;
+    [SerializeField] private bool canSpawnField; // variavel necessaria para que o campo nao seja spawnado mais de uma vez
     
     private GameObject _currentFieldGameObject;
     private GameObject _nextFieldGameObject;
@@ -20,22 +20,20 @@ public class FieldManager : MonoBehaviour
     
     private void Update()
     {
-        if (canSpawnField && _currentField.state == Field.States.OnTarget)
-        {
-            ChangeField();
-            canSpawnField = false;
-        }
+        // isso sera movido para uma funçao que verifica se o player fez gol
+        if (!canSpawnField || _currentField.state != Field.States.OnTarget) return;
+        ChangeField();
+        canSpawnField = false;
     }
 
     public void ChangeField()
     {
         _nextFieldGameObject = Instantiate(fieldPrefab, _currentFieldGameObject.transform.position + offset, Quaternion.identity);
         _currentField.state = Field.States.Leaving;
-        _nextField = _nextFieldGameObject.GetComponent<Field>();
+        _nextField = _nextFieldGameObject.GetComponent<Field>(); // nao sera executado varias vezes por frame
         _nextField.state = Field.States.Reaching;
         Destroy(_currentFieldGameObject, 5f);
         _currentFieldGameObject = _nextFieldGameObject;
         _currentField = _nextField;
-        //canSpawnField = true;
     }
 }
