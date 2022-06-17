@@ -14,28 +14,32 @@ public class BarHorizontalMovement : MonoBehaviour
     // Depois mudar para uma lista de strings com as opções
     [SerializeField] public int type;
 
-    private double minDistance = 0.01;
+    private double distanceBetweenLimits;
     private Vector3 nextPosition;
 
     void Start()
     {
         // It could be randomized too
         nextPosition = maxLimit.position;
+        distanceBetweenLimits = Vector3.Distance(minLimit.position, maxLimit.position);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        // Change the 'nextPosition' when the bar limit achieves the 
-        // table wall
-        if (Vector3.Distance(maxPosition.position, maxLimit.position) < minDistance) 
+        // Change the 'nextPosition' when the bar limit achieves or passes the limit position
+        double distanceBetweenMinPosMaxLimit = Vector3.Distance(minPosition.position, maxLimit.position);
+        double distanceBetweenMaxPosMinLimit = Vector3.Distance(maxPosition.position, minLimit.position);
+
+        if (distanceBetweenMaxPosMinLimit > distanceBetweenLimits)
         {
             nextPosition = minLimit.position;
         }
-        if (Vector3.Distance(minPosition.position, minLimit.position) < minDistance)
+        if (distanceBetweenMinPosMaxLimit > distanceBetweenLimits)
         {
             nextPosition = maxLimit.position;
         }
+
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, speed * Time.deltaTime);
     }
 }
