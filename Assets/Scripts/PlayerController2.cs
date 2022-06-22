@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
 {
-    Camera cam;
     [SerializeField] float range = 2.2f;
     [SerializeField] float speed = 0.5f;
     [SerializeField] float targetX = 0;
@@ -13,11 +12,13 @@ public class PlayerController2 : MonoBehaviour
     [SerializeField] bool selected = false;
     public bool Selected => selected;
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetStartX(float _x)
     {
-        cam = Camera.main;
-
+        startX = _x;
+    }
+    public void SetStartMouseX(float _x)
+    {
+        startMouseX = _x;
     }
 
     public void SetSelected(bool val)
@@ -31,53 +32,12 @@ public class PlayerController2 : MonoBehaviour
         targetX = startX + dirX;
         targetX = Mathf.Min(targetX, range);
         targetX = Mathf.Max(targetX, -range);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            RaycastHit2D hit = Physics2D.CircleCast(mousePos, 0.1f, new Vector3(1f, 0, 0));
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                PlayerController2 controller=hit.transform.parent.gameObject.GetComponent<PlayerController2>();
-                controller.SetSelected(true);
-                startMouseX = mousePos.x;
-                startX = hit.transform.parent.position.x;
-            }
-        }
-
-
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            RaycastHit2D hit = Physics2D.CircleCast(mousePos, 0.1f, new Vector3(1f, 0, 0));
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                PlayerController2 controller = hit.transform.parent.gameObject.GetComponent<PlayerController2>();
-                if (controller.Selected)
-                {
-                    float _x = mousePos.x;
-                    controller.SetTarget(_x);
-                }
-            }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            RaycastHit2D hit = Physics2D.CircleCast(mousePos, 0.1f, new Vector3(1f, 0, 0));
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                PlayerController2 controller = hit.transform.parent.gameObject.GetComponent<PlayerController2>();
-                controller.SetSelected(false);
-            }
-        }
+        // move to targetX position
         if (selected)
         {
             Vector3 pos = transform.position;

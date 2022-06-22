@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class BallController : MonoBehaviour
 {
+
+    [SerializeField] private PlayerInputManager playerManager;
+    [SerializeField] private LineRenderer line;
     [Header("Stats")]
     [SerializeField] float offsetFromPlayer;
     [SerializeField] float throwSpeed;
@@ -60,25 +63,34 @@ public class BallController : MonoBehaviour
                     if (Vector2.SqrMagnitude(mousePosition - currentPlayer.transform.position) < (0.5f)*(0.5f))
                     {
                         mousePressed = true;
+                        playerManager.SetCanMove(false);
                     }
                 }
 
                 if (mousePressed)
                 {
+                    line.enabled = true;
                     float forceLevel = GetForceLevel(mousePosition, currentPlayer.transform.position);
-
-                    Debug.DrawRay(transform.position, (transform.position - mousePosition).normalized * forceLevel * maxDistance * 2f);
+                    Vector3 pos1 = transform.position;
+                    Vector3 pos2= transform.position+(transform.position - mousePosition).normalized * forceLevel * maxDistance * 2f;
+                    Debug.DrawRay(pos1,pos2-transform.position);
+                    line.SetPosition(0, pos1);
+                    line.SetPosition(1, pos2);
 
                     if (Input.GetMouseButtonUp(0))
                     {
                         ThrowBall(forceLevel);
                         mousePressed = false;
+                        playerManager.SetCanMove(true);
+                        line.enabled = false;
                     }
 
                     if (Input.GetMouseButtonDown(1))
                     {
                         // release aim
                         mousePressed = false;
+                        playerManager.SetCanMove(true);
+                        line.enabled = false;
                     }
                 }
             }
@@ -112,13 +124,13 @@ public class BallController : MonoBehaviour
             }
         }  
         
-
+        /*
         //temporary player move for testing
         if (currentPlayer)
         {
             float horizontalMove = Input.GetAxisRaw("Horizontal");
             currentPlayer.transform.position += 5f * Time.deltaTime * new Vector3(horizontalMove, 0, 0);
-        }
+        }*/
     }
 
     private float GetForceLevel(Vector2 from, Vector2 to)

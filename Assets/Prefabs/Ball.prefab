@@ -134,8 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2a8c77030f9c946b3b9e79e3b88e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
+  line: {fileID: 0}
   offsetFromPlayer: 1
   throwSpeed: 10
   secondThrowMode: 0
-  variableForceMode: 0
+  variableForceMode: 1
   maxDistance: 2
