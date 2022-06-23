@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BallController : MonoBehaviour
 {
-
+    [SerializeField] private MapManager map;
     [SerializeField] private PlayerInputManager playerManager;
     [SerializeField] private LineRenderer line;
     [Header("Stats")]
@@ -15,6 +15,7 @@ public class BallController : MonoBehaviour
 
     // state variables
     GameObject currentPlayer;
+    GameObject lastPlayer;
     bool lockedOntoPlayer = false;
 
     [Header("Second throw mode")]
@@ -164,9 +165,14 @@ public class BallController : MonoBehaviour
         if (collision.CompareTag("Ally"))
         {
             currentPlayer = collision.gameObject;
+            lastPlayer = currentPlayer;
             lockedOntoPlayer = true;
             rb2d.velocity = Vector2.zero;
             rb2d.bodyType = RigidbodyType2D.Kinematic;
+            map.StartTransition(currentPlayer.transform.parent);
+        }else if (collision.CompareTag("MapTop"))
+        {
+            transform.position = lastPlayer.transform.position;
         }
     }
 }

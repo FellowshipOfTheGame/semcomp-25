@@ -10,7 +10,8 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] private GameObject fx;
     public bool IsMoving => isMoving;
     private bool canMove=true;
-
+    [SerializeField] private PlayerController lastSelected;
+   
     public void SetCanMove(bool val)
     {
         canMove = val;
@@ -32,9 +33,11 @@ public class PlayerInputManager : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 // Select player to control
-                PlayerController2 controller = hit.transform.parent.gameObject.GetComponent<PlayerController2>();
+                PlayerController controller = hit.transform.parent.gameObject.GetComponent<PlayerController>();
+                lastSelected = controller;
                 controller.SetSelected(true);
                 isMoving = true;
+                fx.SetActive(false);
                 controller.SetStartMouseX(mousePos.x);
                 controller.SetStartX(hit.transform.parent.position.x);
             }
@@ -49,7 +52,7 @@ public class PlayerInputManager : MonoBehaviour
             RaycastHit2D hit = Physics2D.CircleCast(mousePos, 0.1f, new Vector3(1f, 0, 0));
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                PlayerController2 controller = hit.transform.parent.gameObject.GetComponent<PlayerController2>();
+                PlayerController controller = hit.transform.parent.gameObject.GetComponent<PlayerController>();
                 if (controller.Selected)
                 {
                     float _x = mousePos.x;
@@ -69,9 +72,16 @@ public class PlayerInputManager : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 //Unselect player
-                PlayerController2 controller = hit.transform.parent.gameObject.GetComponent<PlayerController2>();
+                PlayerController controller = hit.transform.parent.gameObject.GetComponent<PlayerController>();
                 controller.SetSelected(false);
                 isMoving = false;
+                fx.SetActive(true);
+            }
+            else if(lastSelected!=null)
+            {
+                lastSelected.SetSelected(false);
+                isMoving = false;
+                fx.SetActive(true);
             }
         }
     }
