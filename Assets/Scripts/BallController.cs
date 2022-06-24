@@ -165,6 +165,7 @@ public class BallController : MonoBehaviour
         if (collision.CompareTag("Ally"))
         {
             currentPlayer = collision.gameObject;
+            currentPlayer.transform.parent.gameObject.GetComponent<PlayerController>().PlayEffect();
             lastPlayer = currentPlayer;
             lockedOntoPlayer = true;
             rb2d.velocity = Vector2.zero;

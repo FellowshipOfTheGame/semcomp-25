@@ -18,6 +18,7 @@ public class MapManager : MonoBehaviour
     Transform currPlayer;
     IEnumerator Transition()
     {
+        yield return new WaitForSeconds(0.2f);
         onTransition = true;
         fx.SetActive(false);
         while (Mathf.Abs(currPlayer.position.y-targetY)>0.1f)
