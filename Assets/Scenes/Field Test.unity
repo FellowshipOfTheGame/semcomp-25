@@ -168,6 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldPrefab: {fileID: 43184888522098807, guid: 1dc8d0af9276ce44b8e52e04ed561cf5, type: 3}
   canSpawnField: 0
+  canMoveFields: 0
+  moveSpeed: 5
 --- !u!1 &1398492675
 GameObject:
   m_ObjectHideFlags: 0
