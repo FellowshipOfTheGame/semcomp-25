@@ -13,6 +13,16 @@ public class Timer : MonoBehaviour
     // state variables
     private float currentTime;
     private bool paused = false;
+    
+    public float CurrentTime
+    {
+        get => currentTime;
+        private set
+        {
+            currentTime = value;
+            UpdateTimerTextUI();
+        }
+    }
 
     // cached references
     [SerializeField] TextMeshProUGUI timerText;
@@ -22,24 +32,20 @@ public class Timer : MonoBehaviour
         if (!timerText)
             Debug.Log("Link timer Text UI");
 
-        currentTime = startingTime;
-        UpdateTimerText(currentTime);
+        CurrentTime = startingTime;
     }
 
     private void Update()
     {
         if (!paused)
         {
-            currentTime -= Time.deltaTime;
-            if (currentTime < 0)
+            CurrentTime -= Time.deltaTime;
+            if (CurrentTime < 0)
             {
-                UpdateTimerText(0);
+                CurrentTime = 0;
                 Debug.Log("call game over");
                 SetPaused(true);
-                return;
             }
-            
-            UpdateTimerText(currentTime); 
         }
     }
 
@@ -52,16 +58,15 @@ public class Timer : MonoBehaviour
     {
         if (paused) return;
 
-        currentTime += seconds;
-        UpdateTimerText(currentTime);
+        CurrentTime += seconds;
     }
 
-    private void UpdateTimerText(float time)
+    private void UpdateTimerTextUI()
     {
         if (!timerText) return;
 
-        int minutes = (int) (time / 60f);
-        int secondsLeft = (int) (time % 60f);
+        int minutes = (int) (CurrentTime / 60f);
+        int secondsLeft = (int) (CurrentTime % 60f);
 
         if (secondsLeft < 10)
             timerText.text = minutes + ":0" + secondsLeft;
