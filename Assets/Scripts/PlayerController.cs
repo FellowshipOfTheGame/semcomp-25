@@ -11,12 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float startMouseX = 0;
     [SerializeField] bool selected = false;
     [SerializeField] private GameObject selectedObj;
-    [SerializeField] private GameObject fx;
     public bool Selected => selected;
-    public void PlayEffect()
-    {
-        fx.SetActive(true);
-    }
     public void SetStartX(float _x)
     {
         startX = _x;

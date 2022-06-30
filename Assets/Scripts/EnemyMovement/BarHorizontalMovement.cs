@@ -39,8 +39,9 @@ public class BarHorizontalMovement : MonoBehaviour
         {
             nextPosition = maxLimit.position;
         }
-
-        transform.position = Vector3.MoveTowards(transform.position, nextPosition, speed * Time.deltaTime);
+        Vector3 pos = transform.position;
+        pos.x = Mathf.MoveTowards(pos.x, nextPosition.x, speed * Time.deltaTime);
+        transform.position = pos;
     }
 }
 

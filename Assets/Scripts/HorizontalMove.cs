@@ -19,12 +19,12 @@ public class HorizontalMove : MonoBehaviour
     {
             Vector3 pos=transform.position;
         if(going){
-            pos.x+=speed;
+            pos.x+=speed * Time.deltaTime;
             transform.position=pos;
             if(Mathf.Abs(pos.x-max)<0.01f)
                 going=!going;
         }else{
-            pos.x-=speed;
+            pos.x-=speed*Time.deltaTime;
             if(Mathf.Abs(pos.x-min)<0.01f)
                 going=!going;
         }

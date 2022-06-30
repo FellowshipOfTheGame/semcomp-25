@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ally
   - MapTop
+  - Enemy
+  - Empty
+  - Ball
+  - Allies
   layers:
   - Default
   - TransparentFX

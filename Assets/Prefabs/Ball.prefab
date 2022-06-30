@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5636276234246029799}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,10 +135,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
+  manager: {fileID: 0}
   playerManager: {fileID: 0}
   line: {fileID: 0}
-  offsetFromPlayer: 0.9
+  offsetFromPlayer: 0.8
   throwSpeed: 10
   secondThrowMode: 0
   variableForceMode: 1
-  maxDistance: 2
+  maxDistance: 1.5

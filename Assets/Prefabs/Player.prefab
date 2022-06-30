@@ -107,12 +107,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3464120551011403635}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7944325762244716628}
-  m_RootOrder: 4
+  m_Father: {fileID: 5731175258584046193}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &6349020021222118845
 ParticleSystem:
@@ -122,7 +122,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3464120551011403635}
   serializedVersion: 7
-  lengthInSec: 0.8
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 1
   cullingMode: 0
@@ -197,7 +197,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 0.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1443,9 +1443,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0.78431374}
+        key0: {r: 1, g: 1, b: 1, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1459,10 +1459,10 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 4626
-        atime1: 59560
-        atime2: 0
-        atime3: 0
+        atime0: 0
+        atime1: 65535
+        atime2: 65535
+        atime3: 65535
         atime4: 0
         atime5: 0
         atime6: 0
@@ -4972,8 +4972,9 @@ Transform:
   m_GameObject: {fileID: 4311913241965600336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_Children:
+  - {fileID: 7587922548392540183}
   m_Father: {fileID: 7944325762244716628}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5097,7 +5098,6 @@ Transform:
   - {fileID: 7944325763342549676}
   - {fileID: 7944325763059292365}
   - {fileID: 8322665487847965917}
-  - {fileID: 7587922548392540183}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5120,7 +5120,6 @@ MonoBehaviour:
   startMouseX: 0
   selected: 0
   selectedObj: {fileID: 1523266325038458572}
-  fx: {fileID: 3464120551011403635}
 --- !u!1 &7944325763059292366
 GameObject:
   m_ObjectHideFlags: 0
@@ -5250,7 +5249,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

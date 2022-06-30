@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private MapManager map;
+    [SerializeField] private GameManager manager;
     [SerializeField] private PlayerInputManager playerManager;
     [SerializeField] private LineRenderer line;
     [Header("Stats")]
@@ -65,6 +66,7 @@ public class BallController : MonoBehaviour
                     {
                         mousePressed = true;
                         playerManager.SetCanMove(false);
+                        currentPlayer.transform.parent.gameObject.GetComponent<PlayerController>().SetSelected(false);
                     }
                 }
 
@@ -165,15 +167,16 @@ public class BallController : MonoBehaviour
         if (collision.CompareTag("Ally"))
         {
             currentPlayer = collision.gameObject;
-            currentPlayer.transform.parent.gameObject.GetComponent<PlayerController>().PlayEffect();
+            currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
             lastPlayer = currentPlayer;
             lockedOntoPlayer = true;
             rb2d.velocity = Vector2.zero;
             rb2d.bodyType = RigidbodyType2D.Kinematic;
             map.StartTransition(currentPlayer.transform.parent);
-        }else if (collision.CompareTag("MapTop"))
+        }else if (collision.CompareTag("MapTop") || collision.CompareTag("Enemy"))
         {
             transform.position = lastPlayer.transform.position;
+            manager.GameOverScene();
         }
     }
 }

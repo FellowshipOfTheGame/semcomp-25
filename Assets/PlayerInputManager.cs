@@ -73,6 +73,7 @@ public class PlayerInputManager : MonoBehaviour
             {
                 //Unselect player
                 PlayerController controller = hit.transform.parent.gameObject.GetComponent<PlayerController>();
+                if(controller!=null)
                 controller.SetSelected(false);
                 isMoving = false;
                 fx.SetActive(true);
