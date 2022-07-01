@@ -161,7 +161,13 @@ public class BallController : MonoBehaviour
         else
             rb2d.velocity = -(mousePosition - transform.position).normalized * throwSpeed;
     }
-
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(0.5f);
+        manager.GameOverScene();
+        Destroy(gameObject);
+    }
+    [SerializeField] private GameObject ballHitPrefab;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
@@ -175,8 +181,12 @@ public class BallController : MonoBehaviour
             map.StartTransition(currentPlayer.transform.parent);
         }else if (collision.CompareTag("MapTop") || collision.CompareTag("Enemy"))
         {
-            transform.position = lastPlayer.transform.position;
-            manager.GameOverScene();
+            //transform.position = lastPlayer.transform.position;
+            Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
+            rb2d.bodyType=RigidbodyType2D.Static;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            map.SetBallFx(false);
+            StartCoroutine(GameOver());
         }
     }
 }

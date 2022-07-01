@@ -22,6 +22,10 @@ public class MapManager : MonoBehaviour
     Transform currPlayer;
 
     [SerializeField] private GameManager manager;
+    public void SetBallFx(bool val)
+    {
+        fx.SetActive(val);
+    }
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0.1f);
@@ -83,6 +87,13 @@ public class MapManager : MonoBehaviour
         GameObject obj = Instantiate(playerPrefabs[Random.Range(0,n)], alliesTransf);
         Vector3 pos = obj.transform.position;
         pos.y = _y;
+        PlayerController controller = obj.GetComponent<PlayerController>();
+        if (controller != null)
+        {
+
+            float range =controller.Range - 0.05f;
+            pos.x = Random.Range(-range, range);
+        }
         obj.transform.position = pos;
         allies.Add(obj.transform);
     }

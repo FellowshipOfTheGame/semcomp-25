@@ -448,6 +448,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5636276234246029799, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
+      propertyPath: ballHitPrefab
+      value: 
+      objectReference: {fileID: 3249267262933426012, guid: d97dff8e50e8c5848bb532744e27c7fe, type: 3}
+    - target: {fileID: 5636276234246029799, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1160211087}
