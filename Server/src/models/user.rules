@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // match /{document=**} {
+    //   allow read, write: if request.time < timestamp.date(2020, 6, 1);
+    // }
+    
+    match /players/{player} {
+      allow get: if isLoggedIn() && isValidPlayer();
+      allow list: if isLoggedIn();
+      allow create: if isLoggedIn() && isValidPlayer() && existsPlayer() == false;
+      allow update, delete: false;
+    }
+  }
+
+  function isLoggedIn() {
+    return request.auth != null;
+  }
+  
+  function isValidPlayer() {
+    return request.resource.data.uid == request.auth.uid
+  }
+
+  function existsPlayer() {
+    return exists(/databases/$(database)/documents/players/$(request.auth.uid))
+  }
+}
