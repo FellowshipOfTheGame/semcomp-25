@@ -19,9 +19,12 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] private Transform alliesTransf;
     [SerializeField] private Transform enemiesTransf;
+
     Transform currPlayer;
 
     [SerializeField] private GameManager manager;
+
+    [SerializeField] private int distanceToGoal;
     public void SetBallFx(bool val)
     {
         fx.SetActive(val);
