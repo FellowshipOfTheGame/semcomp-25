@@ -7,6 +7,8 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] List<Transform> allies;
     [SerializeField] List<Transform> enemies;
+    [SerializeField] Transform goal;
+
     [SerializeField] private bool onTransition=false;
 
     [SerializeField] private float targetY=-3f;
@@ -14,17 +16,20 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject fx;
 
     [SerializeField] private List<GameObject> playerPrefabs;
-
     [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private List<GameObject> goalPrefabs;
 
     [SerializeField] private Transform alliesTransf;
     [SerializeField] private Transform enemiesTransf;
+    [SerializeField] private Transform goalTransf;
 
     Transform currPlayer;
 
     [SerializeField] private GameManager manager;
 
-    [SerializeField] private int distanceToGoal;
+    private bool goalSpawned = false;
+    private int removedAllyIndex;
+
     public void SetBallFx(bool val)
     {
         fx.SetActive(val);
@@ -43,7 +48,11 @@ public class MapManager : MonoBehaviour
         }
 
         onTransition = false;
-        int alliesDestroyed = 0, enemiesDestroyed=0;
+
+        int alliesDestroyed = 0, enemiesDestroyed = 0;
+
+        if (goalSpawned)
+            alliesDestroyed++;
 
         for (int i = allies.Count - 1; i >= 0; i--)
         {
@@ -78,7 +87,6 @@ public class MapManager : MonoBehaviour
         {
             SpawnAlly(j);
         }
-
         fx.SetActive(true);
     }
 
@@ -104,7 +112,6 @@ public class MapManager : MonoBehaviour
 
     private void SpawnEnemy(float _y)
     {
-
         int n = enemyPrefabs.Count;
         GameObject obj = Instantiate(enemyPrefabs[Random.Range(0,n)], enemiesTransf);
         Vector3 pos = obj.transform.position;
@@ -112,6 +119,45 @@ public class MapManager : MonoBehaviour
         obj.transform.position = pos;
         enemies.Add(obj.transform);
     }
+
+    public void SpawnGoal(float _y)
+    {
+        int numberOfGoals = goalPrefabs.Count;
+
+        // Generate Goal object
+        GameObject obj = Instantiate(goalPrefabs[Random.Range(0, numberOfGoals)], goalTransf);
+        Vector3 pos = obj.transform.position;
+        pos.y = _y;
+        obj.transform.position = pos;
+
+        // Set the goal transform
+        goal = obj.transform;
+
+        // Deactivate ally object where the goal is
+        for (int i = 0; i < allies.Count; i++)
+        {
+            Transform ally = allies[i];
+            if (Vector3.Distance(ally.position, goal.position) < 0.1f)
+            {
+                //Destroy(ally.gameObject);
+                //allies.RemoveAt(i);
+                ally.gameObject.SetActive(false);
+                goalSpawned = true;
+                removedAllyIndex = i;
+            }
+        }
+
+        obj.SetActive(true);
+    }
+
+    public void DeleteGoal()
+    {
+        Destroy(goal.gameObject);
+        goalSpawned = false;
+        allies[removedAllyIndex].gameObject.SetActive(true);
+        StartTransition(allies[removedAllyIndex]);
+    }
+
     public void StartTransition(Transform newPlayer)
     {
         currPlayer = newPlayer;

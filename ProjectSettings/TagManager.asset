@@ -10,6 +10,7 @@ TagManager:
   - Empty
   - Ball
   - Allies
+  - Goal
   layers:
   - Default
   - TransparentFX

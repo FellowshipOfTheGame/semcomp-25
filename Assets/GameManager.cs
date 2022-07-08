@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverPointsView;
     [SerializeField] private TMP_Text highscoreView;
     [SerializeField] private GameObject gameOverObj;
-    [SerializeField] private int faseLevel; // Factor used to control the level of the game
+
+    private int faseLevel; // Factor used to control the level of the game
     private int points = 0;
     private int highscore = 0;
     // Start is called before the first frame update

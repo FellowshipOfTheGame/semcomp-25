@@ -30,8 +30,12 @@ public class BallController : MonoBehaviour
     // cached references
     Rigidbody2D rb2d;
 
+    [SerializeField] private int distanceToGoal; // Number of allies to achieve the goal
+    private int distanceCount;
+
     private void Awake()
     {
+        distanceCount = 0;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -172,6 +176,8 @@ public class BallController : MonoBehaviour
     {
         if (collision.CompareTag("Ally"))
         {
+            distanceCount++;
+
             currentPlayer = collision.gameObject;
             currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
             lastPlayer = currentPlayer;
@@ -179,7 +185,16 @@ public class BallController : MonoBehaviour
             rb2d.velocity = Vector2.zero;
             rb2d.bodyType = RigidbodyType2D.Kinematic;
             map.StartTransition(currentPlayer.transform.parent);
-        }else if (collision.CompareTag("MapTop") || collision.CompareTag("Enemy"))
+
+            // Check distance to generate the goal
+            if (distanceCount >= distanceToGoal)
+            {
+                distanceCount = -99;
+                // Generate goal
+                map.SpawnGoal(16);
+            }
+        } 
+        else if (collision.CompareTag("MapTop") || collision.CompareTag("Enemy"))
         {
             //transform.position = lastPlayer.transform.position;
             Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
@@ -188,5 +203,31 @@ public class BallController : MonoBehaviour
             map.SetBallFx(false);
             StartCoroutine(GameOver());
         }
+        else if (collision.CompareTag("Goal"))
+        {
+            // Reset distance
+            distanceCount = 0;
+
+            // Update the fase level
+            manager.AddFaseLevel();
+
+            // Update distance to goal 
+            //distanceToGoal = manager.FaseLevel() * 10; // used if the distance will be different to every fase
+
+            // Show Goal animation
+
+            // Move camera
+            currentPlayer = collision.gameObject;
+            currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
+            lastPlayer = currentPlayer;
+            lockedOntoPlayer = true;
+            rb2d.velocity = Vector2.zero;
+            rb2d.bodyType = RigidbodyType2D.Kinematic;
+            map.StartTransition(currentPlayer.transform.parent);
+
+            // Delete goal object
+            map.DeleteGoal();
+        }
+
     }
 }
