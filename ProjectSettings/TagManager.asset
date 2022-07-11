@@ -5,12 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ally
-  - MapTop
-  - Enemy
-  - Empty
   - Ball
-  - Allies
-  - Goal
   layers:
   - Default
   - TransparentFX
