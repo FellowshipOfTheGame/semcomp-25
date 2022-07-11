@@ -156,7 +156,7 @@ public class MapManager : MonoBehaviour
         Destroy(goal.gameObject);
         Debug.Log(removedAlly.gameObject.name);
         removedAlly.gameObject.SetActive(true);
-        removedAlly.transform.GetChild(0).gameObject.SetActive(true);
+
         goalSpawned = false;
         StartTransition(removedAlly.parent);
     }

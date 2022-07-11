@@ -172,18 +172,26 @@ public class BallController : MonoBehaviour
         Destroy(gameObject);
     }
     [SerializeField] private GameObject ballHitPrefab;
+
+    // Auxiliar function to set the ball freezed to the player position
+    private void SetBallToPlayer(GameObject player)
+    {
+        currentPlayer = player;
+        currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
+        lastPlayer = currentPlayer;
+        lockedOntoPlayer = true;
+        rb2d.velocity = Vector2.zero;
+        rb2d.bodyType = RigidbodyType2D.Kinematic;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
         {
             distanceCount++;
 
-            currentPlayer = collision.gameObject;
-            currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
-            lastPlayer = currentPlayer;
-            lockedOntoPlayer = true;
-            rb2d.velocity = Vector2.zero;
-            rb2d.bodyType = RigidbodyType2D.Kinematic;
+            SetBallToPlayer(collision.gameObject);
+
             map.StartTransition(currentPlayer.transform.parent);
 
             // Check distance to generate the goal
@@ -216,13 +224,10 @@ public class BallController : MonoBehaviour
 
             // Show Goal animation
 
+
             // Get the Transform of the removed ally (replaced with the Goal object)
-            currentPlayer = map.RemovedAllyTransform().gameObject;
-            currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
-            lastPlayer = currentPlayer;
-            lockedOntoPlayer = true;
-            rb2d.velocity = Vector2.zero;
-            rb2d.bodyType = RigidbodyType2D.Kinematic;
+
+            SetBallToPlayer(map.RemovedAllyTransform().gameObject);
 
             // Delete goal object and move camera
             map.StartDeleteGoalTransition();
