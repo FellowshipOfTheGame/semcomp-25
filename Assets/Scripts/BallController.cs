@@ -212,21 +212,20 @@ public class BallController : MonoBehaviour
             manager.AddFaseLevel();
 
             // Update distance to goal 
-            //distanceToGoal = manager.FaseLevel() * 10; // used if the distance will be different to every fase
+            //distanceToGoal = manager.FaseLevel() * 10; // used if the distance will be different accordingly to the fase level
 
             // Show Goal animation
 
-            // Move camera
-            currentPlayer = collision.gameObject;
+            // Get the Transform of the removed ally (replaced with the Goal object)
+            currentPlayer = map.RemovedAllyTransform().gameObject;
             currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
             lastPlayer = currentPlayer;
             lockedOntoPlayer = true;
             rb2d.velocity = Vector2.zero;
             rb2d.bodyType = RigidbodyType2D.Kinematic;
-            map.StartTransition(currentPlayer.transform.parent);
 
-            // Delete goal object
-            map.DeleteGoal();
+            // Delete goal object and move camera
+            map.StartDeleteGoalTransition();
         }
 
     }

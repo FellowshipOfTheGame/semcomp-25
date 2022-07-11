@@ -28,7 +28,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameManager manager;
 
     private bool goalSpawned = false;
-    private int removedAllyIndex;
+    private Transform removedAlly;
 
     public void SetBallFx(bool val)
     {
@@ -51,8 +51,8 @@ public class MapManager : MonoBehaviour
 
         int alliesDestroyed = 0, enemiesDestroyed = 0;
 
-        if (goalSpawned)
-            alliesDestroyed++;
+        //if (goalSpawned)
+        //    alliesDestroyed++;
 
         for (int i = allies.Count - 1; i >= 0; i--)
         {
@@ -143,25 +143,33 @@ public class MapManager : MonoBehaviour
                 //allies.RemoveAt(i);
                 ally.gameObject.SetActive(false);
                 goalSpawned = true;
-                removedAllyIndex = i;
+                removedAlly = ally;
             }
         }
 
         obj.SetActive(true);
     }
 
-    public void DeleteGoal()
+    // Delete the Goal gameobject and 
+    public void StartDeleteGoalTransition()
     {
         Destroy(goal.gameObject);
+        Debug.Log(removedAlly.gameObject.name);
+        removedAlly.gameObject.SetActive(true);
+        removedAlly.transform.GetChild(0).gameObject.SetActive(true);
         goalSpawned = false;
-        allies[removedAllyIndex].gameObject.SetActive(true);
-        StartTransition(allies[removedAllyIndex]);
+        StartTransition(removedAlly.parent);
     }
 
     public void StartTransition(Transform newPlayer)
     {
         currPlayer = newPlayer;
         StartCoroutine(Transition());
+    }
+
+    public Transform RemovedAllyTransform()
+    {
+        return removedAlly;
     }
 
     // Update is called once per frame
