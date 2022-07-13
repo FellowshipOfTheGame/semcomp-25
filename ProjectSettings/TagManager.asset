@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Ally
   - Ball
+  - MapTop
+  - Goal
+  - Allies
+  - Empty
+  - Enemy
+  - pw_freeze
+  - pw_slow
   layers:
   - Default
   - TransparentFX
