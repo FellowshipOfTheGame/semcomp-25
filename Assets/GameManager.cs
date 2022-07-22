@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         highscore = (int)Mathf.Max(highscore, points);
         PlayerPrefs.SetInt("HighScore", highscore);
         GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
-        GameObject.FindWithTag("Allies").GetComponent<PlayerInputManager>().SetCanMove(false) ;
+        GameObject.Find("INPUT_MANAGER").GetComponent<PlayerInputManager>().SetCanMove(false) ;
         gameOverPointsView.text = points + "";
         highscoreView.text = "Highest: "+highscore + "";
         gameOverObj.SetActive(true);
