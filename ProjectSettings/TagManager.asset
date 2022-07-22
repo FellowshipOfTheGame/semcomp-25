@@ -13,6 +13,8 @@ TagManager:
   - Enemy
   - pw_freeze
   - pw_slow
+  - pw_invisible-ball
+  - pw_new-life
   layers:
   - Default
   - TransparentFX

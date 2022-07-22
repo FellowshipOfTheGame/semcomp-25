@@ -1069,6 +1069,55 @@ MonoBehaviour:
   enemiesTransf: {fileID: 765162948}
   goalTransf: {fileID: 357753559}
   manager: {fileID: 1760192326}
+--- !u!1 &480448037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 480448038}
+  - component: {fileID: 480448039}
+  m_Layer: 0
+  m_Name: DontDeleteThisPowerup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &480448038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480448037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 676984995}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &480448039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480448037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229ac98ad7cf5414eb36600b5e6c5f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minPosition: {fileID: 480448038}
+  maxPosition: {fileID: 480448038}
+  minLimit: {fileID: 480448038}
+  maxLimit: {fileID: 480448038}
+  speed: 0
+  type: 0
 --- !u!1 &561831440 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8514858998525760269, guid: 011e3f3231dee944a9d87283b63b36c4, type: 3}
@@ -1092,7 +1141,7 @@ GameObject:
   - component: {fileID: 595668525}
   m_Layer: 0
   m_Name: Slow
-  m_TagString: pw_slow
+  m_TagString: pw_invisible-ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1217,6 +1266,7 @@ Transform:
   m_Children:
   - {fileID: 595668524}
   - {fileID: 1454848434}
+  - {fileID: 480448038}
   m_Father: {fileID: 459864623}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2844,7 +2894,7 @@ GameObject:
   - component: {fileID: 1454848435}
   m_Layer: 0
   m_Name: Freeze
-  m_TagString: pw_freeze
+  m_TagString: pw_new-life
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14476,7 +14526,8 @@ MonoBehaviour:
   freezeTime: 2
   slowTime: 2
   slowFactor: 0.5
-  speedFactor: 0
+  invisibleTime: 3
+  barHorizontalMovement: {fileID: 480448039}
 --- !u!114 &5636276234157345400
 MonoBehaviour:
   m_ObjectHideFlags: 0

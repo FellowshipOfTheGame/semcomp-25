@@ -22,15 +22,13 @@ public class BarHorizontalMovement : MonoBehaviour
 
     void Start()
     {
-
         // It could be randomized too
         nextPosition = maxLimit.position;
         distanceBetweenLimits = Vector3.Distance(minLimit.position, maxLimit.position);
     }
 
     void FixedUpdate()
-    {
-        
+    {        
         // Change the 'nextPosition' when the bar limit achieves or passes the limit position
         double distanceBetweenMinPosMaxLimit = Vector3.Distance(minPosition.position, maxLimit.position);
         double distanceBetweenMaxPosMinLimit = Vector3.Distance(maxPosition.position, minLimit.position);
