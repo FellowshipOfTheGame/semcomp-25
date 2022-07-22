@@ -9,15 +9,14 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private float slowTime;
     [SerializeField] private float slowFactor;
 
-    private IEnumerator coroutine;
+    // The scene need an indetructible object with the script 'BarHorizontalMovement'
+    // and this object attached here
+    [SerializeField] private BarHorizontalMovement barHorizontalMovement;
 
-    [HideInInspector] public float speedFactor;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        // Set the speed factor to 1 (doesn't change the speed)
-        speedFactor = 1.0f;
+        // Set the initial speed factor (static variable) to 1.0f
+        barHorizontalMovement.ChangeSpeedFactorTemporarily(0.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -29,30 +28,16 @@ public class PowerUpManager : MonoBehaviour
     {
         if (collision.CompareTag("pw_freeze"))
         {
-            ChangeSpeedFactorTemporarily(freezeTime, 0.0f);
+            barHorizontalMovement.ChangeSpeedFactorTemporarily(freezeTime, 0.0f);
         }
         else if (collision.CompareTag("pw_slow"))
         {
-            ChangeSpeedFactorTemporarily(slowTime, slowFactor);
+            barHorizontalMovement.ChangeSpeedFactorTemporarily(slowTime, slowFactor);
         }
     }
 
-    // Called to change the speed factor, used to move the enemy bar
-    public void ChangeSpeedFactorTemporarily(float waitTime, float factor)
+    private void ChangeSpeedFactor(float waitTime, float factor)
     {
-        coroutine = WaitAndChangeSpeedFactor(waitTime, factor);
-        StartCoroutine(coroutine);
-    }
-
-    private IEnumerator WaitAndChangeSpeedFactor(float waitTime, float factor)
-    {
-        // Change the speedfactor to the new factor
-        speedFactor = factor;
-
-        // Wait for 'waitTime' seconds
-        yield return new WaitForSeconds(waitTime);
-
-        // Return the factor to 1.0 (default)
-        speedFactor = 1.0f;
+        barHorizontalMovement = FindObjectOfType<BarHorizontalMovement>();
     }
 }
