@@ -23,7 +23,11 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "firebase": "^8.10.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "winston-firebase-transport": "^1.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

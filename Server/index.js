@@ -7,14 +7,20 @@ const logger = require('./src/config/logger')
 // Singletons & Libraries Loaders
 require('./src/loaders/firebase')
 
+// Routes
+const userRoutes = require('./src/routes/players')
+
 const app = express()
 
-app.use(express.json());
+app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'))
-app.use(cors());
+app.use(cors())
 
-//Creating APIs
+// Routes Configurations
+
+app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
+app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, userRoutes)
 
 //GET request to display our todo list
 app.get("/", (req, res) => {

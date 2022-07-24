@@ -1,7 +1,7 @@
 /*
  * User Controllers : Contains all user endpoints 
  */
-const Player = require('../models/Player');
+// const Player = require('../models/Player');
 const configEnv = requere("../config")
 
 module.exports = {
