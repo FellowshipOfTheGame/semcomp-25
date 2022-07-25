@@ -1,8 +1,8 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors  = require('cors')
+const { logger } = require('./src/config/logger')
 const configEnv = require('./src/config')
-const logger = require('./src/config/logger')
 
 // Singletons & Libraries Loaders
 require('./src/loaders/firebase')
@@ -18,7 +18,7 @@ app.use(morgan('dev'))
 app.use(cors())
 
 // Routes Configurations
-
+ 
 app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
 app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, userRoutes)
 
@@ -43,8 +43,8 @@ async function main() {
 
     app.listen(configEnv.SERVER_PORT, (error) => {
         if (error) throw error
-        console.log({
+        logger.info({
             message: `Starting HTTP server on port ${configEnv.SERVER_PORT}.`
         }) 
     })
-}
+};

@@ -29,7 +29,14 @@ class FirebaseClient {
         }
     
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig)
+        let app;
+        
+        if (!firebase.apps.length) {
+            app = initializeApp(firebaseConfig);
+         }else {
+            app = firebase.app(); // if already initialized, use that one
+         }
+
         // .(config.MONGO_CONNECT_URL,{
         //     useNewUrlParser: true,
         //     useUnifiedTopology: true,
