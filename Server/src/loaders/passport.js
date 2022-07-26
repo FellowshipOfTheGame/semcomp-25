@@ -1,36 +1,37 @@
+const passport = require('passport');
 let GoogleStrategy = require('passport-google-oauth20').Strategy;
-let FacebookStrategy = require('passport-facebook').Strategy;
+// let FacebookStrategy = require('passport-facebook').Strategy;
 
-const config = require('../config')
-const User = require('../models/User');
-const UserController = require('../controllers/userController');
+const configEnv = require('../config')
+// const Player = require('../models/Player');
+const PlayerController = require('../controllers/userController');
 
 const { logger } = require('../config/logger');
 
 module.exports = function (passport) {
 
-    passport.serializeUser(function(user, done){
+    passport.serializePlayer(function(player, done){
         done(null, {
-            id: user._id,
+            id: player._id,
         });
         // done(null, user);
     });
-
-    passport.deserializeUser(function(obj, done){
+ 
+    passport.deserializePlayer(function(obj, done){
         User.findById(obj.id, function(err,user){
             done(err, user);    
         });
         // done(null, obj);
     });
 
-    if(config.GOOGLE_CLIENT_ID !== undefined){
+    if(configEnv.GOOGLE_CLIENT_ID !== undefined){
         passport.use(new GoogleStrategy({
-                clientID: config.GOOGLE_CLIENT_ID,
-                clientSecret: config.GOOGLE_CLIENT_SECRET,
-                callbackURL: config.GOOGLE_CALLBACK_URL,
+                clientID: configEnv.GOOGLE_CLIENT_ID,
+                clientSecret: configEnv.GOOGLE_CLIENT_SECRET,
+                callbackURL: configEnv.GOOGLE_CALLBACK_URL,
             },
             function(accessToken, refreshToken, profile, done) {
-                UserController.findOrCreate(profile, (err, user) => {
+                PlayerController.findOrCreate(profile, (err, player) => {
                     if (err) {
                         logger.error({
                             message: `at Google Login: ${err}`
@@ -38,37 +39,11 @@ module.exports = function (passport) {
                         return done(null, null, { message: "unable to create or find user" })
                     }
 
-                    if (!user) {
+                    if (!player) {
                         return done(null, null, { message: "user not created or not found" });
                     }
                     
-                    return done(null, user);
-                });
-            }
-        ));
-    }
-
-    if(config.FACEBOOK_CLIENT_ID !== undefined){
-        passport.use(new FacebookStrategy({
-                clientID: config.FACEBOOK_CLIENT_ID,
-                clientSecret: config.FACEBOOK_CLIENT_SECRET,
-                callbackURL: config.FACEBOOK_CALLBACK_URL,
-                profileFields: ["id", "email", "name"]
-            },
-            function(accessToken, refreshToken, profile, done) {
-                UserController.findOrCreate(profile, (err, user) => {
-                    if (err) {
-                        logger.error({
-                            message: `at Facebook Login: ${err}`
-                        })
-                        return done(null, null, { message: "unable to create or find user" })
-                    }
-
-                    if (!user) {
-                        return done(null, null, { message: "user not created or not found" });
-                    }
-                    
-                    return done(null, user);
+                    return done(null, player);
                 });
             }
         ));
