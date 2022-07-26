@@ -1,28 +1,53 @@
 const express = require('express')
 const cors  = require('cors')
 const morgan = require('morgan')
+
 const { logger } = require('./src/config/logger')
+
 const passport = require('passport');
+
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 
 // Singletons & Libraries Loaders
 require('./src/loaders/firebase')
-require('./loaders/passport')(passport)
-
+require('./src/loaders/passport')(passport)
+ 
 // Enviroments Variables
 const configEnv = require('./src/config')
 
 // Routes
-const playerRoutes = require('./src/routes/players')
+// const playerRoutes = require('./src/routes/players');
+const sessionRoutes = require('./src/routes/session');
 
 const app = express()
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(morgan('dev'))
 app.use(cors())
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+// For an actual app you should configure this with an experation time, better keys, proxy and secure
+app.use(cookieSession({
+    name: 'tuto-session',
+    keys: ['key1', 'key2']
+  }))
+
+// app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(morgan('dev'))
+
+app.use(cookieSession({
+    name: 'gameSession',
+    keys: ['key1', 'key2']
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes Configurations
- 
+  
 app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
 // app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)

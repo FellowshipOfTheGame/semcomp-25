@@ -1,5 +1,7 @@
-.env
 node_modules
-src/loaders/.semcomp25-pkey.json
-*.log
+
 /logs
+*.log
+
+.env
+src/loaders/.semcomp25-pkey.json
