@@ -35,6 +35,15 @@ public class BallController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+    IEnumerator KickDelay(float force)
+    {
+        yield return new WaitForSeconds(0.1f);
+        ThrowBall(force);
+        mousePressed = false;
+        playerManager.SetCanMove(true);
+        line.enabled = false;
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -66,12 +75,15 @@ public class BallController : MonoBehaviour
                     {
                         mousePressed = true;
                         playerManager.SetCanMove(false);
+
+                        currentPlayer.GetComponent<Ally>().Pull();
                         currentPlayer.transform.parent.gameObject.GetComponent<PlayerController>().SetSelected(false);
                     }
                 }
 
                 if (mousePressed)
                 {
+                    // começa a mirar
                     line.enabled = true;
                     float forceLevel = GetForceLevel(mousePosition, currentPlayer.transform.position);
                     Vector3 pos1 = transform.position;
@@ -80,16 +92,20 @@ public class BallController : MonoBehaviour
                     line.SetPosition(0, pos1);
                     line.SetPosition(1, pos2);
 
-                    if (Input.GetMouseButtonUp(0))
+                    if (Input.GetMouseButtonUp(0)) // chuta bola
                     {
+                        currentPlayer.GetComponent<Ally>().Kick();
+                        StartCoroutine(KickDelay(forceLevel));
+                        /*
                         ThrowBall(forceLevel);
                         mousePressed = false;
                         playerManager.SetCanMove(true);
-                        line.enabled = false;
+                        line.enabled = false;*/
                     }
 
-                    if (Input.GetMouseButtonDown(1))
+                    if (Input.GetMouseButtonDown(1)) // soltou a mira
                     {
+                     //   currentPlayer.GetComponent<Ally>().Kick();
                         // release aim
                         mousePressed = false;
                         playerManager.SetCanMove(true);
@@ -97,6 +113,7 @@ public class BallController : MonoBehaviour
                     }
                 }
             }
+            /*
             else if (!secondThrowMode)
             {
                 if (Input.GetMouseButton(0))
@@ -124,7 +141,7 @@ public class BallController : MonoBehaviour
                         ThrowBall();
                     }
                 }
-            }
+            }*/
         }  
         
         /*

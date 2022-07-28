@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetTarget(float currentMouseX)
     {
-        float dirX = currentMouseX-startMouseX;
+        float dirX = currentMouseX - startMouseX;
         targetX = startX + dirX;
         targetX = Mathf.Min(targetX, range);
         targetX = Mathf.Max(targetX, -range);
