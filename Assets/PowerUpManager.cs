@@ -11,6 +11,15 @@ public class PowerUpManager : MonoBehaviour
 
     [SerializeField] private float invisibleTime;
 
+    /*
+        Adicoes Lucas Ebling =  Conectar a pontos e a tempo/ 
+    */
+
+    //Tempo e Score Managers precisam ser conectados com os da cena em questão.
+    [SerializeField] private ScoreSystem scoreManager;
+
+    [SerializeField] private Timer timeManager;
+
     private int lives;  // number of lives of the player
     private bool isInvisible;
 
@@ -80,6 +89,33 @@ public class PowerUpManager : MonoBehaviour
         else if (collision.CompareTag("pw_new-life"))
         {
             lives++;
+        }
+        else if(collision.CompareTag("pw_l")){
+            //comparacao usando apenas uma tag. Ver se acha essa opcao melhor.
+            DataHolder data = collision.gameObject.GetComponent<DataHolder>();
+
+            if(data.getTag() == "Time"){
+                if(!timeManager){
+                    TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
+                    Debug.Log("Time Added:" + x.time);
+                }
+                else{
+                    TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
+                    timeManager.AddTime(x.time);
+                }
+            }
+            else if(data.getTag() == "Point"){
+                if(!scoreManager){
+                    PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
+                    Debug.Log("Score Added:" + x.PointAmmount); 
+                }
+                else{
+                    PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
+                    scoreManager.addScore(x.PointAmmount);
+                }
+
+            }
+
         }
     }
 }

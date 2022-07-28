@@ -63,4 +63,12 @@ public class ScoreSystem : MonoBehaviour
 
         scoreTextUI.text = ScoreAmount.ToString();
     }
+
+    /*
+        Modificacoes Lucas = Adicao de um "addscore" generico
+    */
+
+    public void addScore(int points){
+        ScoreAmount += points;
+    }
 }

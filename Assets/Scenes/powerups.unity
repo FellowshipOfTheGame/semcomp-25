@@ -1139,9 +1139,10 @@ GameObject:
   - component: {fileID: 595668524}
   - component: {fileID: 595668526}
   - component: {fileID: 595668525}
+  - component: {fileID: 595668527}
   m_Layer: 0
   m_Name: Slow
-  m_TagString: pw_invisible-ball
+  m_TagString: pw_l
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1237,6 +1238,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13786766, y: 0.1318858}
   m_EdgeRadius: 0
+--- !u!114 &595668527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595668523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032f01ba8b244f94c850b4755df63330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: d52fed428b8739d4aa5bb4ddc4585331, type: 2}
 --- !u!1 &676984994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,9 +2906,10 @@ GameObject:
   - component: {fileID: 1454848434}
   - component: {fileID: 1454848436}
   - component: {fileID: 1454848435}
+  - component: {fileID: 1454848437}
   m_Layer: 0
   m_Name: Freeze
-  m_TagString: pw_new-life
+  m_TagString: pw_l
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2990,6 +3005,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13786766, y: 0.1318858}
   m_EdgeRadius: 0
+--- !u!114 &1454848437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454848433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032f01ba8b244f94c850b4755df63330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 3a76d0a7db6b360418da14490f076abe, type: 2}
 --- !u!1001 &1628528903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14527,6 +14555,8 @@ MonoBehaviour:
   slowTime: 2
   slowFactor: 0.5
   invisibleTime: 3
+  scoreManager: {fileID: 0}
+  timeManager: {fileID: 0}
   barHorizontalMovement: {fileID: 480448039}
 --- !u!114 &5636276234157345400
 MonoBehaviour:
