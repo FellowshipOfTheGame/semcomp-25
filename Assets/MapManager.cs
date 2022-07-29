@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
 
-    [SerializeField] List<GameObject> presetPrefabs;
+    //[SerializeField] List<GameObject> presetPrefabs;
     [SerializeField] List<Preset> presetsOnMap;
     [SerializeField] private bool onTransition=false;
     [SerializeField] Transform presetSpawner;
@@ -16,7 +16,15 @@ public class MapManager : MonoBehaviour
     float posNextSpawn = -4f;
     Transform currPlayer;
 
-    [SerializeField] private GameManager manager;
+    private GameManager manager;
+    private DifficultyProgression difficultyProgression;
+
+    private void Awake()
+    {
+        manager = FindObjectOfType<GameManager>();
+        difficultyProgression = FindObjectOfType<DifficultyProgression>();
+    }
+
     public void SetBallFx(bool val)
     {
         fx.SetActive(val);
@@ -35,8 +43,11 @@ public class MapManager : MonoBehaviour
             posNextSpawn = presetsOnMap[presetCount-1].SpawnPos+4f;
         }
         Vector2 pos = new Vector2(0, posNextSpawn);
-        int id = Random.Range(0, presetPrefabs.Count);
-        GameObject obj=Instantiate(presetPrefabs[id], pos, Quaternion.identity, presetSpawner);
+
+        //int id = Random.Range(0, presetPrefabs.Count);
+        //GameObject obj=Instantiate(presetPrefabs[id], pos, Quaternion.identity, presetSpawner);
+        GameObject obj = Instantiate(difficultyProgression.NextPreset(), pos, Quaternion.identity, presetSpawner);
+
         Preset preset = obj.GetComponent<Preset>();
         presetsOnMap.Add(preset);
   
@@ -76,9 +87,4 @@ public class MapManager : MonoBehaviour
         StartCoroutine(Transition());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
