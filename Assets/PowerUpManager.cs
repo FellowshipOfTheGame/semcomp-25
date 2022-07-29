@@ -94,28 +94,42 @@ public class PowerUpManager : MonoBehaviour
             //comparacao usando apenas uma tag. Ver se acha essa opcao melhor.
             DataHolder data = collision.gameObject.GetComponent<DataHolder>();
 
-            if(data.getTag() == "Time"){
-                if(!timeManager){
+            string tag = data.getTag();
+
+            switch(tag){
+
+                case "Time" :
+                    if(!timeManager){
                     TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
                     Debug.Log("Time Added:" + x.time);
-                }
-                else{
-                    TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
-                    timeManager.AddTime(x.time);
-                }
-            }
-            else if(data.getTag() == "Point"){
-                if(!scoreManager){
+                    }
+                    else{
+                        TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
+                        timeManager.AddTime(x.time);
+                    }
+                break;
+
+                case "Point":
+                    if(!scoreManager){
                     PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
                     Debug.Log("Score Added:" + x.PointAmmount); 
-                }
-                else{
-                    PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
-                    scoreManager.addScore(x.PointAmmount);
-                }
+                    }
+                    else{
+                        PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
+                        scoreManager.addScore(x.PointAmmount);
+                    }
+                
+                break;  
 
             }
-
+            /*
+            if(data.getTag() == "Time"){
+               
+            }
+            else if(data.getTag() == "Point"){
+             
+            }
+            */
         }
     }
 }
