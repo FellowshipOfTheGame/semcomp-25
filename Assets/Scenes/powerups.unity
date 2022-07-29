@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 595668525}
   m_Layer: 0
   m_Name: Slow
-  m_TagString: pw_invisible-ball
+  m_TagString: pw_big-ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2894,7 +2894,7 @@ GameObject:
   - component: {fileID: 1454848435}
   m_Layer: 0
   m_Name: Freeze
-  m_TagString: pw_new-life
+  m_TagString: pw_small-ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14527,6 +14527,10 @@ MonoBehaviour:
   slowTime: 2
   slowFactor: 0.5
   invisibleTime: 3
+  bigBallRadius: 2
+  bigBallTime: 2
+  smallBallRadius: 0.2
+  smallBallTime: 2
   barHorizontalMovement: {fileID: 480448039}
 --- !u!114 &5636276234157345400
 MonoBehaviour:

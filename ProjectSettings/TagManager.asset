@@ -15,6 +15,8 @@ TagManager:
   - pw_slow
   - pw_invisible-ball
   - pw_new-life
+  - pw_big-ball
+  - pw_small-ball
   layers:
   - Default
   - TransparentFX
