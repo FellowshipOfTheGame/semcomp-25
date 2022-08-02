@@ -17,19 +17,22 @@ public class PauseMenu : MonoBehaviour
         // Check if the user press ESC button
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // IF the game is already paused, exits the pause menu
-            if (isGamePaused)
-            {
-                Resume();
-            } 
-            // ELSE join the pause menu
-            else
-            {
-                Pause();
-            }
+            SwitchPaused();
         }
     }
-
+    public void SwitchPaused()
+    {
+        // IF the game is already paused, exits the pause menu
+        if (isGamePaused)
+        {
+            Resume();
+        }
+        // ELSE join the pause menu
+        else
+        {
+            Pause();
+        }
+    }
     // Exit the Pause Menu
     public void Resume()
     {
@@ -45,7 +48,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Open the Pause Menu
-    void Pause()
+    public void Pause()
     {
         // Show the Pause Menu in the canvas
         pauseMenuUI.SetActive(true);

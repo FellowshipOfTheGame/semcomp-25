@@ -19,6 +19,8 @@ public class DifficultyProgression : MonoBehaviour
     Queue<PresetSO> presetsQueue = new Queue<PresetSO>();
     int levelToQueue = 0;
 
+    int playersOnLevel=0;
+    public int PlayersOnLevel => playersOnLevel;
     [Serializable]
     public struct LevelPresetProportions
     {
@@ -46,7 +48,6 @@ public class DifficultyProgression : MonoBehaviour
             }
         }
     }
-
     public GameObject NextPreset()
     {
         // enqueue presets of current level
@@ -59,18 +60,21 @@ public class DifficultyProgression : MonoBehaviour
                 difficulties.Add(Difficulty.Normal);
             for (int i = 0; i < levelProgression[levelToQueue].hard; i++)
                 difficulties.Add(Difficulty.Hard);
-            
+            playersOnLevel = 0;
             while (difficulties.Count > 0)
             {
                 int rd_idx = UnityEngine.Random.Range(0, difficulties.Count);
-
-                presetsQueue.Enqueue(GetRandomPresetSO(difficulties[rd_idx]));
+                PresetSO p = GetRandomPresetSO(difficulties[rd_idx]);
+                int playerCount=p.presetPrefab.transform.Find("Players").childCount;
+                playersOnLevel += playerCount;
+                presetsQueue.Enqueue(p);
 
                 difficulties.RemoveAt(rd_idx);
             }
 
             if (levelToQueue < levelProgression.Length-1)
                 levelToQueue++;
+
         }
 
 

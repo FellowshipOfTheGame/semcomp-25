@@ -12,9 +12,15 @@ public class MapManager : MonoBehaviour
     [SerializeField] private float targetY=-3f;
     [SerializeField] private float speed = 0.01f;
     [SerializeField] private GameObject fx;
-
+    [SerializeField] Transform ballTransf;
     float posNextSpawn = -4f;
+    float spawnOffset = 2f;
     Transform currPlayer;
+
+    /* Level Control */
+    int playersPassed = 0;
+    int totalPlayersToPass = 0;
+    int currLevel = 1;
 
     private GameManager manager;
     private DifficultyProgression difficultyProgression;
@@ -33,14 +39,20 @@ public class MapManager : MonoBehaviour
     {
         SpawnPreset();
         SpawnPreset();
+        SpawnPreset();
+        //SpawnPreset();
 
+        Vector2 pos = ballTransf.position;
+        pos.x = presetsOnMap[0].BallPosX;
+        ballTransf.position = pos;
+        totalPlayersToPass = difficultyProgression.PlayersOnLevel;
     }
     private void SpawnPreset()
     {
         int presetCount = presetsOnMap.Count;
         if (presetCount > 0)
         {
-            posNextSpawn = presetsOnMap[presetCount-1].SpawnPos+4f;
+            posNextSpawn = presetsOnMap[presetCount-1].SpawnPos+ spawnOffset;
         }
         Vector2 pos = new Vector2(0, posNextSpawn);
 
@@ -58,6 +70,18 @@ public class MapManager : MonoBehaviour
         onTransition = true;
         fx.SetActive(false);
         int points=((int)Mathf.Abs(currPlayer.position.y - targetY)/4);
+        playersPassed += points;
+        if (playersPassed >= totalPlayersToPass)
+        {
+            playersPassed = points - 1;
+            totalPlayersToPass = difficultyProgression.PlayersOnLevel;
+            currLevel++;
+            manager.PassLevel();
+            manager.SetLevelProgress(1f);
+        }
+        else
+        manager.SetLevelProgress((float)playersPassed / totalPlayersToPass);
+
         Vector3 pos=transform.position;
         while (Mathf.Abs(currPlayer.position.y-targetY)>0.1f)
         {

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PresetSO6
   m_EditorClassIdentifier: 
   presetPrefab: {fileID: 1003820834125476221, guid: cdedecf18e4fb224b8a2f55596bfb98d, type: 3}
-  difficulty: 2
+  difficulty: 1
