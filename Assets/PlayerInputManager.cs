@@ -23,7 +23,7 @@ public class PlayerInputManager : MonoBehaviour
 
     }
 
-    private void ínputClickDown()
+    private void InputClickDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -43,7 +43,7 @@ public class PlayerInputManager : MonoBehaviour
             }
         }
     }
-    private void ínputClickHold()
+    private void InputClickHold()
     {
         if (Input.GetMouseButton(0))
         {
@@ -92,8 +92,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (canMove)
         {
-            ínputClickDown();
-            ínputClickHold();
+            InputClickDown();
+            InputClickHold();
             inputClickUp();
         }
 

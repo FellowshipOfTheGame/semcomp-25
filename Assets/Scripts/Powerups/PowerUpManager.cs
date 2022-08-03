@@ -17,6 +17,14 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private float smallBallTime;
 
     private SpriteRenderer spriteRenderer;
+    /*
+        Adicoes Lucas Ebling =  Conectar a pontos e a tempo/ 
+    */
+
+    //Tempo e Score Managers precisam ser conectados com os da cena em questão.
+    [SerializeField] private ScoreSystem scoreManager;
+
+    [SerializeField] private Timer timeManager;
 
     private int lives;  // number of lives of the player
     private bool isInvisible;
@@ -116,6 +124,47 @@ public class PowerUpManager : MonoBehaviour
         else if (collision.CompareTag("pw_small-ball"))
         {
             ChangeTemporarilyBallSize(smallBallRadius, smallBallTime);
+        }
+        else if(collision.CompareTag("pw_l")){
+            //comparacao usando apenas uma tag. Ver se acha essa opcao melhor.
+            DataHolder data = collision.gameObject.GetComponent<DataHolder>();
+
+            string tag = data.getTag();
+
+            switch(tag){
+
+                case "Time" :
+                    if(!timeManager){
+                    TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
+                    Debug.Log("Time Added:" + x.time);
+                    }
+                    else{
+                        TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
+                        timeManager.AddTime(x.time);
+                    }
+                break;
+
+                case "Point":
+                    if(!scoreManager){
+                    PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
+                    Debug.Log("Score Added:" + x.PointAmmount); 
+                    }
+                    else{
+                        PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
+                        scoreManager.addScore(x.PointAmmount);
+                    }
+                
+                break;  
+
+            }
+            /*
+            if(data.getTag() == "Time"){
+               
+            }
+            else if(data.getTag() == "Point"){
+             
+            }
+            */
         }
     }
 }
