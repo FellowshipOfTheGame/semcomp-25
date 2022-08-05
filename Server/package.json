@@ -27,8 +27,10 @@
     "firebase": "^8.10.0",
     "morgan": "^1.10.0",
     "passport": "^0.5.3",
+    "passport-google-id-token": "^0.4.7",
     "passport-google-oauth": "^2.0.0",
     "passport-google-oauth20": "^2.0.0",
+    "passport-google-verify-token": "^2.2.0",
     "winston-firebase-transport": "^1.1.0"
   },
   "devDependencies": {

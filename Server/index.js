@@ -29,10 +29,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // For an actual app you should configure this with an experation time, better keys, proxy and secure
-app.use(cookieSession({
-    name: 'tuto-session',
-    keys: ['key1', 'key2']
-  }))
 
 // app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -40,9 +36,10 @@ app.use(morgan('dev'))
 
 app.use(cookieSession({
     name: 'gameSession',
-    keys: ['key1', 'key2']
+    keys: ['key1', 'key2'],
+    //maxAge:60*60*24
 }))
-
+ 
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -65,13 +62,6 @@ app.post("/delete", (req, res) => {
 main().catch(err => console.log(err));
 
 async function main() {
-    // Test application
-
-    // app.set('view-engine', 'ejs')
-
-    // https://www.youtube.com/watch?v=-RCnNyD0L-s
-    
-    //GET request to display our todo list
 
     app.listen(configEnv.SERVER_PORT, (error) => {
         if (error) throw error

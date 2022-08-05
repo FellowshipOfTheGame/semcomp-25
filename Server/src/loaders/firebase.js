@@ -4,6 +4,7 @@ const { logger } = require("../config/logger");
 
 // Import app from SDKs
 const { initializeApp } = require("firebase/app");
+const { get } = require('../routes/session');
 
 /**
  * Database Singleton (using Firebase)
@@ -31,30 +32,29 @@ class FirebaseClient {
         // Initialize Firebase
         let app;
         
-        if (!firebase.apps.length) {
-            app = initializeApp(firebaseConfig);
-         }else {
-            app = firebase.app(); // if already initialized, use that one
-         }
+        try {
+            if (!firebase.apps.length)
+                app = initializeApp(firebaseConfig);
+            else
+               app = firebase.app(); // if already initialized, use that one
 
-        // .(config.MONGO_CONNECT_URL,{
-        //     useNewUrlParser: true,
-        //     useUnifiedTopology: true,
-        //     useCreateIndex: true,
-        // })
-        // .then(() => {
-        //     logger.info({
-        //         message: `at Firebase: ${config.MONGO_CONNECT_URL} connect successful`
-        //     })
-        // })
-        // .catch(err => {
-        //     logger.error({
-        //         message: `at Firebase: ${err}`
-        //     })
-        // })
-      
+            logger.info({
+                message: `at Firebase: connect successful`
+            })  
+        } catch(err) {   
+            logger.error({   
+                message: `at Firebase: ${err}`
+            })
+        }
+    } 
+
+    getFirebaseDatabase() {
+        return firebase.database()
     }
 }
+const fbClient = new FirebaseClient()
+const db = fbClient.getFirebaseDatabase();
 
-module.exports = new FirebaseClient()
-
+module.exports = {
+    db
+}

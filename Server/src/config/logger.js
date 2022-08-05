@@ -43,13 +43,13 @@ const logger = winston.createLogger({
 				level: 'info',
                 format: winston.format.combine(
                     winston.format.json(),
-                    format
-                ),
+                    format 
+                ),   
                 options: {
                     useUnifiedTopology: true
                 },
 			},     
-			applicationName: 'semcomp25',
+			applicationName: configEnv.PROJECT_ID,
 			collectionName: 'logs',
 			storageType: StorageType.Realtime,
 		}), 
