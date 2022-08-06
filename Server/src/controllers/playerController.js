@@ -4,47 +4,51 @@
 
 const { Player } = require('../models/player');
 const configEnv = require("../config")
+const { logger } = require('../config/logger');
 
 module.exports = {
-    async findOrCreate (googleId, cb) {
-        console.log("aqui")
-        if (!googleId) {
+    async findOrCreate (provider_id, provider, parsedToken, cb) {
+        let player = null;
+
+        if (!provider_id) {
             return cb({ message: "An provider_id is required" }, null);
-        }
-
-        Player.describe();
-        Player.find(googleId);
-        
-        // try {
-        //     var user = await User.findOne({ provider_id: passport_user.id, provider: passport_user.provider });
-        // } catch (err) {
-        //     return cb(err, null);
-        // }
-
-        // if (user) {
-        //     if (user.isBanned === false)
-        //         return cb(null, user);
-        //     else
-        //         return cb(null, null)
-        // }
+        }    
 
         try {
-            // user = await User.create({
-            //     created_at: new Date(),
-
-            //     provider: passport_user.provider,
-            //     provider_id: passport_user.id,
-            //     name: (passport_user.provider === 'facebook') ? `${passport_user._json?.first_name} ${passport_user._json?.last_name}` : passport_user._json?.name,
-            //     email: passport_user._json?.email,
-            // });
+            player = await Player.findOne(provider_id, provider);
         } catch (err) {
+            console.log("Fail")
             return cb(err, null);
         }
 
-        // logger.info({
-        //     message: `User ${user._id} created successfully from ${passport_user.provider}`
-        // });
+        if (player) {
+                console.log("Found player")
+        //     if (user.isBanned === false)
+                 return cb(null, player);
+        //     else
+        //         return cb(null, null)
+        }
 
-        return cb(null, googleId);
+        try {
+            player = await Player.create({
+            //     created_at: new Date(),
+                 provider: provider,
+                 provider_id: provider_id,
+                 email: parsedToken.email,
+                 // email_verified: parsedToken.email_verified,
+                 first_name: parsedToken.given_name,
+                 surname_name: parsedToken.family_name
+            });
+        } catch (err) {
+            console.log("Error create user")
+            console.log(err)
+            return cb(err, null);
+        }
+
+        logger.info({
+            message: `Player ${player.provider_id} created successfully from ${provider}`
+        });
+
+        return cb(null, player);
     },
 }

@@ -7,16 +7,27 @@ class SchemaPlayer {
         console.log('this function works...')
     }
     
-    async find(googleId) {
-        db.ref(configEnv.PROJECT_ID + '/players/' + googleId).set({
-            username: 'julio35',
-            email: 'julio@gmail.com',
-            provider_id : googleId
-          });
+    async findOne(provider_id, provider) {
+        db.ref(provider + '/' + provider_id).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                return snapshot.val();
+            } else {
+                console.log("No data available");
+                return null;
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+          
     }
 
-    async create() {
-        db.ref('logs/info').set('something')
+    async create(Player) {
+       db.ref(Player.provider + '/' + Player.provider_id).set({
+            first_name: Player.first_name,
+            email: Player.email,
+        });
+        return Player;
     }
 
     async update() {

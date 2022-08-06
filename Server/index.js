@@ -37,7 +37,7 @@ app.use(morgan('dev'))
 app.use(cookieSession({
     name: 'gameSession',
     keys: ['key1', 'key2'],
-    //maxAge:60*60*24
+    maxAge:60*60*24
 }))
  
 app.use(passport.initialize());

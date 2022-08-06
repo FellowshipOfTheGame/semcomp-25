@@ -72,8 +72,8 @@ module.exports = function (passport) {
                 // getGoogleCerts: optionalCustomGetGoogleCerts
             },
             function(parsedToken, googleId, done) {
-                PlayerController.findOrCreate(googleId, (err, player) => {
-                    console.log("Meu Player: ", player)
+                const provider = 'google'
+                PlayerController.findOrCreate(googleId, provider, parsedToken, (err, player) => {
                     if (err) {
                         logger.error({
                             message: `at Google Login: ${err}`
@@ -87,8 +87,6 @@ module.exports = function (passport) {
                     
                     return done(null, player);
                 });
-                console.log("aqui " + googleId)
-                return done(null, googleId);
             }
         ));
     }
