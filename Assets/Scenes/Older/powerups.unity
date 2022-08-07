@@ -1035,40 +1035,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4060f7d4220f1aa40a7eb1ac364e3ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allies:
-  - {fileID: 1865643250}
-  - {fileID: 1375986630}
-  - {fileID: 1144469248}
-  - {fileID: 1908275547}
-  - {fileID: 1044777145}
-  - {fileID: 1907127972}
-  enemies:
-  - {fileID: 1120978901}
-  - {fileID: 1655221573}
-  - {fileID: 1937621238}
-  - {fileID: 449508948}
-  - {fileID: 157887246}
+  presetsOnMap: []
   goal: {fileID: 0}
   onTransition: 0
+  presetSpawner: {fileID: 0}
   targetY: -4
   speed: 8
   fx: {fileID: 1780892986}
-  playerPrefabs:
-  - {fileID: 7944325762244716629, guid: edae06eb462c1ab439c3fad074032761, type: 3}
-  - {fileID: 3407597078253179038, guid: fa8d716d27feb5c4c9b88a36d5966b9e, type: 3}
-  - {fileID: 6770568658293729315, guid: d0e85f821869cbe49bd8f04676a02586, type: 3}
-  enemyPrefabs:
-  - {fileID: 4929632446020782815, guid: b65c6283186a61a4b9b45974a5722008, type: 3}
-  - {fileID: 1756570411135036750, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-  - {fileID: 2775839399116898309, guid: 91d3db37d4d7bd14185a92c59363871f, type: 3}
-  - {fileID: 1534919115634198099, guid: 0a4aef9cd4fe3c042842fa169d199cc7, type: 3}
-  - {fileID: 6770568658293729315, guid: d0e85f821869cbe49bd8f04676a02586, type: 3}
+  ballTransf: {fileID: 0}
   goalPrefabs:
   - {fileID: 561831440}
-  alliesTransf: {fileID: 1160211086}
-  enemiesTransf: {fileID: 765162948}
   goalTransf: {fileID: 357753559}
-  manager: {fileID: 1760192326}
 --- !u!1 &480448037
 GameObject:
   m_ObjectHideFlags: 0
@@ -8425,6 +8402,10 @@ MonoBehaviour:
   gameOverPointsView: {fileID: 1709783256}
   highscoreView: {fileID: 1174906630}
   gameOverObj: {fileID: 2057015190}
+  progressFill: {fileID: 0}
+  currLevelView: {fileID: 0}
+  nextLevelView: {fileID: 0}
+  timeView: {fileID: 0}
 --- !u!4 &1760192327
 Transform:
   m_ObjectHideFlags: 0
@@ -14531,6 +14512,8 @@ MonoBehaviour:
   bigBallTime: 2
   smallBallRadius: 0.2
   smallBallTime: 2
+  scoreManager: {fileID: 0}
+  timeManager: {fileID: 0}
   barHorizontalMovement: {fileID: 480448039}
 --- !u!114 &5636276234157345400
 MonoBehaviour:
@@ -14613,10 +14596,6 @@ PrefabInstance:
     - target: {fileID: 8514858998525760269, guid: 011e3f3231dee944a9d87283b63b36c4, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514858998525760271, guid: 011e3f3231dee944a9d87283b63b36c4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 011e3f3231dee944a9d87283b63b36c4, type: 3}

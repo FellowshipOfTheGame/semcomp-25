@@ -34,8 +34,8 @@ public class MapManager : MonoBehaviour
     }
     [SerializeField] private List<GameObject> goalPrefabs;
     [SerializeField] private Transform goalTransf;
-    private bool goalSpawned = false;
-    private Transform removedAlly;
+    //private bool goalSpawned = false;
+    //private Transform removedAlly;
 
     public void SetBallFx(bool val)
     {
@@ -124,10 +124,11 @@ public class MapManager : MonoBehaviour
         goal = obj.transform;
 
         // Deactivate ally object where the goal is
-        for (int i = 0; i < allies.Count; i++)
+        /*for (int i = 0; i < allies.Count; i++)
         {
             Transform ally = allies[i];
-            if (Vector3.Distance(ally.position, goal.position) < 0.1f)
+            //if (Vector3.Distance(ally.position, goal.position) < 0.1f)
+            if (Mathf.Abs(ally.position.y - goal.position.y) < 0.1f)
             {
                 //Destroy(ally.gameObject);
                 //allies.RemoveAt(i);
@@ -135,7 +136,7 @@ public class MapManager : MonoBehaviour
                 goalSpawned = true;
                 removedAlly = ally;
             }
-        }
+        }*/
 
         obj.SetActive(true);
     }
@@ -144,11 +145,11 @@ public class MapManager : MonoBehaviour
     public void StartDeleteGoalTransition()
     {
         Destroy(goal.gameObject);
-        Debug.Log(removedAlly.gameObject.name);
-        removedAlly.gameObject.SetActive(true);
+        //Debug.Log(removedAlly.gameObject.name);
+        //removedAlly.gameObject.SetActive(true);
 
-        goalSpawned = false;
-        StartTransition(removedAlly.parent);
+        //goalSpawned = false;
+        //StartTransition(removedAlly.parent);
     }
 
     public void StartTransition(Transform newPlayer)
@@ -157,8 +158,8 @@ public class MapManager : MonoBehaviour
         StartCoroutine(Transition());
     }
 
-    public Transform RemovedAllyTransform()
+    /*public Transform RemovedAllyTransform()
     {
-        return removedAlly;
-    }
+        return removedAlly.GetChild(0);
+    }*/
 }

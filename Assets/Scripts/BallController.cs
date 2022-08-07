@@ -283,7 +283,7 @@ public class BallController : MonoBehaviour
 
             // Get the Transform of the removed ally (replaced with the Goal object)
 
-            SetBallToPlayer(map.RemovedAllyTransform().gameObject);
+            //SetBallToPlayer(map.RemovedAllyTransform().gameObject);
 
             // Delete goal object and move camera
             map.StartDeleteGoalTransition();
