@@ -5,119 +5,109 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
 
-    [SerializeField] List<Transform> allies;
-    [SerializeField] List<Transform> enemies;
+    //[SerializeField] List<GameObject> presetPrefabs;
+    [SerializeField] List<Preset> presetsOnMap;
     [SerializeField] Transform goal;
 
     [SerializeField] private bool onTransition=false;
-
+    [SerializeField] Transform presetSpawner;
     [SerializeField] private float targetY=-3f;
     [SerializeField] private float speed = 0.01f;
     [SerializeField] private GameObject fx;
-
-    [SerializeField] private List<GameObject> playerPrefabs;
-    [SerializeField] private List<GameObject> enemyPrefabs;
-    [SerializeField] private List<GameObject> goalPrefabs;
-
-    [SerializeField] private Transform alliesTransf;
-    [SerializeField] private Transform enemiesTransf;
-    [SerializeField] private Transform goalTransf;
-
+    [SerializeField] Transform ballTransf;
+    float posNextSpawn = -4f;
+    float spawnOffset = 2f;
     Transform currPlayer;
 
-    [SerializeField] private GameManager manager;
+    /* Level Control */
+    int playersPassed = 0;
+    int totalPlayersToPass = 0;
+    int currLevel = 1;
 
-    private bool goalSpawned = false;
-    private Transform removedAlly;
+    private GameManager manager;
+    private DifficultyProgression difficultyProgression;
+
+    private void Awake()
+    {
+        manager = FindObjectOfType<GameManager>();
+        difficultyProgression = FindObjectOfType<DifficultyProgression>();
+    }
+    [SerializeField] private List<GameObject> goalPrefabs;
+    [SerializeField] private Transform goalTransf;
+    //private bool goalSpawned = false;
+    //private Transform removedAlly;
 
     public void SetBallFx(bool val)
     {
         fx.SetActive(val);
+    }
+    private void Start()
+    {
+        SpawnPreset();
+        SpawnPreset();
+        SpawnPreset();
+        //SpawnPreset();
+
+        Vector2 pos = ballTransf.position;
+        pos.x = presetsOnMap[0].BallPosX;
+        ballTransf.position = pos;
+        totalPlayersToPass = difficultyProgression.PlayersOnLevel;
+    }
+    private void SpawnPreset()
+    {
+        int presetCount = presetsOnMap.Count;
+        if (presetCount > 0)
+        {
+            posNextSpawn = presetsOnMap[presetCount-1].SpawnPos+ spawnOffset;
+        }
+        Vector2 pos = new Vector2(0, posNextSpawn);
+
+        //int id = Random.Range(0, presetPrefabs.Count);
+        //GameObject obj=Instantiate(presetPrefabs[id], pos, Quaternion.identity, presetSpawner);
+        GameObject obj = Instantiate(difficultyProgression.NextPreset(), pos, Quaternion.identity, presetSpawner);
+
+        Preset preset = obj.GetComponent<Preset>();
+        presetsOnMap.Add(preset);
+  
     }
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0.1f);
         onTransition = true;
         fx.SetActive(false);
-        while (Mathf.Abs(currPlayer.position.y-targetY)>0.2f)
+        int points=((int)Mathf.Abs(currPlayer.position.y - targetY)/4);
+        playersPassed += points;
+        if (playersPassed >= totalPlayersToPass)
         {
-            Vector3 pos = transform.position;
+            playersPassed = points - 1;
+            totalPlayersToPass = difficultyProgression.PlayersOnLevel;
+            currLevel++;
+            manager.PassLevel();
+            manager.SetLevelProgress(1f);
+        }
+        else
+        manager.SetLevelProgress((float)playersPassed / totalPlayersToPass);
+
+        Vector3 pos=transform.position;
+        while (Mathf.Abs(currPlayer.position.y-targetY)>0.1f)
+        {
+            pos = transform.position;
             pos.y -= speed*Time.deltaTime;
             transform.position = pos;
             yield return null;
         }
-
+        pos.y =Mathf.Round(pos.y);
+        transform.position = pos;
+        
         onTransition = false;
-
-        int alliesDestroyed = 0, enemiesDestroyed = 0;
-
-        //if (goalSpawned)
-        //    alliesDestroyed++;
-
-        for (int i = allies.Count - 1; i >= 0; i--)
+        manager.AddPoint(points);
+        if (presetsOnMap[0].SpawnPos < targetY)
         {
-            Transform item = allies[i];
-            if (item.position.y < targetY)
-            {
-                Destroy(item.gameObject);
-                allies.RemoveAt(i);
-                alliesDestroyed++;
-            }
-        }
-
-        for (int i = enemies.Count - 1; i >= 0; i--)
-        {
-            Transform item = enemies[i];
-            if (item.position.y < targetY)
-            {
-                Destroy(item.gameObject);
-                enemies.RemoveAt(i);
-                enemiesDestroyed++;
-            }
-        }
-
-        manager.AddPoint(alliesDestroyed);
-
-        for (int i = 0, j = 14-(enemiesDestroyed-1)*4; i < enemiesDestroyed; i++, j += 4)
-        {
-            SpawnEnemy(j);
-        }
-
-        for (int i = 0,j=16-(enemiesDestroyed-1)*4; i < alliesDestroyed; i++,j+=4)
-        {
-            SpawnAlly(j);
+            SpawnPreset();
+            Destroy(presetsOnMap[0].gameObject);
+            presetsOnMap.RemoveAt(0);
         }
         fx.SetActive(true);
-    }
-
-    private void SpawnAlly(float _y)
-    {
-        int n = playerPrefabs.Count;
-        if (allies[allies.Count - 1].CompareTag("Empty"))
-            n--;
-        GameObject obj = Instantiate(playerPrefabs[Random.Range(0,n)], alliesTransf);
-        Vector3 pos = obj.transform.position;
-        pos.y = _y;
-        PlayerController controller = obj.GetComponent<PlayerController>();
-        if (controller != null)
-        {
-
-            float range =controller.Range - 0.05f;
-            pos.x = Random.Range(-range, range);
-        }
-        obj.transform.position = pos;
-        allies.Add(obj.transform);
-    }
-
-
-    private void SpawnEnemy(float _y)
-    {
-        int n = enemyPrefabs.Count;
-        GameObject obj = Instantiate(enemyPrefabs[Random.Range(0,n)], enemiesTransf);
-        Vector3 pos = obj.transform.position;
-        pos.y = _y;
-        obj.transform.position = pos;
-        enemies.Add(obj.transform);
     }
 
     public void SpawnGoal(float _y)
@@ -134,10 +124,11 @@ public class MapManager : MonoBehaviour
         goal = obj.transform;
 
         // Deactivate ally object where the goal is
-        for (int i = 0; i < allies.Count; i++)
+        /*for (int i = 0; i < allies.Count; i++)
         {
             Transform ally = allies[i];
-            if (Vector3.Distance(ally.position, goal.position) < 0.1f)
+            //if (Vector3.Distance(ally.position, goal.position) < 0.1f)
+            if (Mathf.Abs(ally.position.y - goal.position.y) < 0.1f)
             {
                 //Destroy(ally.gameObject);
                 //allies.RemoveAt(i);
@@ -145,7 +136,7 @@ public class MapManager : MonoBehaviour
                 goalSpawned = true;
                 removedAlly = ally;
             }
-        }
+        }*/
 
         obj.SetActive(true);
     }
@@ -154,11 +145,11 @@ public class MapManager : MonoBehaviour
     public void StartDeleteGoalTransition()
     {
         Destroy(goal.gameObject);
-        Debug.Log(removedAlly.gameObject.name);
-        removedAlly.gameObject.SetActive(true);
+        //Debug.Log(removedAlly.gameObject.name);
+        //removedAlly.gameObject.SetActive(true);
 
-        goalSpawned = false;
-        StartTransition(removedAlly.parent);
+        //goalSpawned = false;
+        //StartTransition(removedAlly.parent);
     }
 
     public void StartTransition(Transform newPlayer)
@@ -167,14 +158,8 @@ public class MapManager : MonoBehaviour
         StartCoroutine(Transition());
     }
 
-    public Transform RemovedAllyTransform()
+    /*public Transform RemovedAllyTransform()
     {
-        return removedAlly;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        return removedAlly.GetChild(0);
+    }*/
 }
