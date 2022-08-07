@@ -7,6 +7,8 @@ public class MapManager : MonoBehaviour
 
     //[SerializeField] List<GameObject> presetPrefabs;
     [SerializeField] List<Preset> presetsOnMap;
+    [SerializeField] Transform goal;
+
     [SerializeField] private bool onTransition=false;
     [SerializeField] Transform presetSpawner;
     [SerializeField] private float targetY=-3f;
@@ -30,6 +32,10 @@ public class MapManager : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
         difficultyProgression = FindObjectOfType<DifficultyProgression>();
     }
+    [SerializeField] private List<GameObject> goalPrefabs;
+    [SerializeField] private Transform goalTransf;
+    private bool goalSpawned = false;
+    private Transform removedAlly;
 
     public void SetBallFx(bool val)
     {
@@ -101,8 +107,48 @@ public class MapManager : MonoBehaviour
             Destroy(presetsOnMap[0].gameObject);
             presetsOnMap.RemoveAt(0);
         }
-
         fx.SetActive(true);
+    }
+
+    public void SpawnGoal(float _y)
+    {
+        int numberOfGoals = goalPrefabs.Count;
+
+        // Generate Goal object
+        GameObject obj = Instantiate(goalPrefabs[Random.Range(0, numberOfGoals)], goalTransf);
+        Vector3 pos = obj.transform.position;
+        pos.y = _y;
+        obj.transform.position = pos;
+
+        // Set the goal transform
+        goal = obj.transform;
+
+        // Deactivate ally object where the goal is
+        for (int i = 0; i < allies.Count; i++)
+        {
+            Transform ally = allies[i];
+            if (Vector3.Distance(ally.position, goal.position) < 0.1f)
+            {
+                //Destroy(ally.gameObject);
+                //allies.RemoveAt(i);
+                ally.gameObject.SetActive(false);
+                goalSpawned = true;
+                removedAlly = ally;
+            }
+        }
+
+        obj.SetActive(true);
+    }
+
+    // Delete the Goal gameobject and 
+    public void StartDeleteGoalTransition()
+    {
+        Destroy(goal.gameObject);
+        Debug.Log(removedAlly.gameObject.name);
+        removedAlly.gameObject.SetActive(true);
+
+        goalSpawned = false;
+        StartTransition(removedAlly.parent);
     }
 
     public void StartTransition(Transform newPlayer)
@@ -111,4 +157,8 @@ public class MapManager : MonoBehaviour
         StartCoroutine(Transition());
     }
 
+    public Transform RemovedAllyTransform()
+    {
+        return removedAlly;
+    }
 }

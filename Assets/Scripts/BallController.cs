@@ -30,8 +30,15 @@ public class BallController : MonoBehaviour
     // cached references
     Rigidbody2D rb2d;
 
+    [SerializeField] private int distanceToGoal; // Number of allies to achieve the goal
+    private int distanceCount;
+
+    private PowerUpManager powerUpManager;
+
     private void Awake()
     {
+        powerUpManager = GetComponent<PowerUpManager>();
+        distanceCount = 0;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -167,7 +174,7 @@ public class BallController : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
-        currentPlayer = null;
+//        currentPlayer = null;
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
 
@@ -185,25 +192,102 @@ public class BallController : MonoBehaviour
         Destroy(gameObject);
     }
     [SerializeField] private GameObject ballHitPrefab;
+
+    private void SetGameOver()
+    {
+        Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
+        rb2d.bodyType = RigidbodyType2D.Static;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        map.SetBallFx(false);
+        StartCoroutine(GameOver());
+    }
+
+    // Auxiliar function to set the ball freezed to the player position
+    private void SetBallToPlayer(GameObject player)
+    {
+        currentPlayer = player;
+        currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
+        lastPlayer = currentPlayer;
+        lockedOntoPlayer = true;
+        rb2d.velocity = Vector2.zero;
+        rb2d.bodyType = RigidbodyType2D.Kinematic;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
         {
-            currentPlayer = collision.gameObject;
-            currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
-            lastPlayer = currentPlayer;
-            lockedOntoPlayer = true;
-            rb2d.velocity = Vector2.zero;
-            rb2d.bodyType = RigidbodyType2D.Kinematic;
+            distanceCount++;
+
+            SetBallToPlayer(collision.gameObject);
+
             map.StartTransition(currentPlayer.transform.parent);
-        }else if (collision.CompareTag("MapTop") || collision.CompareTag("Enemy"))
+
+            // Check distance to generate the goal
+            if (distanceCount >= distanceToGoal)
+            {
+                distanceCount = -99;
+                // Generate goal
+                map.SpawnGoal(16);
+            }
+        } 
+        else if (collision.CompareTag("MapTop"))
         {
-            //transform.position = lastPlayer.transform.position;
-            Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
-            rb2d.bodyType=RigidbodyType2D.Static;
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            map.SetBallFx(false);
-            StartCoroutine(GameOver());
+            // Checks the number of lives the player has
+            if (powerUpManager.GetNumberLives() < 2)
+            {
+                // Game Over
+                SetGameOver();
+            }
+            // If the number of lives of the player is up to 1:
+            else
+            {
+                // the player loose one life
+                powerUpManager.LoseLife();
+                // the ball get back to the last ally that 'kicked' the ball
+                SetBallToPlayer(currentPlayer);
+                map.StartTransition(currentPlayer.transform.parent);
+            }
         }
+        else if (collision.CompareTag("Enemy"))
+        {
+            // Check first if the ball is invisible (by invisible powerup)
+            if (!powerUpManager.IsInvisible())
+            {
+                // Then, checks the number of lives the player has
+                if (powerUpManager.GetNumberLives() < 2)
+                {
+                    // Game Over
+                    SetGameOver();
+                }
+                // If the number of lives of the player is up to 1, the plase loose one life
+                else
+                {
+                    powerUpManager.LoseLife();
+                }
+            }
+        }
+        else if (collision.CompareTag("Goal"))
+        {
+            // Reset distance
+            distanceCount = 0;
+
+            // Update the fase level
+            manager.AddFaseLevel();
+
+            // Update distance to goal 
+            //distanceToGoal = manager.FaseLevel() * 10; // used if the distance will be different accordingly to the fase level
+
+            // Show Goal animation
+
+
+            // Get the Transform of the removed ally (replaced with the Goal object)
+
+            SetBallToPlayer(map.RemovedAllyTransform().gameObject);
+
+            // Delete goal object and move camera
+            map.StartDeleteGoalTransition();
+        }
+
     }
 }

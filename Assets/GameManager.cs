@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text timeView;
     float progress = 0;
     int level = 0;
+
+    private int faseLevel; // Factor used to control the level of the game
     private int points = 0;
     private int highscore = 0;
     float time = 0;
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetLevelView();
+        faseLevel = 0;
         SetPointsView();
         highscore=PlayerPrefs.GetInt("HighScore", 0);
     }
@@ -95,6 +98,16 @@ public class GameManager : MonoBehaviour
     public void SetPointsView()
     {
         pointsView.text = points.ToString("D4") + "";
+    }
+
+    public void AddFaseLevel()
+    {
+        faseLevel++;
+    }
+
+    public int FaseLevel()
+    {
+        return faseLevel;
     }
 
     public void GameOverScene()
