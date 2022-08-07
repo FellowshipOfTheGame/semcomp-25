@@ -10,7 +10,6 @@ TagManager:
   - Empty
   - Ball
   - Allies
-  - Map
   layers:
   - Default
   - TransparentFX
