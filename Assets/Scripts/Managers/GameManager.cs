@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text pointsView;
     [SerializeField] private TMP_Text gameOverPointsView;
     [SerializeField] private TMP_Text highscoreView;
     [SerializeField] private GameObject gameOverObj;
-    [SerializeField] private RectTransform progressFill;
+    //[SerializeField] private RectTransform progressFill;
+
+    [SerializeField] private Slider levelProgressSlider;
 
     [SerializeField] private TMP_Text currLevelView;
     [SerializeField] private TMP_Text nextLevelView;
@@ -45,17 +48,21 @@ public class GameManager : MonoBehaviour
         float speed = 0.005f;
         while (_x <= p)
         {
-            Vector2 size = progressFill.sizeDelta;
-            size.x = Mathf.Lerp(25, 230, _x);
-            progressFill.sizeDelta = size;
+            //Vector2 size = progressFill.sizeDelta;
+            //size.x = Mathf.Lerp(25, 230, _x);
+            //progressFill.sizeDelta = size;
             _x += speed;
+
+            levelProgressSlider.value = _x;
+
             yield return new WaitForEndOfFrame();
         }
         if (p == 1f)
         {
-            Vector2 size = progressFill.sizeDelta;
-            size.x = Mathf.Lerp(25, 230, 0);
-            progressFill.sizeDelta = size;
+            //Vector2 size = progressFill.sizeDelta;
+            //size.x = Mathf.Lerp(25, 230, 0);
+            //progressFill.sizeDelta = size;
+            levelProgressSlider.value = 0;
         }
     }
     public void SetLevelProgress(float p)
@@ -76,7 +83,7 @@ public class GameManager : MonoBehaviour
     }
     public void SetTimeView()
     {
-        timeView.text = time.ToString("0.00")+"";
+        timeView.text = time.ToString("00.00")+"";
     }
     public void SetLevelView()
     {
