@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Difficulty { Easy, Normal, Hard};
 
-[CreateAssetMenu(fileName = "New PresetSO", menuName = "PresetSO")]
+[CreateAssetMenu(fileName = "New PresetSO", menuName = "ScriptableObjects/Preset")]
 public class PresetSO : ScriptableObject
 {
     public GameObject presetPrefab;
