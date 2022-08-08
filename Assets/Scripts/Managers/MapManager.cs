@@ -107,6 +107,7 @@ public class MapManager : MonoBehaviour
             Destroy(presetsOnMap[0].gameObject);
             presetsOnMap.RemoveAt(0);
         }
+        if(fx!=null)
         fx.SetActive(true);
     }
 

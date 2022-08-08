@@ -89,14 +89,32 @@ public class PowerUpManager : MonoBehaviour
     private void ChangeTemporarilyBallSize(float radius, float time)
     {
         coroutine = ChangeBallSizeAndWait(radius, time);
+        StopAllCoroutines();
         StartCoroutine(coroutine);
     }
+    private IEnumerator ScaleAnimation(float start, float finish)
+    {
 
+        float t = 0;
+        float currRadius;
+        float speed = 0.02f;
+        do
+        {
+            currRadius = Mathf.Lerp(start, finish, t);
+            transform.localScale = new Vector3(currRadius, currRadius, 1f);
+            t += speed;
+            yield return new WaitForEndOfFrame();
+        } while (t <= 1f);
+
+        transform.localScale = new Vector3(finish, finish, 1f);
+
+    }
+    
     private IEnumerator ChangeBallSizeAndWait(float radius, float time)
     {
-        this.GetComponent<Transform>().localScale = new Vector3(radius, radius, 1f);
+        yield return StartCoroutine(ScaleAnimation(0.5f, radius));
         yield return new WaitForSeconds(time);
-        this.GetComponent<Transform>().localScale = new Vector3(initialBallRadius, initialBallRadius, 1f);
+        yield return StartCoroutine(ScaleAnimation(radius, 0.5f));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

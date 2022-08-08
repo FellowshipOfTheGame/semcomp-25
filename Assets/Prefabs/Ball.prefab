@@ -4943,7 +4943,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -5120,7 +5120,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9803,7 +9803,7 @@ MonoBehaviour:
   slowTime: 2
   slowFactor: 0.5
   invisibleTime: 3
-  bigBallRadius: 2
+  bigBallRadius: 1.5
   bigBallTime: 2
   smallBallRadius: 0.2
   smallBallTime: 2
