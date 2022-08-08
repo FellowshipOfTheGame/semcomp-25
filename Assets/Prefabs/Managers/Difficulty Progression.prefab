@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3538776694070950587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3538776694070950581}
+  - component: {fileID: 3538776694070950586}
+  m_Layer: 0
+  m_Name: Difficulty Progression
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3538776694070950581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538776694070950587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3538776694070950586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538776694070950587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9311c6b6d384c4f803cc8801c89d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presetSOList:
+  - {fileID: 11400000, guid: 2a2852133f8c4ba469eac8e73078cf9e, type: 2}
+  - {fileID: 11400000, guid: cc131b7e2de3dee4782d13053f7ee81b, type: 2}
+  - {fileID: 11400000, guid: a67accb32d17f3548b5ffe328bb43fd9, type: 2}
+  - {fileID: 11400000, guid: ababc02acec1b0b49a7c8fbd5e7fa3db, type: 2}
+  - {fileID: 11400000, guid: 75ec42e5739ca71458621cba95c39abd, type: 2}
+  - {fileID: 11400000, guid: 5a76d8187ece01b41bc07ea5fb195486, type: 2}
+  - {fileID: 11400000, guid: c28a1e8799aa91947aa530f9e01f918e, type: 2}
+  - {fileID: 11400000, guid: ebab64a2ba114ff4fb96a28ba94d65dd, type: 2}
+  - {fileID: 11400000, guid: 5c97e0a4d4f346346a87ebeb077296e2, type: 2}
+  - {fileID: 11400000, guid: ea645d6e61f68b14da11107bac8467d2, type: 2}
+  levelProgression:
+  - easy: 3
+    normal: 0
+    hard: 0
+  - easy: 1
+    normal: 3
+    hard: 0
+  - easy: 0
+    normal: 4
+    hard: 3
+  - easy: 5
+    normal: 5
+    hard: 5
