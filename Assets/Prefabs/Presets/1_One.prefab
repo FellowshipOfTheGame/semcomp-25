@@ -48,8 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesTransf: {fileID: 2276502091170963246}
   playersTransf: {fileID: 2378734492175178187}
-  firstObj: {fileID: 4456392981740613112}
-  lastObj: {fileID: 6813533192683342126}
   randomizePos: 1
 --- !u!1 &5205690445121720195
 GameObject:

@@ -4,19 +4,10 @@ using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    [SerializeField] private float freezeTime;
 
-    [SerializeField] private float slowTime;
-    [SerializeField] private float slowFactor;
-
-    [SerializeField] private float invisibleTime;
-
-    [SerializeField] private float bigBallRadius;
-    [SerializeField] private float bigBallTime;
-    [SerializeField] private float smallBallRadius;
-    [SerializeField] private float smallBallTime;
 
     private SpriteRenderer spriteRenderer;
+
     /*
         Adicoes Lucas Ebling =  Conectar a pontos e a tempo/ 
     */
@@ -25,7 +16,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private ScoreSystem scoreManager;
 
     [SerializeField] private Timer timeManager;
-
+    [SerializeField] private GameObject ballFx;
     private int lives;  // number of lives of the player
     private bool isInvisible;
 
@@ -51,12 +42,11 @@ public class PowerUpManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-                
-    }
 
+    public void AddLife(int n)
+    {
+        lives += n;
+    }
     public void LoseLife()
     {
         lives--;
@@ -73,7 +63,7 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // Turns the ball invisible to enemy collision
-    private void ChangeTemporarilyVisibility(float invisibilityTime)
+    public void ChangeTemporarilyVisibility(float invisibilityTime)
     {
         coroutine = ChangeVisibilityAndWait(invisibilityTime);
         StartCoroutine(coroutine);
@@ -81,16 +71,42 @@ public class PowerUpManager : MonoBehaviour
 
     private IEnumerator ChangeVisibilityAndWait(float invisibilityTime)
     {
-        isInvisible = true;
+        Color invisibleColor = new Color(1f, 1f, 1f, 0.2f);
+        Color oldColor = spriteRenderer.color;
+        isInvisible = true; 
+
+        ballFx.SetActive(false);
+
+         yield return StartCoroutine(ColorAnimation(oldColor, invisibleColor)); 
         yield return new WaitForSeconds(invisibilityTime);
+        yield return StartCoroutine(ColorAnimation(invisibleColor, oldColor));
+
+
+        ballFx.SetActive(true);
         isInvisible = false;
     }
 
-    private void ChangeTemporarilyBallSize(float radius, float time)
+    public void ChangeTemporarilyBallSize(float radius, float time)
     {
         coroutine = ChangeBallSizeAndWait(radius, time);
-        StopAllCoroutines();
         StartCoroutine(coroutine);
+    }
+    private IEnumerator ColorAnimation(Color startColor, Color endColor)
+    {
+
+        float t = 0;
+        Color currColor;
+        float speed = 0.02f;
+        do
+        {
+            currColor = Color.Lerp(startColor, endColor, t);
+            spriteRenderer.color = currColor;
+            t += speed;
+            yield return new WaitForEndOfFrame();
+        } while (t <= 1f);
+
+        spriteRenderer.color = endColor;
+
     }
     private IEnumerator ScaleAnimation(float start, float finish)
     {
@@ -109,7 +125,11 @@ public class PowerUpManager : MonoBehaviour
         transform.localScale = new Vector3(finish, finish, 1f);
 
     }
-    
+    public void ChangeEnemyTime(float duration, float timeFactor)
+    {
+        barHorizontalMovement.ChangeSpeedFactorTemporarily(duration, timeFactor);
+    }
+
     private IEnumerator ChangeBallSizeAndWait(float radius, float time)
     {
         yield return StartCoroutine(ScaleAnimation(0.5f, radius));
@@ -119,70 +139,44 @@ public class PowerUpManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("pw_freeze"))
+        if (collision.CompareTag("pw_l"))
         {
-            barHorizontalMovement.ChangeSpeedFactorTemporarily(freezeTime, 0.0f);
-        }
-        else if (collision.CompareTag("pw_slow"))
-        {
-            barHorizontalMovement.ChangeSpeedFactorTemporarily(slowTime, slowFactor);
-        }
-        else if (collision.CompareTag("pw_invisible-ball"))
-        {
-            ChangeTemporarilyVisibility(invisibleTime);
-        }
-        else if (collision.CompareTag("pw_new-life"))
-        {
-            lives++;
-        }
-        else if (collision.CompareTag("pw_big-ball"))
-        {
-            ChangeTemporarilyBallSize(bigBallRadius, bigBallTime);
-        }
-        else if (collision.CompareTag("pw_small-ball"))
-        {
-            ChangeTemporarilyBallSize(smallBallRadius, smallBallTime);
-        }
-        else if(collision.CompareTag("pw_l")){
             //comparacao usando apenas uma tag. Ver se acha essa opcao melhor.
             DataHolder data = collision.gameObject.GetComponent<DataHolder>();
 
             string tag = data.getTag();
 
-            switch(tag){
+            switch (tag)
+            {
 
-                case "Time" :
-                    if(!timeManager){
-                    TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
-                    Debug.Log("Time Added:" + x.time);
+                case "Time":
+                    if (!timeManager)
+                    {
+                        TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
+                        Debug.Log("Time Added:" + x.time);
                     }
-                    else{
+                    else
+                    {
                         TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
                         timeManager.AddTime(x.time);
                     }
-                break;
+                    break;
 
                 case "Point":
-                    if(!scoreManager){
-                    PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
-                    Debug.Log("Score Added:" + x.PointAmmount); 
+                    if (!scoreManager)
+                    {
+                        PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
+                        Debug.Log("Score Added:" + x.PointAmmount);
                     }
-                    else{
+                    else
+                    {
                         PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
                         scoreManager.addScore(x.PointAmmount);
                     }
-                
-                break;  
+
+                    break;
 
             }
-            /*
-            if(data.getTag() == "Time"){
-               
-            }
-            else if(data.getTag() == "Point"){
-             
-            }
-            */
         }
     }
 }

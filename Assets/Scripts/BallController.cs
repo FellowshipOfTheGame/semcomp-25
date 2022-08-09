@@ -245,8 +245,8 @@ public class BallController : MonoBehaviour
                 // the player loose one life
                 powerUpManager.LoseLife();
                 // the ball get back to the last ally that 'kicked' the ball
+                
                 SetBallToPlayer(currentPlayer);
-                map.StartTransition(currentPlayer.transform.parent);
             }
         }
         else if (collision.CompareTag("Enemy"))
@@ -264,6 +264,7 @@ public class BallController : MonoBehaviour
                 else
                 {
                     powerUpManager.LoseLife();
+                    SetBallToPlayer(currentPlayer);
                 }
             }
         }

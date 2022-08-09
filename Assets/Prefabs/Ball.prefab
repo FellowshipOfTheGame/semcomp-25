@@ -5058,7 +5058,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
+      maxColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9799,14 +9799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4d2de0bdb6b594dbbb5c20bb30d661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeTime: 2
-  slowTime: 2
-  slowFactor: 0.5
-  invisibleTime: 3
-  bigBallRadius: 1.5
-  bigBallTime: 2
-  smallBallRadius: 0.2
-  smallBallTime: 2
   scoreManager: {fileID: 0}
   timeManager: {fileID: 0}
+  ballFx: {fileID: 0}
   barHorizontalMovement: {fileID: 0}
