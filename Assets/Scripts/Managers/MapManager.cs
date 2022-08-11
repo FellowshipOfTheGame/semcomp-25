@@ -27,6 +27,10 @@ public class MapManager : MonoBehaviour
     private GameManager manager;
     private DifficultyProgression difficultyProgression;
 
+    /* Pass event */
+    public delegate void SuccessfulPass();
+    public static event SuccessfulPass OnSuccessfulPass;
+
     private void Awake()
     {
         manager = FindObjectOfType<GameManager>();
@@ -100,7 +104,8 @@ public class MapManager : MonoBehaviour
         transform.position = pos;
         
         onTransition = false;
-        manager.AddPoint(points);
+        //manager.AddPoint(points);
+        OnSuccessfulPass?.Invoke();
         if (presetsOnMap[0].SpawnPos < targetY)
         {
             SpawnPreset();

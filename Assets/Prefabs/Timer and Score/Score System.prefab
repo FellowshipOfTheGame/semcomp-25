@@ -46,5 +46,5 @@ MonoBehaviour:
   wallHitScore: 2
   successfulPassScore: 10
   enableWallHitScore: 1
-  enableSuccessfulPassScore: 0
+  enableSuccessfulPassScore: 1
   scoreTextUI: {fileID: 0}

@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
 
     // Receive the PauseMenu game object
     public GameObject pauseMenuUI;
-    public GameObject BackgroundImage;
+    //public GameObject BackgroundImage;
 
         // Update is called once per frame
     void Update()
@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour
     {
         // Exit the Pause Menu in the canvas
         pauseMenuUI.SetActive(false);
-        BackgroundImage.SetActive(false);
+        //BackgroundImage.SetActive(false);
 
         // Unfreeze the game
         Time.timeScale = 1f;
@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         // Set true meaning that the game is paused
         isGamePaused = true;
 
-        BackgroundImage.SetActive(true);
+        //BackgroundImage.SetActive(true);
     }
 
     // Open the Main Menu

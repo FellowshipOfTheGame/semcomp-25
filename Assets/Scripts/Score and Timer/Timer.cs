@@ -65,12 +65,14 @@ public class Timer : MonoBehaviour
     {
         if (!timerText) return;
 
-        int minutes = (int) (CurrentTime / 60f);
+        timerText.text = CurrentTime.ToString("00.00") + "";
+
+        /*int minutes = (int) (CurrentTime / 60f);
         int secondsLeft = (int) (CurrentTime % 60f);
 
         if (secondsLeft < 10)
             timerText.text = minutes + ":0" + secondsLeft;
         else
-            timerText.text = minutes + ":" + secondsLeft;
+            timerText.text = minutes + ":" + secondsLeft;*/
     }
 }
