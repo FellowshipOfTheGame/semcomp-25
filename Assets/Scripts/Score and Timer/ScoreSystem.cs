@@ -32,12 +32,14 @@ public class ScoreSystem : MonoBehaviour
     {
         // subscribe to events
         Wall.OnWallHit += WallHitScored;
+        MapManager.OnSuccessfulPass += SuccessfulPassScored;
     }
 
     private void OnDisable()
     {
         // unsubscribe to events
         Wall.OnWallHit -= WallHitScored;
+        MapManager.OnSuccessfulPass -= SuccessfulPassScored;
     }
 
     private void Start()
