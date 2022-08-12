@@ -136,7 +136,32 @@ public class PowerUpManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         yield return StartCoroutine(ScaleAnimation(radius, 0.5f));
     }
+    public void AddTime(int time)
+    {
 
+        if (!timeManager)
+        {
+            Debug.Log("Time Added:" + time);
+        }
+        else
+        {
+            timeManager.AddTime(time);
+        }
+    }
+    public void AddScore(int score)
+    {
+
+        if (!scoreManager)
+        {
+            Debug.Log("Score Added:" + score);
+        }
+        else
+        {
+            scoreManager.addScore(score);
+        }
+
+    }
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("pw_l"))
@@ -150,33 +175,12 @@ public class PowerUpManager : MonoBehaviour
             {
 
                 case "Time":
-                    if (!timeManager)
-                    {
-                        TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
-                        Debug.Log("Time Added:" + x.time);
-                    }
-                    else
-                    {
-                        TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
-                        timeManager.AddTime(x.time);
-                    }
                     break;
 
                 case "Point":
-                    if (!scoreManager)
-                    {
-                        PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
-                        Debug.Log("Score Added:" + x.PointAmmount);
-                    }
-                    else
-                    {
-                        PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
-                        scoreManager.addScore(x.PointAmmount);
-                    }
-
                     break;
 
             }
         }
-    }
+    }*/
 }
