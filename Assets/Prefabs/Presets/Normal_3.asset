@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd6a608e5ea71343ac9a0ea0746068b, type: 3}
+  m_Name: Normal_3
+  m_EditorClassIdentifier: 
+  presetPrefab: {fileID: 241027640905043560, guid: c14037238e9ca954bbcbfd4447e157f7, type: 3}
+  difficulty: 1
