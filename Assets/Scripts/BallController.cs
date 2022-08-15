@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BallController : MonoBehaviour
 {
@@ -11,29 +8,38 @@ public class BallController : MonoBehaviour
     [SerializeField] private PlayerInputManager playerManager;
     [SerializeField] private LineRenderer line;
     [Header("Stats")]
-    [SerializeField] float offsetFromPlayer;
-    [SerializeField] float throwSpeed;
+    [SerializeField]
+    private float offsetFromPlayer;
+    [SerializeField] private float throwSpeed;
 
     // state variables
-    GameObject currentPlayer;
-    GameObject lastPlayer;
-    bool lockedOntoPlayer = false;
+    private GameObject currentPlayer;
+    private bool lockedOntoPlayer;
 
     [Header("Second throw mode")]
-    [SerializeField] bool secondThrowMode = false;
+    [SerializeField]
+    private bool secondThrowMode;
 
     [Header("Variable force mode")]
-    [SerializeField] bool variableForceMode = false;
-    [SerializeField] float maxDistance = 2f;
-    bool mousePressed = false;
+    [SerializeField]
+    private bool variableForceMode;
+    [SerializeField] private float maxDistance = 2f;
+    private bool mousePressed;
 
     // cached references
-    Rigidbody2D rb2d;
+    private Rigidbody2D rb2d;
 
     [SerializeField] private int distanceToGoal; // Number of allies to achieve the goal
     private int distanceCount;
 
     private PowerUpManager powerUpManager;
+    [SerializeField] private GameObject ballHitPrefab;
+    private Camera camera1;
+    
+    private void Start()
+    {
+        camera1 = Camera.main;
+    }
 
     private void Awake()
     {
@@ -42,7 +48,7 @@ public class BallController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    IEnumerator KickDelay(float force)
+    private IEnumerator KickDelay(float force)
     {
         yield return new WaitForSeconds(0.1f);
         ThrowBall(force);
@@ -52,7 +58,7 @@ public class BallController : MonoBehaviour
 
     }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // shortcuts
         if (Input.GetKeyDown(KeyCode.T))
@@ -68,9 +74,10 @@ public class BallController : MonoBehaviour
         // aim and throw
         if (lockedOntoPlayer)
         {
-            transform.position = new Vector2(currentPlayer.transform.position.x, currentPlayer.transform.position.y + offsetFromPlayer);
+            var position1 = currentPlayer.transform.position;
+            transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
             
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePosition = camera1!.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
 
             if (variableForceMode)
@@ -93,9 +100,10 @@ public class BallController : MonoBehaviour
                     // começa a mirar
                     line.enabled = true;
                     float forceLevel = GetForceLevel(mousePosition, currentPlayer.transform.position);
-                    Vector3 pos1 = transform.position;
-                    Vector3 pos2= transform.position+(transform.position - mousePosition).normalized * forceLevel * maxDistance * 2f;
-                    Debug.DrawRay(pos1,pos2-transform.position);
+                    var position = transform.position;
+                    Vector3 pos1 = position;
+                    Vector3 pos2= position+(position - mousePosition).normalized * (forceLevel * maxDistance * 2f);
+                    Debug.DrawRay(pos1,pos2-position);
                     line.SetPosition(0, pos1);
                     line.SetPosition(1, pos2);
 
@@ -120,44 +128,7 @@ public class BallController : MonoBehaviour
                     }
                 }
             }
-            /*
-            else if (!secondThrowMode)
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    Debug.DrawLine(transform.position, mousePosition);
-                }
-
-                if (Input.GetMouseButtonUp(0))
-                {
-                    ThrowBall();
-                }
-            }
-            else
-            {
-                // apenas se mouse se encontra na zona abaixo do player
-                if (mousePosition.y < currentPlayer.transform.position.y)
-                {
-                    if (Input.GetMouseButton(0))
-                    {
-                        Debug.DrawRay(transform.position, (transform.position - mousePosition) * 5f);
-                    }
-
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        ThrowBall();
-                    }
-                }
-            }*/
         }  
-        
-        /*
-        //temporary player move for testing
-        if (currentPlayer)
-        {
-            float horizontalMove = Input.GetAxisRaw("Horizontal");
-            currentPlayer.transform.position += 5f * Time.deltaTime * new Vector3(horizontalMove, 0, 0);
-        }*/
     }
 
     private float GetForceLevel(Vector2 from, Vector2 to)
@@ -171,7 +142,7 @@ public class BallController : MonoBehaviour
 
     private void ThrowBall(float forceLevel = 1f)
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = camera1.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
 //        currentPlayer = null;
@@ -179,19 +150,20 @@ public class BallController : MonoBehaviour
         rb2d.bodyType = RigidbodyType2D.Dynamic;
 
         if (variableForceMode)
-            rb2d.velocity = -(mousePosition - transform.position).normalized * throwSpeed * forceLevel;
+            rb2d.velocity = -(mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
         else if (!secondThrowMode)
             rb2d.velocity = (mousePosition - transform.position).normalized * throwSpeed;
         else
             rb2d.velocity = -(mousePosition - transform.position).normalized * throwSpeed;
     }
-    IEnumerator GameOver()
+
+    private IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.5f);
         manager.GameOverScene();
         Destroy(gameObject);
     }
-    [SerializeField] private GameObject ballHitPrefab;
+    
 
     private void SetGameOver()
     {
@@ -207,7 +179,6 @@ public class BallController : MonoBehaviour
     {
         currentPlayer = player;
         currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
-        lastPlayer = currentPlayer;
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;
