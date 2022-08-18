@@ -90,8 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093aed12fba8a4f4388e9c5ca3b4bc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnBallCollision:
-    m_PersistentCalls:
-      m_Calls: []
-  duration: 3
+  duration: 4
   timeScale: 0
+  hasIceFx: 1
+  icePrefab: {fileID: 50487187555934252, guid: e9391933d95980c45a260eea7d7f4798, type: 3}

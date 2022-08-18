@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 398609409976776341, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
       propertyPath: m_Name
-      value: Life
+      value: Life Variant
       objectReference: {fileID: 0}
     - target: {fileID: 398609409976776344, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
       propertyPath: m_RootOrder
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3679992401158754688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a63f07a1d39cdca4298017a9a4b152c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ccac1b48cdbe4b4e879996a628ef8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnBallCollision:

@@ -91,6 +91,7 @@ public class PowerUpManager : MonoBehaviour
         coroutine = ChangeBallSizeAndWait(radius, time);
         StartCoroutine(coroutine);
     }
+
     private IEnumerator ColorAnimation(Color startColor, Color endColor)
     {
 
@@ -161,26 +162,4 @@ public class PowerUpManager : MonoBehaviour
         }
 
     }
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("pw_l"))
-        {
-            //comparacao usando apenas uma tag. Ver se acha essa opcao melhor.
-            DataHolder data = collision.gameObject.GetComponent<DataHolder>();
-
-            string tag = data.getTag();
-
-            switch (tag)
-            {
-
-                case "Time":
-                    break;
-
-                case "Point":
-                    break;
-
-            }
-        }
-    }*/
 }

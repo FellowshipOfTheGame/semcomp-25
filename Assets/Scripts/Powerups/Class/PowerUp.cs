@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public abstract class PowerUp : MonoBehaviour
 {
-    [SerializeField] UnityEvent OnBallCollision;
     private PowerUpManager manager;
     private GameObject ballObj;
     public PowerUpManager Manager => manager;
@@ -16,13 +15,12 @@ public abstract class PowerUp : MonoBehaviour
     }
     public abstract void Collected(Collider2D col);
 
-    // Realizam a função collected ao colidir com player/missilBaby
+    // Realizam a função collected ao colidir com a bola
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Ball"))
             return;
         Collected(collision);
-        OnBallCollision.Invoke();
         Destroy(gameObject);
     }
 }
