@@ -837,6 +837,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a2852133f8c4ba469eac8e73078cf9e, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ababc02acec1b0b49a7c8fbd5e7fa3db, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ebab64a2ba114ff4fb96a28ba94d65dd, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b16ed3d47c6301e468c2a8dccb6c012c, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[0].easy
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[1].easy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[2].hard
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[3].easy
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[3].hard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[1].normal
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[2].normal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[3].normal
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950587, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: m_Name
       value: Difficulty Progression
@@ -971,6 +1027,10 @@ PrefabInstance:
       propertyPath: currLevelView
       value: 
       objectReference: {fileID: 1343442094}
+    - target: {fileID: 5386213530411251973, guid: c7fd19b6c45e0f3418c7681df0a1fe55, type: 3}
+      propertyPath: highScoreView
+      value: 
+      objectReference: {fileID: 1174906630}
     - target: {fileID: 5386213530411251973, guid: c7fd19b6c45e0f3418c7681df0a1fe55, type: 3}
       propertyPath: highscoreView
       value: 
@@ -1152,6 +1212,10 @@ PrefabInstance:
     - target: {fileID: 6033588312376128367, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6033588313056245448, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 811.22253
       objectReference: {fileID: 0}
     - target: {fileID: 9109676530672095649, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
       propertyPath: m_AnchorMax.y
