@@ -12,6 +12,7 @@ public class Preset : MonoBehaviour
     private List<GameObject> players=new List<GameObject>();
     [SerializeField] Transform enemiesTransf;
     [SerializeField] Transform playersTransf;
+    [SerializeField] private Transform goal;
 
     Transform firstObj;
     Transform lastObj;
@@ -58,6 +59,11 @@ public class Preset : MonoBehaviour
             }
         }
 
+        if (goal)
+        {
+            lastObj = goal.transform;
+        }
+
         if (randomizePos)
         {
             RandomizePlayerPos();
@@ -76,10 +82,5 @@ public class Preset : MonoBehaviour
 
             }
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

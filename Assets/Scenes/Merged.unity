@@ -854,6 +854,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ebab64a2ba114ff4fb96a28ba94d65dd, type: 2}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b16ed3d47c6301e468c2a8dccb6c012c, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[0].easy
       value: 2
       objectReference: {fileID: 0}

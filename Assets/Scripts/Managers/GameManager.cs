@@ -50,12 +50,14 @@ public class GameManager : MonoBehaviour
             levelProgressSlider.value = 0;
         }
     }
+    
     public void SetLevelProgress(float p)
     {
         float initial = progress;
         progress = p;
         StartCoroutine(ProgressAnim(initial,progress));
     }
+    
     public void PassLevel()
     {
         level++;
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
         highScoreView.text = "Highest: "+highscore + "";
         gameOverObj.SetActive(true);
     }
+    
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
