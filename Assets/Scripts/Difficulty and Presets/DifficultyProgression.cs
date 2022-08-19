@@ -19,8 +19,7 @@ public class DifficultyProgression : MonoBehaviour
     Queue<PresetSO> presetsQueue = new Queue<PresetSO>();
     int levelToQueue = 0;
 
-    int playersOnLevel=0;
-    public int PlayersOnLevel => playersOnLevel;
+    private List<int> playersOnLevels = new List<int>();
     [Serializable]
     public struct LevelPresetProportions
     {
@@ -60,25 +59,22 @@ public class DifficultyProgression : MonoBehaviour
                 difficulties.Add(Difficulty.Normal);
             for (int i = 0; i < levelProgression[levelToQueue].hard; i++)
                 difficulties.Add(Difficulty.Hard);
-            playersOnLevel = 0;
+            int playerCount = 0;
             while (difficulties.Count > 0)
             {
-                int rd_idx = UnityEngine.Random.Range(0, difficulties.Count);
-                PresetSO p = GetRandomPresetSO(difficulties[rd_idx]);
-                int playerCount=p.presetPrefab.transform.Find("Players").childCount;
-                playersOnLevel += playerCount;
+                int rdIdx = UnityEngine.Random.Range(0, difficulties.Count);
+                PresetSO p = GetRandomPresetSO(difficulties[rdIdx]);
+                playerCount+=p.presetPrefab.transform.Find("Players").childCount;
                 presetsQueue.Enqueue(p);
 
-                difficulties.RemoveAt(rd_idx);
+                difficulties.RemoveAt(rdIdx);
             }
+            playersOnLevels.Add(playerCount);
 
             if (levelToQueue < levelProgression.Length-1)
                 levelToQueue++;
 
         }
-
-
-
         return presetsQueue.Dequeue().presetPrefab;
     }
 
@@ -101,4 +97,12 @@ public class DifficultyProgression : MonoBehaviour
         return p;
     }
 
+    public int GetTotalPlayersInLevel(int level)
+    {
+        if (playersOnLevels.Count > level)
+            return playersOnLevels[level];
+        else
+            return -1;
+    }
+    
 }

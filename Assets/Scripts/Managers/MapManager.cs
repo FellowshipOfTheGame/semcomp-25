@@ -20,9 +20,13 @@ public class MapManager : MonoBehaviour
     Transform currPlayer;
 
     /* Level Control */
-    int playersPassed = 0;
-    int totalPlayersToPass = 0;
-    int currLevel = 1;
+    //int playersPassed = 0;
+    //int totalPlayersToPass = 0;
+    
+    /* Level Control 2 */
+    private int allyBarsPassed = 0;
+    private int totalPlayersInLevel = 0;
+    //int currLevel = 0;
 
     private GameManager manager;
     private DifficultyProgression difficultyProgression;
@@ -50,12 +54,11 @@ public class MapManager : MonoBehaviour
         SpawnPreset();
         SpawnPreset();
         SpawnPreset();
-        //SpawnPreset();
 
         Vector2 pos = ballTransf.position;
         pos.x = presetsOnMap[0].BallPosX;
         ballTransf.position = pos;
-        totalPlayersToPass = difficultyProgression.PlayersOnLevel;
+        totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(manager.Level);
     }
     private void SpawnPreset()
     {
@@ -79,18 +82,7 @@ public class MapManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         onTransition = true;
         fx.SetActive(false);
-        int points=((int)Mathf.Abs(currPlayer.position.y - targetY)/4);
-        playersPassed += points;
-        if (playersPassed >= totalPlayersToPass)
-        {
-            playersPassed = points - 1;
-            totalPlayersToPass = difficultyProgression.PlayersOnLevel;
-            currLevel++;
-            manager.PassLevel();
-            manager.SetLevelProgress(1f);
-        }
-        else
-        manager.SetLevelProgress((float)playersPassed / totalPlayersToPass);
+        
 
         Vector3 pos=transform.position;
         while (Mathf.Abs(currPlayer.position.y-targetY)>0.1f)
@@ -104,7 +96,6 @@ public class MapManager : MonoBehaviour
         transform.position = pos;
         
         onTransition = false;
-        //manager.AddPoint(points);
         OnSuccessfulPass?.Invoke();
         if (presetsOnMap[0].SpawnPos < targetY)
         {
@@ -113,6 +104,20 @@ public class MapManager : MonoBehaviour
             presetsOnMap.RemoveAt(0);
         }
         fx.SetActive(true);
+    }
+
+    public void AllyBarPassed()
+    {
+        allyBarsPassed++;
+        if (allyBarsPassed == totalPlayersInLevel + 1)
+        {
+            allyBarsPassed = 1;
+            manager.PassLevel();
+            totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(manager.Level);
+            manager.SetLevelProgress(1f);
+        }
+        else
+            manager.SetLevelProgress((float)allyBarsPassed / (totalPlayersInLevel+1));
     }
 
     public void SpawnGoal(float _y)
@@ -160,6 +165,7 @@ public class MapManager : MonoBehaviour
     public void StartTransition(Transform newPlayer)
     {
         currPlayer = newPlayer;
+        currPlayer.GetComponentInChildren<AllyBar>().SetPassed();
         StartCoroutine(Transition());
     }
 

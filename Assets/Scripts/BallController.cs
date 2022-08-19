@@ -244,7 +244,7 @@ public class BallController : MonoBehaviour
             distanceCount = 0;
 
             // Update the fase level
-            manager.AddFaseLevel();
+            //manager.PassLevel();
 
             // Update distance to goal 
             //distanceToGoal = manager.FaseLevel() * 10; // used if the distance will be different accordingly to the fase level
