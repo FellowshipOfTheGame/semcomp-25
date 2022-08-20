@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2145881937802032838}
+  - component: {fileID: 7483763748205554518}
   m_Layer: 0
   m_Name: Hard_3
   m_TagString: Untagged
@@ -64,6 +65,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7483763748205554518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145881937802032841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96025967b42909f4b837305031539200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesTransf: {fileID: 360543814120079597}
+  playersTransf: {fileID: 2524347231008182391}
+  goal: {fileID: 0}
+  randomizePos: 1
 --- !u!1 &2614048944800085892
 GameObject:
   m_ObjectHideFlags: 0
