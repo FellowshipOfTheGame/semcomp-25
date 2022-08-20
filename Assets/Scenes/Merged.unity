@@ -397,7 +397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1758258299
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -438,12 +438,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300000, guid: 408106907a9665b4d96c05e29206ec9b, type: 3}
-  m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c6e7f2c76e625294a8468e5bad81bb0b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 4.99, y: 7.33}
+  m_DrawMode: 2
+  m_Size: {x: 17.1, y: 40.410934}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -457,8 +457,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758258298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0.0908, y: 3.6221, z: 0}
+  m_LocalScale: {x: 0.4836096, y: 0.4836096, z: 0.2418048}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -519,6 +519,14 @@ PrefabInstance:
       propertyPath: timerText
       value: 
       objectReference: {fileID: 2015638665}
+    - target: {fileID: 4272701876218466900, guid: de577448bb9c5194580753d27c06e679, type: 3}
+      propertyPath: startingTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4272701876218466900, guid: de577448bb9c5194580753d27c06e679, type: 3}
+      propertyPath: timeAddedOnPass
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4310654987431220745, guid: de577448bb9c5194580753d27c06e679, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -671,6 +679,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1997940529997829318, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339288, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339288, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339288, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339288, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339288, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339289, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_Size.x
+      value: 8.206208
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339289, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_Size.y
+      value: 13.905012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997940530346339291, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2252877062890034730, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
       propertyPath: m_Name
       value: Map
@@ -844,15 +888,15 @@ PrefabInstance:
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 2a2852133f8c4ba469eac8e73078cf9e, type: 2}
+      objectReference: {fileID: 11400000, guid: c2dda344aed2c024f9b7f3f545181a10, type: 2}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: ababc02acec1b0b49a7c8fbd5e7fa3db, type: 2}
+      objectReference: {fileID: 11400000, guid: 4ed775f68eadcd940ac62f71425f8fa9, type: 2}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: ebab64a2ba114ff4fb96a28ba94d65dd, type: 2}
+      objectReference: {fileID: 11400000, guid: 1e84791d950b5ac4293c0fc0539f9ee5, type: 2}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: goalPresetSOList.Array.size
       value: 1
