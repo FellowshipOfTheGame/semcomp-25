@@ -21,7 +21,7 @@ public class Preset : MonoBehaviour
     public float SpawnPos => lastObj.position.y;
 
     public float BallPosX => firstObj.position.x;
-
+    public GameObject FirstPlayer => firstObj.gameObject;
     
     // Start is called before the first frame update
     void Awake()
@@ -82,5 +82,15 @@ public class Preset : MonoBehaviour
 
             }
         }
+    }
+
+    public bool HasGoal()
+    {
+        return (goal != null);
+    }
+
+    public Vector3 GetGoalPosition()
+    {
+        return goal.transform.position;
     }
 }

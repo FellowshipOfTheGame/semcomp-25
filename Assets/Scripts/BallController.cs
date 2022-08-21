@@ -18,6 +18,8 @@ public class BallController : MonoBehaviour
     private bool lockedOntoPlayer;
     private bool mousePressed;
 
+    private bool gameOverSet = false;
+
     // cached references
     private Rigidbody2D rb2d;
     private MapManager mapManager;
@@ -128,12 +130,15 @@ public class BallController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void SetGameOver()
+    public void SetGameOver()
     {
+        if (gameOverSet)
+            return;
         Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
         rb2d.bodyType = RigidbodyType2D.Static;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         mapManager.SetBallFx(false);
+        FindObjectOfType<Timer>().SetPaused(true);
         StartCoroutine(GameOver());
     }
 
@@ -193,7 +198,26 @@ public class BallController : MonoBehaviour
         }
         else if (collision.CompareTag("Goal"))
         {
-            
+            StartCoroutine(GoalTransition());
         }
+    }
+
+    IEnumerator GoalTransition()
+    {
+        rb2d.velocity = rb2d.velocity.normalized * 1f;
+        gameManager.PassLevel();
+        yield return new WaitForSeconds(2f);
+
+        GameObject nextPlayer = mapManager.GetFirstPlayerOfLevel(gameManager.Level);
+        nextPlayer = nextPlayer.GetComponentInChildren<Ally>().gameObject;
+        SetBallToPlayer(nextPlayer);
+
+        mapManager.StartTransition(nextPlayer.transform.parent);
+        
+        // reposition field
+        Field field = FindObjectOfType<Field>();
+        field.ResetPosition();
+        //float goalY = mapManager.GetGoalPositionOfLevel(gameManager.Level).y;
+        field.SetGoalPosition(300f);
     }
 }

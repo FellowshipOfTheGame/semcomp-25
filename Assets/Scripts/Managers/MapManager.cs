@@ -19,9 +19,14 @@ public class MapManager : MonoBehaviour
     /* Level Control  */
     private int allyBarsPassed = 0;
     private int totalPlayersInLevel = 0;
+    private List<Vector2> goalPositions = new List<Vector2>();
+    private List<GameObject> firstPlayerInLevels = new List<GameObject>();
 
     private GameManager gameManager;
     private DifficultyProgression difficultyProgression;
+    
+    /* Field related */
+    private Field field;
 
     /* Pass event */
     public delegate void SuccessfulPass();
@@ -31,6 +36,7 @@ public class MapManager : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         difficultyProgression = FindObjectOfType<DifficultyProgression>();
+        field = GetComponentInChildren<Field>();
     }
 
     public void SetBallFx(bool val)
@@ -40,16 +46,19 @@ public class MapManager : MonoBehaviour
     
     private void Start()
     {
+        if (field != null)
+        {
+            field.ResetPosition();
+            field.SetGoalPosition(300f);
+        }
         SpawnPreset();
         SpawnPreset();
         SpawnPreset();
 
-        Vector2 pos = ballTransf.position;
-        pos.x = presetsOnMap[0].BallPosX;
-        ballTransf.position = pos;
+        ballTransf.position = presetsOnMap[0].FirstPlayer.transform.position;
         totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
     }
-    
+
     private void SpawnPreset()
     {
         int presetCount = presetsOnMap.Count;
@@ -63,6 +72,34 @@ public class MapManager : MonoBehaviour
 
         Preset preset = obj.GetComponent<Preset>();
         presetsOnMap.Add(preset);
+
+        if (firstPlayerInLevels.Count == goalPositions.Count)
+        {
+            firstPlayerInLevels.Add(preset.FirstPlayer); 
+        }
+        
+        // goal check
+        if (preset.HasGoal())
+        {
+            Vector2 goalPos = preset.GetGoalPosition();
+            goalPositions.Add(goalPos);
+            //if (field != null)
+            //    field.SetGoalPosition(goalPos.y);
+        }
+    }
+
+    public Vector2 GetGoalPositionOfLevel(int level)
+    {
+        if (goalPositions.Count > level)
+            return goalPositions[level];
+        return Vector2.zero;
+    }
+    
+    public GameObject GetFirstPlayerOfLevel(int level)
+    {
+        if (firstPlayerInLevels.Count > level)
+            return firstPlayerInLevels[level];
+        return null;
     }
     
     IEnumerator Transition()
@@ -99,7 +136,7 @@ public class MapManager : MonoBehaviour
         if (allyBarsPassed == totalPlayersInLevel + 1)
         {
             allyBarsPassed = 1;
-            gameManager.PassLevel();
+            //gameManager.PassLevel();
             totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
             gameManager.SetLevelProgress(1f);
         }

@@ -75,6 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9037560973384344865}
+  - component: {fileID: 8467434554575437600}
   m_Layer: 0
   m_Name: Easy_5
   m_TagString: Untagged
@@ -98,6 +99,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8467434554575437600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9037560973384344866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96025967b42909f4b837305031539200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesTransf: {fileID: 1635054085636183579}
+  playersTransf: {fileID: 1571082814654595128}
+  goal: {fileID: 0}
+  randomizePos: 1
 --- !u!1001 &9037560971553978213
 PrefabInstance:
   m_ObjectHideFlags: 0

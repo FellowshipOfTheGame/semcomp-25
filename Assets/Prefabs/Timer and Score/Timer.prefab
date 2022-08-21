@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01524a64f674e5e4e9a08c504fa7e975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 120
+  startingTime: 60
+  timeAddedOnPass: 3
   timerText: {fileID: 0}
