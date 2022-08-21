@@ -18,6 +18,8 @@ public class BallController : MonoBehaviour
     private bool lockedOntoPlayer;
     private bool mousePressed;
 
+    private bool gameOverSet = false;
+
     // cached references
     private Rigidbody2D rb2d;
     private MapManager mapManager;
@@ -128,12 +130,15 @@ public class BallController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void SetGameOver()
+    public void SetGameOver()
     {
+        if (gameOverSet)
+            return;
         Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
         rb2d.bodyType = RigidbodyType2D.Static;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         mapManager.SetBallFx(false);
+        FindObjectOfType<Timer>().SetPaused(true);
         StartCoroutine(GameOver());
     }
 

@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
         GameObject.FindObjectOfType<PlayerInputManager>().SetCanMove(false) ;
         gameOverPointsView.text = points + "";
-        highScoreView.text = "Highest: "+highscore + "";
+        highScoreView.text = "High score: "+highscore + "";
         gameOverObj.SetActive(true);
     }
     

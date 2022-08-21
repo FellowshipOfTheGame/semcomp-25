@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
             if (CurrentTime < 0)
             {
                 CurrentTime = 0;
-                Debug.Log("call game over");
+                FindObjectOfType<BallController>()?.SetGameOver();
                 SetPaused(true);
             }
         }
