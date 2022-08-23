@@ -148,6 +148,7 @@ public class BallController : MonoBehaviour
     // Auxiliar function to set the ball freezed to the player position
     private void SetBallToPlayer(GameObject player)
     {
+        audioManager.PlaySFX("PassAlly");
         currentPlayer = player;
         currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
         lockedOntoPlayer = true;
@@ -168,7 +169,7 @@ public class BallController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
-        {
+        {            
             SetBallToPlayer(collision.gameObject);
 
             mapManager.StartTransition(currentPlayer.transform.parent);
@@ -218,6 +219,7 @@ public class BallController : MonoBehaviour
 
     IEnumerator GoalTransition()
     {
+        audioManager.PlaySFX("Goal");
         rb2d.velocity = rb2d.velocity.normalized * 1f;
         gameManager.PassLevel();
         yield return new WaitForSeconds(2f);
