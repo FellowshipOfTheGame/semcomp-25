@@ -9,16 +9,16 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("main-volume", volume * 100 - 100);
+        audioMixer.SetFloat("main-volume", Mathf.Log10(volume)*30f);
     }
 
     public void SetMusicVolume(float volume)
     {
-        audioMixer.SetFloat("music-volume", (volume * 100 - 100) );
+        audioMixer.SetFloat("music-volume", Mathf.Log10(volume) * 30f);
     }
 
     public void SetEffectsVolume(float volume)
     {
-        audioMixer.SetFloat("effects-volume", (volume * 100 - 100) );
+        audioMixer.SetFloat("effects-volume", Mathf.Log10(volume) * 30f);
     }
 }
