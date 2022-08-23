@@ -17,6 +17,6 @@ public class PlayMusic : MonoBehaviour
     
     public void PlayIt(string musicName)
     {
-        audioManager.Play(musicName);
+        audioManager.PlayMusic(musicName);
     }
 }
