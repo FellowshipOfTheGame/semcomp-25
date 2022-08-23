@@ -24,6 +24,7 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb2d;
     private MapManager mapManager;
     private GameManager gameManager;
+    private AudioManager audioManager;
     private PlayerInputManager playerManager;
     private PowerUpManager powerUpManager;
     private Camera camera1;
@@ -35,6 +36,7 @@ public class BallController : MonoBehaviour
         
         mapManager = FindObjectOfType<MapManager>();
         gameManager = FindObjectOfType<GameManager>();
+        audioManager = FindObjectOfType<AudioManager>();
         playerManager = FindObjectOfType<PlayerInputManager>();
         camera1 = Camera.main;
     }
@@ -132,6 +134,7 @@ public class BallController : MonoBehaviour
 
     public void SetGameOver()
     {
+        audioManager.PlaySFX("WrongPass");
         if (gameOverSet)
             return;
         Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
