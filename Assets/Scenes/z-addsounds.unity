@@ -934,7 +934,59 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
       propertyPath: sounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d6103093f2ba3ca4e8fd84b8e37203dc, type: 3}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[0].name
+      value: Goal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6540cc37bd90afa49915ff5355cd26ab, type: 3}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[1].name
+      value: WrongPass
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 22c8d6499c4fafb4ab475b357e42ac31, type: 3}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[2].name
+      value: InTheNet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963408015563819029, guid: 622427323150a794783c7bf9e04696c5, type: 3}
+      propertyPath: SFX.Array.data[2].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3963408015563819030, guid: 622427323150a794783c7bf9e04696c5, type: 3}
