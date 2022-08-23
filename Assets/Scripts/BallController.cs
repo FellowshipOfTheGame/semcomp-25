@@ -155,6 +155,16 @@ public class BallController : MonoBehaviour
         rb2d.bodyType = RigidbodyType2D.Kinematic;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Collider2D collider = collision.collider;
+
+        if (collider.CompareTag("LateralWall"))
+        {
+            audioManager.PlaySFX("HitWall");
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
@@ -203,6 +213,7 @@ public class BallController : MonoBehaviour
         {
             StartCoroutine(GoalTransition());
         }
+        
     }
 
     IEnumerator GoalTransition()
