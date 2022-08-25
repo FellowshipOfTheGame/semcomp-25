@@ -24,6 +24,7 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb2d;
     private MapManager mapManager;
     private GameManager gameManager;
+    private AudioManager audioManager;
     private PlayerInputManager playerManager;
     private PowerUpManager powerUpManager;
     private Camera camera1;
@@ -35,6 +36,7 @@ public class BallController : MonoBehaviour
         
         mapManager = FindObjectOfType<MapManager>();
         gameManager = FindObjectOfType<GameManager>();
+        audioManager = FindObjectOfType<AudioManager>();
         playerManager = FindObjectOfType<PlayerInputManager>();
         camera1 = Camera.main;
     }
@@ -132,6 +134,7 @@ public class BallController : MonoBehaviour
 
     public void SetGameOver()
     {
+        audioManager.PlaySFX("WrongPass");
         if (gameOverSet)
             return;
         Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
@@ -145,6 +148,7 @@ public class BallController : MonoBehaviour
     // Auxiliar function to set the ball freezed to the player position
     private void SetBallToPlayer(GameObject player)
     {
+        audioManager.PlaySFX("PassAlly");
         currentPlayer = player;
         currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
         lockedOntoPlayer = true;
@@ -152,10 +156,20 @@ public class BallController : MonoBehaviour
         rb2d.bodyType = RigidbodyType2D.Kinematic;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Collider2D collider = collision.collider;
+
+        if (collider.CompareTag("LateralWall"))
+        {
+            audioManager.PlaySFX("HitWall");
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
-        {
+        {            
             SetBallToPlayer(collision.gameObject);
 
             mapManager.StartTransition(currentPlayer.transform.parent);
@@ -200,10 +214,12 @@ public class BallController : MonoBehaviour
         {
             StartCoroutine(GoalTransition());
         }
+        
     }
 
     IEnumerator GoalTransition()
     {
+        audioManager.PlaySFX("Goal");
         rb2d.velocity = rb2d.velocity.normalized * 1f;
         gameManager.PassLevel();
         yield return new WaitForSeconds(2f);
