@@ -19,6 +19,7 @@ public class BallController : MonoBehaviour
     private bool mousePressed;
 
     private bool gameOverSet = false;
+    public bool GoalTransitionOver { private get; set; }
 
     // cached references
     private Rigidbody2D rb2d;
@@ -221,19 +222,31 @@ public class BallController : MonoBehaviour
     {
         audioManager.PlaySFX("Goal");
         rb2d.velocity = rb2d.velocity.normalized * 1f;
-        gameManager.PassLevel();
+        gameManager.PassLevel(false);
+        gameManager.SetLevelProgress(1f);
         yield return new WaitForSeconds(2f);
-
+        rb2d.simulated = false;
+        
+        
         GameObject nextPlayer = mapManager.GetFirstPlayerOfLevel(gameManager.Level);
         nextPlayer = nextPlayer.GetComponentInChildren<Ally>().gameObject;
         SetBallToPlayer(nextPlayer);
-
+        
+        
+        
+        GoalTransitionOver = false;
         mapManager.StartTransition(nextPlayer.transform.parent);
         
-        // reposition field
-        Field field = FindObjectOfType<Field>();
-        field.ResetPosition();
-        //float goalY = mapManager.GetGoalPositionOfLevel(gameManager.Level).y;
-        field.SetGoalPosition(300f);
+        // wait until transition is finished to reposition field
+        while (!GoalTransitionOver)
+        {
+            yield return null;
+        }
+        
+        rb2d.simulated = true;
+        gameManager.SetLevelProgress(0f);
+        gameManager.SetLevelView();
+
+        mapManager.RepositionField();
     }
 }

@@ -89,8 +89,8 @@ public class Preset : MonoBehaviour
         return (goal != null);
     }
 
-    public Vector3 GetGoalPosition()
+    public GameObject GetGoal()
     {
-        return goal.transform.position;
+        return goal.gameObject;
     }
 }
