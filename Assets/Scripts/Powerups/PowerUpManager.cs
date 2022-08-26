@@ -4,19 +4,10 @@ using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    [SerializeField] private float freezeTime;
 
-    [SerializeField] private float slowTime;
-    [SerializeField] private float slowFactor;
-
-    [SerializeField] private float invisibleTime;
-
-    [SerializeField] private float bigBallRadius;
-    [SerializeField] private float bigBallTime;
-    [SerializeField] private float smallBallRadius;
-    [SerializeField] private float smallBallTime;
 
     private SpriteRenderer spriteRenderer;
+
     /*
         Adicoes Lucas Ebling =  Conectar a pontos e a tempo/ 
     */
@@ -25,7 +16,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private ScoreSystem scoreManager;
 
     [SerializeField] private Timer timeManager;
-
+    [SerializeField] private GameObject ballFx;
     private int lives;  // number of lives of the player
     private bool isInvisible;
 
@@ -51,12 +42,11 @@ public class PowerUpManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-                
-    }
 
+    public void AddLife(int n)
+    {
+        lives += n;
+    }
     public void LoseLife()
     {
         lives--;
@@ -73,7 +63,7 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // Turns the ball invisible to enemy collision
-    private void ChangeTemporarilyVisibility(float invisibilityTime)
+    public void ChangeTemporarilyVisibility(float invisibilityTime)
     {
         coroutine = ChangeVisibilityAndWait(invisibilityTime);
         StartCoroutine(coroutine);
@@ -81,90 +71,113 @@ public class PowerUpManager : MonoBehaviour
 
     private IEnumerator ChangeVisibilityAndWait(float invisibilityTime)
     {
-        isInvisible = true;
+        Color invisibleColor = new Color(1f, 1f, 1f, 0.2f);
+        Color oldColor = spriteRenderer.color;
+        isInvisible = true; 
+
+        ballFx.SetActive(false);
+
+         yield return StartCoroutine(ColorAnimation(oldColor, invisibleColor)); 
         yield return new WaitForSeconds(invisibilityTime);
+        yield return StartCoroutine(ColorAnimation(invisibleColor, oldColor));
+
+
+        ballFx.SetActive(true);
         isInvisible = false;
     }
 
-    private void ChangeTemporarilyBallSize(float radius, float time)
+    public void ChangeTemporarilyBallSize(float radius, float time)
     {
         coroutine = ChangeBallSizeAndWait(radius, time);
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator ChangeBallSizeAndWait(float radius, float time)
+    private IEnumerator ColorAnimation(Color startColor, Color endColor)
     {
-        this.GetComponent<Transform>().localScale = new Vector3(radius, radius, 1f);
-        yield return new WaitForSeconds(time);
-        this.GetComponent<Transform>().localScale = new Vector3(initialBallRadius, initialBallRadius, 1f);
+
+        float t = 0;
+        Color currColor;
+        float speed = 0.02f;
+        do
+        {
+            currColor = Color.Lerp(startColor, endColor, t);
+            spriteRenderer.color = currColor;
+            t += speed;
+            yield return new WaitForEndOfFrame();
+        } while (t <= 1f);
+
+        spriteRenderer.color = endColor;
+
+    }
+    private IEnumerator ScaleAnimation(float start, float finish)
+    {
+
+        float t = 0;
+        float currRadius;
+        float speed = 0.02f;
+        do
+        {
+            currRadius = Mathf.Lerp(start, finish, t);
+            transform.localScale = new Vector3(currRadius, currRadius, 1f);
+            t += speed;
+            yield return new WaitForEndOfFrame();
+        } while (t <= 1f);
+
+        transform.localScale = new Vector3(finish, finish, 1f);
+
+    }
+    public void ChangeEnemyTime(float duration, float timeFactor)
+    {
+        barHorizontalMovement.ChangeSpeedFactorTemporarily(duration, timeFactor);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator ChangeBallSizeAndWait(float radius, float time)
     {
-        if (collision.CompareTag("pw_freeze"))
-        {
-            barHorizontalMovement.ChangeSpeedFactorTemporarily(freezeTime, 0.0f);
-        }
-        else if (collision.CompareTag("pw_slow"))
-        {
-            barHorizontalMovement.ChangeSpeedFactorTemporarily(slowTime, slowFactor);
-        }
-        else if (collision.CompareTag("pw_invisible-ball"))
-        {
-            ChangeTemporarilyVisibility(invisibleTime);
-        }
-        else if (collision.CompareTag("pw_new-life"))
-        {
-            lives++;
-        }
-        else if (collision.CompareTag("pw_big-ball"))
-        {
-            ChangeTemporarilyBallSize(bigBallRadius, bigBallTime);
-        }
-        else if (collision.CompareTag("pw_small-ball"))
-        {
-            ChangeTemporarilyBallSize(smallBallRadius, smallBallTime);
-        }
-        else if(collision.CompareTag("pw_l")){
-            //comparacao usando apenas uma tag. Ver se acha essa opcao melhor.
-            DataHolder data = collision.gameObject.GetComponent<DataHolder>();
+        yield return StartCoroutine(ScaleAnimation(0.5f, radius));
+        yield return new WaitForSeconds(time);
+        yield return StartCoroutine(ScaleAnimation(radius, 0.5f));
+    }
+    public void AddTime(int time)
+    {
 
-            string tag = data.getTag();
-
-            switch(tag){
-
-                case "Time" :
-                    if(!timeManager){
-                    TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
-                    Debug.Log("Time Added:" + x.time);
-                    }
-                    else{
-                        TimeScriptableOBJ x = (TimeScriptableOBJ)data.getData();
-                        timeManager.AddTime(x.time);
-                    }
-                break;
-
-                case "Point":
-                    if(!scoreManager){
-                    PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
-                    Debug.Log("Score Added:" + x.PointAmmount); 
-                    }
-                    else{
-                        PointScriptableOBJ x = (PointScriptableOBJ)data.getData();
-                        scoreManager.addScore(x.PointAmmount);
-                    }
-                
-                break;  
-
-            }
-            /*
-            if(data.getTag() == "Time"){
-               
-            }
-            else if(data.getTag() == "Point"){
-             
-            }
-            */
+        if (!timeManager)
+        {
+            Debug.Log("Time Added:" + time);
         }
+        else
+        {
+            timeManager.AddTime(time);
+        }
+    }
+    public void AddScore(int score)
+    {
+
+        if (!scoreManager)
+        {
+            Debug.Log("Score Added:" + score);
+        }
+        else
+        {
+            scoreManager.addScore(score);
+        }
+
+    }
+
+    private bool canTeleport = true;
+    public void Teleport(Vector3 pos,Vector2 vel)
+    {
+        if (canTeleport)
+        {
+
+            transform.position = pos;
+            gameObject.GetComponent<Rigidbody2D>().velocity = vel;
+            StartCoroutine(CanTeleportDelay());
+        }
+    }
+    IEnumerator CanTeleportDelay()
+    {
+        canTeleport = false;
+        yield return new WaitForSeconds(0.5f);
+        canTeleport = true;
     }
 }

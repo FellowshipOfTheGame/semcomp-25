@@ -108,7 +108,8 @@ public class DifficultyProgression : MonoBehaviour
             if (levelToQueue < levelProgression.Length-1)
                 levelToQueue++;
         }
-
+        
+        // return next preset in queue
         return presetsQueue.Dequeue().presetPrefab;
     }
 

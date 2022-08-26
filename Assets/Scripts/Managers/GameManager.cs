@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text currLevelView;
     [SerializeField] private TMP_Text nextLevelView;
 
-    float progress = 0;
     int level = 0;
     public int Level => level;
 
@@ -29,23 +29,21 @@ public class GameManager : MonoBehaviour
         highscore=PlayerPrefs.GetInt("HighScore", 0);
     }
     
-    IEnumerator ProgressAnim(float min,float p)
+    IEnumerator ProgressAnim(float p)
     {
-        if (min == 1f)
+        float x = levelProgressSlider.value;
+        if (x > p)
+            x = 0;
+        const float speed = 0.005f;
+        while (x <= p)
         {
-            min = 0;
-        }
-        float _x = min;
-        float speed = 0.005f;
-        while (_x <= p)
-        {
-            _x += speed;
+            x += speed;
 
-            levelProgressSlider.value = _x;
+            levelProgressSlider.value = x;
 
             yield return new WaitForEndOfFrame();
         }
-        if (p == 1f)
+        if (Math.Abs(p - 1f) < 0.001f)
         {
             levelProgressSlider.value = 1;
         }
@@ -53,9 +51,7 @@ public class GameManager : MonoBehaviour
     
     public void SetLevelProgress(float p)
     {
-        float initial = progress;
-        progress = p;
-        StartCoroutine(ProgressAnim(initial,progress));
+        StartCoroutine(ProgressAnim(p));
     }
     
     public void PassLevel(bool changeUI)
