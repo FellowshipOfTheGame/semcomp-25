@@ -25,6 +25,7 @@ class SchemaPlayer {
     async create(Player) {
        db.ref(Player.provider + '/' + Player.provider_id).set({
             first_name: Player.first_name,
+            surname_name: Player.surname_name,
             email: Player.email,
         });
         return Player;

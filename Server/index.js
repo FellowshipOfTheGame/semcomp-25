@@ -7,8 +7,9 @@ const { logger } = require('./src/config/logger')
 const passport = require('passport');
 
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
+// const cookieParser = require('cookie-parser');
+// const cookieSession = require('cookie-session');
+const session = require('./src/loaders/session')
 
 // Singletons & Libraries Loaders
 require('./src/loaders/firebase')
@@ -21,27 +22,47 @@ const configEnv = require('./src/config')
 // const playerRoutes = require('./src/routes/players');
 const sessionRoutes = require('./src/routes/session');
 
+// app.set('trust proxy', true)
 const app = express()
-
-app.use(cors())
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-// For an actual app you should configure this with an experation time, better keys, proxy and secure
-
-// app.use(express.json())
+// app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.json())
+app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'))
-
-app.use(cookieSession({
-    name: 'gameSession',
-    keys: ['key1', 'key2'],
-    maxAge:60*60*24
-}))
- 
+app.use(session.sessionLoader())
+// app.use(cookieSession({
+//     name: 'gameSession',
+//     keys: ['key1', 'key2'],
+//     maxAge: 24 * 60 * 60 * 1000 // 24 hours
+// }))
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Enable cors to all origins (because we are an API after all :P)
+app.use(cors({
+    credentials: true,
+    origin: /^https:\/\/[a-zA-Z0-9]*\.ssl\.hwcdn\.net$/,
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    exposedHeaders: ["set-cookie"],
+}))
+
+// Security and Log Configurations
+// TODO (https://expressjs.com/pt-br/advanced/best-practice-security.html)
+app.disable('x-powered-by');
+
+app.use((req, res, next) => {
+    let ip = req.headers['x-forwarded-for'] || (req.socket.remoteAddress);
+    ip = ip.indexOf('.') >= 0 ? ip.substring(ip.lastIndexOf(':') + 1) : ip;
+
+    req.ip = ip;
+
+    logger.info({
+        message: `${req.method} ${req.path} - User-Agent: ${req.get('User-Agent')} - ${req.ip} `
+    });
+    next();
+})
 
 // Routes Configurations
   

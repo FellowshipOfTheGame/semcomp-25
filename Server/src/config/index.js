@@ -23,5 +23,14 @@ module.exports = {
     STORAGE_BUCKET: process.env.STORAGEBUCKET,
     MESSAGING_SENDER_ID: process.env.MESSAGINGSENDERID,
     APP_ID: process.env.APPID,
-    MEASUREMENT_ID: process.env.MEASUREMENTID
+    MEASUREMENT_ID: process.env.MEASUREMENTID,
+
+    REDIS_HOST: process.env.REDIS_HOST || "localhost",
+    REDIS_PORT: process.env.REDIS_PORT ||  6379,
+
+    COOKIE_SIGNATURE_KEY: process.env.COOKIE_SIGNATURE_KEY || "ABCDEFGHIJKLU",
+    SESSION_SECURE: process.env.SESSION_SECURE == "1" || false, 
+    SESSION_HTTP_ONLY: process.env.SESSION_HTTP_ONLY == "1" || false,
+    SESSION_SAME_SITE: process.env.SESSION_SAME_SITE || "strict",
+    SESSION_MAX_AGE: process.env.SESSION_MAX_AGE || 3600000,
 }

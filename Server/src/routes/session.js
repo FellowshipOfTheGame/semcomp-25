@@ -19,7 +19,7 @@ routes.get('/login/google-success', SessionMiddleware.isAuth, (req, res) => res.
 
 const configEnv = require('../config')
 
-routes.post('/auth/google', passport.authenticate('google-verify-token'), function (req, res) {
+routes.post('/login/auth', passport.authenticate('google-verify-token'), function (req, res) {
     // console.log(req.user)
     res.send(req.user? 200 : 401);
   }
