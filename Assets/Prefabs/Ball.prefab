@@ -9776,17 +9776,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2a8c77030f9c946b3b9e79e3b88e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  manager: {fileID: 0}
-  playerManager: {fileID: 0}
   line: {fileID: 0}
+  ballHitPrefab: {fileID: 3249267262933426012, guid: d97dff8e50e8c5848bb532744e27c7fe, type: 3}
   offsetFromPlayer: 0.8
   throwSpeed: 10
-  secondThrowMode: 0
-  variableForceMode: 1
+  playerRadius: 0.5
   maxDistance: 1.2
-  distanceToGoal: 0
-  ballHitPrefab: {fileID: 3249267262933426012, guid: d97dff8e50e8c5848bb532744e27c7fe, type: 3}
 --- !u!114 &3698216701625935198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9802,4 +9797,5 @@ MonoBehaviour:
   scoreManager: {fileID: 0}
   timeManager: {fileID: 0}
   ballFx: {fileID: 4583277373443672393}
+  teleportDelay: 0.3
   barHorizontalMovement: {fileID: 0}

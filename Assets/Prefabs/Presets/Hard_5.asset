@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd6a608e5ea71343ac9a0ea0746068b, type: 3}
   m_Name: Hard_5
   m_EditorClassIdentifier: 
-  presetPrefab: {fileID: 1072807106240285781, guid: cde539612bba09d47ac3c1bd24a414fe, type: 3}
-  difficulty: 0
+  presetPrefab: {fileID: 6682774840123374816, guid: f00cfcca3a19bbb41a258fd9e0852be1, type: 3}
+  difficulty: 2

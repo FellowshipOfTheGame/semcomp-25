@@ -17,6 +17,7 @@ public class PowerUpManager : MonoBehaviour
 
     [SerializeField] private Timer timeManager;
     [SerializeField] private GameObject ballFx;
+    [SerializeField] private float teleportDelay;
     private int lives;  // number of lives of the player
     private bool isInvisible;
 
@@ -177,7 +178,7 @@ public class PowerUpManager : MonoBehaviour
     IEnumerator CanTeleportDelay()
     {
         canTeleport = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(teleportDelay);
         canTeleport = true;
     }
 }
