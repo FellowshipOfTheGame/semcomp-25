@@ -168,8 +168,9 @@ public class PowerUpManager : MonoBehaviour
     {
         if (canTeleport)
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = vel;
+
             transform.position = pos;
+            gameObject.GetComponent<Rigidbody2D>().velocity = vel;
             StartCoroutine(CanTeleportDelay());
         }
     }

@@ -11,12 +11,17 @@ public class Portal : PowerUp
     [SerializeField] float speed = 8f;
     private void Start()
     {
-            Quaternion rot = targetPortal.rotation;
-            float angle = Mathf.Deg2Rad * rot.eulerAngles.z;
-            rotated = new Vector2(-(float)Math.Round(Mathf.Sin(angle), 2), (float)Math.Round(Mathf.Cos(angle), 2));
+    }
+    void CalculateTargetRotation()
+    {
+
+        Quaternion rot = targetPortal.rotation;
+        float angle = Mathf.Deg2Rad * rot.eulerAngles.z;
+        rotated = new Vector2(-(float)Math.Round(Mathf.Sin(angle), 2), (float)Math.Round(Mathf.Cos(angle), 2));
     }
     public override void Collected(Collider2D col)
     {
+        CalculateTargetRotation();
         Manager.Teleport(targetPortal.position,rotated*speed);
     }
 }
