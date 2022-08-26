@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class PauseMenu : MonoBehaviour
 
     // Receive the PauseMenu game object
     public GameObject pauseMenuUI;
-    public GameObject BackgroundImage;
+    public GameObject volumePanel;
 
-        // Update is called once per frame
+    public TMP_Text menuLabelText;
+
+    // Update is called once per frame
     void Update()
     {
         // Check if the user press ESC button
@@ -38,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     {
         // Exit the Pause Menu in the canvas
         pauseMenuUI.SetActive(false);
-        BackgroundImage.SetActive(false);
+        //BackgroundImage.SetActive(false);
 
         // Unfreeze the game
         Time.timeScale = 1f;
@@ -50,6 +53,7 @@ public class PauseMenu : MonoBehaviour
     // Open the Pause Menu
     public void Pause()
     {
+        menuLabelText.text = "PAUSADO";
         // Show the Pause Menu in the canvas
         pauseMenuUI.SetActive(true);
 
@@ -59,7 +63,7 @@ public class PauseMenu : MonoBehaviour
         // Set true meaning that the game is paused
         isGamePaused = true;
 
-        BackgroundImage.SetActive(true);
+        //BackgroundImage.SetActive(true);
     }
 
     // Open the Main Menu
@@ -74,5 +78,12 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Quit the game");
         Application.Quit();
+    }
+
+    public void Volume()
+    {
+        menuLabelText.text = "VOLUME";
+                
+        volumePanel.SetActive(true);
     }
 }

@@ -12,6 +12,7 @@ public class Preset : MonoBehaviour
     private List<GameObject> players=new List<GameObject>();
     [SerializeField] Transform enemiesTransf;
     [SerializeField] Transform playersTransf;
+    [SerializeField] private Transform goal;
 
     Transform firstObj;
     Transform lastObj;
@@ -20,7 +21,7 @@ public class Preset : MonoBehaviour
     public float SpawnPos => lastObj.position.y;
 
     public float BallPosX => firstObj.position.x;
-
+    public GameObject FirstPlayer => firstObj.gameObject;
     
     // Start is called before the first frame update
     void Awake()
@@ -58,6 +59,11 @@ public class Preset : MonoBehaviour
             }
         }
 
+        if (goal)
+        {
+            lastObj = goal.transform;
+        }
+
         if (randomizePos)
         {
             RandomizePlayerPos();
@@ -77,9 +83,14 @@ public class Preset : MonoBehaviour
             }
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    public bool HasGoal()
     {
-        
+        return (goal != null);
+    }
+
+    public GameObject GetGoal()
+    {
+        return goal.gameObject;
     }
 }

@@ -43,11 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff714d1520694a3459bf1855e0a7c044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsView: {fileID: 0}
   gameOverPointsView: {fileID: 0}
-  highscoreView: {fileID: 0}
+  highScoreView: {fileID: 0}
   gameOverObj: {fileID: 0}
-  progressFill: {fileID: 0}
+  levelProgressSlider: {fileID: 0}
   currLevelView: {fileID: 0}
   nextLevelView: {fileID: 0}
-  timeView: {fileID: 0}

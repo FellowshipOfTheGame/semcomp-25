@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesTransf: {fileID: 3016193837954528777}
   playersTransf: {fileID: 1679447581509267692}
+  goal: {fileID: 0}
   randomizePos: 1
 --- !u!1 &4863472690941692625
 GameObject:
@@ -252,18 +253,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy2 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6117647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.g
-      value: 0.34117648
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.r
-      value: 0.3019608
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
 --- !u!4 &886348235421346227 stripped
@@ -333,18 +322,6 @@ PrefabInstance:
     - target: {fileID: 1756570411135036750, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
       propertyPath: m_Name
       value: Enemy2 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6117647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.g
-      value: 0.34117648
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.r
-      value: 0.3019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
@@ -416,18 +393,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy2 (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6117647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.g
-      value: 0.34117648
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.r
-      value: 0.3019608
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
 --- !u!4 &3137266685741231382 stripped
@@ -489,18 +454,6 @@ PrefabInstance:
     - target: {fileID: 1756570411135036750, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
       propertyPath: m_Name
       value: Enemy2 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6117647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.g
-      value: 0.34117648
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653241562740775217, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}
-      propertyPath: m_Color.r
-      value: 0.3019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4020ca51b6e88684fa97ca71a6f4d1d0, type: 3}

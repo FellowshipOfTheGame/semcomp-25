@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 {
     // variables
     [SerializeField] int startingTime;
-
+    [SerializeField] private float timeAddedOnPass;
 
     // state variables
     private float currentTime;
@@ -33,6 +33,7 @@ public class Timer : MonoBehaviour
             Debug.Log("Link timer Text UI");
 
         CurrentTime = startingTime;
+        MapManager.OnSuccessfulPass += SuccessfulPassScored;
     }
 
     private void Update()
@@ -43,10 +44,15 @@ public class Timer : MonoBehaviour
             if (CurrentTime < 0)
             {
                 CurrentTime = 0;
-                Debug.Log("call game over");
+                FindObjectOfType<BallController>()?.SetGameOver();
                 SetPaused(true);
             }
         }
+    }
+
+    private void SuccessfulPassScored()
+    {
+        AddTime(timeAddedOnPass);
     }
 
     public void SetPaused(bool pause)
@@ -65,12 +71,14 @@ public class Timer : MonoBehaviour
     {
         if (!timerText) return;
 
-        int minutes = (int) (CurrentTime / 60f);
+        timerText.text = CurrentTime.ToString("00.00") + "";
+
+        /*int minutes = (int) (CurrentTime / 60f);
         int secondsLeft = (int) (CurrentTime % 60f);
 
         if (secondsLeft < 10)
             timerText.text = minutes + ":0" + secondsLeft;
         else
-            timerText.text = minutes + ":" + secondsLeft;
+            timerText.text = minutes + ":" + secondsLeft;*/
     }
 }
