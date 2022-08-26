@@ -8,6 +8,7 @@ public abstract class PowerUp : MonoBehaviour
     private PowerUpManager manager;
     private GameObject ballObj;
     public PowerUpManager Manager => manager;
+    [SerializeField] bool autoDestroy = true;
     private void Awake()
     {
         ballObj = GameObject.FindGameObjectWithTag("Ball");
@@ -21,6 +22,7 @@ public abstract class PowerUp : MonoBehaviour
         if (!collision.CompareTag("Ball"))
             return;
         Collected(collision);
-        Destroy(gameObject);
+        if(autoDestroy)
+            Destroy(gameObject);
     }
 }

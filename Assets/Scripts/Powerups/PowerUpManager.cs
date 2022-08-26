@@ -162,4 +162,21 @@ public class PowerUpManager : MonoBehaviour
         }
 
     }
+
+    private bool canTeleport = true;
+    public void Teleport(Vector3 pos,Vector2 vel)
+    {
+        if (canTeleport)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = vel;
+            transform.position = pos;
+            StartCoroutine(CanTeleportDelay());
+        }
+    }
+    IEnumerator CanTeleportDelay()
+    {
+        canTeleport = false;
+        yield return new WaitForSeconds(0.5f);
+        canTeleport = true;
+    }
 }
