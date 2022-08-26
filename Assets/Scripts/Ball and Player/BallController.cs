@@ -119,7 +119,6 @@ public class BallController : MonoBehaviour
         Vector3 mousePosition = camera1.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
-//        currentPlayer = null;
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
 
@@ -144,6 +143,7 @@ public class BallController : MonoBehaviour
         mapManager.SetBallFx(false);
         FindObjectOfType<Timer>().SetPaused(true);
         StartCoroutine(GameOver());
+        gameOverSet = true;
     }
 
     // Auxiliar function to set the ball freezed to the player position
@@ -223,20 +223,18 @@ public class BallController : MonoBehaviour
     IEnumerator GoalTransition()
     {
         audioManager.PlaySFX("Goal");
-        rb2d.velocity = rb2d.velocity.normalized * 1f;
-        gameManager.PassLevel(false);
+        rb2d.velocity = rb2d.velocity.normalized * .8f; // slows ball
+        gameManager.PassLevel(false); // pass level but dont update UI now
         gameManager.SetLevelProgress(1f);
-        yield return new WaitForSeconds(2f);
-        rb2d.simulated = false;
         
+        yield return new WaitForSeconds(2f);
+        rb2d.simulated = false; // so the ball doesnt hit the map boundaries when doing the transition
         
         GameObject nextPlayer = mapManager.GetFirstPlayerOfLevel(gameManager.Level);
         nextPlayer = nextPlayer.GetComponentInChildren<Ally>().gameObject;
         SetBallToPlayer(nextPlayer);
         
-        
-        
-        GoalTransitionOver = false;
+        GoalTransitionOver = false; // this variable will be set to true when the player transition on MapManager is finished
         mapManager.StartTransition(nextPlayer.transform.parent);
         
         // wait until transition is finished to reposition field
@@ -247,7 +245,7 @@ public class BallController : MonoBehaviour
         
         rb2d.simulated = true;
         gameManager.SetLevelProgress(0f);
-        gameManager.SetLevelView();
+        gameManager.SetLevelView(); // finally updates text UI with the levels
 
         mapManager.RepositionField();
     }

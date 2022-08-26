@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] List<Preset> presetsOnMap;
+    List<Preset> presetsOnMap = new List<Preset>();
 
-    //[SerializeField] private bool onTransition=false;
     [SerializeField] Transform presetSpawner;
     [SerializeField] private float targetY=-3f;
-    [SerializeField] private float goalOffsetFromMiddle;
     [SerializeField] private float speed = 0.01f;
     [SerializeField] private GameObject fx;
     [SerializeField] Transform ballTransf;
@@ -23,14 +21,17 @@ public class MapManager : MonoBehaviour
     private List<GameObject> goalPositions = new List<GameObject>();
     private List<GameObject> firstPlayerInLevels = new List<GameObject>();
 
+    /* Cached references */
     private GameManager gameManager;
     private DifficultyProgression difficultyProgression;
     private BallController ballController;
     
     /* Field related */
-    private Field field;
+    [Header("Goal positioning")]
+    [SerializeField] private float goalOffsetFromMiddle;
     [SerializeField] float startGoalPosition;
-    
+    private Field field;
+
     /* Pass event */
     public delegate void SuccessfulPass();
     public static event SuccessfulPass OnSuccessfulPass;
@@ -123,6 +124,8 @@ public class MapManager : MonoBehaviour
         {
             SpawnPreset();
         }
+        
+        OnSuccessfulPass?.Invoke();
 
         Transform currGoal = GetGoalPositionOfLevel(gameManager.Level);
         
@@ -138,7 +141,6 @@ public class MapManager : MonoBehaviour
         transform.position = pos;
         
         
-        OnSuccessfulPass?.Invoke();
         if (presetsOnMap[0].SpawnPos < targetY)
         {
             Destroy(presetsOnMap[0].gameObject);

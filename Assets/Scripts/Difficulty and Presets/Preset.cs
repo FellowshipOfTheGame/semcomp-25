@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Preset : MonoBehaviour
 {
-    /*
-     int numberOfEnemies =>enemies.Count;
-     int numberOfPlayers =>players.Count;
-    */
     private List<GameObject> enemies=new List<GameObject>();
     private List<GameObject> players=new List<GameObject>();
     [SerializeField] Transform enemiesTransf;
