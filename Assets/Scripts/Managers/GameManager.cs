@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         }
         if (p == 1f)
         {
-            levelProgressSlider.value = 0;
+            levelProgressSlider.value = 1;
         }
     }
     
@@ -58,10 +58,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ProgressAnim(initial,progress));
     }
     
-    public void PassLevel()
+    public void PassLevel(bool changeUI)
     {
         level++;
-        SetLevelView();
+        if (changeUI)
+            SetLevelView();
     }
 
     public void SetLevelView()

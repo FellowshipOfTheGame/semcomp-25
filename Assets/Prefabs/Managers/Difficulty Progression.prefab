@@ -44,6 +44,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetSOList:
+  - {fileID: 11400000, guid: c2dda344aed2c024f9b7f3f545181a10, type: 2}
+  - {fileID: 11400000, guid: 984a255cab6d9654b81558c082b0a0dd, type: 2}
+  - {fileID: 11400000, guid: 81d464026d0d2394b8369609e5575755, type: 2}
+  - {fileID: 11400000, guid: 2236d40072208d84388cbb9e7ac3389d, type: 2}
+  - {fileID: 11400000, guid: 8d7a04a4adadf5f4a8582281e0b47354, type: 2}
+  - {fileID: 11400000, guid: 2ae1a02871fcb1645b6678d50687ceec, type: 2}
+  - {fileID: 11400000, guid: 27fa8b583b9a8ab40ba74d501ebbf95d, type: 2}
+  - {fileID: 11400000, guid: 854bf3e53d6d45c4fa328a7a66213390, type: 2}
+  - {fileID: 11400000, guid: 2e881f570ebef1e439930940da182f8c, type: 2}
+  - {fileID: 11400000, guid: 5feae1e2028f4784abefa6f21fe3266c, type: 2}
+  - {fileID: 11400000, guid: 1e84791d950b5ac4293c0fc0539f9ee5, type: 2}
+  - {fileID: 11400000, guid: a20107c8d2b3e9d4ab0f05085d0a3fd4, type: 2}
+  - {fileID: 11400000, guid: c105367b5fe6c244887624fcc2a9ff90, type: 2}
+  - {fileID: 11400000, guid: b84ba109c55961f43bb2350fa094c954, type: 2}
+  - {fileID: 11400000, guid: 4ed775f68eadcd940ac62f71425f8fa9, type: 2}
+  - {fileID: 11400000, guid: 6a6bae94d6b9aac419a6abdce7a19380, type: 2}
+  - {fileID: 11400000, guid: f52b634cee7a4f94d940cd2d477d316f, type: 2}
+  - {fileID: 11400000, guid: 492311339f8d2f543adc47ea1f6448b2, type: 2}
+  - {fileID: 11400000, guid: 6b4d45f08300d664fb0b6c6e110a7e08, type: 2}
+  - {fileID: 11400000, guid: 8b115a0df43e7eb44a8b39d613d7277c, type: 2}
+  - {fileID: 11400000, guid: 9da8b3002f3aee7419df205133a898ef, type: 2}
+  - {fileID: 11400000, guid: acc7bab79c8c94146852162c36af0ce9, type: 2}
+  - {fileID: 11400000, guid: 6eccf939d35f31a4a97a879e7a6fe46b, type: 2}
+  - {fileID: 11400000, guid: 8570b35082848174d90867849c3a8f01, type: 2}
   - {fileID: 11400000, guid: 2a2852133f8c4ba469eac8e73078cf9e, type: 2}
   - {fileID: 11400000, guid: cc131b7e2de3dee4782d13053f7ee81b, type: 2}
   - {fileID: 11400000, guid: a67accb32d17f3548b5ffe328bb43fd9, type: 2}
@@ -54,16 +78,62 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ebab64a2ba114ff4fb96a28ba94d65dd, type: 2}
   - {fileID: 11400000, guid: 5c97e0a4d4f346346a87ebeb077296e2, type: 2}
   - {fileID: 11400000, guid: ea645d6e61f68b14da11107bac8467d2, type: 2}
+  goalPresetSOList:
+  - {fileID: 11400000, guid: b16ed3d47c6301e468c2a8dccb6c012c, type: 2}
   levelProgression:
-  - easy: 3
+  - easy: 15
     normal: 0
     hard: 0
-  - easy: 1
+    goalDifficulty: 0
+  - easy: 12
     normal: 3
     hard: 0
-  - easy: 0
-    normal: 4
-    hard: 3
-  - easy: 5
+    goalDifficulty: 0
+  - easy: 10
     normal: 5
+    hard: 0
+    goalDifficulty: 0
+  - easy: 7
+    normal: 8
+    hard: 0
+    goalDifficulty: 0
+  - easy: 5
+    normal: 10
+    hard: 0
+    goalDifficulty: 0
+  - easy: 3
+    normal: 12
+    hard: 0
+    goalDifficulty: 0
+  - easy: 0
+    normal: 15
+    hard: 0
+    goalDifficulty: 0
+  - easy: 0
+    normal: 12
+    hard: 3
+    goalDifficulty: 0
+  - easy: 0
+    normal: 10
     hard: 5
+    goalDifficulty: 0
+  - easy: 0
+    normal: 7
+    hard: 8
+    goalDifficulty: 0
+  - easy: 0
+    normal: 5
+    hard: 10
+    goalDifficulty: 0
+  - easy: 0
+    normal: 3
+    hard: 12
+    goalDifficulty: 0
+  - easy: 0
+    normal: 2
+    hard: 13
+    goalDifficulty: 0
+  - easy: 0
+    normal: 0
+    hard: 15
+    goalDifficulty: 0

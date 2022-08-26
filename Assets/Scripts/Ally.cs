@@ -5,17 +5,17 @@ using UnityEngine;
 public class Ally : MonoBehaviour
 {
     [SerializeField] Animator anim;
-    [SerializeField] bool selected;
+    //[SerializeField] bool selected;
 
     public void Pull()
     {
-        selected = true;
+        //selected = true;
         anim.Play("Pull");
     }
 
     public void Kick()
     {
-        selected = false;
+        //selected = false;
         anim.Play("Kick");
     }
     // Start is called before the first frame update
