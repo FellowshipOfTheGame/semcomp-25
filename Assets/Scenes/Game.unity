@@ -323,6 +323,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b07d538bcd15e5f4b9c57d930f26c083, type: 3}
+--- !u!114 &1268009318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3588782406288102138, guid: b07d538bcd15e5f4b9c57d930f26c083, type: 3}
+  m_PrefabInstance: {fileID: 1268009317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52681a2c7a8dff40ac003acddc6bfc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1274846485 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7246899708432274366, guid: c2009f6bd355ccc45927b406e77c7978, type: 3}
@@ -595,6 +606,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de577448bb9c5194580753d27c06e679, type: 3}
+--- !u!114 &1789561341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4272701876218466900, guid: de577448bb9c5194580753d27c06e679, type: 3}
+  m_PrefabInstance: {fileID: 1789561340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01524a64f674e5e4e9a08c504fa7e975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1881865947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -909,6 +931,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3175433285518557893, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: timeManager
+      value: 
+      objectReference: {fileID: 1789561341}
+    - target: {fileID: 3175433285518557893, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 1268009318}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
 --- !u!1001 &2376718149807528032

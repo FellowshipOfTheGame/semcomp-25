@@ -129,16 +129,20 @@ public class MapManager : MonoBehaviour
 
         Transform currGoal = GetGoalPositionOfLevel(gameManager.Level);
         
-        Vector3 pos=transform.position;
-        while (currGoal.position.y >= goalOffsetFromMiddle && Mathf.Abs(currPlayer.position.y-targetY)>0.1f)
+        // move until goal is on the top or currentPlayer is on the bottom
+        float distance = Mathf.Min(currGoal.position.y - goalOffsetFromMiddle, currPlayer.position.y - targetY);
+        var transform1 = transform;
+        while (distance > 0)
         {
-            pos = transform.position;
-            pos.y -= speed*Time.deltaTime;
-            transform.position = pos;
+            float deltaMove = speed * Time.deltaTime;
+            deltaMove = Mathf.Min(deltaMove, distance);
+            distance -= deltaMove;
+
+            Vector3 pos = transform.position;
+            pos.y -= deltaMove;
+            transform1.position = pos;
             yield return null;
         }
-        pos.y = Mathf.Round(pos.y);
-        transform.position = pos;
         
         
         if (presetsOnMap[0].SpawnPos < targetY)
