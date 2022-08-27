@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallHitScore: 2
   successfulPassScore: 10
+  goalScore: 100
   enableWallHitScore: 0
   enableSuccessfulPassScore: 1
+  enableGoalScore: 1
   scoreTextUI: {fileID: 0}

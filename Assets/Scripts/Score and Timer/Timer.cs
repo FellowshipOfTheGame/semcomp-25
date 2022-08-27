@@ -33,7 +33,7 @@ public class Timer : MonoBehaviour
             Debug.Log("Link timer Text UI");
 
         CurrentTime = startingTime;
-        MapManager.OnSuccessfulPass += SuccessfulPassScored;
+        BallController.OnSuccessfulPass += SuccessfulPassScored;
     }
 
     private void Update()

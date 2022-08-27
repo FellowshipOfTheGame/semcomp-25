@@ -159,7 +159,7 @@ public class PowerUpManager : MonoBehaviour
         }
         else
         {
-            scoreManager.addScore(score);
+            scoreManager.AddScore(score);
         }
 
     }

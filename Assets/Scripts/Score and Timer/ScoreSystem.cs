@@ -8,11 +8,13 @@ public class ScoreSystem : MonoBehaviour
     [Header("Score amounts")]
     [SerializeField] int wallHitScore;
     [SerializeField] int successfulPassScore;
-
+    [SerializeField] int goalScore;
+    
     [Header("Enable score types")]
     [SerializeField] bool enableWallHitScore;
     [SerializeField] bool enableSuccessfulPassScore;
-
+    [SerializeField] bool enableGoalScore;
+    
     private int scoreAmount;
     public int ScoreAmount
     {
@@ -27,19 +29,20 @@ public class ScoreSystem : MonoBehaviour
     [Header("UI")]
     [SerializeField] TextMeshProUGUI scoreTextUI;
 
-
     private void OnEnable()
     {
         // subscribe to events
         Wall.OnWallHit += WallHitScored;
-        MapManager.OnSuccessfulPass += SuccessfulPassScored;
+        BallController.OnSuccessfulPass += SuccessfulPassScored;
+        BallController.OnGoalScored += GoalScored;
     }
 
     private void OnDisable()
     {
         // unsubscribe to events
         Wall.OnWallHit -= WallHitScored;
-        MapManager.OnSuccessfulPass -= SuccessfulPassScored;
+        BallController.OnSuccessfulPass -= SuccessfulPassScored;
+        BallController.OnGoalScored -= GoalScored;
     }
 
     private void Start()
@@ -59,6 +62,12 @@ public class ScoreSystem : MonoBehaviour
             ScoreAmount += successfulPassScore;
     }
 
+    private void GoalScored()
+    {
+        if (enableGoalScore)
+            ScoreAmount += goalScore;
+    }
+
     private void UpdateScoreTextUI()
     {
         if (!scoreTextUI) return;
@@ -66,11 +75,7 @@ public class ScoreSystem : MonoBehaviour
         scoreTextUI.text = ScoreAmount.ToString();
     }
 
-    /*
-        Modificacoes Lucas = Adicao de um "addscore" generico
-    */
-
-    public void addScore(int points){
+    public void AddScore(int points){
         ScoreAmount += points;
     }
 }

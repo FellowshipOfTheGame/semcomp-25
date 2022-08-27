@@ -20,7 +20,17 @@ public class BallController : MonoBehaviour
 
     private bool gameOverSet = false;
     public bool GoalTransitionOver { private get; set; }
-
+    
+    /* Pass event */
+    public delegate void SuccessfulPass();
+    public static event SuccessfulPass OnSuccessfulPass;
+    private bool ballLaunched;
+    private float yPosWhenLaunched;
+    
+    /* Goal event */
+    public delegate void GoalScored();
+    public static event GoalScored OnGoalScored;
+    
     // cached references
     private Rigidbody2D rb2d;
     private MapManager mapManager;
@@ -84,7 +94,7 @@ public class BallController : MonoBehaviour
                 var position = transform.position;
                 Vector3 pos1 = position;
                 Vector3 pos2= position+(position - mousePosition).normalized * (forceLevel * maxDistance * 2f);
-                Debug.DrawRay(pos1,pos2-position);
+
                 line.SetPosition(0, pos1);
                 line.SetPosition(1, pos2);
 
@@ -100,6 +110,7 @@ public class BallController : MonoBehaviour
                     mousePressed = false;
                     playerManager.SetCanMove(true);
                     line.enabled = false;
+                    currentPlayer.GetComponent<Ally>().Idle();
                 }
             }
         }  
@@ -119,10 +130,15 @@ public class BallController : MonoBehaviour
         Vector3 mousePosition = camera1.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
+        // set pass state
+        ballLaunched = true;
+        yPosWhenLaunched = transform.position.y;
+        
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
-
+        
         rb2d.velocity = -(mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
+        
     }
 
     private IEnumerator GameOver()
@@ -155,13 +171,21 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;
+
+        if (ballLaunched)
+        {
+            ballLaunched = false;
+            // if position is greater than when it was launched plus a little tolerance
+            if (transform.position.y > yPosWhenLaunched + 0.15f)
+                OnSuccessfulPass?.Invoke();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Collider2D collider = collision.collider;
+        Collider2D collisionCollider = collision.collider;
 
-        if (collider.CompareTag("LateralWall"))
+        if (collisionCollider.CompareTag("LateralWall"))
         {
             audioManager.PlaySFX("HitWall");
         }
@@ -215,6 +239,8 @@ public class BallController : MonoBehaviour
         }
         else if (collision.CompareTag("Goal"))
         {
+            ballLaunched = false;
+            OnGoalScored?.Invoke();
             StartCoroutine(GoalTransition());
         }
         

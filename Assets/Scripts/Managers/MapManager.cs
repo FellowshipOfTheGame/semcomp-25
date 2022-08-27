@@ -32,10 +32,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] float startGoalPosition;
     private Field field;
 
-    /* Pass event */
-    public delegate void SuccessfulPass();
-    public static event SuccessfulPass OnSuccessfulPass;
-
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -124,8 +120,7 @@ public class MapManager : MonoBehaviour
         {
             SpawnPreset();
         }
-        
-        OnSuccessfulPass?.Invoke();
+
 
         Transform currGoal = GetGoalPositionOfLevel(gameManager.Level);
         
