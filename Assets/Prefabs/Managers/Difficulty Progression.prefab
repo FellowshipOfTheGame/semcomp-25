@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetSOList:
+  - {fileID: 11400000, guid: 2a2852133f8c4ba469eac8e73078cf9e, type: 2}
+  - {fileID: 11400000, guid: cc131b7e2de3dee4782d13053f7ee81b, type: 2}
+  - {fileID: 11400000, guid: a67accb32d17f3548b5ffe328bb43fd9, type: 2}
   - {fileID: 11400000, guid: c2dda344aed2c024f9b7f3f545181a10, type: 2}
   - {fileID: 11400000, guid: 984a255cab6d9654b81558c082b0a0dd, type: 2}
   - {fileID: 11400000, guid: 81d464026d0d2394b8369609e5575755, type: 2}
@@ -54,10 +57,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 854bf3e53d6d45c4fa328a7a66213390, type: 2}
   - {fileID: 11400000, guid: 2e881f570ebef1e439930940da182f8c, type: 2}
   - {fileID: 11400000, guid: 5feae1e2028f4784abefa6f21fe3266c, type: 2}
-  - {fileID: 11400000, guid: 1e84791d950b5ac4293c0fc0539f9ee5, type: 2}
-  - {fileID: 11400000, guid: a20107c8d2b3e9d4ab0f05085d0a3fd4, type: 2}
-  - {fileID: 11400000, guid: c105367b5fe6c244887624fcc2a9ff90, type: 2}
-  - {fileID: 11400000, guid: b84ba109c55961f43bb2350fa094c954, type: 2}
+  - {fileID: 11400000, guid: 75ec42e5739ca71458621cba95c39abd, type: 2}
+  - {fileID: 11400000, guid: ababc02acec1b0b49a7c8fbd5e7fa3db, type: 2}
+  - {fileID: 11400000, guid: 5a76d8187ece01b41bc07ea5fb195486, type: 2}
+  - {fileID: 11400000, guid: c28a1e8799aa91947aa530f9e01f918e, type: 2}
   - {fileID: 11400000, guid: 4ed775f68eadcd940ac62f71425f8fa9, type: 2}
   - {fileID: 11400000, guid: 6a6bae94d6b9aac419a6abdce7a19380, type: 2}
   - {fileID: 11400000, guid: f52b634cee7a4f94d940cd2d477d316f, type: 2}
@@ -68,16 +71,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: acc7bab79c8c94146852162c36af0ce9, type: 2}
   - {fileID: 11400000, guid: 6eccf939d35f31a4a97a879e7a6fe46b, type: 2}
   - {fileID: 11400000, guid: 8570b35082848174d90867849c3a8f01, type: 2}
-  - {fileID: 11400000, guid: 2a2852133f8c4ba469eac8e73078cf9e, type: 2}
-  - {fileID: 11400000, guid: cc131b7e2de3dee4782d13053f7ee81b, type: 2}
-  - {fileID: 11400000, guid: a67accb32d17f3548b5ffe328bb43fd9, type: 2}
-  - {fileID: 11400000, guid: ababc02acec1b0b49a7c8fbd5e7fa3db, type: 2}
-  - {fileID: 11400000, guid: 75ec42e5739ca71458621cba95c39abd, type: 2}
-  - {fileID: 11400000, guid: 5a76d8187ece01b41bc07ea5fb195486, type: 2}
-  - {fileID: 11400000, guid: c28a1e8799aa91947aa530f9e01f918e, type: 2}
   - {fileID: 11400000, guid: ebab64a2ba114ff4fb96a28ba94d65dd, type: 2}
   - {fileID: 11400000, guid: 5c97e0a4d4f346346a87ebeb077296e2, type: 2}
   - {fileID: 11400000, guid: ea645d6e61f68b14da11107bac8467d2, type: 2}
+  - {fileID: 11400000, guid: 1e84791d950b5ac4293c0fc0539f9ee5, type: 2}
+  - {fileID: 11400000, guid: a20107c8d2b3e9d4ab0f05085d0a3fd4, type: 2}
+  - {fileID: 11400000, guid: c105367b5fe6c244887624fcc2a9ff90, type: 2}
+  - {fileID: 11400000, guid: b84ba109c55961f43bb2350fa094c954, type: 2}
   goalPresetSOList:
   - {fileID: 11400000, guid: b16ed3d47c6301e468c2a8dccb6c012c, type: 2}
   levelProgression:

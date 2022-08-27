@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cd6a608e5ea71343ac9a0ea0746068b, type: 3}
-  m_Name: PresetSO8
+  m_Name: 1_One
   m_EditorClassIdentifier: 
-  presetPrefab: {fileID: 5290686116190302539, guid: 87c79d15a828f0f4995e0eeae7553c71, type: 3}
-  difficulty: 2
+  presetPrefab: {fileID: 1003820834125476221, guid: 8d3a0d3a485481d41acf011ec5efb511, type: 3}
+  difficulty: 0

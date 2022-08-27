@@ -58,7 +58,7 @@ public class MapManager : MonoBehaviour
             RepositionField();
         }
 
-        ballTransf.position = presetsOnMap[0].FirstPlayer.transform.position;
+        ballTransf.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
         totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
     }
 
@@ -116,7 +116,7 @@ public class MapManager : MonoBehaviour
         fx.SetActive(false);
 
         // spawn presets until goal of current level is spawned
-        while (goalPositions.Count <= gameManager.Level || presetsOnMap.Count < 3)
+        while (goalPositions.Count <= gameManager.Level || presetsOnMap.Count <= 7)
         {
             SpawnPreset();
         }

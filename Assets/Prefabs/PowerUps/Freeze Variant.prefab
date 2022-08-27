@@ -71,6 +71,38 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_Size.x
+      value: 0.77734375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6855469
+      objectReference: {fileID: 0}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d6059e4106459064ebe2fd127988ccee, type: 3}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.032
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
 --- !u!1 &6937274488717889214 stripped
@@ -90,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093aed12fba8a4f4388e9c5ca3b4bc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoDestroy: 1
   duration: 4
   timeScale: 0
   hasIceFx: 1

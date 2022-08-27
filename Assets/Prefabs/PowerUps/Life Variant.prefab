@@ -71,6 +71,42 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_Size.x
+      value: 0.85546875
+      objectReference: {fileID: 0}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.75390625
+      objectReference: {fileID: 0}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 933e1d31116fed24aa5d90d5ac452c7c, type: 3}
+    - target: {fileID: 6188522463403021203, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.004
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
 --- !u!1 &3679992401158754688 stripped
@@ -90,7 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccac1b48cdbe4b4e879996a628ef8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnBallCollision:
-    m_PersistentCalls:
-      m_Calls: []
+  autoDestroy: 1
   lifeQuantity: 1

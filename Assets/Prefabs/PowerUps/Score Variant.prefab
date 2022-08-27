@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281898985
-  m_fontColor: {r: 0.9150943, g: 0.5939753, b: 0.22014059, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -192,7 +192,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &1594527718
 MonoBehaviour:
@@ -243,7 +243,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 398609409976776341, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
       propertyPath: m_Name
-      value: Score
+      value: Score Variant
       objectReference: {fileID: 0}
     - target: {fileID: 398609409976776344, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
       propertyPath: m_RootOrder
@@ -251,11 +251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 398609409976776344, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 398609409976776344, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.759
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 398609409976776344, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -289,6 +289,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6251674767566790648, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7867622177207841098, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6526a9c173f12bf49ae3559c873218b2, type: 3}
 --- !u!1 &6328219604131312215 stripped
@@ -313,7 +321,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7239b9b466b19b14da0f0a5cf9e47015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnBallCollision:
-    m_PersistentCalls:
-      m_Calls: []
+  autoDestroy: 1
   score: 10

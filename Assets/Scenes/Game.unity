@@ -1049,6 +1049,106 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[0].easy
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[1].easy
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[2].easy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[3].easy
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[4].easy
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[5].easy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[7].hard
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[8].hard
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[9].hard
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[10].hard
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[11].hard
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[12].hard
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[13].hard
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[1].normal
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[2].normal
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[3].normal
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[4].normal
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[5].normal
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[6].normal
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[7].normal
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[8].normal
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[9].normal
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[10].normal
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[11].normal
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[12].normal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950587, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: m_Name
       value: Difficulty Progression

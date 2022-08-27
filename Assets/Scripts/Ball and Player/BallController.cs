@@ -153,7 +153,8 @@ public class BallController : MonoBehaviour
         audioManager.PlaySFX("WrongPass");
         if (gameOverSet)
             return;
-        Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
+        var fx = Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
+        fx.SetActive(true);
         rb2d.bodyType = RigidbodyType2D.Static;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         mapManager.SetBallFx(false);
