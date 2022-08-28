@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesTransf: {fileID: 2276502091170963246}
   playersTransf: {fileID: 2378734492175178187}
+  goal: {fileID: 0}
   randomizePos: 1
 --- !u!1 &5205690445121720195
 GameObject:
@@ -739,11 +740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7767148560556528034, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7767148560556528034, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2.93
       objectReference: {fileID: 0}
     - target: {fileID: 7767148560556528034, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: m_LocalPosition.z
