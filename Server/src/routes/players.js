@@ -1,9 +1,8 @@
 // Dependencies
 const express = require('express');
 const routes = express.Router();
-const passport = require('passport');
 
-const config = require('../config')
+const configEnv = require('../config')
 
 // Middlewares
 const SessionMiddleware = require('../middlewares/Session.middleware');

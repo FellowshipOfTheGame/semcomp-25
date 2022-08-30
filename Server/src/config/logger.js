@@ -28,7 +28,7 @@ const logger = winston.createLogger({
             maxsize: 2*1024*1024, // 2 MB max size
             maxFiles: 512,        // No more storage then 1 GB
         }),
-        new FirebaseTransport({
+        new FirebaseTransport({ 
 			firebaseConfig: {
                 apiKey: configEnv.API_KEY,
                 authDomain: configEnv.AUTH_DOMAIN,
@@ -43,13 +43,13 @@ const logger = winston.createLogger({
 				level: 'info',
                 format: winston.format.combine(
                     winston.format.json(),
-                    format
-                ),
+                    format 
+                ),   
                 options: {
                     useUnifiedTopology: true
                 },
 			},     
-			applicationName: 'semcomp25',
+			applicationName: configEnv.PROJECT_ID,
 			collectionName: 'logs',
 			storageType: StorageType.Realtime,
 		}), 

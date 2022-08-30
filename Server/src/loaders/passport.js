@@ -1,36 +1,79 @@
+const passport = require('passport');
 let GoogleStrategy = require('passport-google-oauth20').Strategy;
-let FacebookStrategy = require('passport-facebook').Strategy;
+let GoogleTokenStrategy =  require("passport-google-verify-token").Strategy;
 
-const config = require('../config')
-const User = require('../models/User');
-const UserController = require('../controllers/userController');
+// let FacebookStrategy = require('passport-facebook').Strategy;
+
+const configEnv = require('../config')
+// const Player = require('../models/Player');
+const PlayerController = require('../controllers/playerController');
 
 const { logger } = require('../config/logger');
 
 module.exports = function (passport) {
 
-    passport.serializeUser(function(user, done){
-        done(null, {
-            id: user._id,
-        });
-        // done(null, user);
+    passport.serializeUser(function(player, done){
+        // done(null, {
+        //     id: player._id,
+        // });
+         // testin return the google profile
+        done(null, player);
     });
-
+ 
     passport.deserializeUser(function(obj, done){
-        User.findById(obj.id, function(err,user){
-            done(err, user);    
-        });
-        // done(null, obj);
+        // find user in firebase
+        // User.findById(obj.id, function(err,user){
+        //     done(err, user);    
+        // });
+        
+        // testin return the google profile
+        done(null, obj);
     });
 
-    if(config.GOOGLE_CLIENT_ID !== undefined){
+    if(configEnv.GOOGLE_CLIENT_ID !== undefined) {
         passport.use(new GoogleStrategy({
-                clientID: config.GOOGLE_CLIENT_ID,
-                clientSecret: config.GOOGLE_CLIENT_SECRET,
-                callbackURL: config.GOOGLE_CALLBACK_URL,
+                clientID: configEnv.GOOGLE_CLIENT_ID,
+                clientSecret: configEnv.GOOGLE_CLIENT_SECRET,
+                callbackURL: configEnv.GOOGLE_CALLBACK_URL,
             },
-            function(accessToken, refreshToken, profile, done) {
-                UserController.findOrCreate(profile, (err, user) => {
+            function(accessToken, refreshToken, params, profile, done) {
+                console.log(params)
+     
+                // PlayerController.findOrCreate(profile, (err, player) => {
+                //     if (err) {
+                //         logger.error({
+                //             message: `at Google Login: ${err}`
+                //         })
+                //         return done(null, null, { message: "unable to create or find user" })
+                //     }
+
+                //     if (!player) {
+                //         return done(null, null, { message: "user not created or not found" });
+                //     }
+                    
+                //     return done(null, player);
+                // });
+
+                // while testing, just return the google profile 
+                console.log(profile);
+                console.log("This re: " + refreshToken);
+                console.log("This is the accessToken: " + accessToken)
+                return done(null, profile);
+            }
+        ));
+    }
+        
+    if(configEnv.GOOGLE_CLIENT_ID !== undefined) {
+        passport.use(new GoogleTokenStrategy({
+                clientID: configEnv.GOOGLE_CLIENT_ID,
+                // If other clients (such as android / ios apps) also access the google api:
+                // audience: [CLIENT_ID_FOR_THE_BACKEND, CLIENT_ID_ANDROID, CLIENT_ID_IOS, CLIENT_ID_SPA]
+                clientSecret: configEnv.GOOGLE_CLIENT_SECRET,
+                // getGoogleCerts: optionalCustomGetGoogleCerts
+            },
+            function(parsedToken, googleId, done) {
+                const provider = 'google'
+                PlayerController.findOrCreate(googleId, provider, parsedToken, (err, player) => {
                     if (err) {
                         logger.error({
                             message: `at Google Login: ${err}`
@@ -38,37 +81,11 @@ module.exports = function (passport) {
                         return done(null, null, { message: "unable to create or find user" })
                     }
 
-                    if (!user) {
+                    if (!player) {
                         return done(null, null, { message: "user not created or not found" });
                     }
                     
-                    return done(null, user);
-                });
-            }
-        ));
-    }
-
-    if(config.FACEBOOK_CLIENT_ID !== undefined){
-        passport.use(new FacebookStrategy({
-                clientID: config.FACEBOOK_CLIENT_ID,
-                clientSecret: config.FACEBOOK_CLIENT_SECRET,
-                callbackURL: config.FACEBOOK_CALLBACK_URL,
-                profileFields: ["id", "email", "name"]
-            },
-            function(accessToken, refreshToken, profile, done) {
-                UserController.findOrCreate(profile, (err, user) => {
-                    if (err) {
-                        logger.error({
-                            message: `at Facebook Login: ${err}`
-                        })
-                        return done(null, null, { message: "unable to create or find user" })
-                    }
-
-                    if (!user) {
-                        return done(null, null, { message: "user not created or not found" });
-                    }
-                    
-                    return done(null, user);
+                    return done(null, player);
                 });
             }
         ));
