@@ -6,6 +6,7 @@ public class Destructible : MonoBehaviour
 {
     string BALL_TAG = "Ball";
     [SerializeField] List<Sprite> sprites;
+    [SerializeField] GameObject fxObj;
     int spriteCount;
     int currentSprite = 0;
     SpriteRenderer spriteRenderer;
@@ -19,11 +20,16 @@ public class Destructible : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    public void SpawnFx(Transform targetTransf)
+    {
+        Instantiate(fxObj, targetTransf.position, Quaternion.identity);
+    }
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log(col.gameObject.CompareTag(BALL_TAG));
+        //Debug.Log(col.gameObject.CompareTag(BALL_TAG));
         if (currentSprite >= spriteCount)
         {
+            SpawnFx(transform);
             DestroyThis();
         }
         else

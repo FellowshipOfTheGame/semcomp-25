@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: 74bb5947643fab84e8a168005607d40e, type: 3}
+  fxObj: {fileID: 7397412817227702722, guid: e9910a480b9edb743b2fb38a603f48d2, type: 3}
 --- !u!60 &435690297731755376
 PolygonCollider2D:
   m_ObjectHideFlags: 0

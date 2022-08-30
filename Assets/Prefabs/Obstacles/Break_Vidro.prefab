@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites: []
+  fxObj: {fileID: 1689462473297022426, guid: 62bbba2f0a516e0489e5b774d4b48932, type: 3}
