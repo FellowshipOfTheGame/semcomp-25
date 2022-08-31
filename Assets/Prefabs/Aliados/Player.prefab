@@ -213,6 +213,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7944325762244716628}
     m_Modifications:
+    - target: {fileID: 1214873948817195503, guid: 08be67bb087fa3741a068d716587e482, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1952838330238621900, guid: 08be67bb087fa3741a068d716587e482, type: 3}
       propertyPath: m_Name
       value: Ally
@@ -259,6 +263,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8018139800787918061, guid: 08be67bb087fa3741a068d716587e482, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706406069129433889, guid: 08be67bb087fa3741a068d716587e482, type: 3}
+      propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
