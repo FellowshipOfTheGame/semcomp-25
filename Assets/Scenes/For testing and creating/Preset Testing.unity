@@ -1062,6 +1062,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 197f908df48fd8b4698ed1e376dc21f2, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[0].easy
       value: 0
       objectReference: {fileID: 0}
@@ -1084,6 +1088,10 @@ PrefabInstance:
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[1].normal
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[0].goalDifficulty
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950587, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: m_Name

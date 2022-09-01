@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd6a608e5ea71343ac9a0ea0746068b, type: 3}
+  m_Name: Goal_Hard_3
+  m_EditorClassIdentifier: 
+  presetPrefab: {fileID: 8356731298569351696, guid: 685e28a56bd2d5449aef981da456a26c, type: 3}
+  difficulty: 2
