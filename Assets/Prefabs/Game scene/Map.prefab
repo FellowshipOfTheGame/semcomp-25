@@ -50,11 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetSpawner: {fileID: 2252877063571925843}
-  targetY: -4
   speed: 8
   fx: {fileID: 2020266654655738622}
   ballTransf: {fileID: 5871498331891148385}
-  goalOffsetFromMiddle: 5
 --- !u!1 &2252877063495409687
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,11 +337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5636276234246029818, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -9.58
       objectReference: {fileID: 0}
     - target: {fileID: 5636276234246029818, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 5636276234246029818, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
       propertyPath: m_LocalPosition.z
