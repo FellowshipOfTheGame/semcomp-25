@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,11 @@ public class PauseMenu : MonoBehaviour
     public GameObject volumePanel;
 
     public TMP_Text menuLabelText;
+
+    private void Awake()
+    {
+        Resume();
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,7 +47,6 @@ public class PauseMenu : MonoBehaviour
     {
         // Exit the Pause Menu in the canvas
         pauseMenuUI.SetActive(false);
-        //BackgroundImage.SetActive(false);
 
         // Unfreeze the game
         Time.timeScale = 1f;
@@ -70,12 +75,14 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         Time.timeScale = 1f;
+        isGamePaused = false;
         SceneManager.LoadScene("MainMenu");
     }
 
     public void ReloadScene()
     {
         Time.timeScale = 1f;
+        isGamePaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

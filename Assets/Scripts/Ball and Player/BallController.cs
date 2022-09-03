@@ -78,7 +78,6 @@ public class BallController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // mouse clicado próximo ao jogador
-                //if (Vector2.SqrMagnitude(mousePosition - currentPlayer.transform.position) < playerRadius*playerRadius)
                 if (Vector2.SqrMagnitude(mousePosition - transform.position) < playerRadius*playerRadius)
                 {
                     mousePressed = true;
@@ -93,11 +92,10 @@ public class BallController : MonoBehaviour
             {
                 // começa a mirar
                 line.enabled = true;
-                //float forceLevel = GetForceLevel(mousePosition, currentPlayer.transform.position);
                 var position = transform.position;
                 float forceLevel = GetForceLevel(mousePosition, position);
                 Vector3 pos1 = position;
-                Vector3 pos2= position+(position - mousePosition).normalized * (forceLevel * maxDistance * 2f);
+                Vector3 pos2 = position + (mousePosition - position).normalized * (forceLevel * maxDistance * 2f);
 
                 line.SetPosition(0, pos1);
                 line.SetPosition(1, pos2);
@@ -141,7 +139,7 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         
-        rb2d.velocity = -(mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
+        rb2d.velocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
         
     }
 
