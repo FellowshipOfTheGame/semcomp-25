@@ -7,14 +7,19 @@ public class MapManager : MonoBehaviour
     List<Preset> presetsOnMap = new List<Preset>();
 
     [SerializeField] Transform presetSpawner;
-    [SerializeField] private float targetY=-3f;
     [SerializeField] private float speed = 0.01f;
     [SerializeField] private GameObject fx;
     [SerializeField] Transform ballTransf;
-    float posNextSpawn = -4f;
-    float spawnOffset = 2f;
-    private float spawnOffsetAfterGoal = 3.7f;
+    
     Transform currPlayer;
+    
+    /* Screen and presets related offsets */
+    private const float SpawnOffset = 2f;
+    private const float SpawnOffsetAfterGoal = 3.7f;
+    private const float OffsetFromScreenBottom = 1.6f;
+    private const float OffsetFromScreenTop = 1.6f;
+    private float targetY;
+    private float goalTargetY;
     
     /* Level Control  */
     private int allyBarsPassed = 0;
@@ -28,8 +33,6 @@ public class MapManager : MonoBehaviour
     private BallController ballController;
     
     /* Field related */
-    [Header("Goal positioning")]
-    [SerializeField] private float goalOffsetFromMiddle;
     private Field[] fields = new Field[2];
 
     private void Awake()
@@ -47,6 +50,9 @@ public class MapManager : MonoBehaviour
     
     private void Start()
     {
+        targetY = Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, 0)).y + OffsetFromScreenBottom;
+        goalTargetY = Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height)).y - OffsetFromScreenTop;
+        
         // spawn until a goal is spawned
         SpawnPresetsUntilGoal();
         
@@ -71,23 +77,22 @@ public class MapManager : MonoBehaviour
     private void SpawnPreset()
     {
         int presetCount = presetsOnMap.Count;
+        Vector2 posNextSpawn = new Vector2(0, targetY);
         if (presetCount > 0)
         {
             // if it is a preset after a goal then spawn further than normal
             if (presetsOnMap[presetCount - 1].HasGoal())
-                posNextSpawn = presetsOnMap[presetCount-1].SpawnPos + spawnOffsetAfterGoal;
+                posNextSpawn.y = presetsOnMap[presetCount-1].SpawnPos + SpawnOffsetAfterGoal;
             else
-                posNextSpawn = presetsOnMap[presetCount-1].SpawnPos + spawnOffset;
+                posNextSpawn.y = presetsOnMap[presetCount-1].SpawnPos + SpawnOffset;
         }
-        Vector2 pos = new Vector2(0, posNextSpawn);
 
-        GameObject obj = Instantiate(difficultyProgression.NextPreset(), pos, Quaternion.identity, presetSpawner);
+        GameObject obj = Instantiate(difficultyProgression.NextPreset(), posNextSpawn, Quaternion.identity, presetSpawner);
 
         
         
         Preset preset = obj.GetComponent<Preset>();
         presetsOnMap.Add(preset);
-
         if (firstPlayerInLevels.Count == goalPositions.Count)
         {
             firstPlayerInLevels.Add(preset.FirstPlayer); 
@@ -137,7 +142,6 @@ public class MapManager : MonoBehaviour
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0.1f);
-        //onTransition = true;
         fx.SetActive(false);
 
         // spawn presets until goal of current level is spawned
@@ -149,7 +153,7 @@ public class MapManager : MonoBehaviour
         Transform currGoal = GetGoalPositionOfLevel(gameManager.Level);
         
         // move until goal is on the top or currentPlayer is on the bottom
-        float distance = Mathf.Min(currGoal.position.y - goalOffsetFromMiddle, currPlayer.position.y - targetY);
+        float distance = Mathf.Min(currGoal.position.y - goalTargetY, currPlayer.position.y - targetY);
         var transform1 = transform;
         while (distance > 0)
         {

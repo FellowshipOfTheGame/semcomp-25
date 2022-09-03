@@ -23,7 +23,7 @@ public class Preset : MonoBehaviour
     void Awake()
     {
         float firstY = float.MaxValue;
-        float lastY = 0;
+        float lastY = float.MinValue;
         foreach(Transform child in enemiesTransf)
         {
             enemies.Add(child.gameObject);

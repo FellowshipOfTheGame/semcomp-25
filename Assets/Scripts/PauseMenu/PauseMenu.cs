@@ -6,7 +6,7 @@ using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
-    private static bool _isGamePaused = false;
+    public static bool isGamePaused = false;
 
     // Receive the PauseMenu game object
     public GameObject pauseMenuUI;
@@ -26,7 +26,7 @@ public class PauseMenu : MonoBehaviour
     public void SwitchPaused()
     {
         // IF the game is already paused, exits the pause menu
-        if (_isGamePaused)
+        if (isGamePaused)
         {
             Resume();
         }
@@ -47,7 +47,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
 
         // Set false meaning that the game is NOT paused
-        _isGamePaused = false;
+        isGamePaused = false;
     }
 
     // Open the Pause Menu
@@ -61,7 +61,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
 
         // Set true meaning that the game is paused
-        _isGamePaused = true;
+        isGamePaused = true;
 
         //BackgroundImage.SetActive(true);
     }

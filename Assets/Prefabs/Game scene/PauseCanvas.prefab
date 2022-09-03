@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 7246899708432274367}
   - component: {fileID: 7246899708432274366}
   - component: {fileID: 7246899708432274365}
+  - component: {fileID: 7892442946270945825}
   m_Layer: 5
   m_Name: PauseCanvas
   m_TagString: Untagged
@@ -451,6 +452,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+--- !u!114 &7892442946270945825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7246899708432274364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c397a293dbc7742b99b02f46939ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7246899708486696728
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,7 +781,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7246899708665393630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7246899708155444440}
