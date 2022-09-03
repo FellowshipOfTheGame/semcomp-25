@@ -197,10 +197,13 @@ public class BallController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
-        {            
-            SetBallToPlayer(collision.gameObject);
+        {
+            if (!lockedOntoPlayer)
+            {
+                SetBallToPlayer(collision.gameObject);
 
-            mapManager.StartTransition(currentPlayer.transform.parent);
+                mapManager.StartTransition(currentPlayer.transform.parent);
+            }
         } 
         else if (collision.CompareTag("MapTop"))
         {

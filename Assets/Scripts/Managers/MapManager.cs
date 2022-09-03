@@ -146,7 +146,6 @@ public class MapManager : MonoBehaviour
             SpawnPreset();
         }
 
-
         Transform currGoal = GetGoalPositionOfLevel(gameManager.Level);
         
         // move until goal is on the top or currentPlayer is on the bottom
