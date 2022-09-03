@@ -115,12 +115,12 @@ public class PowerUpManager : MonoBehaviour
 
         float t = 0;
         float currRadius;
-        float speed = 0.02f;
+        float speed = 2f;
         do
         {
             currRadius = Mathf.Lerp(start, finish, t);
             transform.localScale = new Vector3(currRadius, currRadius, 1f);
-            t += speed;
+            t += speed * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         } while (t <= 1f);
 

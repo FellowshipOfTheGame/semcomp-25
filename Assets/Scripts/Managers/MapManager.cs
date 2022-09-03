@@ -13,6 +13,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] Transform ballTransf;
     float posNextSpawn = -4f;
     float spawnOffset = 2f;
+    private float spawnOffsetAfterGoal = 3.7f;
     Transform currPlayer;
     
     /* Level Control  */
@@ -29,14 +30,13 @@ public class MapManager : MonoBehaviour
     /* Field related */
     [Header("Goal positioning")]
     [SerializeField] private float goalOffsetFromMiddle;
-    [SerializeField] float startGoalPosition;
-    private Field field;
+    private Field[] fields = new Field[2];
 
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         difficultyProgression = FindObjectOfType<DifficultyProgression>();
-        field = GetComponentInChildren<Field>();
+        fields = GetComponentsInChildren<Field>();
         ballController = FindObjectOfType<BallController>();
     }
 
@@ -48,18 +48,24 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         // spawn until a goal is spawned
-        while (goalPositions.Count == 0)
-        {
-            SpawnPreset();
-        }
+        SpawnPresetsUntilGoal();
         
-        if (field != null)
+        if (fields[0] != null)
         {
-            RepositionField();
+            RepositionFields();
         }
 
         ballTransf.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
         totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
+    }
+
+    public void SpawnPresetsUntilGoal()
+    {
+        // spawn presets until goal of current level is spawned
+        while (goalPositions.Count <= gameManager.Level)
+        {
+            SpawnPreset();
+        }
     }
 
     private void SpawnPreset()
@@ -67,12 +73,18 @@ public class MapManager : MonoBehaviour
         int presetCount = presetsOnMap.Count;
         if (presetCount > 0)
         {
-            posNextSpawn = presetsOnMap[presetCount-1].SpawnPos+ spawnOffset;
+            // if it is a preset after a goal then spawn further than normal
+            if (presetsOnMap[presetCount - 1].HasGoal())
+                posNextSpawn = presetsOnMap[presetCount-1].SpawnPos + spawnOffsetAfterGoal;
+            else
+                posNextSpawn = presetsOnMap[presetCount-1].SpawnPos + spawnOffset;
         }
         Vector2 pos = new Vector2(0, posNextSpawn);
 
         GameObject obj = Instantiate(difficultyProgression.NextPreset(), pos, Quaternion.identity, presetSpawner);
 
+        
+        
         Preset preset = obj.GetComponent<Preset>();
         presetsOnMap.Add(preset);
 
@@ -96,10 +108,23 @@ public class MapManager : MonoBehaviour
     }
 
     // reposition field to fit into current level presets and goal
-    public void RepositionField()
+    public void RepositionFields()
     {
-        float goalY = GetGoalPositionOfLevel(gameManager.Level).position.y;
-        field.SetGoalPosition(startGoalPosition, goalY);
+        float endGoalY = GetGoalPositionOfLevel(gameManager.Level).position.y;
+        float startGoalY = GetFirstPlayerOfLevel(gameManager.Level).transform.position.y;
+
+        if (gameManager.Level == 0)
+        {
+            fields[0].SetGoalPosition(startGoalY - .9f, endGoalY);
+            fields[1].SetGoalPosition(startGoalY - 15f, startGoalY - 5f);
+        }
+        else
+        {
+            // reposiciona o campo que está embaixo
+            int index = (fields[0].transform.position.y < fields[1].transform.position.y) ? 0 : 1;
+            fields[index].SetGoalPosition(startGoalY - .9f, endGoalY);
+        }
+        
     }
     
     public GameObject GetFirstPlayerOfLevel(int level)
@@ -116,11 +141,10 @@ public class MapManager : MonoBehaviour
         fx.SetActive(false);
 
         // spawn presets until goal of current level is spawned
-        while (goalPositions.Count <= gameManager.Level || presetsOnMap.Count <= 7)
+        while (presetsOnMap.Count <= 7)
         {
             SpawnPreset();
         }
-
 
         Transform currGoal = GetGoalPositionOfLevel(gameManager.Level);
         

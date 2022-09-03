@@ -39,6 +39,7 @@ public class BallController : MonoBehaviour
     private PlayerInputManager playerManager;
     private PowerUpManager powerUpManager;
     private Camera camera1;
+    private Timer timer;
     
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class BallController : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         playerManager = FindObjectOfType<PlayerInputManager>();
         camera1 = Camera.main;
+        timer = FindObjectOfType<Timer>();
     }
 
     private IEnumerator KickDelay(float force)
@@ -158,7 +160,7 @@ public class BallController : MonoBehaviour
         rb2d.bodyType = RigidbodyType2D.Static;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         mapManager.SetBallFx(false);
-        FindObjectOfType<Timer>().SetPaused(true);
+        timer.SetPaused(true);
         StartCoroutine(GameOver());
         gameOverSet = true;
     }
@@ -195,10 +197,13 @@ public class BallController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ally"))
-        {            
-            SetBallToPlayer(collision.gameObject);
+        {
+            if (!lockedOntoPlayer)
+            {
+                SetBallToPlayer(collision.gameObject);
 
-            mapManager.StartTransition(currentPlayer.transform.parent);
+                mapManager.StartTransition(currentPlayer.transform.parent);
+            }
         } 
         else if (collision.CompareTag("MapTop"))
         {
@@ -249,11 +254,14 @@ public class BallController : MonoBehaviour
 
     IEnumerator GoalTransition()
     {
+        timer.SetPaused(true);
         audioManager.PlaySFX("Goal");
         rb2d.velocity = rb2d.velocity.normalized * .8f; // slows ball
         gameManager.PassLevel(false); // pass level but dont update UI now
         gameManager.SetLevelProgress(1f);
-        
+        mapManager.SpawnPresetsUntilGoal();
+        mapManager.RepositionFields();
+
         yield return new WaitForSeconds(2f);
         rb2d.simulated = false; // so the ball doesnt hit the map boundaries when doing the transition
         
@@ -274,6 +282,6 @@ public class BallController : MonoBehaviour
         gameManager.SetLevelProgress(0f);
         gameManager.SetLevelView(); // finally updates text UI with the levels
 
-        mapManager.RepositionField();
+        timer.SetPaused(false);
     }
 }
