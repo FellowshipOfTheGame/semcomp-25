@@ -48,6 +48,8 @@ public class GameOver : MonoBehaviour
 
         LoadMarmosset();
 
+        GameOverPointbar.Instance.LoadPointBar();
+
         highscore = (int)Mathf.Max(highscore, totalPoints);
 
         PlayerPrefs.SetInt("HighScore", highscore);
