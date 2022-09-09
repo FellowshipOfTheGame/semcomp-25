@@ -2,5 +2,4 @@ node_modules
 src/loaders/.semcomp25-pkey.json
 */logs
 */*.log
-
 /logs
