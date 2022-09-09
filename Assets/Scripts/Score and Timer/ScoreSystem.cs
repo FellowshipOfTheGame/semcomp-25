@@ -26,6 +26,12 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
+    public int GoalScoreAmount { get; set; }
+    public int PowerupScoreAmount { get; set; }
+    public int PassScoreAmount { get; set; }
+    public int WallhitScoreAmount { get; set; }
+
+
     [Header("UI")]
     [SerializeField] TextMeshProUGUI scoreTextUI;
 
@@ -47,25 +53,39 @@ public class ScoreSystem : MonoBehaviour
 
     private void Start()
     {
-        ScoreAmount = 0;    
+        ScoreAmount = 0;
+        GoalScoreAmount = 0;
+        PowerupScoreAmount = 0;
+        PassScoreAmount = 0;
+        WallhitScoreAmount = 0;
     }
 
     private void WallHitScored()
     {
         if (enableWallHitScore)
+        {
             ScoreAmount += wallHitScore;
+            WallhitScoreAmount += wallHitScore;
+
+        }
     }
 
     private void SuccessfulPassScored()
     {
         if (enableSuccessfulPassScore)
+        {
             ScoreAmount += successfulPassScore;
+            PassScoreAmount += successfulPassScore;
+        }
     }
 
     private void GoalScored()
     {
         if (enableGoalScore)
+        {
             ScoreAmount += goalScore;
+            GoalScoreAmount += goalScore;
+        }
     }
 
     private void UpdateScoreTextUI()
@@ -75,7 +95,18 @@ public class ScoreSystem : MonoBehaviour
         scoreTextUI.text = ScoreAmount.ToString();
     }
 
-    public void AddScore(int points){
+    public void AddPowerupScore(int points)
+    {
         ScoreAmount += points;
+        PowerupScoreAmount += points;
+    }
+
+    public void PrintScore()
+    {
+        Debug.Log("TOTAL: " + ScoreAmount + "");
+        Debug.Log("GOAL: " + GoalScoreAmount + "");
+        Debug.Log("PASS: " + PassScoreAmount + "");
+        Debug.Log("WALL: " + WallhitScoreAmount + "");
+        Debug.Log("POWERUP: " + PowerupScoreAmount + "");       
     }
 }

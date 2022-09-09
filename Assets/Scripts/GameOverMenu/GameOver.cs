@@ -9,9 +9,9 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TMP_Text _gameOverPointsView;
     [SerializeField] private TMP_Text _highScoreView;
     [SerializeField] private GameObject _menu;
-
     [SerializeField] private GameObject _marmosset;
 
+    private ScoreSystem _scoreSystem;
     private int highscore = 0;
 
     void Awake()
@@ -20,17 +20,13 @@ public class GameOver : MonoBehaviour
             Instance = this;
         else
             Destroy(this);
+
+        _scoreSystem = FindObjectOfType<ScoreSystem>();
     }
 
     private void Start()
     {
         highscore = PlayerPrefs.GetInt("HighScore", 0); // Antes disso, checar se é a primeira vez que o jogador está jogando?
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void LoadMarmosset()
@@ -46,18 +42,20 @@ public class GameOver : MonoBehaviour
 
     public void OnGameOver()
     {
-        int points = FindObjectOfType<ScoreSystem>().ScoreAmount;
+        int totalPoints = _scoreSystem.ScoreAmount;
+
+        //_scoreSystem.PrintScore();
 
         LoadMarmosset();
 
-        highscore = (int)Mathf.Max(highscore, points);
+        highscore = (int)Mathf.Max(highscore, totalPoints);
 
         PlayerPrefs.SetInt("HighScore", highscore);
 
         GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
         GameObject.FindObjectOfType<PlayerInputManager>().SetCanMove(false);
 
-        _gameOverPointsView.text = points + "";
+        _gameOverPointsView.text = totalPoints + "";
         _highScoreView.text = "Melhor Pontuação: " + highscore + "";
 
         _menu.SetActive(true);

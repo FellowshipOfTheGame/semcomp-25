@@ -8,6 +8,6 @@ public class ScoreCollectable : PowerUp
 
     public override void Collected(Collider2D col)
     {
-        Manager.AddScore(score);
+        Manager.PowerupScore(score);
     }
 }
