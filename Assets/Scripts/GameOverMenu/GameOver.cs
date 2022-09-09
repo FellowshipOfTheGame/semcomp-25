@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] private GameObject _marmosset;
 
     private int highscore = 0;
-    // Start is called before the first frame update
+
     void Awake()
     {
         if (Instance == null)
@@ -46,14 +46,20 @@ public class GameOver : MonoBehaviour
 
     public void OnGameOver()
     {
-        LoadMarmosset();
         int points = FindObjectOfType<ScoreSystem>().ScoreAmount;
+
+        LoadMarmosset();
+
         highscore = (int)Mathf.Max(highscore, points);
+
         PlayerPrefs.SetInt("HighScore", highscore);
+
         GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
         GameObject.FindObjectOfType<PlayerInputManager>().SetCanMove(false);
+
         _gameOverPointsView.text = points + "";
         _highScoreView.text = "Melhor Pontuação: " + highscore + "";
+
         _menu.SetActive(true);
     }
 }

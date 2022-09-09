@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 224572857}
   - component: {fileID: 224572856}
   m_Layer: 5
-  m_Name: Sad
+  m_Name: Sad_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -501,6 +501,7 @@ MonoBehaviour:
   _gameOverPointsView: {fileID: 1545798562}
   _highScoreView: {fileID: 2048163392}
   _menu: {fileID: 1558343634}
+  _marmosset: {fileID: 1869045445}
 --- !u!1 &859353037
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +968,7 @@ GameObject:
   - component: {fileID: 1241754661}
   - component: {fileID: 1241754660}
   m_Layer: 5
-  m_Name: Neutral
+  m_Name: Neutral_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1315,7 +1316,7 @@ GameObject:
   - component: {fileID: 1513297347}
   - component: {fileID: 1513297346}
   m_Layer: 5
-  m_Name: Happy
+  m_Name: Happy_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
