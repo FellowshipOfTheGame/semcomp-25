@@ -13,13 +13,6 @@ const sessionClient = redis.createClient({
     port: config.REDIS_PORT
 })
 
-// Redis Database 2 - Nonces Client
-const nonceClient = new IORedis({ 
-    db: 3, 
-    host: config.REDIS_HOST,
-    port: config.REDIS_PORT, 
-})
-
 // Redis Clients Logs
 const clientList = [ sessionClient, nonceClient ]
 
