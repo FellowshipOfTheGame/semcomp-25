@@ -21,15 +21,18 @@ const configEnv = require('./src/config')
 // Routes
 // const playerRoutes = require('./src/routes/players');
 const sessionRoutes = require('./src/routes/session');
+const matchRoutes = require('./src/routes/match')
 
-// app.set('trust proxy', true)
 const app = express()
+// app.set('trust proxy', true)
 // app.use(bodyParser.urlencoded({ extended: false }))
 // app.use(bodyParser.json())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'))
+// app.use(session.cookieLoader())
 app.use(session.sessionLoader())
+
 // app.use(cookieSession({
 //     name: 'gameSession',
 //     keys: ['key1', 'key2'],
@@ -69,6 +72,7 @@ app.use((req, res, next) => {
 app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
 // app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)
+app.use(`${configEnv.SERVER_PATH_PREFIX}/match/`, matchRoutes)
 
 //POST request to create a new task in todo list
 app.post("/create", (req, res) => {
