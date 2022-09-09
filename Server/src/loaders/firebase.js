@@ -56,5 +56,6 @@ const fbClient = new FirebaseClient()
 const db = fbClient.getFirebaseDatabase();
 
 module.exports = {
-    db
+    firebase,
+    db 
 }

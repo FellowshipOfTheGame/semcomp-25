@@ -1,4 +1,4 @@
-const { db } = require('../loaders/firebase')
+const { firebase, db } = require('../loaders/firebase')
 const configEnv = require("../config")
 
 class SchemaPlayer {
@@ -8,7 +8,11 @@ class SchemaPlayer {
     }
     
     async findOne(provider_id, provider) {
-        db.ref(provider + '/' + provider_id).get().then((snapshot) => {
+        
+        const pathTable = configEnv.PROJECT_ID + provider + '/' + provider_id
+
+        // find one user
+        db.ref(pathTable).get().then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
                 return snapshot.val();
@@ -23,7 +27,8 @@ class SchemaPlayer {
     }
 
     async create(Player) {
-       db.ref(Player.provider + '/' + Player.provider_id).set({
+       db.ref(Player.provider + '/' + Player.provider_id).push({
+            created_at: firebase.ServerValue.TIMESTAMP,
             first_name: Player.first_name,
             surname_name: Player.surname_name,
             email: Player.email,
