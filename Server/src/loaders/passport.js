@@ -5,7 +5,7 @@ let GoogleTokenStrategy =  require("passport-google-verify-token").Strategy;
 // let FacebookStrategy = require('passport-facebook').Strategy;
 
 const configEnv = require('../config')
-// const Player = require('../models/Player');
+const { Player } = require('../models/player');
 const PlayerController = require('../controllers/playerController');
 
 const { logger } = require('../config/logger');
@@ -13,18 +13,17 @@ const { logger } = require('../config/logger');
 module.exports = function (passport) {
 
     passport.serializeUser(function(player, done){
-        // done(null, {
-        //     id: player._id,
-        // });
-         // testin return the google profile
         done(null, player);
     });
  
     passport.deserializeUser(function(obj, done){
         // find user in firebase
-        // User.findById(obj.id, function(err,user){
-        //     done(err, user);    
-        // });
+        const tableName = configEnv.PROJECT_ID + '/player/' + obj.id 
+
+        Player.findOneById(tableName, function(err, player){
+            console.log("FOUND BEFORE")
+            done(err, player);    
+        });
         
         // testin return the google profile
         done(null, obj);

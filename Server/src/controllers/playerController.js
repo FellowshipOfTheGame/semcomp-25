@@ -15,7 +15,7 @@ module.exports = {
         }    
 
         try {
-            player = await Player.findOne(provider_id, provider);
+            player = await Player.findOneById(provider_id);
         } catch (err) {
             console.log("Fail")
             return cb(err, null);
@@ -23,15 +23,14 @@ module.exports = {
 
         if (player) {
                 console.log("Found player")
-        //     if (user.isBanned === false)
+            if (player.isBanned === false)
                  return cb(null, player);
-        //     else
-        //         return cb(null, null)
+             else
+                 return cb(null, null)
         }
 
         try {
             player = await Player.create({
-            //     created_at: new Date(),
                  provider: provider,
                  provider_id: provider_id,
                  email: parsedToken.email,

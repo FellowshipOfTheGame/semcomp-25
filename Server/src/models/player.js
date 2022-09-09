@@ -7,7 +7,7 @@ class SchemaPlayer {
         console.log('this function works...')
     }
     
-    async findOne(provider_id) {
+    async findOneById(provider_id) {
         const tableName = '/player/'
         const pathTable = configEnv.PROJECT_ID + tableName + provider_id
 
@@ -42,8 +42,9 @@ class SchemaPlayer {
             top_score_date: firebase.database.ServerValue.TIMESTAMP,
             is_banned: false
         });
+        
         return Player;
-        }
+    }
 
         async update() {
         db.ref('logs/info').set('something')
