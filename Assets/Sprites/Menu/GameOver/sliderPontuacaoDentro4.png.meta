@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 6515865564872453597
     second: sliderPontuacaoDentro4_0
+  - first:
+      213: 3102176149148551794
+    second: sliderPontuacaoDentro4_1
+  - first:
+      213: 8143532953376489370
+    second: sliderPontuacaoDentro4_13
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -98,9 +104,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 205
-        y: 410
-        width: 591
-        height: 83
+        y: 412
+        width: 45
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,6 +116,48 @@ TextureImporter:
       bones: []
       spriteID: ddd2c6e65310d6a50800000000000000
       internalID: 6515865564872453597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sliderPontuacaoDentro4_1
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 412
+        width: 498
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27a40b885c42d0b20800000000000000
+      internalID: 3102176149148551794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sliderPontuacaoDentro4_13
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 412
+        width: 45
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f71b62314a30170800000000000000
+      internalID: 8143532953376489370
       vertices: []
       indices: 
       edges: []

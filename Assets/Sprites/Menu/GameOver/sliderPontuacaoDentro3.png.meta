@@ -98,9 +98,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 205
-        y: 410
-        width: 591
-        height: 83
+        y: 412
+        width: 45
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,6 +110,48 @@ TextureImporter:
       bones: []
       spriteID: 84e1ad639f6f42990800000000000000
       internalID: -7411527536517439928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sliderPontuacaoDentro3_13
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 412
+        width: 45
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86c83937dee251d60800000000000000
+      internalID: 7860240322026245224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sliderPontuacaoDentro3_26
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 412
+        width: 498
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24f656c7fef1ef350800000000000000
+      internalID: 6052310062677192514
       vertices: []
       indices: 
       edges: []
