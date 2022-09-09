@@ -74,7 +74,9 @@ async function loginCallback(req, res) {
 //     })
 // }
 
+// https://medium.com/swlh/session-management-in-nodejs-using-redis-as-session-store-64186112aa9
 async function logout(req, res) { 
+    req.session.destroy
     req.logOut() 
     return res.json({ message: "ok" })
 }
