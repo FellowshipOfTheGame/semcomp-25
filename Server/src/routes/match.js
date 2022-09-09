@@ -11,4 +11,8 @@ routes.get('/', (req, res) => {
     res.status(200).send("Match alive!");
 })
 
+routes.get('/start', (req, res) => {
+    
+})
+
 module.exports = routes;

@@ -14,35 +14,25 @@ const sessionClient = redis.createClient({
     legacyMode: true
 })
 
-// Redis Database 2 - Nonces Client
-const nonceClient = new IORedis({ 
-    db: 3, 
-    host: config.REDIS_HOST,
-    port: config.REDIS_PORT, 
-})
-
 // Redis Clients Logs
-const clientList = [ sessionClient, nonceClient ]
+const clientList = [ sessionClient ]
 
-clientList.forEach(async client => {
-    client.on('connect', () => {
-        logger.info({
-            message: `at Redis[${client.options.db}]: Frequency connected!`
-        })
+client.on('connect', () => {
+    logger.info({
+        message: `at Redis[${client.options.db}]: Frequency connected!`
     })
-    
-    client.on('error', (err) => {
-        logger.error({
-            message: `at Redis[${client.options.db}]: ${err}`
-        })
-    })
-    await client.connect().catch(console.error)
 })
+
+client.on('error', (err) => {
+    logger.error({
+        message: `at Redis[${client.options.db}]: ${err}`
+    })
+})
+await client.connect().catch(console.error)
 
 // Module Exports
 module.exports = {
     sessionClient,
     sessionStore: new redisStore({ client: sessionClient, ttl: 3600 }),
-    nonceClient,
     session
 }
