@@ -43,6 +43,6 @@ clientList.forEach(async client => {
 // Module Exports
 module.exports = {
     sessionClient,
-    // sessionStore: new redisStore({ client: sessionClient, ttl: 3600 }),
-    sessionStore: new redisStore({ client: sessionClient})
+    sessionStore: new redisStore({ client: sessionClient, ttl: 3600 }),
+    session
 }
