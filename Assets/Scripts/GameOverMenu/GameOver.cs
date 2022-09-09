@@ -10,6 +10,8 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TMP_Text _highScoreView;
     [SerializeField] private GameObject _menu;
 
+    [SerializeField] private GameObject _marmosset;
+
     private int highscore = 0;
     // Start is called before the first frame update
     void Awake()
@@ -31,8 +33,20 @@ public class GameOver : MonoBehaviour
         
     }
 
+    private void LoadMarmosset()
+    {
+        // Deactivate all marmosset in the gameover menu
+        foreach (Transform marmosset in _marmosset.transform)
+            marmosset.gameObject.SetActive(false);
+
+        // Then, activate a random marmosset
+        int randomMarmossetIndex = Random.Range(0, _marmosset.transform.childCount);
+        _marmosset.transform.GetChild(randomMarmossetIndex).gameObject.SetActive(true);
+    }
+
     public void OnGameOver()
     {
+        LoadMarmosset();
         int points = FindObjectOfType<ScoreSystem>().ScoreAmount;
         highscore = (int)Mathf.Max(highscore, points);
         PlayerPrefs.SetInt("HighScore", highscore);
