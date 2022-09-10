@@ -15,7 +15,7 @@ public class ArrowUp : MonoBehaviour
     {
         Quaternion rot = transform.rotation;
         float angle = Mathf.Deg2Rad*rot.eulerAngles.z;
-        print(rot.eulerAngles.z);
+        //print(rot.eulerAngles.z);
         rotated = new Vector2(-(float)Math.Round(Mathf.Sin(angle),2), (float)Math.Round(Mathf.Cos(angle), 2));
 
         ballObj = GameObject.FindGameObjectWithTag("Ball");

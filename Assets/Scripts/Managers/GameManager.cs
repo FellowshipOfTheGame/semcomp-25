@@ -34,11 +34,11 @@ public class GameManager : MonoBehaviour
         float x = levelProgressSlider.value;
         if (x > p)
             x = 0;
-        const float speed = 0.005f;
+        const float speed = .7f;
         while (x <= p)
         {
-            x += speed;
-
+            x += Time.deltaTime * speed;
+            x = Mathf.Min(x, p);
             levelProgressSlider.value = x;
 
             yield return new WaitForEndOfFrame();

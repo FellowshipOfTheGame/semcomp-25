@@ -186,8 +186,7 @@ public class MapManager : MonoBehaviour
             allyBarsPassed = 1;
             totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
         }
-        else
-            gameManager.SetLevelProgress((float)allyBarsPassed / (totalPlayersInLevel+1));
+        gameManager.SetLevelProgress((float)allyBarsPassed / (totalPlayersInLevel+1));
     }
 
     public void StartTransition(Transform newPlayer)

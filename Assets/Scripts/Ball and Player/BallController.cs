@@ -264,7 +264,10 @@ public class BallController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         rb2d.simulated = false; // so the ball doesnt hit the map boundaries when doing the transition
-        
+
+        gameManager.SetLevelProgress(0f);
+        gameManager.SetLevelView(); // finally updates text UI with the levels
+
         GameObject nextPlayer = mapManager.GetFirstPlayerOfLevel(gameManager.Level);
         nextPlayer = nextPlayer.GetComponentInChildren<Ally>().gameObject;
         SetBallToPlayer(nextPlayer);
@@ -279,8 +282,6 @@ public class BallController : MonoBehaviour
         }
         
         rb2d.simulated = true;
-        gameManager.SetLevelProgress(0f);
-        gameManager.SetLevelView(); // finally updates text UI with the levels
 
         timer.SetPaused(false);
     }
