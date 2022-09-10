@@ -19,12 +19,11 @@ routes.get('/login/google-success', SessionMiddleware.isAuth, (req, res) => res.
 
 const configEnv = require('../config')
 
-routes.post('/login/auth', passport.authenticate('google-verify-token'), function (req, res) {
-  console.log("AAAAAAAAAAAAAAAAA") 
-  console.log(req.player) 
-    res.send(req.user? 200 : 401);
-  }
-);
+routes.post('/login', passport.authenticate('google-verify-token'), function (req, res) {
+  console.log("-----------")
+  console.log(req.user)
+  res.send(req.user? 200 : 401)
+});
 
 // routes.get('/facebook/login', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }))
 // routes.get('/facebook/login/callback', passport.authenticate('facebook', { failureRedirect: `${config.SERVER_PATH_PREFIX}/?auth=failed` }), SessionController.loginCallback)

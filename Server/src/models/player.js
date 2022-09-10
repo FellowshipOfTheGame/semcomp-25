@@ -28,7 +28,6 @@ class SchemaPlayer {
 
     async create(Player) {
         const pathTable = configEnv.PROJECT_ID + '/player/' + Player.provider_id
-        console.log(Player)
 
         db.ref(pathTable).set({
             created_at: firebase.database.ServerValue.TIMESTAMP,
@@ -42,12 +41,12 @@ class SchemaPlayer {
             top_score_date: firebase.database.ServerValue.TIMESTAMP,
             is_banned: false
         });
-        
+
         return Player;
     }
 
         async update() {
-        db.ref('logs/info').set('something')
+            db.ref('logs/info').set('something')
         }
 }
 

@@ -20,10 +20,10 @@ module.exports = function (passport) {
         // find user in firebase
         const tableName = configEnv.PROJECT_ID + '/player/' + obj.id 
 
-        Player.findOneById(tableName, function(err, player){
-            console.log("FOUND BEFORE")
-            done(err, player);    
-        });
+        // Player.findOneById(tableName, function(err, player){
+        //     console.log("FOUND BEFORE")
+        //     done(err, player);    
+        // });
         
         // testin return the google profile
         done(null, obj);
