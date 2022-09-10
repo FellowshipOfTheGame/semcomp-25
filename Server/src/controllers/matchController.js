@@ -8,7 +8,7 @@ async function index(req, res) {
 
 async function start(req, res) {
     const userId = parseInt(req.user.id);
-    const startedAt = new Date().toISOString();
+    const startedAt = new Date().getMilliseconds();
     
     sessionClient.multi()
         .set(`${userId}_match`, startedAt)
