@@ -20,9 +20,8 @@ routes.get('/login/google-success', SessionMiddleware.isAuth, (req, res) => res.
 const configEnv = require('../config')
 
 routes.post('/login', passport.authenticate('google-verify-token'), function (req, res) {
-  console.log("-----------")
   console.log(req.user)
-  res.send(req.user? 200 : 401)
+  return (req.user)? res.status(200).json(req.user) : res.status(404).json({ message: "user not found" });
 });
 
 // routes.get('/facebook/login', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }))

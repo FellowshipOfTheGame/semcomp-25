@@ -2,20 +2,14 @@
 const express = require('express');
 const routes = express.Router();
 
-const configEnv = require('../config')
-
 // Middlewares
 const SessionMiddleware = require('../middlewares/Session.middleware');
 
 // Controllers
-// const SessionController = require('../controllers/sessionController');
+const PlayerController = require('../controllers/playerController')
 
 // Routes
-routes.get('/login', passport.authenticate('google', { scope: ['profile', 'email'], access_type: 'online' }))
-
-// routes.get('/facebook/login', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }))
-
-// routes.get('/validate', SessionMiddleware.isAuth, (req, res) => res.json({ message: "ok" }))
+routes.get('/status', SessionMiddleware.isAuth, PlayerController.getInfoWithSession)
 
 // Export routes
 module.exports = routes;

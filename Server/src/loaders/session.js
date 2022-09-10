@@ -10,7 +10,7 @@ const sessionOpts = {
         secure: config.SESSION_SECURE, 
         httpOnly: config.SESSION_HTTP_ONLY, 
         sameSite: config.SESSION_SAME_SITE, 
-        maxAge: config.SESSION_MAX_AGE 
+        maxAge: 3600000 * 24 * 7
     },
     secret: config.COOKIE_SIGNATURE_KEY,
     resave: false,
