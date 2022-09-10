@@ -8,13 +8,14 @@ const configEnv = require('../config')
 
 // Middlewares
 const SessionMiddleware = require('../middlewares/Session.middleware');
-const redis = require('../loaders/redis');
 
-routes.get('/', SessionMiddleware.isAuth, (req, res) => {
+routes.use(SessionMiddleware.isAuth)
+
+routes.get('/', (req, res) => {
     res.status(200).send("Match alive!");
 })
 
-routes.post('/start', SessionMiddleware.isAuth, controller.start)
-routes.post('/finish', SessionMiddleware.isAuth, controller.finish)
+routes.post('/start', controller.start)
+routes.post('/finish', controller.finish)
 
 module.exports = routes;
