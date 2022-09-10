@@ -797,6 +797,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7491238729003831313}
     m_Modifications:
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5908293766306188998, guid: adf137174b526b94c8a95ced43f1d1b2, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8018843807902038624, guid: 010beef60cf17fa4b97188242ba201e3, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
     - target: {fileID: 7767148560556528034, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -1106,20 +1106,60 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b09f7ba08b3c66140bbad3fbfb524b1b, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 75a92a9e7d08b114bb96a17c642d47e4, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: c1cefaaf61009494cb0224dacf017e7d, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 197f908df48fd8b4698ed1e376dc21f2, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 11dd80de579be994992386a26b6f2ea8, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d171f3ffeaf3304cb27d9fae146bba5, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: b16ed3d47c6301e468c2a8dccb6c012c, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 63ac906c0b34cbe4bad5e170ebcf1b00, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: goalPresetSOList.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 84cc3bb7293d4b54a97859e00f123133, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[0].easy
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[1].easy
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[2].easy
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[3].easy
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[4].easy
@@ -1159,15 +1199,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[1].normal
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[2].normal
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[3].normal
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[4].normal
@@ -1204,6 +1244,50 @@ PrefabInstance:
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[12].normal
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[3].goalDifficulty
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[4].goalDifficulty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[5].goalDifficulty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[6].goalDifficulty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[7].goalDifficulty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[8].goalDifficulty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[9].goalDifficulty
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[10].goalDifficulty
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[11].goalDifficulty
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[12].goalDifficulty
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: levelProgression.Array.data[13].goalDifficulty
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950587, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: m_Name
