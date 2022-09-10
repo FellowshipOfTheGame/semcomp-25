@@ -12,7 +12,7 @@ class SchemaPlayer {
         const pathTable = configEnv.PROJECT_ID + tableName + provider_id
 
         // find one user
-        db.ref(pathTable).get().then((snapshot) => {
+        return db.ref(pathTable).get().then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
                 return snapshot.val();
