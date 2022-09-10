@@ -9799,3 +9799,5 @@ MonoBehaviour:
   ballFx: {fileID: 4583277373443672393}
   teleportDelay: 0.3
   barHorizontalMovement: {fileID: 0}
+  freezeDuration: 0.5
+  icePrefab: {fileID: 2780023716032817422, guid: 6c6209602dd84fd4f9a39335a3e6fe51, type: 3}

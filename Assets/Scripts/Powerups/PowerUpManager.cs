@@ -93,7 +93,23 @@ public class PowerUpManager : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator ColorAnimation(Color startColor, Color endColor)
+    private IEnumerator ColorAnimation(SpriteRenderer _sprite, Color startColor, Color endColor, float speed=0.02f)
+    {
+
+        float t = 0;
+        Color currColor;
+        do
+        {
+            currColor = Color.Lerp(startColor, endColor, t);
+            _sprite.color = currColor;
+            t += speed;
+            yield return new WaitForEndOfFrame();
+        } while (t <= 1f);
+
+        _sprite.color = endColor;
+    }
+
+        private IEnumerator ColorAnimation(Color startColor, Color endColor)
     {
 
         float t = 0;
@@ -164,6 +180,9 @@ public class PowerUpManager : MonoBehaviour
 
     }
 
+
+    // Portal Teleport
+
     private bool canTeleport = true;
     public void Teleport(Vector3 pos,Vector2 vel)
     {
@@ -181,4 +200,30 @@ public class PowerUpManager : MonoBehaviour
         yield return new WaitForSeconds(teleportDelay);
         canTeleport = true;
     }
+    // Ice (freeze ball)
+    [SerializeField] float freezeDuration = 1f;
+    [SerializeField] GameObject icePrefab;
+
+    public void IceBall(GameObject ball)
+    {
+        Vector3 pos = ball.transform.position;
+        Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+        GameObject fx = Instantiate(icePrefab, pos, Quaternion.identity,ball.transform);
+        //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
+        StartCoroutine(FreezeDelayed(rb, fx));
+    }
+
+    private IEnumerator FreezeDelayed(Rigidbody2D body,GameObject fx)
+    {
+        Vector2 initialVel = body.velocity;
+        body.velocity =initialVel.normalized*10f;
+        yield return new WaitForSeconds(freezeDuration);
+        body.velocity = initialVel;
+        yield return StartCoroutine(ColorAnimation(fx.transform.GetChild(0).GetComponent<SpriteRenderer>(),
+            new Color(1f, 1f, 1f, 1f),
+            new Color(1f, 1f, 1f, 0f),
+            0.1f));
+        Destroy(fx);
+    }
+
 }
