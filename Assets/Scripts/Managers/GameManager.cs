@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject hud;
     [SerializeField] PlayerInputManager inputManager;
     [SerializeField] BallController ball;
+    [SerializeField] float startTime;
     int level = 0;
     public int Level => level;
 
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
         hud.SetActive(false);
         inputManager.SetCanMove(false);
         ball.SetCanAim(false);
-        yield return new WaitForSecondsRealtime(1.4f);
+        yield return new WaitForSecondsRealtime(startTime);
         ball.SetCanAim(true);
         inputManager.SetCanMove(true);
         hud.SetActive(true);
