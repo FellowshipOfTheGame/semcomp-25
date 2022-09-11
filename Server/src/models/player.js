@@ -3,16 +3,28 @@ const configEnv = require("../config")
 
 class SchemaPlayer {
 
-    describe() {
-        console.log('this function works...')
+    async findAll() {
+        const pathTable = configEnv.PROJECT_ID + '/score/'
+        const ScoreTable = db.ref(pathTable)
+        let topUserScoreListRef = ScoreTable.orderByChild('top_score')
+        return topUserScoreListRef.get().then((users) => {
+            if(users.exists()) {
+                return users;
+            } else {
+                console.log("No data available");
+                return null;
+            }
+            
+         }).catch((error) => {
+             console.error(error);
+         });
     }
-    
+
     async findOneById(provider_id) {
-        const tableName = '/player/'
-        const pathTable = configEnv.PROJECT_ID + tableName + provider_id
+        const playerTable = configEnv.PROJECT_ID + '/player/' + provider_id
 
         // find one user
-        db.ref(pathTable).get().then((snapshot) => {
+        return db.ref(playerTable).get().then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
                 return snapshot.val();
