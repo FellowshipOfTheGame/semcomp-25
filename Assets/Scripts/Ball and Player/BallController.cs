@@ -40,7 +40,7 @@ public class BallController : MonoBehaviour
     private PowerUpManager powerUpManager;
     private Camera camera1;
     private Timer timer;
-    
+    bool firstTime = true;
     private void Awake()
     {
         powerUpManager = GetComponent<PowerUpManager>();
@@ -63,6 +63,11 @@ public class BallController : MonoBehaviour
         line.enabled = false;
 
     }
+    private bool canAim=true;
+    public void SetCanAim(bool val)
+    {
+        canAim = val;
+    }
     // Update is called once per frame
     private void Update()
     {
@@ -75,7 +80,7 @@ public class BallController : MonoBehaviour
             Vector3 mousePosition = camera1!.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && canAim)
             {
                 // mouse clicado próximo ao jogador
                 if (Vector2.SqrMagnitude(mousePosition - transform.position) < playerRadius*playerRadius)
@@ -88,7 +93,7 @@ public class BallController : MonoBehaviour
                 }
             }
 
-            if (mousePressed)
+            if (mousePressed )
             {
                 // começa a mirar
                 line.enabled = true;
@@ -170,7 +175,9 @@ public class BallController : MonoBehaviour
     {
         audioManager.PlaySFX("PassAlly");
         currentPlayer = player;
-        currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
+        if (firstTime) firstTime = false;
+        else
+            currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;

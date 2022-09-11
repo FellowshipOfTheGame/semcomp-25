@@ -23,6 +23,7 @@ public class MapManager : MonoBehaviour
     
     /* Level Control  */
     private int allyBarsPassed = 0;
+    public int AllyBarsPassed => allyBarsPassed;
     private int totalPlayersInLevel = 0;
     private List<GameObject> goalPositions = new List<GameObject>();
     private List<GameObject> firstPlayerInLevels = new List<GameObject>();

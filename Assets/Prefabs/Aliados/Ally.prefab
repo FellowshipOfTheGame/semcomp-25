@@ -5030,7 +5030,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2961449166431191065}
-  selected: 0
 --- !u!1001 &1584899899001466966
 PrefabInstance:
   m_ObjectHideFlags: 0

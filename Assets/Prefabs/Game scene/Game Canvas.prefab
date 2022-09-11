@@ -278,7 +278,7 @@ RectTransform:
   - {fileID: 1623517440577402622}
   - {fileID: 7437810607848706137}
   m_Father: {fileID: 6033588312208517850}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -367,7 +367,7 @@ RectTransform:
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 6033588312208517850}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1081,7 +1081,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6033588312208517850}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1213,11 +1213,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6033588313056245448}
-  - {fileID: 6033588311063274646}
-  - {fileID: 6033588312139851952}
   - {fileID: 6033588313025798826}
   - {fileID: 7397509361369081443}
   - {fileID: 1460536027237414237}
+  - {fileID: 6033588312139851952}
+  - {fileID: 6033588311063274646}
   m_Father: {fileID: 6033588312376128367}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1904,7 +1904,7 @@ RectTransform:
   - {fileID: 6033588313007571864}
   - {fileID: 6033588312415676648}
   m_Father: {fileID: 6033588312208517850}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1936,7 +1936,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033588313056245447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1945,8 +1945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0012207031, y: 811.22253}
-  m_SizeDelta: {x: -0.83, y: -1622.435}
+  m_AnchoredPosition: {x: -0.0012207031, y: 811.2227}
+  m_SizeDelta: {x: -0.830122, y: -1622.4353}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6033588313056245450
 CanvasRenderer:
@@ -2241,7 +2241,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6033588312208517850}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2325,3 +2325,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerUpViewPrefab: {fileID: 2575983224922869996, guid: 0b6a64ee0e507944db752a9046b6ff51, type: 3}
+  lifeView: {fileID: 0}
