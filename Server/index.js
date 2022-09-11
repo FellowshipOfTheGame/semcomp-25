@@ -19,7 +19,7 @@ require('./src/loaders/passport')(passport)
 const configEnv = require('./src/config')
 
 // Routes
-// const playerRoutes = require('./src/routes/players');
+const playerRoutes = require('./src/routes/players');
 const sessionRoutes = require('./src/routes/session');
 const matchRoutes = require('./src/routes/match')
 
@@ -70,7 +70,7 @@ app.use((req, res, next) => {
 // Routes Configurations
   
 app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
-// app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
+app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/match/`, matchRoutes)
 

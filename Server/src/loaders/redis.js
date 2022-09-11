@@ -8,20 +8,12 @@ const config = require("../config")
 
 // Redis Database 1 - Sessions Storages
 const sessionClient = redis.createClient({
-    db: 3,
+    db: 1,
     host: config.REDIS_HOST,
     port: config.REDIS_PORT,
     legacyMode: true,
 })
 
-// try {
-//     await sessionClient.connect()
-// } catch {
-//     logger.error({
-//         message: `at Redis[${client.options.db}]: ${err}`
-//     })
-// }
-    
 // Redis Clients Logs
 const clientList = [ sessionClient ]
 

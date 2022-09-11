@@ -3,16 +3,28 @@ const configEnv = require("../config")
 
 class SchemaPlayer {
 
-    describe() {
-        console.log('this function works...')
+    async findAll() {
+        const pathTable = configEnv.PROJECT_ID + '/player/'
+        const PlayerTable = db.ref(pathTable)
+
+        return PlayerTable.get().then((users) => {
+            if(users.exists()) {
+                return users;
+            } else {
+                console.log("No data available");
+                return null;
+            }
+            
+         }).catch((error) => {
+             console.error(error);
+         });
     }
-    
+
     async findOneById(provider_id) {
-        const tableName = '/player/'
-        const pathTable = configEnv.PROJECT_ID + tableName + provider_id
+        const playerTable = configEnv.PROJECT_ID + '/player/' + provider_id
 
         // find one user
-        db.ref(pathTable).get().then((snapshot) => {
+        return db.ref(playerTable).get().then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
                 return snapshot.val();
@@ -28,7 +40,6 @@ class SchemaPlayer {
 
     async create(Player) {
         const pathTable = configEnv.PROJECT_ID + '/player/' + Player.provider_id
-        console.log(Player)
 
         db.ref(pathTable).set({
             created_at: firebase.database.ServerValue.TIMESTAMP,
@@ -38,19 +49,66 @@ class SchemaPlayer {
             provider: Player.provider, 
             provider_id: Player.provider_id,
             games_count: 0,
-            top_score: 0,
-            top_score_date: firebase.database.ServerValue.TIMESTAMP,
             is_banned: false
         });
-        
+
         return Player;
     }
+}
 
-        async update() {
-        db.ref('logs/info').set('something')
-        }
+class SchemaScore {
+
+    async findAll() {
+        const pathTable = configEnv.PROJECT_ID + '/score/'
+        const ScoreTable = db.ref(pathTable)
+        let topUserScoreListRef = ScoreTable.orderByChild('top_score')
+
+        return topUserScoreListRef.get().then((scores) => {
+            if(scores.exists()) {
+                return scores;
+            } else {
+                console.log("No data available");
+                return null;
+            }
+            
+         }).catch((error) => {
+             console.error(error);
+         });
+    }
+
+    async findOneById(provider_id) {
+        const playerTable = configEnv.PROJECT_ID + '/score/' + provider_id
+
+        // find one user
+        return db.ref(playerTable).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                return snapshot.val();
+            } else {
+                console.log("No data available");
+                return null;
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+          
+    }
+
+    createOrUpdate(Player) {
+        const pathTable = configEnv.PROJECT_ID + '/score/' + Player.provider_id
+
+        db.ref(pathTable).set({
+            top_score: Player.top_score,
+            top_score_date: firebase.database.ServerValue.TIMESTAMP,
+        }).catch((error) => {
+            console.error(error);
+        });
+
+        return Player
+    }
 }
 
 module.exports = {
-    Player: new SchemaPlayer()
+    Player: new SchemaPlayer(),
+    Score: new SchemaScore()
 }
