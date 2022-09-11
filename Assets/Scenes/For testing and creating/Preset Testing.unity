@@ -746,6 +746,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1946312413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3423364103515743417, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
+  m_PrefabInstance: {fileID: 6033588311742225504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b375ecee75c8dd4cb3a53d9a075d5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2015638665 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6033588312415676649, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
@@ -931,6 +942,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3175433285518557893, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
+      propertyPath: powerUpHud
+      value: 
+      objectReference: {fileID: 1946312413}
     - target: {fileID: 3175433285518557893, guid: cffb32ebc8d2729439621fc51949ceb0, type: 3}
       propertyPath: timeManager
       value: 
