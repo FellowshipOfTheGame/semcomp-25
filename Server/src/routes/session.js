@@ -19,7 +19,7 @@ routes.get('/login/google-success', SessionMiddleware.isAuth, (req, res) => res.
 
 const configEnv = require('../config')
 
-routes.post('/login', passport.authenticate('google-verify-token'), function (req, res) {
+routes.post('/login', (req, res, next) => { console.log(req.headers); next() }, passport.authenticate('google-verify-token'), function (req, res) {
   console.log(req.user)
   return (req.user)? res.status(200).json(req.user) : res.status(404).json({ message: "user not found" });
 });
