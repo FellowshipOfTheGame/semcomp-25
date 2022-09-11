@@ -1,7 +1,7 @@
 const createHmac = require('create-hmac')
 
 // Models
-const { Player } = require('../models/player');
+const { Player, Score } = require('../models/player');
 
 // Config
 const configEnv = require("../config")
@@ -39,6 +39,9 @@ module.exports = {
                  first_name: parsedToken.given_name,
                  surname_name: parsedToken.family_name
             });
+
+            Score.createOrUpdate({ provider_id: player.provider_id, top_score: 0 })
+
         } catch (err) {
             console.log("Error create user")
             console.log(err)
@@ -71,6 +74,7 @@ module.exports = {
 
         try {
             user = await Player.findOneById(req.user.provider_id);
+            score = await Score.findOneById(req.user.provider_id);
 
         } catch (err) {
             logger.error({
@@ -84,8 +88,8 @@ module.exports = {
                 message: "ok", 
                 name: req.user.first_name + ' ' + req.user.surname_name,
                 game_count: user.games_count,
-                top_score: user.top_score,
-                top_score_date: user.top_score_date,
+                top_score: score.top_score,
+                top_score_date: score.top_score_date,
                 sign: ""
             }
             
@@ -100,7 +104,7 @@ module.exports = {
             return res.status(400).json({ message: "invalid user session" })
         
         try {
-            var allPlayers = await Player.findAll()
+            var allPlayers = await Score.findAll()
 
         } catch (err) {
             logger.error({
