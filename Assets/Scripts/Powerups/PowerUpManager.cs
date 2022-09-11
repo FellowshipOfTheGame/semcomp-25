@@ -18,6 +18,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private Timer timeManager;
     [SerializeField] private GameObject ballFx;
     [SerializeField] private float teleportDelay;
+    [SerializeField] private PowerUpHud powerUpHud;
     private int lives;  // number of lives of the player
     private bool isInvisible;
 
@@ -42,8 +43,15 @@ public class PowerUpManager : MonoBehaviour
         initialBallRadius = this.GetComponent<CircleCollider2D>().radius;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    public void SetPowerUpHud(Sprite sprite, float duration)
+    {
+        powerUpHud.CreateTimer(sprite, duration);
+    }
 
-
+    public void SetLifePowerUpHud(Sprite sprite)
+    {
+        powerUpHud.SetLifeView(sprite, lives);
+    }
     public void AddLife(int n)
     {
         lives += n;
@@ -51,6 +59,7 @@ public class PowerUpManager : MonoBehaviour
     public void LoseLife()
     {
         lives--;
+        powerUpHud.SetLifeView(lives);
     }
 
     public int GetNumberLives()
