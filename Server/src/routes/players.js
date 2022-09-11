@@ -8,7 +8,7 @@ const SessionMiddleware = require('../middlewares/Session.middleware');
 // Controllers
 const PlayerController = require('../controllers/playerController')
 
-// Routes
+// Routes 
 routes.get('/status', SessionMiddleware.isAuth, PlayerController.getInfoWithSession)
 routes.get('/raking', SessionMiddleware.isAuth, PlayerController.getRanking);
 

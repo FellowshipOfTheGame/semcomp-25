@@ -24,7 +24,7 @@ module.exports = {
 
         if (player) {
                 console.log("Found player")
-            if (player.isBanned === false)
+            if (player.is_banned === false)
                  return cb(null, player);
              else
                  return cb(null, null)
