@@ -30,8 +30,10 @@ public class BallController : MonoBehaviour
     /* Goal event */
     public delegate void GoalScored();
     public static event GoalScored OnGoalScored;
-    
+
     // cached references
+    [SerializeField] private SpriteRenderer ballSprite;
+    [SerializeField] private SpriteRenderer ghostSprite;
     private Rigidbody2D rb2d;
     private MapManager mapManager;
     private GameManager gameManager;
@@ -67,6 +69,22 @@ public class BallController : MonoBehaviour
     public void SetCanAim(bool val)
     {
         canAim = val;
+    }
+    float t = 0;
+    float angle;
+    float curr;
+    private void RotateBall()
+    {
+        Vector2 v = rb2d.velocity;
+         angle = 360-Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg;
+         curr = transform.rotation.eulerAngles.z;
+        if (t>=1f && Mathf.Abs(curr-angle)>0.01f)
+        {
+            t = 0;
+        }
+        angle = Mathf.LerpAngle(curr, angle, t);
+        t += 0.02f;
+        transform.eulerAngles=new Vector3(0,0,angle);
     }
     // Update is called once per frame
     private void Update()
@@ -120,7 +138,8 @@ public class BallController : MonoBehaviour
                     currentPlayer.GetComponent<Ally>().Idle();
                 }
             }
-        }  
+        }
+        RotateBall();
     }
 
     private float GetForceLevel(Vector2 from, Vector2 to)
@@ -163,7 +182,8 @@ public class BallController : MonoBehaviour
         var fx = Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
         fx.SetActive(true);
         rb2d.bodyType = RigidbodyType2D.Static;
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        ballSprite.enabled = false;
+        ghostSprite.enabled = false;
         mapManager.SetBallFx(false);
         timer.SetPaused(true);
         StartCoroutine(GameOver());

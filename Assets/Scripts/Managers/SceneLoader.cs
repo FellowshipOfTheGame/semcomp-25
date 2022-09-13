@@ -9,7 +9,18 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
-    
+
+    private IEnumerator LoadSceneDelayed(float t)
+    {
+        yield return new WaitForSeconds(t);
+        SceneManager.LoadScene("Game");
+
+    }
+    public void LoadGameDelayed(float delay)
+    {
+        StartCoroutine(LoadSceneDelayed(delay));
+    }
+
     public void QuitGame(){
         Application.Quit();
     }

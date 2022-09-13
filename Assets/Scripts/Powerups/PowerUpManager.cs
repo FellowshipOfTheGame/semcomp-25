@@ -19,6 +19,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private GameObject ballFx;
     [SerializeField] private float teleportDelay;
     [SerializeField] private PowerUpHud powerUpHud;
+    [SerializeField] private SpriteRenderer ghostSprite;
     private int lives;  // number of lives of the player
     private bool isInvisible;
 
@@ -75,21 +76,21 @@ public class PowerUpManager : MonoBehaviour
     // Turns the ball invisible to enemy collision
     public void ChangeTemporarilyVisibility(float invisibilityTime)
     {
-        coroutine = ChangeVisibilityAndWait(invisibilityTime);
+        coroutine = GhostBallAnim(invisibilityTime);
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator ChangeVisibilityAndWait(float invisibilityTime)
+    private IEnumerator GhostBallAnim(float invisibilityTime)
     {
-        Color invisibleColor = new Color(1f, 1f, 1f, 0.2f);
-        Color oldColor = spriteRenderer.color;
+        Color oldColor = new Color(1f, 1f, 1f, 0);
+        Color newColor = new Color(1f,1f,1f,1f);
         isInvisible = true; 
 
         ballFx.SetActive(false);
 
-         yield return StartCoroutine(ColorAnimation(oldColor, invisibleColor)); 
+         yield return StartCoroutine(ColorAnimation(ghostSprite, oldColor, newColor)); 
         yield return new WaitForSeconds(invisibilityTime);
-        yield return StartCoroutine(ColorAnimation(invisibleColor, oldColor));
+        yield return StartCoroutine(ColorAnimation(ghostSprite,newColor, oldColor));
 
 
         ballFx.SetActive(true);
