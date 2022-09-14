@@ -9,10 +9,11 @@ public class AuthManager : MonoBehaviour
 {
     private GoogleSignInConfiguration configuration;
     private const string WebClientID = "560143319104-d5bakq1kpie2f25cq1rkfncig5fkajsu.apps.googleusercontent.com";
-    private const string ServerURL = "http://192.168.0.122:3000";
+    // private const string ServerURL = "http://192.168.0.122:3000";
 
     [SerializeField] private GameObject signInButton, signOutButton;
     [SerializeField] private TextMeshProUGUI idTokenText, sessionText, responseText;
+    [SerializeField] private TMP_InputField serverURLInputField;
 
     private void Awake()
     {
@@ -20,15 +21,27 @@ public class AuthManager : MonoBehaviour
         {
             WebClientId = WebClientID,
             RequestIdToken = true,
+            RequestEmail = true,
             UseGameSignIn = false
         };
 
-        signInButton.SetActive(string.IsNullOrEmpty(PlayerPrefs.GetString("gameSession")));
-        signOutButton.SetActive(!string.IsNullOrEmpty(PlayerPrefs.GetString("gameSession")));
+        if (string.IsNullOrEmpty(PlayerPrefs.GetString("gameSession")))
+        {
+            signInButton.SetActive(true);
+            signOutButton.SetActive(false);
+        }
+        else
+        {
+            sessionText.text = PlayerPrefs.GetString("gameSession");
+            signInButton.SetActive(false);
+            signOutButton.SetActive(true);
+        }
     }
 
     public void SignIn()
     {
+        if (string.IsNullOrEmpty(serverURLInputField.text)) return;
+        
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
@@ -52,29 +65,35 @@ public class AuthManager : MonoBehaviour
     
     private IEnumerator SendLogin(string key, string value)
     {
-        var req = UnityWebRequest.Post($"{ServerURL}/session/login", "");
+        var req = UnityWebRequest.Post($"{serverURLInputField.text}/session/login", "");
         req.SetRequestHeader(key, value);
         yield return req.SendWebRequest();
         responseText.text = req.responseCode.ToString();
 
         if (req.result == UnityWebRequest.Result.Success)
         {
-            PlayerPrefs.SetString("gameSession", req.GetResponseHeader("gameSession"));
+            foreach (var h in req.GetResponseHeaders())
+            {
+                Debug.Log($"{h.Key}: {h.Value}");
+            }
+            PlayerPrefs.SetString("gameSession", req.GetResponseHeader("Set-Cookie"));
             sessionText.text = PlayerPrefs.GetString("gameSession");
             signInButton.SetActive(false);
+            signOutButton.SetActive(true);
         }
     }
 
     public void SignOut()
     {
+        if (string.IsNullOrEmpty(serverURLInputField.text)) return;
         if (string.IsNullOrEmpty(PlayerPrefs.GetString("gameSession"))) return;
         GoogleSignIn.DefaultInstance.SignOut();
         StartCoroutine(SendSignOut());
     }
     
     private IEnumerator SendSignOut() {
-        var req = UnityWebRequest.Get($"{ServerURL}/session/logout");
-        req.SetRequestHeader("gameSession", PlayerPrefs.GetString("gameSession"));
+        var req = UnityWebRequest.Get($"{serverURLInputField.text}/session/logout");
+        req.SetRequestHeader("Set-Cookie", PlayerPrefs.GetString("gameSession"));
         yield return req.SendWebRequest();
         responseText.text = req.responseCode.ToString();
 
@@ -82,6 +101,7 @@ public class AuthManager : MonoBehaviour
         {
             PlayerPrefs.DeleteKey("gameSession");
             sessionText.text = "";
+            signOutButton.SetActive(false);
             signInButton.SetActive(true);
         }
     }
