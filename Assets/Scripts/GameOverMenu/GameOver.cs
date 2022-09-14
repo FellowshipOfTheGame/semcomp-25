@@ -18,9 +18,6 @@ public class GameOver : MonoBehaviour
     private ScoreSystem _scoreSystem;
     private int highscore = 0;
 
-    private const short HAPPY = 0;
-    private const short NEUTRAL = 1;
-    private const short SAD = 2;
 
     void Awake()
     {
@@ -38,27 +35,28 @@ public class GameOver : MonoBehaviour
         _currentMarmoset = _happyMarmossets.transform.GetChild(0).gameObject;
     }
 
-    private void LoadMarmosset(int scoreState)
+    private void LoadMarmosset(int score)
     {
         int randomMarmossetIndex;
 
         _currentMarmoset.SetActive(false);
 
-        switch(scoreState)
+        if (score < highscore * 0.3)
         {
-            case HAPPY:
-                randomMarmossetIndex = Random.Range(0, _happyMarmossets.transform.childCount);
-                _currentMarmoset = _happyMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
-                break;
-            case NEUTRAL:
-                randomMarmossetIndex = Random.Range(0, _neutralMarmossets.transform.childCount);
-                _currentMarmoset = _neutralMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
-                break;
-            case SAD:
-                randomMarmossetIndex = Random.Range(0, _sadMarmossets.transform.childCount);
-                _currentMarmoset = _sadMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
-                break;
+            randomMarmossetIndex = Random.Range(0, _sadMarmossets.transform.childCount);
+            _currentMarmoset = _sadMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
         }
+        else if (score > highscore)
+        {
+            randomMarmossetIndex = Random.Range(0, _happyMarmossets.transform.childCount);
+            _currentMarmoset = _happyMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
+        }
+        else
+        {
+            randomMarmossetIndex = Random.Range(0, _neutralMarmossets.transform.childCount);
+            _currentMarmoset = _neutralMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
+        }
+
         _currentMarmoset.SetActive(true);
     }
 
@@ -66,16 +64,9 @@ public class GameOver : MonoBehaviour
     {
         int totalPoints = _scoreSystem.ScoreAmount;
 
-        //_scoreSystem.PrintScore();
+        LoadMarmosset(totalPoints);
 
         GameOverPointbar.Instance.LoadPointBar();
-
-        if (totalPoints < highscore * 0.3)
-            LoadMarmosset(SAD);
-        else if (totalPoints > highscore)
-            LoadMarmosset(HAPPY);
-        else
-            LoadMarmosset(NEUTRAL);
 
         highscore = (int)Mathf.Max(highscore, totalPoints);
 
