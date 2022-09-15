@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour
@@ -60,24 +58,10 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            
-            // Get all colliders under click
-            var size = Physics2D.OverlapPointNonAlloc(mousePos, results);
-            for (int i = 0; i < size; i++)
-            {
-                // If collided with the bar
-                if (results[i].CompareTag("Player"))
-                {
-                    PlayerController controller = results[i].transform.parent.gameObject.GetComponent<PlayerController>();
-                    if (controller.Selected)
-                    {
-                        float _x = mousePos.x;
-                        controller.SetTarget(_x);
-                    }
 
-                    break;
-                }
+            if (isMoving)
+            {
+                lastSelected.SetTarget(mousePos.x);
             }
         }
     }
