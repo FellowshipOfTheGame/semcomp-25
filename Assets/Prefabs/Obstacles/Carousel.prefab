@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: c7ab4dee074836a4eb94ae1c48a5fa87, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -202,13 +202,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: chuteira
       objectReference: {fileID: 0}
+    - target: {fileID: 6169541960961535242, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.34
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
       propertyPath: m_LocalPosition.y

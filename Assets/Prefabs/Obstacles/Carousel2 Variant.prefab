@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4343110162730632650, guid: 4cfee962cf29bf54eb73d841ba412954, type: 3}
+      propertyPath: m_Size.y
+      value: 2.855
+      objectReference: {fileID: 0}
+    - target: {fileID: 4343110162730632650, guid: 4cfee962cf29bf54eb73d841ba412954, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad021cbe230cf344a8acd171d57cb093, type: 3}
+    - target: {fileID: 4343110162730632650, guid: 4cfee962cf29bf54eb73d841ba412954, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4343110162730632650, guid: 4cfee962cf29bf54eb73d841ba412954, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4343110164103610357, guid: 4cfee962cf29bf54eb73d841ba412954, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4343110164103610358, guid: 4cfee962cf29bf54eb73d841ba412954, type: 3}
       propertyPath: m_Name
-      value: Carousel2
+      value: Carousel2 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cfee962cf29bf54eb73d841ba412954, type: 3}
@@ -73,13 +89,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: chuteira (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6169541960961535242, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
       propertyPath: m_LocalScale.y
@@ -87,7 +103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.38
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 6169541960961535243, guid: 2d20e69e23efe5543a02fb2a984b68ae, type: 3}
       propertyPath: m_LocalPosition.y
