@@ -9,7 +9,7 @@ public class BallController : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float offsetFromPlayer;
     [SerializeField] private float throwSpeed;
-    [SerializeField] private float playerRadius = 0.5f;
+    [SerializeField] private float ballRadius = 0.5f;
     [SerializeField] private float maxDistance = 2f;
     
 
@@ -78,13 +78,12 @@ public class BallController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // mouse clicado próximo ao jogador
-                if (Vector2.SqrMagnitude(mousePosition - transform.position) < playerRadius*playerRadius)
+                if (Vector2.SqrMagnitude(mousePosition - transform.position) < ballRadius*ballRadius)
                 {
                     mousePressed = true;
                     playerManager.SetCanMove(false);
 
                     currentPlayer.GetComponent<Ally>().Pull();
-                    currentPlayer.transform.parent.gameObject.GetComponent<PlayerController>().SetSelected(false);
                 }
             }
 
@@ -156,7 +155,6 @@ public class BallController : MonoBehaviour
         if (gameOverSet)
             return;
         var fx = Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
-        fx.SetActive(true);
         rb2d.bodyType = RigidbodyType2D.Static;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         mapManager.SetBallFx(false);

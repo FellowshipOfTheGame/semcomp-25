@@ -9780,7 +9780,7 @@ MonoBehaviour:
   ballHitPrefab: {fileID: 3249267262933426012, guid: d97dff8e50e8c5848bb532744e27c7fe, type: 3}
   offsetFromPlayer: 0.8
   throwSpeed: 10
-  playerRadius: 0.5
+  ballRadius: 0.7
   maxDistance: 1.2
 --- !u!114 &3698216701625935198
 MonoBehaviour:
