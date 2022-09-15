@@ -10,19 +10,39 @@ public class GameOverPointbar : MonoBehaviour
     [SerializeField] private GameObject _pass;
     [SerializeField] private GameObject _wallhit;
     [SerializeField] private GameObject _powerup;
+
     [SerializeField] private TMP_Text _lastIndicatorPoints;
+
+    [SerializeField] private RectTransform _goalBody_rt;
+    [SerializeField] private RectTransform _passBody_rt;
+    [SerializeField] private RectTransform _whBody_rt;
+    [SerializeField] private RectTransform _pwBody_rt;
+
+    [SerializeField] private RectTransform _goalIndicator_rt;
+    [SerializeField] private RectTransform _passIndicator_rt;
+    [SerializeField] private RectTransform _whIndicator_rt;
 
     public static GameOverPointbar Instance;
 
-    private const int barBodyMaxWidth = 498;
-    private const int barHeight = 79;
+    private const float BAR_BODY_MAX_WIDTH = 575;
+    private const float BAR_HEIGHT = 79;
+    private const float HEAD_TAIL_WIDTH = 45;
+    private const float HEAD_TAIL_PERCENTAGE = HEAD_TAIL_WIDTH / BAR_BODY_MAX_WIDTH;
 
-    private RectTransform _goal_rt;
-    private RectTransform _pass_rt;
-    private RectTransform _wh_rt;
-    private RectTransform _pw_rt;
+    private int _totalScore;
+    private int _highscore;
+    private int _goalScore;
+    private int _passScore;
+    private int _wallhitScore;
+    private int _pwScore;
 
-    private double _firstPos;
+    private float _goalRatio;
+    private float _passRatio;
+    private float _wallRatio;
+    private float _powerUpRatio;
+
+
+    private float _firstPos;
 
     private ScoreSystem _scoreSystem;
 
@@ -34,46 +54,191 @@ public class GameOverPointbar : MonoBehaviour
             Destroy(this);
 
         _scoreSystem = FindObjectOfType<ScoreSystem>();
-        _goal_rt = _goal.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<RectTransform>();
-        _pass_rt = _pass.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<RectTransform>();
-        _wh_rt = _wallhit.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<RectTransform>();
-        _pw_rt = _powerup.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<RectTransform>();
     }
     void Start()
     {
         
     }
 
-    private void ResetBodyRect()
+    private void ActivateAllBars()
     {
-        _goal_rt.sizeDelta = new Vector2(barBodyMaxWidth, barHeight);
-        _goal_rt.anchoredPosition = new Vector2(0, 0);
-        _pass_rt.sizeDelta = new Vector2(barBodyMaxWidth, barHeight);
-        _pass_rt.anchoredPosition = new Vector2(0, 0);
-        _wh_rt.sizeDelta = new Vector2(barBodyMaxWidth, barHeight);
-        _wh_rt.anchoredPosition = new Vector2(0, 0);
-        _pw_rt.sizeDelta = new Vector2(barBodyMaxWidth, barHeight);
-        _pw_rt.anchoredPosition = new Vector2(0, 0);
+        _goal.SetActive(true);
+        _pass.SetActive(true);
+        _wallhit.SetActive(true);
+        _powerup.SetActive(true);
+    }
+
+    private void ResetRect()
+    {
+        _goalBody_rt.anchoredPosition = new Vector2(0, 0);
+        _goalIndicator_rt.anchoredPosition = new Vector2(0, 0);
+
+        _passBody_rt.anchoredPosition = new Vector2(0, 0);
+        _passIndicator_rt.anchoredPosition = new Vector2(0, 0);
+
+        _whBody_rt.anchoredPosition = new Vector2(0, 0);
+        _whIndicator_rt.anchoredPosition = new Vector2(0, 0);
+
+        _pwBody_rt.anchoredPosition = new Vector2(0, 0);
+        _whIndicator_rt.anchoredPosition = new Vector2(0, 0);
+    }
+
+    private void UpdateScores()
+    {
+        _goalScore = _scoreSystem.GoalScoreAmount;
+        _passScore = _scoreSystem.PassScoreAmount;
+        _wallhitScore = _scoreSystem.WallhitScoreAmount;
+        _pwScore = _scoreSystem.PowerupScoreAmount;
+    }
+
+    private void UpdateScoreRatios()
+    {
+        _goalRatio = _goalScore * (1.0f) / _totalScore;
+        _passRatio = _passScore * (1.0f) / _totalScore;
+        _wallRatio = _wallhitScore * (1.0f) / _totalScore;
+        _powerUpRatio = _pwScore * (1.0f) / _totalScore;
+
+        float ratioAdd = 0.0f;
+
+        if (_goal.activeSelf)
+        {
+            if (_goalRatio <= HEAD_TAIL_PERCENTAGE)
+            {
+                _goalRatio = 0.0f;
+                ratioAdd = HEAD_TAIL_PERCENTAGE - _goalRatio;
+                //_goalIndicator_rt.anchoredPosition = new Vector2(0, 0);
+            }
+            else
+            {
+                _goalRatio -= HEAD_TAIL_PERCENTAGE;
+            }
+            if (!_pass.activeSelf && !_wallhit.activeSelf && !_powerup.activeSelf)
+            {
+                _goalRatio -= HEAD_TAIL_PERCENTAGE;
+            }
+        }
+        if (_pass.activeSelf)
+        {
+            if (!_goal.activeSelf)
+            {
+                if (_passRatio <= HEAD_TAIL_PERCENTAGE)
+                {
+                    _goalRatio = 0.0f;
+                    ratioAdd = HEAD_TAIL_PERCENTAGE - _passRatio;
+                }
+                else
+                {
+                    _passRatio -= HEAD_TAIL_PERCENTAGE;
+                }
+            }
+            else
+            {
+                _passRatio -= ratioAdd;
+                ratioAdd = 0.0f;
+            }
+                
+            if (!_wallhit.activeSelf && !_powerup.activeSelf)
+            {
+                _passRatio -= HEAD_TAIL_PERCENTAGE;
+            }
+        }
+        if (_wallhit.activeSelf)
+        {
+            if (!_goal.activeSelf && !_pass.activeSelf)
+            {
+                if (_wallRatio <= HEAD_TAIL_PERCENTAGE)
+                {
+                    _passRatio = 0.0f;
+                    ratioAdd = HEAD_TAIL_PERCENTAGE - _wallRatio;
+                }
+                else
+                {
+                    _wallRatio -= HEAD_TAIL_PERCENTAGE;
+                }
+            }
+            else
+            {
+                _wallRatio -= ratioAdd;
+                ratioAdd = 0.0f;
+            }
+            if (!_powerup.activeSelf)
+            {
+                _wallRatio -= HEAD_TAIL_PERCENTAGE;
+            }
+        }
+        if (_powerup.activeSelf)
+        {
+            if (!_goal.activeSelf && !_pass.activeSelf && !_wallhit.activeSelf)
+            {
+                _powerUpRatio -= HEAD_TAIL_PERCENTAGE;
+            }
+            else
+                _powerUpRatio -= ratioAdd;
+
+            _powerUpRatio -= HEAD_TAIL_PERCENTAGE;
+        }
+
+        Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
+    }
+
+    private void DeactivateBarsWithZeroScore()
+    {
+        if (_goalScore == 0)
+            _goal.SetActive(false);
+        if (_passScore == 0)
+            _pass.SetActive(false);
+        if (_wallhitScore == 0)
+            _wallhit.SetActive(false);
+        if (_pwScore == 0)
+            _powerup.SetActive(false);        
+    }
+
+    private void UpdateBarSizes()
+    {
+        _goalBody_rt.sizeDelta = new Vector2(BAR_BODY_MAX_WIDTH * _goalRatio, BAR_HEIGHT);
+        _passBody_rt.sizeDelta = new Vector2(BAR_BODY_MAX_WIDTH * _passRatio, BAR_HEIGHT);
+        _whBody_rt.sizeDelta = new Vector2(BAR_BODY_MAX_WIDTH * _wallRatio, BAR_HEIGHT);
+        _pwBody_rt.sizeDelta = new Vector2(BAR_BODY_MAX_WIDTH * _powerUpRatio, BAR_HEIGHT);
+    }
+
+    private void UpdateBarPosition()
+    {
+
+    }
+
+    private void UpdateBarIndicator()
+    {
+
+    }
+
+    private void UpdateBar()
+    {
+        // Checks for the case that there is only one form of score
+        // ( the player get only one type of score in a run )
+        if (_passRatio == 1.0f)
+        {
+            _passIndicator_rt.gameObject.SetActive(false);
+        }
+        else if (_wallRatio == 1.0f)
+        {
+            _whIndicator_rt.gameObject.SetActive(false);
+        }
+
+        UpdateBarSizes();
     }
 
     public void LoadPointBar()
     {
-        int totalPoints = _scoreSystem.ScoreAmount;
-        int highscore = PlayerPrefs.GetInt("HighScore", 0);
-        int goalScore = _scoreSystem.GoalScoreAmount;
+        _totalScore = _scoreSystem.ScoreAmount;
+        _highscore = PlayerPrefs.GetInt("HighScore", 0);
 
-        double goalRatio = _scoreSystem.GoalScoreAmount * (1.0) / totalPoints;
-        double passRatio = _scoreSystem.PassScoreAmount * (1.0) / totalPoints;
-        double wallRatio = _scoreSystem.WallhitScoreAmount * (1.0) / totalPoints;
-        double powerUpRatio = _scoreSystem.PowerupScoreAmount * (1.0) / totalPoints;
+        ActivateAllBars();              // Set Active all bars objects
+        ResetRect();                    // Resets all sizes and positions of all bar Bodies and Indicators
+        UpdateScores();                 // Updates the local scores in this object with the game current values
+        DeactivateBarsWithZeroScore();  // Deactivate the bar if the player have zero points in a score type
+        UpdateScoreRatios();            // Updates current ratio for all scores
+        UpdateBar();                    // Updates bar and its indicator and points
 
-        ResetBodyRect();    // Resets all sizes and positions of all bar Bodies
-
-
-
-
-
-        ResetBodyRect();
         _lastIndicatorPoints.text = _scoreSystem.ScoreAmount + "";
     }
 }
