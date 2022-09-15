@@ -66,7 +66,6 @@ public class GameOver : MonoBehaviour
 
         LoadMarmosset(totalPoints);
 
-        GameOverPointbar.Instance.LoadPointBar();
 
         highscore = (int)Mathf.Max(highscore, totalPoints);
 
@@ -79,5 +78,7 @@ public class GameOver : MonoBehaviour
         _highScoreView.text = "Melhor Pontuação: " + highscore + "";
 
         _menu.SetActive(true);
+
+        GameOverPointbar.Instance.LoadPointBar();
     }
 }
