@@ -61,13 +61,15 @@ public class BallController : MonoBehaviour
         mousePressed = false;
         playerManager.SetCanMove(true);
         line.enabled = false;
-
     }
+    
     // Update is called once per frame
     private void Update()
     {
+        if (PauseMenu.isGamePaused) return;
+        
         // aim and throw
-        if (!PauseMenu.isGamePaused && lockedOntoPlayer)
+        if (lockedOntoPlayer)
         {
             var position1 = currentPlayer.transform.position;
             transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
@@ -114,7 +116,7 @@ public class BallController : MonoBehaviour
                     currentPlayer.GetComponent<Ally>().Idle();
                 }
             }
-        }  
+        }
     }
 
     private float GetForceLevel(Vector2 from, Vector2 to)
@@ -138,8 +140,8 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         
-        rb2d.velocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
-        
+        Vector2 newVelocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
+        rb2d.velocity = newVelocity;
     }
 
     private IEnumerator GameOver()
@@ -188,6 +190,12 @@ public class BallController : MonoBehaviour
 
         if (collisionCollider.CompareTag("LateralWall"))
         {
+            // correction for when vertical velocity is too small and ball gets stuck on infinite horizontal movement
+            if (Mathf.Abs(rb2d.velocity.y) < 0.2f)
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0.2f * Mathf.Sign(rb2d.velocity.y));
+            }
+            
             audioManager.PlaySFX("HitWall");
         }
     }
