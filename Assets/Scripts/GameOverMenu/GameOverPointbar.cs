@@ -11,6 +11,10 @@ public class GameOverPointbar : MonoBehaviour
     [SerializeField] private GameObject _wallhit;
     [SerializeField] private GameObject _powerup;
 
+    [SerializeField] private GameObject _passHead;
+    [SerializeField] private GameObject _wallhitHead;
+    [SerializeField] private GameObject _powerupHead;
+
     [SerializeField] private TMP_Text _lastIndicatorPoints;
 
     [SerializeField] private RectTransform _goalBody_rt;
@@ -24,10 +28,15 @@ public class GameOverPointbar : MonoBehaviour
 
     public static GameOverPointbar Instance;
 
-    private const float BAR_BODY_MAX_WIDTH = 575;
-    private const float BAR_HEIGHT = 79;
-    private const float HEAD_TAIL_WIDTH = 45;
+    private const float BAR_BODY_MAX_WIDTH = 575.0f;
+    private const float BAR_BODY_MAX_HALF_WIDTH = BAR_BODY_MAX_WIDTH / 2;
+    private const float BAR_HEIGHT = 79.0f;
+    private const float HEAD_TAIL_WIDTH = 45.0f;
     private const float HEAD_TAIL_PERCENTAGE = HEAD_TAIL_WIDTH / BAR_BODY_MAX_WIDTH;
+    private const float LITTLE_INDICATOR_ADD = 3.0f;        // Used to add a little more posX to an indicator
+
+    private List<RectTransform> _bodies_rt = new List<RectTransform>();
+    private List<RectTransform> _indicator_rt = new List<RectTransform>();
 
     private int _totalScore;
     private int _highscore;
@@ -54,33 +63,35 @@ public class GameOverPointbar : MonoBehaviour
             Destroy(this);
 
         _scoreSystem = FindObjectOfType<ScoreSystem>();
-    }
-    void Start()
-    {
-        
+
+        _bodies_rt.Add(_goalBody_rt);   _bodies_rt.Add(_passBody_rt);
+        _bodies_rt.Add(_whBody_rt);     _bodies_rt.Add(_pwBody_rt);
+
+        _indicator_rt.Add(_goalIndicator_rt); _indicator_rt.Add(_passIndicator_rt);
+        _indicator_rt.Add(_whIndicator_rt); _indicator_rt.Add(_whIndicator_rt);
     }
 
     private void ActivateAllBars()
     {
         _goal.SetActive(true);
+
         _pass.SetActive(true);
+        _passHead.SetActive(true);
+
         _wallhit.SetActive(true);
+       _wallhitHead.SetActive(true);
+
         _powerup.SetActive(true);
+        _powerupHead.SetActive(true);        
     }
 
     private void ResetRect()
     {
-        _goalBody_rt.anchoredPosition = new Vector2(0, 0);
-        _goalIndicator_rt.anchoredPosition = new Vector2(0, 0);
-
-        _passBody_rt.anchoredPosition = new Vector2(0, 0);
-        _passIndicator_rt.anchoredPosition = new Vector2(0, 0);
-
-        _whBody_rt.anchoredPosition = new Vector2(0, 0);
-        _whIndicator_rt.anchoredPosition = new Vector2(0, 0);
-
-        _pwBody_rt.anchoredPosition = new Vector2(0, 0);
-        _whIndicator_rt.anchoredPosition = new Vector2(0, 0);
+        for (int i = 0; i < _bodies_rt.Count; i++)
+        {
+            _bodies_rt[i].anchoredPosition = new Vector2(0, 0);
+            _indicator_rt[i].anchoredPosition = new Vector2(0, 0);
+        }
     }
 
     private void UpdateScores()
@@ -133,6 +144,7 @@ public class GameOverPointbar : MonoBehaviour
             }
             else
             {
+                _passHead.SetActive(false);
                 _passRatio -= ratioAdd;
                 ratioAdd = 0.0f;
             }
@@ -158,6 +170,7 @@ public class GameOverPointbar : MonoBehaviour
             }
             else
             {
+                _wallhitHead.SetActive(false);
                 _wallRatio -= ratioAdd;
                 ratioAdd = 0.0f;
             }
@@ -173,12 +186,15 @@ public class GameOverPointbar : MonoBehaviour
                 _powerUpRatio -= HEAD_TAIL_PERCENTAGE;
             }
             else
-                _powerUpRatio -= ratioAdd;
-
+            {
+                _powerupHead.SetActive(false);
+            }
+            //else
+            _powerUpRatio -= ratioAdd;
             _powerUpRatio -= HEAD_TAIL_PERCENTAGE;
         }
 
-        Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
+     Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
     }
 
     private void DeactivateBarsWithZeroScore()
@@ -203,7 +219,26 @@ public class GameOverPointbar : MonoBehaviour
 
     private void UpdateBarPosition()
     {
+        float nextPosition = BAR_BODY_MAX_HALF_WIDTH * _goalRatio - BAR_BODY_MAX_HALF_WIDTH + HEAD_TAIL_WIDTH;
+        _goalBody_rt.anchoredPosition = new Vector2(nextPosition , 0);
+        _goalIndicator_rt.anchoredPosition = new Vector2(nextPosition + BAR_BODY_MAX_WIDTH * _goalRatio/2 + LITTLE_INDICATOR_ADD, 0);
+        Debug.Log(nextPosition);
+        Debug.Log(BAR_BODY_MAX_WIDTH * _goalRatio / 2);
+        Debug.Log(nextPosition + BAR_BODY_MAX_WIDTH * _goalRatio / 2);
 
+        nextPosition += BAR_BODY_MAX_HALF_WIDTH * _goalRatio + BAR_BODY_MAX_HALF_WIDTH * _passRatio;
+        _passBody_rt.anchoredPosition = new Vector2(nextPosition, 0);
+        _passIndicator_rt.anchoredPosition = new Vector2(nextPosition + BAR_BODY_MAX_WIDTH * _passRatio / 2 + LITTLE_INDICATOR_ADD, 0);
+        Debug.Log(nextPosition);
+        Debug.Log(BAR_BODY_MAX_WIDTH * _goalRatio / 2);
+        Debug.Log(nextPosition + BAR_BODY_MAX_WIDTH * _goalRatio / 2);
+
+        nextPosition += BAR_BODY_MAX_HALF_WIDTH * _passRatio + BAR_BODY_MAX_HALF_WIDTH * _wallRatio;
+        _whBody_rt.anchoredPosition = new Vector2(nextPosition, 0);
+        _whIndicator_rt.anchoredPosition = new Vector2(nextPosition + BAR_BODY_MAX_WIDTH * _wallRatio / 2 + LITTLE_INDICATOR_ADD, 0);
+        
+        nextPosition += BAR_BODY_MAX_HALF_WIDTH * _wallRatio + BAR_BODY_MAX_HALF_WIDTH * _powerUpRatio;
+        _pwBody_rt.anchoredPosition = new Vector2(nextPosition, 0);
     }
 
     private void UpdateBarIndicator()
@@ -225,6 +260,7 @@ public class GameOverPointbar : MonoBehaviour
         }
 
         UpdateBarSizes();
+        UpdateBarPosition();
     }
 
     public void LoadPointBar()

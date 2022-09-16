@@ -1709,6 +1709,9 @@ MonoBehaviour:
   _pass: {fileID: 1331290539}
   _wallhit: {fileID: 314723314}
   _powerup: {fileID: 512237910}
+  _passHead: {fileID: 512349637}
+  _wallhitHead: {fileID: 1986837332}
+  _powerupHead: {fileID: 937871788}
   _lastIndicatorPoints: {fileID: 2076292668}
   _goalBody_rt: {fileID: 1998564088}
   _passBody_rt: {fileID: 2131602329}
