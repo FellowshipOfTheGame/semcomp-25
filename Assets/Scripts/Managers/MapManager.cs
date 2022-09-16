@@ -22,7 +22,7 @@ public class MapManager : MonoBehaviour
     private float goalTargetY;
     
     /* Level Control  */
-    private int allyBarsPassed = 0;
+    public int AllyBarsPassed { get; private set; } = 0;
     private int totalPlayersInLevel = 0;
     private List<GameObject> goalPositions = new List<GameObject>();
     private List<GameObject> firstPlayerInLevels = new List<GameObject>();
@@ -144,7 +144,7 @@ public class MapManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         fx.SetActive(false);
 
-        // spawn presets until goal of current level is spawned
+        // keep at least 7 presets spawned
         while (presetsOnMap.Count <= 7)
         {
             SpawnPreset();
@@ -180,19 +180,18 @@ public class MapManager : MonoBehaviour
 
     public void AllyBarPassed()
     {
-        allyBarsPassed++;
-        if (allyBarsPassed == totalPlayersInLevel + 1)
+        AllyBarsPassed++;
+        if (AllyBarsPassed == totalPlayersInLevel + 1)
         {
-            allyBarsPassed = 1;
+            AllyBarsPassed = 1;
             totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
         }
-        gameManager.SetLevelProgress((float)allyBarsPassed / (totalPlayersInLevel+1));
+        gameManager.SetLevelProgress((float)AllyBarsPassed / (totalPlayersInLevel+1));
     }
 
     public void StartTransition(Transform newPlayer)
     {
         currPlayer = newPlayer;
-        currPlayer.GetComponentInChildren<AllyBar>().SetPassed();
         StartCoroutine(Transition());
     }
 }

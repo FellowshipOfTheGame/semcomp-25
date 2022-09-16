@@ -11,7 +11,6 @@ public class BallController : MonoBehaviour
     [SerializeField] private float throwSpeed;
     [SerializeField] private float ballRadius = 0.5f;
     [SerializeField] private float maxDistance = 2f;
-    
 
     // state variables
     private GameObject currentPlayer;
@@ -26,6 +25,8 @@ public class BallController : MonoBehaviour
     public static event SuccessfulPass OnSuccessfulPass;
     private bool ballLaunched;
     private float yPosWhenLaunched;
+    private int alliesWhenLaunched;
+    private int alliesPassed = 0;
     
     /* Goal event */
     public delegate void GoalScored();
@@ -136,6 +137,7 @@ public class BallController : MonoBehaviour
         // set pass state
         ballLaunched = true;
         yPosWhenLaunched = transform.position.y;
+        alliesWhenLaunched = mapManager.AllyBarsPassed;
         
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
@@ -174,13 +176,26 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;
-
+        
+        var position1 = currentPlayer.transform.position;
+        transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
+        
+        currentPlayer.transform.parent.GetComponentInChildren<AllyBar>().SetPassed();
+        
         if (ballLaunched)
         {
             ballLaunched = false;
+            alliesPassed += mapManager.AllyBarsPassed - alliesWhenLaunched;
+
             // if position is greater than when it was launched plus a little tolerance
             if (transform.position.y > yPosWhenLaunched + 0.15f)
-                OnSuccessfulPass?.Invoke();
+            {
+                Debug.Log("posY now: " + transform.position.y + " position then: " + yPosWhenLaunched);
+                Debug.Log(alliesPassed);
+                for (int i = 0; i < alliesPassed; i++)
+                    OnSuccessfulPass?.Invoke();
+                alliesPassed = 0;
+            }
         }
     }
 
@@ -210,7 +225,7 @@ public class BallController : MonoBehaviour
 
                 mapManager.StartTransition(currentPlayer.transform.parent);
             }
-        } 
+        }
         else if (collision.CompareTag("MapTop"))
         {
             // Checks the number of lives the player has
@@ -252,6 +267,7 @@ public class BallController : MonoBehaviour
         else if (collision.CompareTag("Goal"))
         {
             ballLaunched = false;
+            alliesPassed = 0;
             OnGoalScored?.Invoke();
             StartCoroutine(GoalTransition());
         }
