@@ -8,6 +8,7 @@ services:
     volumes:
       - ./logs:/var/log/app
       - ./node_modules:/app/node_modules
+      - ./:/app
     depends_on:
       - semcomp25-redis
   semcomp25-redis:
