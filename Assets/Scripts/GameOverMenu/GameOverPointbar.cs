@@ -187,14 +187,39 @@ public class GameOverPointbar : MonoBehaviour
             }
             else
             {
+                _powerUpRatio -= ratioAdd;
                 _powerupHead.SetActive(false);
             }
-            //else
-            _powerUpRatio -= ratioAdd;
+
             _powerUpRatio -= HEAD_TAIL_PERCENTAGE;
         }
 
+        if (_powerUpRatio < 0.0f)
+        {
+            _powerUpRatio *= (-1.0f);
+            if (_wallhit.activeSelf)
+            {
+                if (_wallRatio - _powerUpRatio > 0.0f)
+                {
+                    _wallRatio -= _powerUpRatio;
+                    _powerUpRatio = 0.0f;
+                }
+            }
+            else if (_pass.activeSelf)
+            {
+                if (_passRatio - _powerUpRatio < 0.0f)
+                {
+                    _passRatio -= _powerUpRatio;
+                    _powerUpRatio = 0.0f;
+                }
+            }
+        }
+
      Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
+        Debug.Log("GOAL: " + _goalRatio);
+        Debug.Log("PASS: " + _passRatio);
+        Debug.Log("WALL: " + _wallRatio);
+        Debug.Log("PW: " + _powerUpRatio);
     }
 
     private void DeactivateBarsWithZeroScore()
@@ -215,6 +240,9 @@ public class GameOverPointbar : MonoBehaviour
         _passBody_rt.sizeDelta = new Vector2(BAR_BODY_MAX_WIDTH * _passRatio, BAR_HEIGHT);
         _whBody_rt.sizeDelta = new Vector2(BAR_BODY_MAX_WIDTH * _wallRatio, BAR_HEIGHT);
         _pwBody_rt.sizeDelta = new Vector2(BAR_BODY_MAX_WIDTH * _powerUpRatio, BAR_HEIGHT);
+
+        Debug.Log("WHAT SHOULD BE: " + (BAR_BODY_MAX_WIDTH * (1 - 2 * HEAD_TAIL_PERCENTAGE)));
+        Debug.Log("WHAT IS: " + (BAR_BODY_MAX_WIDTH * _goalRatio + BAR_BODY_MAX_WIDTH * _passRatio + BAR_BODY_MAX_WIDTH * _wallRatio + BAR_BODY_MAX_WIDTH * _powerUpRatio));
     }
 
     private void UpdateBarPosition()
@@ -229,9 +257,9 @@ public class GameOverPointbar : MonoBehaviour
         nextPosition += BAR_BODY_MAX_HALF_WIDTH * _goalRatio + BAR_BODY_MAX_HALF_WIDTH * _passRatio;
         _passBody_rt.anchoredPosition = new Vector2(nextPosition, 0);
         _passIndicator_rt.anchoredPosition = new Vector2(nextPosition + BAR_BODY_MAX_WIDTH * _passRatio / 2 + LITTLE_INDICATOR_ADD, 0);
-        Debug.Log(nextPosition);
+        /*Debug.Log(nextPosition);
         Debug.Log(BAR_BODY_MAX_WIDTH * _goalRatio / 2);
-        Debug.Log(nextPosition + BAR_BODY_MAX_WIDTH * _goalRatio / 2);
+        Debug.Log(nextPosition + BAR_BODY_MAX_WIDTH * _goalRatio / 2);*/
 
         nextPosition += BAR_BODY_MAX_HALF_WIDTH * _passRatio + BAR_BODY_MAX_HALF_WIDTH * _wallRatio;
         _whBody_rt.anchoredPosition = new Vector2(nextPosition, 0);
