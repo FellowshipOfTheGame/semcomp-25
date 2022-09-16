@@ -5,7 +5,8 @@ public class BallController : MonoBehaviour
 {
     [SerializeField] private LineRenderer line;
     [SerializeField] private GameObject ballHitPrefab;
-
+    [SerializeField] private GameObject throwFx;
+    
     [Header("Stats")]
     [SerializeField] private float offsetFromPlayer;
     [SerializeField] private float throwSpeed;
@@ -23,7 +24,8 @@ public class BallController : MonoBehaviour
     /* Pass event */
     public delegate void SuccessfulPass();
     public static event SuccessfulPass OnSuccessfulPass;
-    private bool ballLaunched;
+    public bool BallLaunched { get; private set; }
+
     private float yPosWhenLaunched;
     private int alliesWhenLaunched;
     private int alliesPassed = 0;
@@ -135,7 +137,7 @@ public class BallController : MonoBehaviour
         mousePosition.z = 0;
 
         // set pass state
-        ballLaunched = true;
+        BallLaunched = true;
         yPosWhenLaunched = transform.position.y;
         alliesWhenLaunched = mapManager.AllyBarsPassed;
         
@@ -161,10 +163,16 @@ public class BallController : MonoBehaviour
         var fx = Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
         rb2d.bodyType = RigidbodyType2D.Static;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        mapManager.SetBallFx(false);
+        SetBallFx(false);
         timer.SetPaused(true);
         StartCoroutine(GameOver());
         gameOverSet = true;
+    }
+    
+    public void SetBallFx(bool val)
+    {
+        if (throwFx)
+            throwFx.SetActive(val);
     }
 
     // Auxiliar function to set the ball freezed to the player position
@@ -182,9 +190,9 @@ public class BallController : MonoBehaviour
         
         currentPlayer.transform.parent.GetComponentInChildren<AllyBar>().SetPassed();
         
-        if (ballLaunched)
+        if (BallLaunched)
         {
-            ballLaunched = false;
+            BallLaunched = false;
             alliesPassed += mapManager.AllyBarsPassed - alliesWhenLaunched;
 
             // if position is greater than when it was launched plus a little tolerance
@@ -264,7 +272,7 @@ public class BallController : MonoBehaviour
         }
         else if (collision.CompareTag("Goal"))
         {
-            ballLaunched = false;
+            BallLaunched = false;
             alliesPassed = 0;
             OnGoalScored?.Invoke();
             StartCoroutine(GoalTransition());

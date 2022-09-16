@@ -9908,6 +9908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   line: {fileID: 5079801264839627885}
   ballHitPrefab: {fileID: 3249267262933426012, guid: d97dff8e50e8c5848bb532744e27c7fe, type: 3}
+  throwFx: {fileID: 237210911483352421}
   offsetFromPlayer: 0.8
   throwSpeed: 10
   ballRadius: 0.7

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,6 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] Transform presetSpawner;
     [SerializeField] private float speed = 0.01f;
-    [SerializeField] private GameObject fx;
-    [SerializeField] Transform ballTransf;
     
     Transform currPlayer;
     
@@ -18,6 +17,7 @@ public class MapManager : MonoBehaviour
     private const float SpawnOffsetAfterGoal = 3.7f;
     private const float OffsetFromScreenBottom = 1.6f;
     private const float OffsetFromScreenTop = 1.6f;
+    [SerializeField] private float yBallLimit = 2.3f;
     private float targetY;
     private float goalTargetY;
     
@@ -26,7 +26,8 @@ public class MapManager : MonoBehaviour
     private int totalPlayersInLevel = 0;
     private List<GameObject> goalPositions = new List<GameObject>();
     private List<GameObject> firstPlayerInLevels = new List<GameObject>();
-
+    private Transform currGoal;
+    
     /* Cached references */
     private GameManager gameManager;
     private DifficultyProgression difficultyProgression;
@@ -43,10 +44,7 @@ public class MapManager : MonoBehaviour
         ballController = FindObjectOfType<BallController>();
     }
 
-    public void SetBallFx(bool val)
-    {
-        fx.SetActive(val);
-    }
+    
     
     private void Start()
     {
@@ -61,8 +59,24 @@ public class MapManager : MonoBehaviour
             RepositionFields();
         }
 
-        ballTransf.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
+        ballController.transform.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
         totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
+    }
+
+    private void LateUpdate()
+    {
+        if (ballController && ballController.BallLaunched)
+        {
+            // move until goal is on the top or currentPlayer is on the bottom
+            float distance = Mathf.Min(currGoal.position.y - goalTargetY, ballController.transform.position.y - yBallLimit);
+            var transform1 = transform;
+            if (distance > 0)
+            {
+                Vector3 pos = transform1.position;
+                pos.y -= distance;
+                transform1.position = pos;
+            }
+        }
     }
 
     public void SpawnPresetsUntilGoal()
@@ -142,15 +156,14 @@ public class MapManager : MonoBehaviour
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0.1f);
-        fx.SetActive(false);
-
+        ballController.SetBallFx(false);
         // keep at least 7 presets spawned
         while (presetsOnMap.Count <= 7)
         {
             SpawnPreset();
         }
 
-        Transform currGoal = GetGoalPositionOfLevel(gameManager.Level);
+        currGoal = GetGoalPositionOfLevel(gameManager.Level);
         
         // move until goal is on the top or currentPlayer is on the bottom
         float distance = Mathf.Min(currGoal.position.y - goalTargetY, currPlayer.position.y - targetY);
@@ -173,8 +186,7 @@ public class MapManager : MonoBehaviour
             Destroy(presetsOnMap[0].gameObject);
             presetsOnMap.RemoveAt(0);
         }
-        if(fx!=null)
-            fx.SetActive(true);
+        ballController.SetBallFx(true);
         ballController.GoalTransitionOver = true; // set variable so BallController knows the transition was finished
     }
 
