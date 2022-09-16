@@ -84,9 +84,7 @@ async function finish(req, res) {
 
             try {
                 playerScore = await Score.findOneById(userId)
-                
-                console.log(playerScore)
-    
+                                
                 await match.create({
                     userId,
                     score: score,
@@ -95,9 +93,11 @@ async function finish(req, res) {
                 })   
 
                 // update score 
-                if(score > playerScore.top_score) {
+                if(playerScore && score > playerScore.top_score) {
                     playerScore.top_score = score;
-                    await Score.createOrUpdate({provider_id: userId, top_score: score, score_date: finishedAt})
+                    playerScore.score_date = finishedAt;
+                    playerScore.provider_id = userId
+                    await Score.createOrUpdate(playerScore)
                 }
 
             } catch (err) {

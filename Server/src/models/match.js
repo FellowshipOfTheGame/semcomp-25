@@ -39,7 +39,7 @@ class SchemaMatch {
     // }
 
     async create(match) {
-        const pathTable = configEnv.PROJECT_ID + `${this.tableName}${match.userId}_${match.startedAt}`
+        const pathTable = configEnv.PROJECT_ID + '/match/' + `${match.userId}/${match.startedAt}`
 
         db.ref(pathTable).set({
             created_at: firebase.database.ServerValue.TIMESTAMP,
