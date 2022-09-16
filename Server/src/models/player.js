@@ -100,7 +100,7 @@ class SchemaScore {
         db.ref(pathTable).set({
             name: Player.name,
             top_score: Player.top_score,
-            top_score_date: firebase.database.ServerValue.TIMESTAMP,
+            top_score_date: Player.score_date || new Date().getTime(),
         }).catch((error) => {
             console.error(error);
         });
