@@ -161,7 +161,7 @@ public class MapManager : MonoBehaviour
             deltaMove = Mathf.Min(deltaMove, distance);
             distance -= deltaMove;
 
-            Vector3 pos = transform.position;
+            Vector3 pos = transform1.position;
             pos.y -= deltaMove;
             transform1.position = pos;
             yield return null;

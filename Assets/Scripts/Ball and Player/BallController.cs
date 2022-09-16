@@ -190,8 +190,6 @@ public class BallController : MonoBehaviour
             // if position is greater than when it was launched plus a little tolerance
             if (transform.position.y > yPosWhenLaunched + 0.15f)
             {
-                Debug.Log("posY now: " + transform.position.y + " position then: " + yPosWhenLaunched);
-                Debug.Log(alliesPassed);
                 for (int i = 0; i < alliesPassed; i++)
                     OnSuccessfulPass?.Invoke();
                 alliesPassed = 0;
