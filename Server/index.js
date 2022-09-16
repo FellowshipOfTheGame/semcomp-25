@@ -75,21 +75,11 @@ app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/match/`, matchRoutes)
 
-//POST request to create a new task in todo list
-app.post("/create", (req, res) => {
-    //Code to add a new data to the database will go here
-});
-
-//POST request to delete a task in todo list
-app.post("/delete", (req, res) => {
-    //Code to delete a data from the database will go here
-});
-
 main().catch(err => console.log(err));
 
 async function main() {
 
-    if(config.ENABLE_HTTPS) { 
+    if(configEnv.ENABLE_HTTPS) { 
 
         var httpsCredentials = {
             key:  configEnv.CERTIFICATE_KEY_PATH && fs.readFileSync(configEnv.CERTIFICATE_KEY_PATH),

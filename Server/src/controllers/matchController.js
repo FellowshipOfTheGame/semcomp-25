@@ -1,19 +1,26 @@
-const { match } = require('../models/match')
-const config = require("../config/index")
 const { createHmac } = require("crypto")
-const { Player } = require('../models/player')
+
+const config = require("../config/index")
 const { logger } = require('../config/logger')
+
+const { Player, Score } = require('../models/player')
+const { match } = require('../models/match')
+
 const { sessionClient } = require('../loaders/redis');
-const { findOrCreate } = require('./playerController');
 
 async function index(req, res) {
     return res.status(200).send("Match alive!");
 }
 
 async function start(req, res) {
-    const userId = req.user.id;
+    const userId = req.user.provider_id;
     const startedAt = new Date().getTime();
     
+    if(userId === undefined) {
+        logger.error(`Failed to start match for user undefined`)
+        return res.status(403).end()
+    }
+
     sessionClient.multi()
         .set(`${userId}_match`, startedAt)
         .exec( (err, results) => {
@@ -30,7 +37,7 @@ async function start(req, res) {
 }
 
 async function finish(req, res) {
-    const userId = req.user.id;
+    const userId = req.user.provider_id;
     const score = req.body.score;
     const sign  = req.body?.sign?.toString().trim()
 
@@ -38,14 +45,13 @@ async function finish(req, res) {
 
     logger.info(`User ${userId} is trying to finish a match`)
 
-    const reqSign = createHmac('sha256', config.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
-    if(sign !== reqSign) {
-        logger.warn({
-            message: `at Race.finish(): Invalid signature for user ${userId}`
-        })    
-
-        return res.status(400).json({ message: "incorrect signature" })
-    }
+    // const reqSign = createHmac('sha256', config.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
+    // if(sign !== reqSign) {
+    //     logger.warn({
+    //         message: `at Race.finish(): Invalid signature for user ${userId}`
+    //     })    
+    //     return res.status(400).json({ message: "incorrect signature" })
+    // }
 
     return await sessionClient.multi()
         .get(`${userId}_match`)
@@ -53,6 +59,7 @@ async function finish(req, res) {
         .exec( async (err, results) => {
             const startedAt = results[0]
             const hasDeleted = results[1]
+            const finishedAt = new Date().getTime()
 
             if (err) {
                 logger.error(`Failed to finish match for user: ${userId}`)
@@ -63,21 +70,45 @@ async function finish(req, res) {
                 logger.warn(`Tryed to finish unexisting match for user: ${userId}`)
                 return res.status(400).end()
             }
+<<<<<<< HEAD
 
             const topScore = await Player
                     .findOneById(userId)
                     .then((user) => {
                         return user
                     })
+=======
+>>>>>>> 3981019 (Fix finish match)
             
-            await match.create({
-                userId,
-                score,
-                startedAt,
-                finishedAt: new Date().getTime()
-            })
+            let playerScore = 0
 
-            return res.status(200).end()
+            try {
+                playerScore = await Score.findOneById(userId)
+                
+                console.log(playerScore)
+    
+                await match.create({
+                    userId,
+                    score: score,
+                    startedAt,
+                    finishedAt: finishedAt
+                })   
+
+                // update score 
+                if(score > playerScore.top_score) {
+                    playerScore.top_score = score;
+                    await Score.createOrUpdate({provider_id: userId, top_score: score, score_date: finishedAt})
+                }
+
+            } catch (err) {
+                console.log(err)
+                logger.info({
+                    message: `Error match finish`,
+                    err: err
+                });
+            }
+                                        
+            return res.status(200).json({top_score: playerScore.top_score})
         });
 }
 

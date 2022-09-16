@@ -9,7 +9,8 @@ const config = require("../config")
 // Redis Database 1 - Sessions Storages
 const sessionClient = redis.createClient({
     db: 1,
-    url: config.REDIS_HOST,
+    // url: config.REDIS_HOST,
+    host: config.REDIS_HOST,
     port: config.REDIS_PORT,
     legacyMode: true,
 })
@@ -18,11 +19,11 @@ const sessionClient = redis.createClient({
 const clientList = [ sessionClient ]
 
 clientList.forEach(async client => {
-        client.on('connect', () => {
-            logger.info({
-                message: `at Redis[${client.options.db}]: Frequency connected!`
-            })
-        })
+    // client.on('connect', () => {
+    //     logger.info({
+    //         message: `at Redis[${client.options.db}]: Frequency connected!`
+    //     })
+    // })
     
     client.on('error', (err) => {
         logger.error({

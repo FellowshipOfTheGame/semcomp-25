@@ -2,10 +2,9 @@ const { firebase, db } = require('../loaders/firebase')
 const configEnv = require("../config")
 
 class SchemaMatch {
-    tableName = '/match/'
     
     async findOneById(provider_id) {
-        const pathTable = configEnv.PROJECT_ID + this.tableName + provider_id
+        const pathTable = configEnv.PROJECT_ID + '/match/' + provider_id
 
         // find one user
         return db.ref(pathTable).get().then((snapshot) => {
@@ -52,10 +51,6 @@ class SchemaMatch {
 
         return match;
     }
-
-        async update() {
-            db.ref('logs/info').set('something')
-        }
 }
 
 module.exports = {
