@@ -1,6 +1,6 @@
 const passport = require('passport');
 let GoogleStrategy = require('passport-google-oauth20').Strategy;
-let GoogleTokenStrategy =  require("passport-google-verify-token").Strategy;
+let GoogleTokenStrategy =  require("./../lib/passport-google-verify-token").Strategy;
 
 // let FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -67,6 +67,7 @@ module.exports = function (passport) {
                 clientID: configEnv.GOOGLE_CLIENT_ID,
                 // If other clients (such as android / ios apps) also access the google api:
                 // audience: [CLIENT_ID_FOR_THE_BACKEND, CLIENT_ID_ANDROID, CLIENT_ID_IOS, CLIENT_ID_SPA]
+                audience: [configEnv.GOOGLE_CLIENT_ID_ANDROID],
                 clientSecret: configEnv.GOOGLE_CLIENT_SECRET,
                 // getGoogleCerts: optionalCustomGetGoogleCerts
             },

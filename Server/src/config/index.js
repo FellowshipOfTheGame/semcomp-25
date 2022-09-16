@@ -15,6 +15,7 @@ module.exports = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || undefined,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET|| undefined,
     GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL ||  "http://localhost:3000/session/login/callback",
+    GOOGLE_CLIENT_ID_ANDROID: process.env.GOOGLE_CLIENT_ID_ANDROID || undefined,
 
     PROJECT_ID: process.env.PROJECT_ID,
     API_KEY: process.env.APIKEY,
