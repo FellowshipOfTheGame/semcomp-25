@@ -70,15 +70,6 @@ async function finish(req, res) {
                 logger.warn(`Tryed to finish unexisting match for user: ${userId}`)
                 return res.status(400).end()
             }
-<<<<<<< HEAD
-
-            const topScore = await Player
-                    .findOneById(userId)
-                    .then((user) => {
-                        return user
-                    })
-=======
->>>>>>> 3981019 (Fix finish match)
             
             let playerScore = 0
 
