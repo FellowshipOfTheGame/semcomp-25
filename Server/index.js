@@ -1,6 +1,7 @@
 const express = require('express')
 const cors  = require('cors')
 const morgan = require('morgan')
+const fs = require('fs');
 
 const { logger } = require('./src/config/logger')
 
@@ -88,10 +89,26 @@ main().catch(err => console.log(err));
 
 async function main() {
 
-    app.listen(configEnv.SERVER_PORT, (error) => {
-        if (error) throw error
-        logger.info({
-            message: `Starting HTTP server on port ${configEnv.SERVER_PORT}.`
-        }) 
-    })
+    if(config.ENABLE_HTTPS) { 
+
+        var httpsCredentials = {
+            key:  configEnv.CERTIFICATE_KEY_PATH && fs.readFileSync(configEnv.CERTIFICATE_KEY_PATH),
+            cert: configEnv.CERTIFICATE_CERT_PATH && fs.readFileSync(configEnv.CERTIFICATE_CERT_PATH),
+            ca:   configEnv.CERTIFICATE_CA_PATH && fs.readFileSync(configEnv.CERTIFICATE_CA_PATH)
+        }
+    
+        https.createServer(httpsCredentials, app).listen(configEnv.SERVER_PORT , (error) => {
+            if (error) throw error
+            logger.info({
+                message: `Starting HTTPS server on port ${configEnv.SERVER_PORT}.`
+            }) 
+        })
+    } else {
+        app.listen(configEnv.SERVER_PORT, (error) => {
+            if (error) throw error
+            logger.info({
+                message: `Starting HTTP server on port ${configEnv.SERVER_PORT}.`
+            }) 
+        })
+    }
 };
