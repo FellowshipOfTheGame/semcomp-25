@@ -40,7 +40,7 @@ module.exports = {
                  surname_name: parsedToken.family_name
             });
 
-            Score.createOrUpdate({ provider_id: player.provider_id, top_score: 0 })
+            Score.createOrUpdate({ provider_id: player.provider_id, name: player.first_name + ' ' + player.surname_name, top_score: 0 })
 
         } catch (err) {
             console.log("Error create user")

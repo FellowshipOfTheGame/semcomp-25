@@ -98,6 +98,7 @@ class SchemaScore {
         const pathTable = configEnv.PROJECT_ID + '/score/' + Player.provider_id
 
         db.ref(pathTable).set({
+            name: Player.name,
             top_score: Player.top_score,
             top_score_date: firebase.database.ServerValue.TIMESTAMP,
         }).catch((error) => {
