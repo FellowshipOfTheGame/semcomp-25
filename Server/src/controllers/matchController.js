@@ -38,7 +38,7 @@ async function start(req, res) {
 
 async function finish(req, res) {
     const userId = req.user.provider_id;
-    const score = req.body.score;
+    const score = parseInt(req.body.score);
     const sign  = req.body?.sign?.toString().trim()
 
     if (score === undefined) return res.status(400).end()
@@ -99,7 +99,7 @@ async function finish(req, res) {
                     playerScore.provider_id = userId
                     await Score.createOrUpdate(playerScore)
                 }
-
+                
             } catch (err) {
                 console.log(err)
                 logger.info({
