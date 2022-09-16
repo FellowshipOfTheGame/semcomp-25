@@ -3,3 +3,4 @@ src/loaders/.semcomp25-pkey.json
 */logs
 */*.log
 /logs
+/redis-data

@@ -9,7 +9,7 @@ const config = require("../config")
 // Redis Database 1 - Sessions Storages
 const sessionClient = redis.createClient({
     db: 1,
-    host: config.REDIS_HOST,
+    url: config.REDIS_HOST,
     port: config.REDIS_PORT,
     legacyMode: true,
 })
