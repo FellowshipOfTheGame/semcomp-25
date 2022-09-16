@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,13 +28,22 @@ public class Timer : MonoBehaviour
     // cached references
     [SerializeField] TextMeshProUGUI timerText;
 
+    private void OnEnable()
+    {
+        BallController.OnSuccessfulPass += SuccessfulPassScored;
+    }
+
+    private void OnDisable()
+    {
+        BallController.OnSuccessfulPass -= SuccessfulPassScored;
+    }
+
     private void Start()
     {
         if (!timerText)
             Debug.Log("Link timer Text UI");
 
         CurrentTime = startingTime;
-        BallController.OnSuccessfulPass += SuccessfulPassScored;
     }
 
     private void Update()
