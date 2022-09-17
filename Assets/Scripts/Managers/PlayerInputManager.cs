@@ -1,45 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour
 {
     Camera cam;
 
-    [SerializeField] private bool isMoving;
-    [SerializeField] private GameObject fx;
-    public bool IsMoving => isMoving;
-    private bool canMove=true;
-    [SerializeField] private PlayerController lastSelected;
-   
+    private bool isMoving;
+    private bool canMove = true;
+    private PlayerController lastSelected;
+
     public void SetCanMove(bool val)
     {
         canMove = val;
+        if (!val && isMoving)
+        {
+            lastSelected.SetSelected(false);
+            isMoving = false;
+            lastSelected = null;
+        }
     }
+    
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
-
     }
 
+    private Collider2D[] results = new Collider2D[5];
     private void InputClickDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
-            RaycastHit2D hit = Physics2D.CircleCast(mousePos, 0.1f, new Vector3(1f, 0, 0));
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            
+            // Get all colliders under click
+            var size = Physics2D.OverlapPointNonAlloc(mousePos, results);
+            for (int i = 0; i < size; i++)
             {
-                // Select player to control
-                PlayerController controller = hit.transform.parent.gameObject.GetComponent<PlayerController>();
-                lastSelected = controller;
-                controller.SetSelected(true);
-                isMoving = true;
-                fx.SetActive(false);
-                controller.SetStartMouseX(mousePos.x);
-                controller.SetStartX(hit.transform.parent.position.x);
+                // If collided with the bar
+                if (results[i].CompareTag("Player"))
+                {
+                    // Select player to control
+                    PlayerController controller = results[i].transform.parent.gameObject.GetComponent<PlayerController>();
+                    lastSelected = controller;
+                    controller.SetSelected(true);
+                    isMoving = true;
+                    controller.SetStartMouseX(mousePos.x);
+                    controller.SetStartX(results[i].transform.parent.position.x);
+
+                    break;
+                }
             }
         }
     }
@@ -48,41 +58,23 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            RaycastHit2D hit = Physics2D.CircleCast(mousePos, 0.1f, new Vector3(1f, 0, 0));
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
+
+            if (isMoving)
             {
-                PlayerController controller = hit.transform.parent.gameObject.GetComponent<PlayerController>();
-                if (controller.Selected)
-                {
-                    float _x = mousePos.x;
-                    controller.SetTarget(_x);
-                }
+                lastSelected.SetTarget(mousePos.x);
             }
         }
     }
 
-    private void inputClickUp()
+    private void InputClickUp()
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            RaycastHit2D hit = Physics2D.CircleCast(mousePos, 0.1f, new Vector3(1f, 0, 0));
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                //Unselect player
-                PlayerController controller = hit.transform.parent.gameObject.GetComponent<PlayerController>();
-                if(controller!=null)
-                controller.SetSelected(false);
-                isMoving = false;
-                fx.SetActive(true);
-            }
-            else if(lastSelected!=null)
+            if (isMoving)
             {
                 lastSelected.SetSelected(false);
                 isMoving = false;
-                fx.SetActive(true);
+                lastSelected = null;
             }
         }
     }
@@ -94,8 +86,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             InputClickDown();
             InputClickHold();
-            inputClickUp();
+            InputClickUp();
         }
-
     }
 }
