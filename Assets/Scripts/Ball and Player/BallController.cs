@@ -9,9 +9,8 @@ public class BallController : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float offsetFromPlayer;
     [SerializeField] private float throwSpeed;
-    [SerializeField] private float playerRadius = 0.5f;
+    [SerializeField] private float ballRadius = 0.5f;
     [SerializeField] private float maxDistance = 2f;
-    
 
     // state variables
     private GameObject currentPlayer;
@@ -26,6 +25,8 @@ public class BallController : MonoBehaviour
     public static event SuccessfulPass OnSuccessfulPass;
     private bool ballLaunched;
     private float yPosWhenLaunched;
+    private int alliesWhenLaunched;
+    private int alliesPassed = 0;
     
     /* Goal event */
     public delegate void GoalScored();
@@ -61,13 +62,15 @@ public class BallController : MonoBehaviour
         mousePressed = false;
         playerManager.SetCanMove(true);
         line.enabled = false;
-
     }
+    
     // Update is called once per frame
     private void Update()
     {
+        if (PauseMenu.isGamePaused) return;
+        
         // aim and throw
-        if (!PauseMenu.isGamePaused && lockedOntoPlayer)
+        if (lockedOntoPlayer)
         {
             var position1 = currentPlayer.transform.position;
             transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
@@ -78,13 +81,12 @@ public class BallController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // mouse clicado próximo ao jogador
-                if (Vector2.SqrMagnitude(mousePosition - transform.position) < playerRadius*playerRadius)
+                if (Vector2.SqrMagnitude(mousePosition - transform.position) < ballRadius*ballRadius)
                 {
                     mousePressed = true;
                     playerManager.SetCanMove(false);
 
                     currentPlayer.GetComponent<Ally>().Pull();
-                    currentPlayer.transform.parent.gameObject.GetComponent<PlayerController>().SetSelected(false);
                 }
             }
 
@@ -115,7 +117,7 @@ public class BallController : MonoBehaviour
                     currentPlayer.GetComponent<Ally>().Idle();
                 }
             }
-        }  
+        }
     }
 
     private float GetForceLevel(Vector2 from, Vector2 to)
@@ -135,12 +137,13 @@ public class BallController : MonoBehaviour
         // set pass state
         ballLaunched = true;
         yPosWhenLaunched = transform.position.y;
+        alliesWhenLaunched = mapManager.AllyBarsPassed;
         
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         
-        rb2d.velocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
-        
+        Vector2 newVelocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
+        rb2d.velocity = newVelocity;
     }
 
     private IEnumerator GameOver()
@@ -156,7 +159,6 @@ public class BallController : MonoBehaviour
         if (gameOverSet)
             return;
         var fx = Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
-        fx.SetActive(true);
         rb2d.bodyType = RigidbodyType2D.Static;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         mapManager.SetBallFx(false);
@@ -174,13 +176,24 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;
-
+        
+        var position1 = currentPlayer.transform.position;
+        transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
+        
+        currentPlayer.transform.parent.GetComponentInChildren<AllyBar>().SetPassed();
+        
         if (ballLaunched)
         {
             ballLaunched = false;
+            alliesPassed += mapManager.AllyBarsPassed - alliesWhenLaunched;
+
             // if position is greater than when it was launched plus a little tolerance
             if (transform.position.y > yPosWhenLaunched + 0.15f)
-                OnSuccessfulPass?.Invoke();
+            {
+                for (int i = 0; i < alliesPassed; i++)
+                    OnSuccessfulPass?.Invoke();
+                alliesPassed = 0;
+            }
         }
     }
 
@@ -190,6 +203,12 @@ public class BallController : MonoBehaviour
 
         if (collisionCollider.CompareTag("LateralWall"))
         {
+            // correction for when vertical velocity is too small and ball gets stuck on infinite horizontal movement
+            if (Mathf.Abs(rb2d.velocity.y) < 0.2f)
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0.2f * Mathf.Sign(rb2d.velocity.y));
+            }
+            
             audioManager.PlaySFX("HitWall");
         }
     }
@@ -204,7 +223,7 @@ public class BallController : MonoBehaviour
 
                 mapManager.StartTransition(currentPlayer.transform.parent);
             }
-        } 
+        }
         else if (collision.CompareTag("MapTop"))
         {
             // Checks the number of lives the player has
@@ -246,6 +265,7 @@ public class BallController : MonoBehaviour
         else if (collision.CompareTag("Goal"))
         {
             ballLaunched = false;
+            alliesPassed = 0;
             OnGoalScored?.Invoke();
             StartCoroutine(GoalTransition());
         }

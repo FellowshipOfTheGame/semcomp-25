@@ -24,10 +24,10 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         // Check if the user press ESC button
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape))
         {
             SwitchPaused();
-        }
+        }*/
     }
     public void SwitchPaused()
     {
