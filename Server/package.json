@@ -12,7 +12,7 @@
     "url": "git+https://github.com/FellowshipOfTheGame/semcomp-25.git"
   },
   "author": "Mathias (Math-O5)",
-  "license": "ISC",
+  "license": "ISC", 
   "bugs": {
     "url": "https://github.com/FellowshipOfTheGame/semcomp-25/issues"
   },
@@ -26,6 +26,7 @@
     "create-hmac": "^1.1.7",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "firebase": "^8.10.0",
