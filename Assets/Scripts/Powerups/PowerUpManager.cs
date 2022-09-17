@@ -220,14 +220,23 @@ public class PowerUpManager : MonoBehaviour
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
         GameObject fx = Instantiate(icePrefab, pos, Quaternion.identity,ball.transform);
         //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
-        StartCoroutine(FreezeDelayed(rb, fx));
+        StartCoroutine(changeSpeedFx(rb, fx,freezeDuration,10f));
+    }
+    [SerializeField] GameObject lamaPrefab;
+    public void LamaBall(GameObject ball)
+    {
+        Vector3 pos = ball.transform.position;
+        Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+        GameObject fx = Instantiate(lamaPrefab, pos, Quaternion.identity, ball.transform);
+        //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
+        StartCoroutine(changeSpeedFx(rb, fx, freezeDuration, 4f));
     }
 
-    private IEnumerator FreezeDelayed(Rigidbody2D body,GameObject fx)
+    private IEnumerator changeSpeedFx(Rigidbody2D body,GameObject fx,float duration,float speed)
     {
         Vector2 initialVel = body.velocity;
-        body.velocity =initialVel.normalized*10f;
-        yield return new WaitForSeconds(freezeDuration);
+        body.velocity =initialVel.normalized*speed;
+        yield return new WaitForSeconds(duration);
         body.velocity = initialVel;
         yield return StartCoroutine(ColorAnimation(fx.transform.GetChild(0).GetComponent<SpriteRenderer>(),
             new Color(1f, 1f, 1f, 1f),
