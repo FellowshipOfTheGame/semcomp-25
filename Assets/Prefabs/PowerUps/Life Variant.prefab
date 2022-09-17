@@ -152,3 +152,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoDestroy: 1
   lifeQuantity: 1
+  sprite: {fileID: 21300000, guid: 933e1d31116fed24aa5d90d5ac452c7c, type: 3}
