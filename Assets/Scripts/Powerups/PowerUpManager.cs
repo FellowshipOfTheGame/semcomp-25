@@ -213,6 +213,7 @@ public class PowerUpManager : MonoBehaviour
     // Ice (freeze ball)
     [SerializeField] float freezeDuration = 1f;
     [SerializeField] GameObject icePrefab;
+    [SerializeField] float iceSpeed = 10f;
 
     public void IceBall(GameObject ball)
     {
@@ -220,16 +221,17 @@ public class PowerUpManager : MonoBehaviour
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
         GameObject fx = Instantiate(icePrefab, pos, Quaternion.identity,ball.transform);
         //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
-        StartCoroutine(changeSpeedFx(rb, fx,freezeDuration,10f));
+        StartCoroutine(changeSpeedFx(rb, fx,freezeDuration, iceSpeed));
     }
     [SerializeField] GameObject lamaPrefab;
+    [SerializeField] float lamaSpeed = 3f;
     public void LamaBall(GameObject ball)
     {
         Vector3 pos = ball.transform.position;
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
         GameObject fx = Instantiate(lamaPrefab, pos, Quaternion.identity, ball.transform);
         //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
-        StartCoroutine(changeSpeedFx(rb, fx, freezeDuration, 4f));
+        StartCoroutine(changeSpeedFx(rb, fx, freezeDuration, lamaSpeed));
     }
 
     private IEnumerator changeSpeedFx(Rigidbody2D body,GameObject fx,float duration,float speed)
