@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class BallController : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class BallController : MonoBehaviour
     [SerializeField] private float playerRadius = 0.5f;
     [SerializeField] private float maxDistance = 2f;
     
-
     // state variables
     private GameObject currentPlayer;
     private bool lockedOntoPlayer;
@@ -35,11 +35,13 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb2d;
     private MapManager mapManager;
     private GameManager gameManager;
+    private ScoreSystem scoreSystem;
     private AudioManager audioManager;
     private PlayerInputManager playerManager;
     private PowerUpManager powerUpManager;
     private Camera camera1;
     private Timer timer;
+    [SerializeField] private RetryMenu retryMenu;
     
     private void Awake()
     {
@@ -48,10 +50,60 @@ public class BallController : MonoBehaviour
         
         mapManager = FindObjectOfType<MapManager>();
         gameManager = FindObjectOfType<GameManager>();
+        scoreSystem = FindObjectOfType<ScoreSystem>();
         audioManager = FindObjectOfType<AudioManager>();
         playerManager = FindObjectOfType<PlayerInputManager>();
         camera1 = Camera.main;
         timer = FindObjectOfType<Timer>();
+    }
+
+    private void Start()
+    {
+        timer.SetPaused(true);
+        playerManager.SetCanMove(false);
+        // Time.timeScale = 0f;
+        PauseMenu.isGamePaused = true;
+        // lockedOntoPlayer = false;
+        
+        StartCoroutine(StartMatch());
+    }
+
+    public IEnumerator StartMatch()
+    {
+        RaycastBlockEvent.Invoke(true);
+        
+        Debug.Log("raycast blocker");
+
+        yield return MatchRequestHandler.StartMatch(
+            () =>
+            {
+                playerManager.SetCanMove(true);
+                timer.SetPaused(false);
+                Time.timeScale = 1f;
+                PauseMenu.isGamePaused = false;
+                Debug.Log("Match start");
+            },
+            req =>
+            {
+                OnHTTPFailure(req, StartMatch());
+            });
+        
+        Debug.Log("raycast unblocker");
+        
+        RaycastBlockEvent.Invoke(false);
+    }
+
+    private void OnHTTPFailure(UnityWebRequest req, IEnumerator retryEnumerator)
+    {
+        switch (req.responseCode)
+        {
+            case 401:
+                retryMenu.SessionExpiredInGame();
+                break;
+            default:
+                retryMenu.InternetConnectionLost(retryEnumerator);
+                break;
+        }
     }
 
     private IEnumerator KickDelay(float force)
@@ -77,7 +129,7 @@ public class BallController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                // mouse clicado próximo ao jogador
+                // mouse clicado prï¿½ximo ao jogador
                 if (Vector2.SqrMagnitude(mousePosition - transform.position) < playerRadius*playerRadius)
                 {
                     mousePressed = true;
@@ -90,7 +142,7 @@ public class BallController : MonoBehaviour
 
             if (mousePressed)
             {
-                // começa a mirar
+                // comeï¿½a a mirar
                 line.enabled = true;
                 var position = transform.position;
                 float forceLevel = GetForceLevel(mousePosition, position);
@@ -143,11 +195,27 @@ public class BallController : MonoBehaviour
         
     }
 
-    private IEnumerator GameOver()
+    public IEnumerator GameOver()
     {
+        RaycastBlockEvent.Invoke(true);
+        
         yield return new WaitForSeconds(0.5f);
-        gameManager.GameOverScene();
-        Destroy(gameObject);
+
+        var matchData = new MatchData()
+        {
+            score = scoreSystem.ScoreAmount
+        };
+
+        yield return StartCoroutine(MatchRequestHandler.FinishMatch(
+            matchData,
+            data =>
+            {
+                gameManager.GameOverScene(data.top_score);
+                Destroy(gameObject);
+            },
+            req => OnHTTPFailure(req, GameOver())));
+
+        RaycastBlockEvent.Invoke(false);
     }
 
     public void SetGameOver()

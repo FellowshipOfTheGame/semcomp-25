@@ -15,9 +15,14 @@ public class PauseMenu : MonoBehaviour
 
     public TMP_Text menuLabelText;
 
+    private ScoreSystem scoreSystem;
+
+    [SerializeField] private RetryMenu retryMenu;
+
     private void Awake()
     {
         Resume();
+        scoreSystem = FindObjectOfType<ScoreSystem>();
     }
 
     // Update is called once per frame
@@ -74,16 +79,35 @@ public class PauseMenu : MonoBehaviour
     // Open the Main Menu
     public void LoadMenu()
     {
-        Time.timeScale = 1f;
-        isGamePaused = false;
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(FinishAndLoadSceneEnumerator(0));
+    }
+
+    private IEnumerator FinishAndLoadSceneEnumerator(int sceneIndex)
+    {
+        RaycastBlockEvent.Invoke(true);
+
+        var matchData = new MatchData()
+        {
+            score = scoreSystem.ScoreAmount
+        };
+
+        yield return StartCoroutine(MatchRequestHandler.FinishMatch(
+            matchData,
+            data =>
+            {
+                Time.timeScale = 1f;
+                isGamePaused = false;
+                SceneManager.LoadScene(0);
+            },
+            req => retryMenu.InternetConnectionLost(FinishAndLoadSceneEnumerator(sceneIndex))
+            ));
+
+        RaycastBlockEvent.Invoke(false);
     }
 
     public void ReloadScene()
     {
-        Time.timeScale = 1f;
-        isGamePaused = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(FinishAndLoadSceneEnumerator(SceneManager.GetActiveScene().buildIndex));
     }
 
     // Quit the game
