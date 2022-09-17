@@ -31,8 +31,10 @@ public class BallController : MonoBehaviour
     /* Goal event */
     public delegate void GoalScored();
     public static event GoalScored OnGoalScored;
-    
+
     // cached references
+    [SerializeField] private SpriteRenderer ballSprite;
+    [SerializeField] private SpriteRenderer ghostSprite;
     private Rigidbody2D rb2d;
     private MapManager mapManager;
     private GameManager gameManager;
@@ -41,7 +43,7 @@ public class BallController : MonoBehaviour
     private PowerUpManager powerUpManager;
     private Camera camera1;
     private Timer timer;
-    
+    bool firstTime = true;
     private void Awake()
     {
         powerUpManager = GetComponent<PowerUpManager>();
@@ -63,7 +65,29 @@ public class BallController : MonoBehaviour
         playerManager.SetCanMove(true);
         line.enabled = false;
     }
-    
+
+    private bool canAim=true;
+    public void SetCanAim(bool val)
+    {
+        canAim = val;
+    }
+    float t = 0;
+    float angle;
+    float curr;
+    private void RotateBall()
+    {
+        Vector2 v = rb2d.velocity;
+         angle = 360-Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg;
+         curr = transform.rotation.eulerAngles.z;
+        if (t>=1f && Mathf.Abs(curr-angle)>0.01f)
+        {
+            t = 0;
+        }
+        angle = Mathf.LerpAngle(curr, angle, t);
+        t += 0.02f;
+        transform.eulerAngles=new Vector3(0,0,angle);
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -78,9 +102,9 @@ public class BallController : MonoBehaviour
             Vector3 mousePosition = camera1!.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && canAim)
             {
-                // mouse clicado próximo ao jogador
+                // mouse clicado prï¿½ximo ao jogador
                 if (Vector2.SqrMagnitude(mousePosition - transform.position) < ballRadius*ballRadius)
                 {
                     mousePressed = true;
@@ -90,9 +114,9 @@ public class BallController : MonoBehaviour
                 }
             }
 
-            if (mousePressed)
+            if (mousePressed )
             {
-                // começa a mirar
+                // comeï¿½a a mirar
                 line.enabled = true;
                 var position = transform.position;
                 float forceLevel = GetForceLevel(mousePosition, position);
@@ -118,6 +142,8 @@ public class BallController : MonoBehaviour
                 }
             }
         }
+
+        RotateBall();
     }
 
     private float GetForceLevel(Vector2 from, Vector2 to)
@@ -160,7 +186,8 @@ public class BallController : MonoBehaviour
             return;
         var fx = Instantiate(ballHitPrefab, transform.position, Quaternion.identity);
         rb2d.bodyType = RigidbodyType2D.Static;
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        ballSprite.enabled = false;
+        ghostSprite.enabled = false;
         mapManager.SetBallFx(false);
         timer.SetPaused(true);
         StartCoroutine(GameOver());
@@ -172,7 +199,9 @@ public class BallController : MonoBehaviour
     {
         audioManager.PlaySFX("PassAlly");
         currentPlayer = player;
-        currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
+        if (firstTime) firstTime = false;
+        else
+            currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;

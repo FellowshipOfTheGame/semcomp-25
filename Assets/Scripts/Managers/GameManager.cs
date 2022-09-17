@@ -16,7 +16,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TMP_Text currLevelView;
     [SerializeField] private TMP_Text nextLevelView;
-
+    [SerializeField] private GameObject hud;
+    [SerializeField] PlayerInputManager inputManager;
+    [SerializeField] BallController ball;
+    [SerializeField] float startTime;
     int level = 0;
     public int Level => level;
 
@@ -27,8 +30,18 @@ public class GameManager : MonoBehaviour
     {
         SetLevelView();
         highscore=PlayerPrefs.GetInt("HighScore", 0);
+        StartCoroutine(StartGameDelay());
     }
-    
+    IEnumerator StartGameDelay()
+    {
+        hud.SetActive(false);
+        inputManager.SetCanMove(false);
+        ball.SetCanAim(false);
+        yield return new WaitForSecondsRealtime(startTime);
+        ball.SetCanAim(true);
+        inputManager.SetCanMove(true);
+        hud.SetActive(true);
+    }
     IEnumerator ProgressAnim(float p)
     {
         float x = levelProgressSlider.value;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 398609409976776344}
   - component: {fileID: 398609409976776347}
   - component: {fileID: 1530444995268117609}
+  - component: {fileID: 4157984921604280819}
   m_Layer: 0
   m_Name: PowerUp
   m_TagString: Untagged
@@ -62,6 +63,25 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
+--- !u!95 &4157984921604280819
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398609409976776341}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 472440dcd4b7c234482bc771f8deca1a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &682364374162897837
 GameObject:
   m_ObjectHideFlags: 0
