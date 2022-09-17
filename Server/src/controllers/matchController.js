@@ -69,7 +69,6 @@ async function finish(req, res) {
                     .then((user) => {
                         return user
                     })
-            console.log(topScore)
             
             await match.create({
                 userId,
@@ -106,16 +105,14 @@ async function savepoint(req, res) {
             const startedAt = results[0]
 
             if (err) {
-                logger.error(`Failed to finish match for user: ${userId}`)
+                logger.error(`Failed to save match for user: ${userId}`)
                 return res.status(500).end()
             }
 
             if (startedAt === null) {
-                logger.warn(`Tryed to finish unexisting match for user: ${userId}`)
+                logger.warn(`Tryed to save unexisting match for user: ${userId}`)
                 return res.status(400).end()
             }
-
-            console.log(startedAt)
             
             await match.create({
                 userId,
