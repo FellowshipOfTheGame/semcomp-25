@@ -61,11 +61,11 @@ class SchemaScore {
     async findAll() {
         const pathTable = configEnv.PROJECT_ID + '/score/'
         const ScoreTable = db.ref(pathTable)
-        let topUserScoreListRef = ScoreTable.orderByChild('top_score')
+        let topUserScoreListRef = ScoreTable.orderByChild('top_score').limitToLast(10)
 
-        return topUserScoreListRef.get().then((scores) => {
-            if(scores.exists()) {
-                return scores;
+        const scores = await ScoreTable.orderByChild('top_score').get().then((snapshot) => {
+            if(snapshot.exists()) {
+                return snapshot.val();
             } else {
                 console.log("No data available");
                 return null;
@@ -74,6 +74,11 @@ class SchemaScore {
          }).catch((error) => {
              console.error(error);
          });
+
+         return scores.map(score => {
+            score.name,
+            score.top_score
+         })
     }
 
     async findOneById(provider_id) {
@@ -90,8 +95,7 @@ class SchemaScore {
             }
         }).catch((error) => {
             console.error(error);
-        });
-          
+        }); 
     }
 
     createOrUpdate(Player) {
