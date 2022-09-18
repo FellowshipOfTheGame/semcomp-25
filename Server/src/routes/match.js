@@ -15,8 +15,8 @@ routes.get('/', (req, res) => {
     res.status(200).send("Match alive!");
 })
 
-routes.post('/start', controller.start)
-routes.post('/finish', controller.finish)
-routes.post('/savepoint', controller.savepoint)
+routes.post('/start', matchController.start)
+routes.post('/finish', matchController.finish)
+routes.post('/savepoint', matchController.savepoint)
 
 module.exports = routes;

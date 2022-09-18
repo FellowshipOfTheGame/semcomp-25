@@ -1,6 +1,6 @@
 const { createHmac } = require("crypto")
 
-const config = require("../config/index")
+const configEnv = require("../config/index")
 const { logger } = require('../config/logger')
 
 const { Player, Score } = require('../models/player')
@@ -23,6 +23,7 @@ async function start(req, res) {
 
     sessionClient.multi()
         .set(`${userId}_match`, startedAt)
+        .expireat(`${userId}_match`, parseInt((+new Date)/1000) + configEnv.MATCH_RESPONSE_TIMEOUT)
         .exec( (err, results) => {
 
             if (err) {
@@ -39,8 +40,7 @@ async function start(req, res) {
 async function finish(req, res) {
     const userId = req.user.provider_id;
     const score = parseInt(req.body.score);
-
-const sign  = req.body?.sign?.toString().trim()
+    const sign  = req.body?.sign?.toString().trim()
 
     if (score === undefined) return res.status(400).end()
 
@@ -93,11 +93,10 @@ const sign  = req.body?.sign?.toString().trim()
                 }
                 
             } catch (err) {
-                console.log(err)
-                logger.info({
-                    message: `Error match finish`,
-                    err: err
+                logger.error({
+                    message: `Error match finish (firebase - ACCESS DENIED)`,
                 });
+                return res.status(500).end()
             }
                                         
             return res.status(200).json({top_score: playerScore.top_score})
@@ -105,7 +104,7 @@ const sign  = req.body?.sign?.toString().trim()
 }
 
 async function savepoint(req, res) {
-    const userId = req.user.id;
+    const userId = req.user.provider_id;
     const score = req.body.score;
     
     const sign  = req.body?.sign?.toString().trim()
@@ -114,17 +113,18 @@ async function savepoint(req, res) {
 
     logger.info(`User ${userId} is trying to save a match`)
 
-    const reqSign = createHmac('sha256', config.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
-    if(sign !== reqSign) {
-        logger.warn({
-            message: `at match.savepoint(): Invalid signature for user ${userId}`
-        })    
+    // const reqSign = createHmac('sha256', config.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
+    // if(sign !== reqSign) {
+    //     logger.warn({
+    //         message: `at match.savepoint(): Invalid signature for user ${userId}`
+    //     })    
 
-        return res.status(400).json({ message: "incorrect signature" })
-    }
+    //     return res.status(400).json({ message: "incorrect signature" })
+    // }
 
     return await sessionClient.multi()
         .get(`${userId}_match`)
+        .expireat(`${userId}_match`, parseInt((+new Date)/1000) + configEnv.MATCH_RESPONSE_TIMEOUT)
         .exec( async (err, results) => {
 
             const startedAt = parseInt(results[0])
@@ -134,31 +134,14 @@ async function savepoint(req, res) {
                 return res.status(500).end()
             }
 
-            if (startedAt === null) {
+            if (isNaN(startedAt)) {
                 logger.warn(`Tryed to save unexisting match for user: ${userId}`)
                 return res.status(400).end()
             }
             
-            await match.create({
-                userId,
-                score,
-                startedAt,
-                finishedAt: null
-            })
-
             return res.status(200).end()
         });
 }
-
-// function getScoreFromRequest(req) {
-//     try {
-//         return req.body.score;
-//     }
-//     catch (err) {
-//         logger.error(`Unable to parse request body`)
-//         return null;
-//     }
-// }
 
 module.exports = {
     index,
