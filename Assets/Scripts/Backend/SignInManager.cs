@@ -140,6 +140,7 @@ public class SignInManager : MonoBehaviour
 
     private void OnSignInSuccess()
     {
+        retryMenu.Close();
         signInButton.gameObject.SetActive(false);
         signOutButton.gameObject.SetActive(true);
         playButton.gameObject.SetActive(true);
@@ -169,6 +170,7 @@ public class SignInManager : MonoBehaviour
 
     private void OnSignOutSuccess()
     {
+        retryMenu.Close();
         signInButton.gameObject.SetActive(true);
         signOutButton.gameObject.SetActive(false);
         playButton.gameObject.SetActive(false);

@@ -21,12 +21,6 @@ public class RetryMenu : MonoBehaviour
     private int numTries = 0;
     private IEnumerator retryEnumerator;
     
-    private void Awake()
-    {
-        retryButton.onClick.AddListener(Retry);           
-        cancelButton.onClick.AddListener(Cancel);
-    }
-
     private void Open(Mode mode, IEnumerator retryEnumerator = null)
     {
         this.mode = mode;
@@ -36,12 +30,12 @@ public class RetryMenu : MonoBehaviour
         retryButton.interactable = (mode == Mode.Confirm || mode == Mode.CloseableConfirm);
     }
 
-    private void Close()
+    public void Close()
     {
         gameObject.SetActive(false);
     }
 
-    private void Cancel()
+    public void Cancel()
     {
         switch (mode)
         {
@@ -56,7 +50,7 @@ public class RetryMenu : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
     }
-    
+
     public void Retry()
     {
         cancelButton.interactable = false;
@@ -64,15 +58,8 @@ public class RetryMenu : MonoBehaviour
         
         if (retryEnumerator != null)
         {
-            StartCoroutine(RetryEnumeratorEnumerator());
+            StartCoroutine(retryEnumerator);
         }
-    }
-
-    private IEnumerator RetryEnumeratorEnumerator()
-    {
-        RaycastBlockEvent.Invoke(true);
-        yield return retryEnumerator;
-        RaycastBlockEvent.Invoke(false);
     }
 
     public void AuthenticationFaulted()

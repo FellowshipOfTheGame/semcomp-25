@@ -79,13 +79,11 @@ public class PauseMenu : MonoBehaviour
     // Open the Main Menu
     public void LoadMenu()
     {
-        StartCoroutine(FinishAndLoadSceneEnumerator(0));
+        StartCoroutine(FinishAndLoadMenuEnumerator());
     }
 
-    private IEnumerator FinishAndLoadSceneEnumerator(int sceneIndex)
+    private IEnumerator FinishAndLoadMenuEnumerator()
     {
-        RaycastBlockEvent.Invoke(true);
-
         var matchData = new MatchData()
         {
             score = scoreSystem.ScoreAmount
@@ -95,19 +93,19 @@ public class PauseMenu : MonoBehaviour
             matchData,
             data =>
             {
+                retryMenu.Close();
                 Time.timeScale = 1f;
                 isGamePaused = false;
                 SceneManager.LoadScene(0);
             },
-            req => retryMenu.InternetConnectionLost(FinishAndLoadSceneEnumerator(sceneIndex))
+            req => retryMenu.InternetConnectionLost(FinishAndLoadMenuEnumerator())
             ));
-
-        RaycastBlockEvent.Invoke(false);
     }
 
     public void ReloadScene()
     {
-        StartCoroutine(FinishAndLoadSceneEnumerator(SceneManager.GetActiveScene().buildIndex));
+        // StartCoroutine(FinishAndLoadSceneEnumerator(SceneManager.GetActiveScene().buildIndex));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Quit the game

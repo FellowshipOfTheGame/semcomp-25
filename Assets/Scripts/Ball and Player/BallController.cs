@@ -61,25 +61,19 @@ public class BallController : MonoBehaviour
     {
         timer.SetPaused(true);
         playerManager.SetCanMove(false);
-        // Time.timeScale = 0f;
         PauseMenu.isGamePaused = true;
-        // lockedOntoPlayer = false;
-        
+
         StartCoroutine(StartMatch());
     }
 
-    public IEnumerator StartMatch()
+    private IEnumerator StartMatch()
     {
-        RaycastBlockEvent.Invoke(true);
-        
-        Debug.Log("raycast blocker");
-
         yield return MatchRequestHandler.StartMatch(
             () =>
             {
+                retryMenu.Close();
                 playerManager.SetCanMove(true);
                 timer.SetPaused(false);
-                Time.timeScale = 1f;
                 PauseMenu.isGamePaused = false;
                 Debug.Log("Match start");
             },
@@ -87,10 +81,6 @@ public class BallController : MonoBehaviour
             {
                 OnHTTPFailure(req, StartMatch());
             });
-        
-        Debug.Log("raycast unblocker");
-        
-        RaycastBlockEvent.Invoke(false);
     }
 
     private void OnHTTPFailure(UnityWebRequest req, IEnumerator retryEnumerator)
@@ -197,8 +187,6 @@ public class BallController : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        RaycastBlockEvent.Invoke(true);
-        
         yield return new WaitForSeconds(0.5f);
 
         var matchData = new MatchData()
@@ -210,12 +198,11 @@ public class BallController : MonoBehaviour
             matchData,
             data =>
             {
+                retryMenu.Close();
                 gameManager.GameOverScene(data.top_score);
                 Destroy(gameObject);
             },
             req => OnHTTPFailure(req, GameOver())));
-
-        RaycastBlockEvent.Invoke(false);
     }
 
     public void SetGameOver()
