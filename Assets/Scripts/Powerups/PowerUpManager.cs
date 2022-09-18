@@ -176,7 +176,7 @@ public class PowerUpManager : MonoBehaviour
             timeManager.AddTime(time);
         }
     }
-    public void AddScore(int score)
+    public void PowerupScore(int score)
     {
 
         if (!scoreManager)
@@ -185,7 +185,7 @@ public class PowerUpManager : MonoBehaviour
         }
         else
         {
-            scoreManager.AddScore(score);
+            scoreManager.AddPowerupScore(score);
         }
 
     }
