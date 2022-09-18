@@ -67,7 +67,7 @@ module.exports = {
             name: req.user.first_name + ' ' + req.user.surname_name,
             game_count: 0,
             top_score: 0,
-            top_score_date: 0,
+            match_id: 0,
             sign: ""
         }
         let user = undefined
@@ -89,7 +89,7 @@ module.exports = {
                 name: req.user.first_name + ' ' + req.user.surname_name,
                 game_count: user.games_count,
                 top_score: score.top_score,
-                top_score_date: score.top_score_date,
+                match_id: score.match_id,
                 sign: ""
             }
             

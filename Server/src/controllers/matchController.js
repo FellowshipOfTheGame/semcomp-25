@@ -57,7 +57,7 @@ async function finish(req, res) {
         .get(`${userId}_match`)
         .del(`${userId}_match`)
         .exec( async (err, results) => {
-            const startedAt = results[0]
+            const startedAt = parseInt(results[0])
             const hasDeleted = results[1]
             const finishedAt = new Date().getTime()
 
@@ -86,7 +86,7 @@ async function finish(req, res) {
                 // update score 
                 if(playerScore && score > playerScore.top_score) {
                     playerScore.top_score = score;
-                    playerScore.score_date = finishedAt;
+                    playerScore.match_id = startedAt;
                     playerScore.provider_id = userId
                     await Score.createOrUpdate(playerScore)
                 }

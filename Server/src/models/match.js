@@ -43,7 +43,6 @@ class SchemaMatch {
 
         db.ref(pathTable).set({
             created_at: firebase.database.ServerValue.TIMESTAMP,
-            user_id: match.userId,
             started_at: match.startedAt,
             finished_at: match.finishedAt,
             score: match.score
