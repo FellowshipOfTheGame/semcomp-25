@@ -29,10 +29,10 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         // Check if the user press ESC button
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape))
         {
             SwitchPaused();
-        }
+        }*/
     }
     public void SwitchPaused()
     {
@@ -77,7 +77,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Open the Main Menu
-    public void LoadMenu()
+    public void FinishAndLoadMenu()
     {
 #if !UNITY_EDITOR
         StartCoroutine(FinishAndLoadMenuEnumerator());

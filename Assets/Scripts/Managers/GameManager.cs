@@ -7,28 +7,40 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text gameOverPointsView;
-    [SerializeField] private TMP_Text highScoreView;
-    [SerializeField] private GameObject gameOverObj;
+    private GameOver gameOver;
 
     [SerializeField] private Slider levelProgressSlider;
-
     [SerializeField] private TMP_Text currLevelView;
     [SerializeField] private TMP_Text nextLevelView;
+    [SerializeField] private GameObject hud;
+    [SerializeField] PlayerInputManager inputManager;
+    [SerializeField] BallController ball;
+    [SerializeField] float startTime;
+    [SerializeField] private GameObject startAnimation;
 
-    int level = 0;
+    private int level;
     public int Level => level;
-
-    private int highscore = 0;
 
     // Start is called before the first frame update
     private void Start()
     {
+        gameOver = GameOver.Instance;
         SetLevelView();
-        // highscore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
-    private IEnumerator ProgressAnim(float p)
+    public IEnumerator StartGameDelay()
+    {
+        startAnimation.SetActive(true);
+        hud.SetActive(false);
+        inputManager.SetCanMove(false);
+        //ball.SetCanAim(false);
+        yield return new WaitForSecondsRealtime(startTime);
+        //ball.SetCanAim(true);
+        inputManager.SetCanMove(true);
+        hud.SetActive(true);
+    }
+
+    IEnumerator ProgressAnim(float p)
     {
         float x = levelProgressSlider.value;
         if (x > p)
@@ -66,17 +78,14 @@ public class GameManager : MonoBehaviour
         nextLevelView.text = (level + 1) + "";
     }
 
-    public void GameOverScene(int _highscore)
+    public void GameOverScene(int highscore)
     {
-        int points = FindObjectOfType<ScoreSystem>().ScoreAmount;
-        highscore = Mathf.Max(_highscore, points);
-        Debug.Log($"{(float)(points / _highscore) * 100}% happy");
-        // PlayerPrefs.SetInt("HighScore", highscore);
-        GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
-        GameObject.FindObjectOfType<PlayerInputManager>().SetCanMove(false) ;
-        gameOverPointsView.text = points + "";
-        highScoreView.text = "High Score: "+highscore + "";
-        gameOverObj.SetActive(true);
+        //gameOver.OnGameOver(highscore);
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void RestartScene()

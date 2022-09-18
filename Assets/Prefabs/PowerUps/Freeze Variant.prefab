@@ -151,3 +151,4 @@ MonoBehaviour:
   timeScale: 0
   hasIceFx: 1
   icePrefab: {fileID: 50487187555934252, guid: e9391933d95980c45a260eea7d7f4798, type: 3}
+  sprite: {fileID: 21300000, guid: d6059e4106459064ebe2fd127988ccee, type: 3}

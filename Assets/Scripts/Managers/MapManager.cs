@@ -8,8 +8,6 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] Transform presetSpawner;
     [SerializeField] private float speed = 0.01f;
-    [SerializeField] private GameObject fx;
-    [SerializeField] Transform ballTransf;
     
     Transform currPlayer;
     
@@ -22,7 +20,7 @@ public class MapManager : MonoBehaviour
     private float goalTargetY;
     
     /* Level Control  */
-    private int allyBarsPassed = 0;
+    public int AllyBarsPassed { get; private set; } = 0;
     private int totalPlayersInLevel = 0;
     private List<GameObject> goalPositions = new List<GameObject>();
     private List<GameObject> firstPlayerInLevels = new List<GameObject>();
@@ -43,10 +41,7 @@ public class MapManager : MonoBehaviour
         ballController = FindObjectOfType<BallController>();
     }
 
-    public void SetBallFx(bool val)
-    {
-        fx.SetActive(val);
-    }
+    
     
     private void Start()
     {
@@ -61,7 +56,7 @@ public class MapManager : MonoBehaviour
             RepositionFields();
         }
 
-        ballTransf.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
+        ballController.transform.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
         totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
     }
 
@@ -142,9 +137,9 @@ public class MapManager : MonoBehaviour
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0.1f);
-        fx.SetActive(false);
+        ballController.SetBallFx(false);
 
-        // spawn presets until goal of current level is spawned
+        // keep at least 7 presets spawned
         while (presetsOnMap.Count <= 7)
         {
             SpawnPreset();
@@ -161,7 +156,7 @@ public class MapManager : MonoBehaviour
             deltaMove = Mathf.Min(deltaMove, distance);
             distance -= deltaMove;
 
-            Vector3 pos = transform.position;
+            Vector3 pos = transform1.position;
             pos.y -= deltaMove;
             transform1.position = pos;
             yield return null;
@@ -173,26 +168,25 @@ public class MapManager : MonoBehaviour
             Destroy(presetsOnMap[0].gameObject);
             presetsOnMap.RemoveAt(0);
         }
-        if(fx!=null)
-            fx.SetActive(true);
+
+        ballController.SetBallFx(true);
         ballController.GoalTransitionOver = true; // set variable so BallController knows the transition was finished
     }
 
     public void AllyBarPassed()
     {
-        allyBarsPassed++;
-        if (allyBarsPassed == totalPlayersInLevel + 1)
+        AllyBarsPassed++;
+        if (AllyBarsPassed == totalPlayersInLevel + 1)
         {
-            allyBarsPassed = 1;
+            AllyBarsPassed = 1;
             totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
         }
-        gameManager.SetLevelProgress((float)allyBarsPassed / (totalPlayersInLevel+1));
+        gameManager.SetLevelProgress((float)AllyBarsPassed / (totalPlayersInLevel+1));
     }
 
     public void StartTransition(Transform newPlayer)
     {
         currPlayer = newPlayer;
-        currPlayer.GetComponentInChildren<AllyBar>().SetPassed();
         StartCoroutine(Transition());
     }
 }

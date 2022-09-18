@@ -145,3 +145,4 @@ MonoBehaviour:
   autoDestroy: 1
   duration: 3
   scaleSize: 1
+  sprite: {fileID: 21300000, guid: 39f4c8be903a31842ad86d0c5c50be48, type: 3}
