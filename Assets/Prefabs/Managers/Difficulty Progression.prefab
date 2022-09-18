@@ -79,61 +79,69 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c105367b5fe6c244887624fcc2a9ff90, type: 2}
   - {fileID: 11400000, guid: b84ba109c55961f43bb2350fa094c954, type: 2}
   goalPresetSOList:
+  - {fileID: 11400000, guid: b09f7ba08b3c66140bbad3fbfb524b1b, type: 2}
+  - {fileID: 11400000, guid: 75a92a9e7d08b114bb96a17c642d47e4, type: 2}
+  - {fileID: 11400000, guid: c1cefaaf61009494cb0224dacf017e7d, type: 2}
+  - {fileID: 11400000, guid: 197f908df48fd8b4698ed1e376dc21f2, type: 2}
+  - {fileID: 11400000, guid: 11dd80de579be994992386a26b6f2ea8, type: 2}
+  - {fileID: 11400000, guid: 1d171f3ffeaf3304cb27d9fae146bba5, type: 2}
   - {fileID: 11400000, guid: b16ed3d47c6301e468c2a8dccb6c012c, type: 2}
+  - {fileID: 11400000, guid: 63ac906c0b34cbe4bad5e170ebcf1b00, type: 2}
+  - {fileID: 11400000, guid: 84cc3bb7293d4b54a97859e00f123133, type: 2}
   levelProgression:
-  - easy: 15
+  - easy: 8
     normal: 0
     hard: 0
     goalDifficulty: 0
-  - easy: 12
-    normal: 3
-    hard: 0
-    goalDifficulty: 0
-  - easy: 10
-    normal: 5
+  - easy: 6
+    normal: 2
     hard: 0
     goalDifficulty: 0
   - easy: 7
-    normal: 8
+    normal: 3
+    hard: 0
+    goalDifficulty: 0
+  - easy: 7
+    normal: 5
     hard: 0
     goalDifficulty: 0
   - easy: 5
+    normal: 7
+    hard: 0
+    goalDifficulty: 1
+  - easy: 0
+    normal: 12
+    hard: 0
+    goalDifficulty: 1
+  - easy: 0
+    normal: 13
+    hard: 0
+    goalDifficulty: 1
+  - easy: 0
     normal: 10
-    hard: 0
-    goalDifficulty: 0
-  - easy: 3
-    normal: 12
-    hard: 0
-    goalDifficulty: 0
-  - easy: 0
-    normal: 15
-    hard: 0
-    goalDifficulty: 0
-  - easy: 0
-    normal: 12
     hard: 3
-    goalDifficulty: 0
+    goalDifficulty: 1
   - easy: 0
     normal: 10
     hard: 5
-    goalDifficulty: 0
+    goalDifficulty: 1
   - easy: 0
     normal: 7
     hard: 8
-    goalDifficulty: 0
+    goalDifficulty: 2
   - easy: 0
     normal: 5
     hard: 10
-    goalDifficulty: 0
+    goalDifficulty: 2
   - easy: 0
     normal: 3
     hard: 12
-    goalDifficulty: 0
+    goalDifficulty: 2
   - easy: 0
     normal: 2
     hard: 13
-    goalDifficulty: 0
+    goalDifficulty: 2
   - easy: 0
     normal: 0
     hard: 15
-    goalDifficulty: 0
+    goalDifficulty: 2

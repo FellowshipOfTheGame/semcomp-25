@@ -10,6 +10,7 @@ public class TimePowerup : PowerUp
     [SerializeField] bool hasIceFx;
 
     [SerializeField] GameObject icePrefab;
+    [SerializeField] Sprite sprite;
     public void SpawnIce()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -24,6 +25,7 @@ public class TimePowerup : PowerUp
     public override void Collected(Collider2D col)
     {
         Manager.ChangeEnemyTime(duration, timeScale);
+        Manager.SetPowerUpHud(sprite, duration);
         if (hasIceFx)
         {
             SpawnIce();

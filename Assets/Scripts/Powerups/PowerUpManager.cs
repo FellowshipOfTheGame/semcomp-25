@@ -18,6 +18,8 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private Timer timeManager;
     [SerializeField] private GameObject ballFx;
     [SerializeField] private float teleportDelay;
+    [SerializeField] private PowerUpHud powerUpHud;
+    [SerializeField] private SpriteRenderer ghostSprite;
     private int lives;  // number of lives of the player
     private bool isInvisible;
 
@@ -42,8 +44,15 @@ public class PowerUpManager : MonoBehaviour
         initialBallRadius = this.GetComponent<CircleCollider2D>().radius;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    public void SetPowerUpHud(Sprite sprite, float duration)
+    {
+        powerUpHud.CreateTimer(sprite, duration);
+    }
 
-
+    public void SetLifePowerUpHud(Sprite sprite)
+    {
+        powerUpHud.SetLifeView(sprite, lives);
+    }
     public void AddLife(int n)
     {
         lives += n;
@@ -51,6 +60,7 @@ public class PowerUpManager : MonoBehaviour
     public void LoseLife()
     {
         lives--;
+        powerUpHud.SetLifeView(lives);
     }
 
     public int GetNumberLives()
@@ -66,21 +76,21 @@ public class PowerUpManager : MonoBehaviour
     // Turns the ball invisible to enemy collision
     public void ChangeTemporarilyVisibility(float invisibilityTime)
     {
-        coroutine = ChangeVisibilityAndWait(invisibilityTime);
+        coroutine = GhostBallAnim(invisibilityTime);
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator ChangeVisibilityAndWait(float invisibilityTime)
+    private IEnumerator GhostBallAnim(float invisibilityTime)
     {
-        Color invisibleColor = new Color(1f, 1f, 1f, 0.2f);
-        Color oldColor = spriteRenderer.color;
+        Color oldColor = new Color(1f, 1f, 1f, 0);
+        Color newColor = new Color(1f,1f,1f,1f);
         isInvisible = true; 
 
         ballFx.SetActive(false);
 
-         yield return StartCoroutine(ColorAnimation(oldColor, invisibleColor)); 
+         yield return StartCoroutine(ColorAnimation(ghostSprite, oldColor, newColor)); 
         yield return new WaitForSeconds(invisibilityTime);
-        yield return StartCoroutine(ColorAnimation(invisibleColor, oldColor));
+        yield return StartCoroutine(ColorAnimation(ghostSprite,newColor, oldColor));
 
 
         ballFx.SetActive(true);
@@ -93,7 +103,23 @@ public class PowerUpManager : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator ColorAnimation(Color startColor, Color endColor)
+    private IEnumerator ColorAnimation(SpriteRenderer _sprite, Color startColor, Color endColor, float speed=0.02f)
+    {
+
+        float t = 0;
+        Color currColor;
+        do
+        {
+            currColor = Color.Lerp(startColor, endColor, t);
+            _sprite.color = currColor;
+            t += speed;
+            yield return new WaitForEndOfFrame();
+        } while (t <= 1f);
+
+        _sprite.color = endColor;
+    }
+
+        private IEnumerator ColorAnimation(Color startColor, Color endColor)
     {
 
         float t = 0;
@@ -164,6 +190,9 @@ public class PowerUpManager : MonoBehaviour
 
     }
 
+
+    // Portal Teleport
+
     private bool canTeleport = true;
     public void Teleport(Vector3 pos,Vector2 vel)
     {
@@ -181,4 +210,41 @@ public class PowerUpManager : MonoBehaviour
         yield return new WaitForSeconds(teleportDelay);
         canTeleport = true;
     }
+    // Ice (freeze ball)
+    [SerializeField] float freezeDuration = 1f;
+    [SerializeField] GameObject icePrefab;
+    [SerializeField] float iceSpeed = 10f;
+
+    public void IceBall(GameObject ball)
+    {
+        Vector3 pos = ball.transform.position;
+        Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+        GameObject fx = Instantiate(icePrefab, pos, Quaternion.identity,ball.transform);
+        //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
+        StartCoroutine(changeSpeedFx(rb, fx,freezeDuration, iceSpeed));
+    }
+    [SerializeField] GameObject lamaPrefab;
+    [SerializeField] float lamaSpeed = 3f;
+    public void LamaBall(GameObject ball)
+    {
+        Vector3 pos = ball.transform.position;
+        Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+        GameObject fx = Instantiate(lamaPrefab, pos, Quaternion.identity, ball.transform);
+        //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
+        StartCoroutine(changeSpeedFx(rb, fx, freezeDuration, lamaSpeed));
+    }
+
+    private IEnumerator changeSpeedFx(Rigidbody2D body,GameObject fx,float duration,float speed)
+    {
+        Vector2 initialVel = body.velocity;
+        body.velocity =initialVel.normalized*speed;
+        yield return new WaitForSeconds(duration);
+        body.velocity = initialVel;
+        yield return StartCoroutine(ColorAnimation(fx.transform.GetChild(0).GetComponent<SpriteRenderer>(),
+            new Color(1f, 1f, 1f, 1f),
+            new Color(1f, 1f, 1f, 0f),
+            0.1f));
+        Destroy(fx);
+    }
+
 }

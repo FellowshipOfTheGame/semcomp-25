@@ -78,13 +78,14 @@ public class ScoreSystem : MonoBehaviour
             PassScoreAmount += successfulPassScore;
         }
     }
-
+    [SerializeField] private GameObject goalPrefab;
     private void GoalScored()
     {
         if (enableGoalScore)
         {
             ScoreAmount += goalScore;
             GoalScoreAmount += goalScore;
+            Instantiate(goalPrefab);
         }
     }
 
