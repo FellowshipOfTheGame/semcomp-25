@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     {
         gameOver = GameOver.Instance;
         SetLevelView();
-        highscore=PlayerPrefs.GetInt("HighScore", 0);
         StartCoroutine(StartGameDelay());
     }
 
