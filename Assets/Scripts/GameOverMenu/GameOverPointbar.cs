@@ -216,13 +216,13 @@ public class GameOverPointbar : MonoBehaviour
                 }
             }
         }
-        /*
+        
         Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
         Debug.Log("GOAL: " + _goalRatio);
         Debug.Log("PASS: " + _passRatio);
         Debug.Log("WALL: " + _wallRatio);
         Debug.Log("PW: " + _powerUpRatio);
-        */
+        
     }
 
     private void DeactivateBarsWithZeroScore()
