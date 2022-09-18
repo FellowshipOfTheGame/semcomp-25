@@ -21,23 +21,6 @@ class SchemaMatch {
         
     }
 
-    // async findHighestScoreByUserId(userId) {
-    //     const pathTable = configEnv.PROJECT_ID + this.tableName
-    //     db.ref(pathTable). get({
-    //         user_id: userId
-    //     }).then((snapshot) => {
-    //         if (snapshot.exists()) {
-    //             console.log(Object.values(snapshot.val()));
-    //             return snapshot.val();
-    //         } else {
-    //             console.log("No data available");
-    //             return null;
-    //         }
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
-
     async create(match) {
         const pathTable = configEnv.PROJECT_ID + '/match/' + `${match.userId}/${match.startedAt}`
 

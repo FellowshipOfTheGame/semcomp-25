@@ -45,7 +45,6 @@ class SchemaPlayer {
             email: Player.email,
             provider: Player.provider, 
             provider_id: Player.provider_id,
-            games_count: 0,
             is_banned: false
         });
 

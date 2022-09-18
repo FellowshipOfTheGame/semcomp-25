@@ -38,5 +38,7 @@ module.exports = {
     REQUEST_SIGNATURE_KEY: process.env.REQUEST_SIGNATURE_KEY || "MINAHSENHASUPERSECRETA",
     RESPONSE_SIGNATURE_KEY: process.env.RESPONSE_SIGNATURE_KEY || "MINAHSENHAHYPERSECRETA",
 
+    // Timeout to confirm connection alive
+    // Unit: seconds
     MATCH_RESPONSE_TIMEOUT: process.env.MATCH_RESPONSE_TIMEOUT || 10
 }
