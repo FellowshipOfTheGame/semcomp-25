@@ -39,7 +39,8 @@ async function start(req, res) {
 async function finish(req, res) {
     const userId = req.user.provider_id;
     const score = parseInt(req.body.score);
-    const sign  = req.body?.sign?.toString().trim()
+
+const sign  = req.body?.sign?.toString().trim()
 
     if (score === undefined) return res.status(400).end()
 
@@ -103,6 +104,52 @@ async function finish(req, res) {
         });
 }
 
+async function savepoint(req, res) {
+    const userId = req.user.id;
+    const score = req.body.score;
+    
+    const sign  = req.body?.sign?.toString().trim()
+
+    if (score === undefined) return res.status(400).end()
+
+    logger.info(`User ${userId} is trying to save a match`)
+
+    const reqSign = createHmac('sha256', config.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
+    if(sign !== reqSign) {
+        logger.warn({
+            message: `at match.savepoint(): Invalid signature for user ${userId}`
+        })    
+
+        return res.status(400).json({ message: "incorrect signature" })
+    }
+
+    return await sessionClient.multi()
+        .get(`${userId}_match`)
+        .exec( async (err, results) => {
+
+            const startedAt = parseInt(results[0])
+
+            if (err) {
+                logger.error(`Failed to save match for user: ${userId}`)
+                return res.status(500).end()
+            }
+
+            if (startedAt === null) {
+                logger.warn(`Tryed to save unexisting match for user: ${userId}`)
+                return res.status(400).end()
+            }
+            
+            await match.create({
+                userId,
+                score,
+                startedAt,
+                finishedAt: null
+            })
+
+            return res.status(200).end()
+        });
+}
+
 // function getScoreFromRequest(req) {
 //     try {
 //         return req.body.score;
@@ -116,5 +163,6 @@ async function finish(req, res) {
 module.exports = {
     index,
     start,
-    finish
+    finish,
+    savepoint
 }

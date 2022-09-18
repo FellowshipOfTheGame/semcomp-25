@@ -15,8 +15,8 @@ routes.get('/', (req, res) => {
     res.status(200).send("Match alive!");
 })
 
-routes.post('/start', SessionMiddleware.isAuth, matchController.start)
-routes.post('/finish', SessionMiddleware.isAuth, matchController.finish)
-
+routes.post('/start', controller.start)
+routes.post('/finish', controller.finish)
+routes.post('/savepoint', controller.savepoint)
 
 module.exports = routes;
