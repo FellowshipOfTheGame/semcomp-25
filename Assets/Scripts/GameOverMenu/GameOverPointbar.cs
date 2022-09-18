@@ -154,6 +154,7 @@ public class GameOverPointbar : MonoBehaviour
             if (!_wallhit.activeSelf && !_powerup.activeSelf)
             {
                 _passRatio -= HEAD_TAIL_PERCENTAGE;
+                _passIndicator_rt.gameObject.SetActive(false);
             }
         }
         if (_wallhit.activeSelf)
@@ -179,6 +180,7 @@ public class GameOverPointbar : MonoBehaviour
             if (!_powerup.activeSelf)
             {
                 _wallRatio -= HEAD_TAIL_PERCENTAGE;
+                _whIndicator_rt.gameObject.SetActive(false);
             }
         }
         if (_powerup.activeSelf)
@@ -216,12 +218,23 @@ public class GameOverPointbar : MonoBehaviour
                 }
             }
         }
-        
+
+        float diffPercentage = _goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE - 1.0f;
+
+        if (diffPercentage > 0.01f)
+        {
+            _goalRatio -= diffPercentage * _goalRatio;
+            _passRatio -= diffPercentage * _passRatio;
+            _wallRatio -= diffPercentage * _wallRatio;
+            _powerUpRatio -= diffPercentage * _powerUpRatio;
+        }
+        /*
         Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
         Debug.Log("GOAL: " + _goalRatio);
         Debug.Log("PASS: " + _passRatio);
         Debug.Log("WALL: " + _wallRatio);
         Debug.Log("PW: " + _powerUpRatio);
+        */
         
     }
 
@@ -307,11 +320,11 @@ public class GameOverPointbar : MonoBehaviour
     {
         // Checks for the case that there is only one form of score
         // ( the player get only one type of score in a run )
-        if (_passRatio == 1.0f)
+        if (Mathf.Abs(_passRatio - 1.0f) < .01f)
         {
             _passIndicator_rt.gameObject.SetActive(false);
         }
-        else if (_wallRatio == 1.0f)
+        else if (Mathf.Abs(_wallRatio - 1.0f) < .0001f)
         {
             _whIndicator_rt.gameObject.SetActive(false);
         }
