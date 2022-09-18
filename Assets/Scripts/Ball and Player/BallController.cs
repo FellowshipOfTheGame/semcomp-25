@@ -5,7 +5,8 @@ public class BallController : MonoBehaviour
 {
     [SerializeField] private LineRenderer line;
     [SerializeField] private GameObject ballHitPrefab;
-
+    [SerializeField] private GameObject throwFx;
+    
     [Header("Stats")]
     [SerializeField] private float offsetFromPlayer;
     [SerializeField] private float throwSpeed;
@@ -64,6 +65,12 @@ public class BallController : MonoBehaviour
         mousePressed = false;
         playerManager.SetCanMove(true);
         line.enabled = false;
+    }
+    
+    public void SetBallFx(bool val)
+    {
+        if (throwFx)
+            throwFx.SetActive(val);
     }
 
     private bool canAim=true;
@@ -188,7 +195,7 @@ public class BallController : MonoBehaviour
         rb2d.bodyType = RigidbodyType2D.Static;
         ballSprite.enabled = false;
         ghostSprite.enabled = false;
-        mapManager.SetBallFx(false);
+        SetBallFx(false);
         timer.SetPaused(true);
         StartCoroutine(GameOver());
         gameOverSet = true;
@@ -197,11 +204,14 @@ public class BallController : MonoBehaviour
     // Auxiliar function to set the ball freezed to the player position
     private void SetBallToPlayer(GameObject player)
     {
-        audioManager.PlaySFX("PassAlly");
         currentPlayer = player;
         if (firstTime) firstTime = false;
         else
+        {
             currentPlayer.transform.GetChild(0).gameObject.SetActive(true);
+            audioManager.PlaySFX("PassAlly");
+        }
+        
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;

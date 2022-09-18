@@ -50,3 +50,4 @@ MonoBehaviour:
   enableSuccessfulPassScore: 1
   enableGoalScore: 1
   scoreTextUI: {fileID: 0}
+  goalPrefab: {fileID: 4788900070623397355, guid: d7757363109f0a748ae84dcddce2bde3, type: 3}

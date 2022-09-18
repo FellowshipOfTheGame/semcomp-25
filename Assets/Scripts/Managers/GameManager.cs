@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
     {
         hud.SetActive(false);
         inputManager.SetCanMove(false);
-        ball.SetCanAim(false);
+        //ball.SetCanAim(false);
         yield return new WaitForSecondsRealtime(startTime);
-        ball.SetCanAim(true);
+        //ball.SetCanAim(true);
         inputManager.SetCanMove(true);
         hud.SetActive(true);
     }

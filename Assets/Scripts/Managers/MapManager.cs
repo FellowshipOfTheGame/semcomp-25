@@ -8,8 +8,6 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] Transform presetSpawner;
     [SerializeField] private float speed = 0.01f;
-    [SerializeField] private GameObject fx;
-    [SerializeField] Transform ballTransf;
     
     Transform currPlayer;
     
@@ -43,10 +41,7 @@ public class MapManager : MonoBehaviour
         ballController = FindObjectOfType<BallController>();
     }
 
-    public void SetBallFx(bool val)
-    {
-        fx.SetActive(val);
-    }
+    
     
     private void Start()
     {
@@ -61,7 +56,7 @@ public class MapManager : MonoBehaviour
             RepositionFields();
         }
 
-        ballTransf.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
+        ballController.transform.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
         totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
     }
 
@@ -142,7 +137,7 @@ public class MapManager : MonoBehaviour
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0.1f);
-        fx.SetActive(false);
+        ballController.SetBallFx(false);
 
         // keep at least 7 presets spawned
         while (presetsOnMap.Count <= 7)
@@ -173,8 +168,8 @@ public class MapManager : MonoBehaviour
             Destroy(presetsOnMap[0].gameObject);
             presetsOnMap.RemoveAt(0);
         }
-        if(fx!=null)
-            fx.SetActive(true);
+
+        ballController.SetBallFx(true);
         ballController.GoalTransitionOver = true; // set variable so BallController knows the transition was finished
     }
 
