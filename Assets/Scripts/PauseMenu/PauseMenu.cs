@@ -79,7 +79,13 @@ public class PauseMenu : MonoBehaviour
     // Open the Main Menu
     public void LoadMenu()
     {
+#if !UNITY_EDITOR
         StartCoroutine(FinishAndLoadMenuEnumerator());
+#else
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        SceneManager.LoadScene(0);
+#endif
     }
 
     private IEnumerator FinishAndLoadMenuEnumerator()

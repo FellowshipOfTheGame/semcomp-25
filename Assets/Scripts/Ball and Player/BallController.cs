@@ -59,11 +59,13 @@ public class BallController : MonoBehaviour
 
     private void Start()
     {
+#if !UNITY_EDITOR
         timer.SetPaused(true);
         playerManager.SetCanMove(false);
         PauseMenu.isGamePaused = true;
 
         StartCoroutine(StartMatch());
+#endif
     }
 
     private IEnumerator StartMatch()
@@ -188,6 +190,8 @@ public class BallController : MonoBehaviour
     public IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.5f);
+        
+#if !UNITY_EDITOR
 
         var matchData = new MatchData()
         {
@@ -203,6 +207,10 @@ public class BallController : MonoBehaviour
                 Destroy(gameObject);
             },
             req => OnHTTPFailure(req, GameOver())));
+#else
+        gameManager.GameOverScene(scoreSystem.ScoreAmount);
+        Destroy(gameObject);
+#endif
     }
 
     public void SetGameOver()
