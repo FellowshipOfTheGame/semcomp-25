@@ -11,7 +11,6 @@ class SchemaPlayer {
             if(users.exists()) {
                 return users;
             } else {
-                console.log("No data available");
                 return null;
             }
             
@@ -26,10 +25,8 @@ class SchemaPlayer {
         // find one user
         return db.ref(playerTable).get().then((snapshot) => {
             if (snapshot.exists()) {
-                console.log(snapshot.val());
                 return snapshot.val();
             } else {
-                console.log("No data available");
                 return null;
             }
         }).catch((error) => {
@@ -85,10 +82,8 @@ class SchemaScore {
         // find one user
         return db.ref(playerTable).get().then((snapshot) => {
             if (snapshot.exists()) {
-                console.log(snapshot.val());
                 return snapshot.val();
             } else {
-                console.log("No data available");
                 return null;
             }
         }).catch((error) => {
@@ -102,7 +97,7 @@ class SchemaScore {
         db.ref(pathTable).set({
             name: Player.name,
             top_score: Player.top_score,
-            match_id: Player.match_id || new Date().getTime(),
+            match_id: Player.match_id || 0,
         }).catch((error) => {
             console.error(error);
         });
