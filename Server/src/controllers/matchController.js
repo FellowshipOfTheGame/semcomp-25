@@ -39,7 +39,8 @@ async function start(req, res) {
 async function finish(req, res) {
     const userId = req.user.provider_id;
     const score = parseInt(req.body.score);
-    const sign  = req.body?.sign?.toString().trim()
+
+const sign  = req.body?.sign?.toString().trim()
 
     if (score === undefined) return res.status(400).end()
 
@@ -57,7 +58,7 @@ async function finish(req, res) {
         .get(`${userId}_match`)
         .del(`${userId}_match`)
         .exec( async (err, results) => {
-            const startedAt = results[0]
+            const startedAt = parseInt(results[0])
             const hasDeleted = results[1]
             const finishedAt = new Date().getTime()
 
@@ -86,7 +87,7 @@ async function finish(req, res) {
                 // update score 
                 if(playerScore && score > playerScore.top_score) {
                     playerScore.top_score = score;
-                    playerScore.score_date = finishedAt;
+                    playerScore.match_id = startedAt;
                     playerScore.provider_id = userId
                     await Score.createOrUpdate(playerScore)
                 }
@@ -106,6 +107,7 @@ async function finish(req, res) {
 async function savepoint(req, res) {
     const userId = req.user.id;
     const score = req.body.score;
+    
     const sign  = req.body?.sign?.toString().trim()
 
     if (score === undefined) return res.status(400).end()
@@ -124,7 +126,8 @@ async function savepoint(req, res) {
     return await sessionClient.multi()
         .get(`${userId}_match`)
         .exec( async (err, results) => {
-            const startedAt = results[0]
+
+            const startedAt = parseInt(results[0])
 
             if (err) {
                 logger.error(`Failed to save match for user: ${userId}`)

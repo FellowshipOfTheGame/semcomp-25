@@ -19,5 +19,4 @@ routes.post('/start', controller.start)
 routes.post('/finish', controller.finish)
 routes.post('/savepoint', controller.savepoint)
 
-
 module.exports = routes;

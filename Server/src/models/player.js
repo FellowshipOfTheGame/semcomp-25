@@ -11,7 +11,6 @@ class SchemaPlayer {
             if(users.exists()) {
                 return users;
             } else {
-                console.log("No data available");
                 return null;
             }
             
@@ -26,10 +25,8 @@ class SchemaPlayer {
         // find one user
         return db.ref(playerTable).get().then((snapshot) => {
             if (snapshot.exists()) {
-                console.log(snapshot.val());
                 return snapshot.val();
             } else {
-                console.log("No data available");
                 return null;
             }
         }).catch((error) => {
@@ -61,19 +58,22 @@ class SchemaScore {
     async findAll() {
         const pathTable = configEnv.PROJECT_ID + '/score/'
         const ScoreTable = db.ref(pathTable)
-        let topUserScoreListRef = ScoreTable.orderByChild('top_score')
+        let scoreList = [];
+        const query = await ScoreTable.orderByChild('top_score').limitToLast(10)
+    
+        await query.once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
 
-        return topUserScoreListRef.get().then((scores) => {
-            if(scores.exists()) {
-                return scores;
-            } else {
-                console.log("No data available");
-                return null;
-            }
-            
-         }).catch((error) => {
-             console.error(error);
-         });
+                const scoreValue = {
+                    name: childSnapshot.val().name,
+                    score: childSnapshot.val().top_score
+                }
+
+                scoreList.push(scoreValue)
+            });
+        });
+
+        return scoreList;
     }
 
     async findOneById(provider_id) {
@@ -82,16 +82,13 @@ class SchemaScore {
         // find one user
         return db.ref(playerTable).get().then((snapshot) => {
             if (snapshot.exists()) {
-                console.log(snapshot.val());
                 return snapshot.val();
             } else {
-                console.log("No data available");
                 return null;
             }
         }).catch((error) => {
             console.error(error);
-        });
-          
+        }); 
     }
 
     createOrUpdate(Player) {
@@ -100,7 +97,7 @@ class SchemaScore {
         db.ref(pathTable).set({
             name: Player.name,
             top_score: Player.top_score,
-            top_score_date: Player.score_date || new Date().getTime(),
+            match_id: Player.match_id || 0,
         }).catch((error) => {
             console.error(error);
         });
