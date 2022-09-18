@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+
 public class GameManager : MonoBehaviour
 {
     private GameOver gameOver;
@@ -17,18 +16,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerInputManager inputManager;
     [SerializeField] BallController ball;
     [SerializeField] float startTime;
-    int level = 0;
+    [SerializeField] private GameObject startAnimation;
+
+    private int level;
     public int Level => level;
 
-    void Start()
+    // Start is called before the first frame update
+    private void Start()
     {
         gameOver = GameOver.Instance;
         SetLevelView();
-        StartCoroutine(StartGameDelay());
+        startAnimation.SetActive(false);
     }
 
-    IEnumerator StartGameDelay()
+    public IEnumerator StartGameDelay()
     {
+        startAnimation.SetActive(true);
         hud.SetActive(false);
         inputManager.SetCanMove(false);
         //ball.SetCanAim(false);
@@ -76,11 +79,16 @@ public class GameManager : MonoBehaviour
         nextLevelView.text = (level + 1) + "";
     }
 
-    public void GameOverScene()
+    public void GameOverScene(int highscore)
     {
-        gameOver.OnGameOver();
+        gameOver.OnGameOver(highscore);
     }
-    
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

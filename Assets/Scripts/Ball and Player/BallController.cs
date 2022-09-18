@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class BallController : MonoBehaviour
 {
@@ -39,12 +40,17 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb2d;
     private MapManager mapManager;
     private GameManager gameManager;
+    private ScoreSystem scoreSystem;
     private AudioManager audioManager;
     private PlayerInputManager playerManager;
     private PowerUpManager powerUpManager;
     private Camera camera1;
     private Timer timer;
+
+    [SerializeField] private RetryMenu retryMenu;
+    
     bool firstTime = true;
+    
     private void Awake()
     {
         powerUpManager = GetComponent<PowerUpManager>();
@@ -52,10 +58,55 @@ public class BallController : MonoBehaviour
         
         mapManager = FindObjectOfType<MapManager>();
         gameManager = FindObjectOfType<GameManager>();
+        scoreSystem = FindObjectOfType<ScoreSystem>();
         audioManager = FindObjectOfType<AudioManager>();
         playerManager = FindObjectOfType<PlayerInputManager>();
         camera1 = Camera.main;
         timer = FindObjectOfType<Timer>();
+    }
+
+    private void Start()
+    {
+#if !UNITY_EDITOR
+        timer.SetPaused(true);
+        playerManager.SetCanMove(false);
+        PauseMenu.isGamePaused = true;
+
+        StartCoroutine(StartMatch());
+#else
+        StartCoroutine(gameManager.StartGameDelay());
+#endif
+    }
+
+    private IEnumerator StartMatch()
+    {
+        yield return MatchRequestHandler.StartMatch(
+            () =>
+            {
+                retryMenu.Close();
+                playerManager.SetCanMove(true);
+                timer.SetPaused(false);
+                PauseMenu.isGamePaused = false;
+                StartCoroutine(gameManager.StartGameDelay());
+                Debug.Log("Match start");
+            },
+            req =>
+            {
+                OnHTTPFailure(req, StartMatch());
+            });
+    }
+
+    private void OnHTTPFailure(UnityWebRequest req, IEnumerator retryEnumerator)
+    {
+        switch (req.responseCode)
+        {
+            case 401:
+                retryMenu.SessionExpiredInGame();
+                break;
+            default:
+                retryMenu.InternetConnectionLost(retryEnumerator);
+                break;
+        }
     }
 
     private IEnumerator KickDelay(float force)
@@ -81,11 +132,13 @@ public class BallController : MonoBehaviour
     float t = 0;
     float angle;
     float curr;
+    
     private void RotateBall()
     {
         Vector2 v = rb2d.velocity;
-         angle = 360-Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg;
-         curr = transform.rotation.eulerAngles.z;
+        angle = 360-Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg;
+        curr = transform.rotation.eulerAngles.z;
+        
         if (t>=1f && Mathf.Abs(curr-angle)>0.01f)
         {
             t = 0;
@@ -179,11 +232,30 @@ public class BallController : MonoBehaviour
         rb2d.velocity = newVelocity;
     }
 
-    private IEnumerator GameOver()
+    public IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.5f);
-        gameManager.GameOverScene();
+        
+#if !UNITY_EDITOR
+
+        var matchData = new MatchData()
+        {
+            score = scoreSystem.ScoreAmount
+        };
+
+        yield return StartCoroutine(MatchRequestHandler.FinishMatch(
+            matchData,
+            data =>
+            {
+                retryMenu.Close();
+                gameManager.GameOverScene(data.top_score);
+                Destroy(gameObject);
+            },
+            req => OnHTTPFailure(req, GameOver())));
+#else
+        gameManager.GameOverScene(scoreSystem.ScoreAmount);
         Destroy(gameObject);
+#endif
     }
 
     public void SetGameOver()

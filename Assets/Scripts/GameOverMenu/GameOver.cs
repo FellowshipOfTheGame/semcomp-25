@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -14,12 +12,9 @@ public class GameOver : MonoBehaviour
     [SerializeField] private GameObject _happyMarmossets;
 
     private GameObject _currentMarmoset;
-
     private ScoreSystem _scoreSystem;
-    private int highscore = 0;
 
-
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
             Instance = this;
@@ -31,51 +26,45 @@ public class GameOver : MonoBehaviour
 
     private void Start()
     {
-        highscore = PlayerPrefs.GetInt("HighScore", 0); // Antes disso, checar se é a primeira vez que o jogador está jogando?
         _currentMarmoset = _happyMarmossets.transform.GetChild(0).gameObject;
     }
 
-    private void LoadMarmosset(int score)
+    private void LoadMarmoset(int score, int highscore)
     {
-        int randomMarmossetIndex;
+        int randomMarmosetIndex;
 
         _currentMarmoset.SetActive(false);
 
         if (score < highscore * 0.3)
         {
-            randomMarmossetIndex = Random.Range(0, _sadMarmossets.transform.childCount);
-            _currentMarmoset = _sadMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
+            randomMarmosetIndex = Random.Range(0, _sadMarmossets.transform.childCount);
+            _currentMarmoset = _sadMarmossets.transform.GetChild(randomMarmosetIndex).gameObject;
         }
         else if (score > highscore)
         {
-            randomMarmossetIndex = Random.Range(0, _happyMarmossets.transform.childCount);
-            _currentMarmoset = _happyMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
+            randomMarmosetIndex = Random.Range(0, _happyMarmossets.transform.childCount);
+            _currentMarmoset = _happyMarmossets.transform.GetChild(randomMarmosetIndex).gameObject;
         }
         else
         {
-            randomMarmossetIndex = Random.Range(0, _neutralMarmossets.transform.childCount);
-            _currentMarmoset = _neutralMarmossets.transform.GetChild(randomMarmossetIndex).gameObject;
+            randomMarmosetIndex = Random.Range(0, _neutralMarmossets.transform.childCount);
+            _currentMarmoset = _neutralMarmossets.transform.GetChild(randomMarmosetIndex).gameObject;
         }
 
         _currentMarmoset.SetActive(true);
     }
 
-    public void OnGameOver()
+    public void OnGameOver(int highScore)
     {
         int totalPoints = _scoreSystem.ScoreAmount;
 
-        LoadMarmosset(totalPoints);
-
-
-        highscore = (int)Mathf.Max(highscore, totalPoints);
-
-        PlayerPrefs.SetInt("HighScore", highscore);
-
+        LoadMarmoset(totalPoints, highScore);
+        
         GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
         GameObject.FindObjectOfType<PlayerInputManager>().SetCanMove(false);
 
         _gameOverPointsView.text = totalPoints + "";
-        _highScoreView.text = "Melhor Pontuação: " + highscore + "";
+        _highScoreView.text = "Melhor PontuaÃ§Ã£o: " + highScore + "";
 
         _menu.SetActive(true);
 
