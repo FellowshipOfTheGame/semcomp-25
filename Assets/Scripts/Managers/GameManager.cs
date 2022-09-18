@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     {
         gameOver = GameOver.Instance;
         SetLevelView();
+        startAnimation.SetActive(false);
     }
 
     public IEnumerator StartGameDelay()
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOverScene(int highscore)
     {
-        //gameOver.OnGameOver(highscore);
+        gameOver.OnGameOver(highscore);
     }
 
     public void LoadMenu()

@@ -268,6 +268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7246899708432274366, guid: c2009f6bd355ccc45927b406e77c7978, type: 3}
+      propertyPath: retryMenu
+      value: 
+      objectReference: {fileID: 6844250963610055233}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2009f6bd355ccc45927b406e77c7978, type: 3}
 --- !u!1 &1019566508
@@ -285,7 +289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1019566509
 Transform:
   m_ObjectHideFlags: 0
@@ -827,10 +831,14 @@ PrefabInstance:
     - target: {fileID: 5467423731739994534, guid: 4e0a784fc633bc44da6df38777830642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1274846485}
+      objectReference: {fileID: 1760192326}
     - target: {fileID: 5467423731739994534, guid: 4e0a784fc633bc44da6df38777830642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467423731739994534, guid: 4e0a784fc633bc44da6df38777830642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5467423731765980059, guid: 4e0a784fc633bc44da6df38777830642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -977,6 +985,10 @@ PrefabInstance:
       propertyPath: barHorizontalMovement
       value: 
       objectReference: {fileID: 2252877063344581637}
+    - target: {fileID: 5636276234246029799, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
+      propertyPath: retryMenu
+      value: 
+      objectReference: {fileID: 6844250963610055233}
     - target: {fileID: 5636276234246029818, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1543,6 +1555,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2475604075335380173}
     - target: {fileID: 5386213530411251973, guid: c7fd19b6c45e0f3418c7681df0a1fe55, type: 3}
+      propertyPath: startAnimation
+      value: 
+      objectReference: {fileID: 1019566508}
+    - target: {fileID: 5386213530411251973, guid: c7fd19b6c45e0f3418c7681df0a1fe55, type: 3}
       propertyPath: gameOverPointsView
       value: 
       objectReference: {fileID: 1709783256}
@@ -1822,6 +1838,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
+--- !u!114 &6844250963610055233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1709119529257886848, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
+  m_PrefabInstance: {fileID: 6844250963610055232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ded692c9e7e8a459859caf6140929c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8951369462418323673 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2504580718057949849, guid: a73fc03a2c497094998d790542f8ca8b, type: 3}
