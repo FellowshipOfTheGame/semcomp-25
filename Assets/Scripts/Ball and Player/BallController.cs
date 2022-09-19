@@ -120,14 +120,14 @@ public class BallController : MonoBehaviour
         line.enabled = false;
     }
     
-    public void SetBallFx(bool val)
+    private void SetBallFx(bool val)
     {
         if (throwFx)
             throwFx.SetActive(val);
     }
 
     private bool canAim=true;
-    public void SetCanAim(bool val)
+    private void SetCanAim(bool val)
     {
         canAim = val;
     }
@@ -230,6 +230,7 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         mapBoundaries.ActivateBoundaries(true);
+        SetBallFx(true);
         
         Vector2 newVelocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
         rb2d.velocity = newVelocity;
@@ -291,6 +292,7 @@ public class BallController : MonoBehaviour
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;
         mapBoundaries.ActivateBoundaries(false);
+        SetBallFx(false);
         
         var position1 = currentPlayer.transform.position;
         transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
@@ -404,6 +406,8 @@ public class BallController : MonoBehaviour
         gameManager.SetLevelProgress(0f);
         gameManager.SetLevelView(); // finally updates text UI with the levels
 
+        SetCanAim(false);
+        
         GameObject nextPlayer = mapManager.GetFirstPlayerOfLevel(gameManager.Level);
         nextPlayer = nextPlayer.GetComponentInChildren<Ally>().gameObject;
         SetBallToPlayer(nextPlayer);
@@ -420,5 +424,6 @@ public class BallController : MonoBehaviour
         rb2d.simulated = true;
 
         timer.SetPaused(false);
+        SetCanAim(true);
     }
 }

@@ -137,7 +137,6 @@ public class MapManager : MonoBehaviour
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0.1f);
-        ballController.SetBallFx(false);
 
         // keep at least 7 presets spawned
         while (presetsOnMap.Count <= 7)
@@ -150,13 +149,13 @@ public class MapManager : MonoBehaviour
         // move until goal is on the top or currentPlayer is on the bottom
         float distance = Mathf.Min(currGoal.position.y - goalTargetY, currPlayer.position.y - targetY);
         var transform1 = transform;
-        if (distance < 0)
+        if (distance < 0) // when player is actually below than where it should be
         {
             Vector3 pos = transform1.position;
             pos.y += distance;
             transform1.position = pos;
         }
-        else
+        else // usual case, when player is ahead and will slowly come down
         {
             while (distance > 0)
             {
@@ -178,7 +177,6 @@ public class MapManager : MonoBehaviour
             presetsOnMap.RemoveAt(0);
         }
 
-        ballController.SetBallFx(true);
         ballController.GoalTransitionOver = true; // set variable so BallController knows the transition was finished
     }
 
@@ -193,9 +191,16 @@ public class MapManager : MonoBehaviour
         gameManager.SetLevelProgress((float)AllyBarsPassed / (totalPlayersInLevel+1));
     }
 
+    private IEnumerator transitionCoroutine;
     public void StartTransition(Transform newPlayer)
     {
         currPlayer = newPlayer;
-        StartCoroutine(Transition());
+        
+        // this ensures only one instance of this coroutine will be running
+        if (transitionCoroutine != null)
+            StopCoroutine(transitionCoroutine);
+        
+        transitionCoroutine = Transition();
+        StartCoroutine(transitionCoroutine);
     }
 }
