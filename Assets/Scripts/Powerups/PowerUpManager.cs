@@ -80,6 +80,7 @@ public class PowerUpManager : MonoBehaviour
     // Turns the ball invisible to enemy collision
     public void ChangeTemporarilyVisibility(float invisibilityTime)
     {
+        audioManager.PlaySFX("PhantomBall");
         coroutine = GhostBallAnim(invisibilityTime);
         StartCoroutine(coroutine);
     }

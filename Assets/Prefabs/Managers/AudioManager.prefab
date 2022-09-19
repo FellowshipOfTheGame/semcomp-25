@@ -96,7 +96,7 @@ MonoBehaviour:
   - name: PhantomBall
     clip: {fileID: 8300000, guid: 5bdd8ea3b51c09b4ea57af1ae456fecb, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.7
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
