@@ -4,15 +4,16 @@
   "description": "Backend of semcomp25 game",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FellowshipOfTheGame/semcomp-25.git"
   },
   "author": "Mathias (Math-O5)",
-  "license": "ISC", 
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/FellowshipOfTheGame/semcomp-25/issues"
   },
@@ -30,7 +31,6 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "firebase": "^8.10.0",
-    "ioredis": "^5.2.3",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-google-id-token": "^0.4.7",

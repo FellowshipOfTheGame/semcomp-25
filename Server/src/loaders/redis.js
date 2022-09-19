@@ -1,41 +1,19 @@
-const session = require('express-session')
-const redis = require('redis')
-const IORedis = require("ioredis")
-const redisStore = require('connect-redis')(session)
-const { logger } = require('../config/logger')
+var redis   = require("redis");
+var session = require('express-session');
+var redisStore = require('connect-redis')(session);
+var client  = redis.createClient();
 
 const config = require("../config")
 
-// Redis Database 1 - Sessions Storages
-const sessionClient = redis.createClient({
-    db: 1,
-    // url: config.REDIS_HOST,
+//Configure redis client
+const redisClient = new redisStore({
     host: config.REDIS_HOST,
     port: config.REDIS_PORT,
-    legacyMode: true,
-})
-
-// Redis Clients Logs
-const clientList = [ sessionClient ]
-
-clientList.forEach(async client => {
-    // client.on('connect', () => {
-    //     logger.info({
-    //         message: `at Redis[${client.options.db}]: Frequency connected!`
-    //     })
-    // })
-    
-    client.on('error', (err) => {
-        logger.error({
-            message: `at Redis[${client.options.db}]: ${err}`
-        })
-    })
-    await client.connect().catch(console.error)
-})
+    client: client,
+});
 
 // Module Exports
 module.exports = {
-    sessionClient,
-    sessionStore: new redisStore({ client: sessionClient, ttl: 3600 }),
-    session
+    redisClient,
+    session,
 }
