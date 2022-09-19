@@ -182,6 +182,7 @@ public class PowerUpManager : MonoBehaviour
         }
         else
         {
+            audioManager.PlaySFX("TimeBonus");
             timeManager.AddTime(time);
         }
     }
