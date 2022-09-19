@@ -158,7 +158,7 @@ public class BallController : MonoBehaviour
         {
             var position1 = currentPlayer.transform.position;
             transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
-            
+
             Vector3 mousePosition = camera1!.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
 
@@ -174,7 +174,7 @@ public class BallController : MonoBehaviour
                 }
             }
 
-            if (mousePressed )
+            if (mousePressed)
             {
                 // come�a a mirar
                 line.enabled = true;

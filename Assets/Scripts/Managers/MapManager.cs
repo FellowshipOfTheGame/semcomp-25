@@ -159,6 +159,7 @@ public class MapManager : MonoBehaviour
             Vector3 pos = transform1.position;
             pos.y -= deltaMove;
             transform1.position = pos;
+
             yield return null;
         }
         
