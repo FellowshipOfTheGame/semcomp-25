@@ -46,6 +46,7 @@ public class BallController : MonoBehaviour
     private PowerUpManager powerUpManager;
     private Camera camera1;
     private Timer timer;
+    private MapBoundaries mapBoundaries;
 
     [SerializeField] private RetryMenu retryMenu;
     
@@ -63,6 +64,7 @@ public class BallController : MonoBehaviour
         playerManager = FindObjectOfType<PlayerInputManager>();
         camera1 = Camera.main;
         timer = FindObjectOfType<Timer>();
+        mapBoundaries = FindObjectOfType<MapBoundaries>();
     }
 
     private void Start()
@@ -227,6 +229,7 @@ public class BallController : MonoBehaviour
         
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
+        mapBoundaries.ActivateBoundaries(true);
         
         Vector2 newVelocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
         rb2d.velocity = newVelocity;
@@ -287,6 +290,7 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;
+        mapBoundaries.ActivateBoundaries(false);
         
         var position1 = currentPlayer.transform.position;
         transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
@@ -370,6 +374,7 @@ public class BallController : MonoBehaviour
                 {
                     powerUpManager.LoseLife();
                     SetBallToPlayer(currentPlayer);
+                    mapManager.StartTransition(currentPlayer.transform.parent);
                 }
             }
         }

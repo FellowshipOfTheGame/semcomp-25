@@ -17,4 +17,10 @@ public class MapBoundaries : MonoBehaviour
             Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, 0)).y - 0.12f
         );
     }
+
+    public void ActivateBoundaries(bool active)
+    {
+        mapTopCollider.SetActive(active);
+        mapBottomCollider.SetActive(active);
+    }
 }

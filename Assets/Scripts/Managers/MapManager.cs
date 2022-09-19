@@ -150,19 +150,27 @@ public class MapManager : MonoBehaviour
         // move until goal is on the top or currentPlayer is on the bottom
         float distance = Mathf.Min(currGoal.position.y - goalTargetY, currPlayer.position.y - targetY);
         var transform1 = transform;
-        while (distance > 0)
+        if (distance < 0)
         {
-            float deltaMove = speed * Time.deltaTime;
-            deltaMove = Mathf.Min(deltaMove, distance);
-            distance -= deltaMove;
-
             Vector3 pos = transform1.position;
-            pos.y -= deltaMove;
+            pos.y += distance;
             transform1.position = pos;
-
-            yield return null;
         }
-        
+        else
+        {
+            while (distance > 0)
+            {
+                float deltaMove = speed * Time.deltaTime;
+                deltaMove = Mathf.Min(deltaMove, distance);
+                distance -= deltaMove;
+
+                Vector3 pos = transform1.position;
+                pos.y -= deltaMove;
+                transform1.position = pos;
+
+                yield return null;
+            }
+        }
         
         if (presetsOnMap[0].SpawnPos < targetY)
         {
