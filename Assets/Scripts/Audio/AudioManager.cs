@@ -16,7 +16,6 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
 
         foreach (Sound sound in Musics)

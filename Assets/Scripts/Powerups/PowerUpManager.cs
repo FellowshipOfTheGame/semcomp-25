@@ -29,6 +29,8 @@ public class PowerUpManager : MonoBehaviour
     // and this object attached here
     [SerializeField] private BarHorizontalMovement barHorizontalMovement;
 
+    private AudioManager audioManager;
+
     private IEnumerator coroutine;
 
     private void Awake()
@@ -37,12 +39,14 @@ public class PowerUpManager : MonoBehaviour
         isInvisible = false;
         // Set the initial speed factor (static variable) to 1.0f
         barHorizontalMovement.ChangeSpeedFactorTemporarily(0.0f, 0.0f);
+
     }
 
     private void Start()
     {
         initialBallRadius = this.GetComponent<CircleCollider2D>().radius;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();        
+        audioManager = AudioManager.instance;
     }
     public void SetPowerUpHud(Sprite sprite, float duration)
     {
@@ -160,6 +164,11 @@ public class PowerUpManager : MonoBehaviour
 
     private IEnumerator ChangeBallSizeAndWait(float radius, float time)
     {
+        if (radius > this.transform.localScale.x)
+            audioManager.PlaySFX("GrowBall");
+        else
+            audioManager.PlaySFX("ShrinkBall");
+
         yield return StartCoroutine(ScaleAnimation(0.5f, radius));
         yield return new WaitForSeconds(time);
         yield return StartCoroutine(ScaleAnimation(radius, 0.5f));
