@@ -18,16 +18,26 @@ module.exports = {
         try {
             player = await Player.findOneById(provider_id);
         } catch (err) {
-            console.log("Fail")
+            logger.error({
+                message: `Fail to find player.`
+            }) 
             return cb(err, null);
         }
 
         if (player) {
-                console.log("Found player")
+            
+            logger.info({
+                message: `Player ${player.provider_id} logged successfully from ${provider}`
+            });
+
             if (player.is_banned === false)
                  return cb(null, player);
-             else
-                 return cb(null, null)
+            
+            logger.error({
+                message: `Player ${player.provider_id} tried to log in, but is banned.`
+            });
+
+            return cb(null, null)
         }
 
         try {
@@ -43,8 +53,9 @@ module.exports = {
             Score.createOrUpdate({ provider_id: player.provider_id, name: player.first_name + ' ' + player.surname_name, top_score: 0 })
 
         } catch (err) {
-            console.log("Error create user")
-            console.log(err)
+            logger.error({
+                message: `Error create user.`
+            }) 
             return cb(err, null);
         }
 
