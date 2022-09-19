@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RaycastBlockingWall : MonoBehaviour
 {
     [SerializeField] private GameObject raycastBlockingPanel;
+    private Image raycastBlockingImage;
 
     private void OnEnable()
     {
         RaycastBlockEvent.Subscribe(BlockRaycast);
+        raycastBlockingImage = GetComponent<Image>();
     }
 
     private void OnDisable()
@@ -28,6 +31,7 @@ public class RaycastBlockingWall : MonoBehaviour
     {
         yield return null;
         raycastBlockingPanel.SetActive(shouldBlock);
+        raycastBlockingImage.enabled = shouldBlock;
     }
 }
 

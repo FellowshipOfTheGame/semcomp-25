@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     private ScoreSystem scoreSystem;
 
     [SerializeField] private RetryMenu retryMenu;
+    
+    [SerializeField] private Slider masterVolumeSlider, effectsVolumeSlider, musicVolumeSlider;
 
     private void Awake()
     {
@@ -121,10 +124,35 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    private float effecttmp;
+    
     public void Volume()
     {
         menuLabelText.text = "VOLUME";
+        
+        // var audioMixer = FindObjectOfType<SettingsMenu>().audioMixer;
+        
+        // audioMixer.GetFloat("main-volume", out var masterValue);
+        // masterVolumeSlider.value = Mathf.Log10(masterValue);
+        // masterVolumeSlider.value = masterValue;
+        // masterVolumeSlider.value = Remap(masterValue, -80f, 0f, 0f, 1f);
+        
+        // audioMixer.GetFloat("effects-volume", out var effectsValue);
+        // sfxVolumeSlider.value = Mathf.Log10(effectsValue);
+        // effectsVolumeSlider.value = effectsValue;
+        // effecttmp = effectsValue;
+        // sfxVolumeSlider.value = Remap(effectsValue, -80f, 0f, 0f, 1f);
+        
+        // audioMixer.GetFloat("music-volume", out var musicValue);
+        // musicVolumeSlider.value = Mathf.Log10(musicVolume);
+        // musicVolumeSlider.value = musicValue;
+        // musicVolumeSlider.value = Remap(musicValue, -80f, 0f, 0f, 1f);
                 
         volumePanel.SetActive(true);
+    }
+    
+    float Remap(float value, float min1, float max1, float min2, float max2) 
+    {
+        return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Runtime.InteropServices;
 
-public static class WebLink
+public class WebLink : MonoBehaviour
 {
 	public static void OpenLinkJSPlugin(string url)
 	{
