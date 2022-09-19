@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,13 +42,20 @@ public class MapManager : MonoBehaviour
         ballController = FindObjectOfType<BallController>();
     }
 
-    
-    
+    private void OnEnable()
+    {
+        CameraScale.OnResolutionChanged += CalculateTargets;
+    }
+
+    private void OnDisable()
+    {
+        CameraScale.OnResolutionChanged -= CalculateTargets;
+    }
+
     private void Start()
     {
-        targetY = Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, 0)).y + OffsetFromScreenBottom;
-        goalTargetY = Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height)).y - OffsetFromScreenTop;
-        
+        CalculateTargets();
+
         // spawn until a goal is spawned
         SpawnPresetsUntilGoal();
         
@@ -58,6 +66,13 @@ public class MapManager : MonoBehaviour
 
         ballController.transform.position = presetsOnMap[0].FirstPlayer.GetComponentInChildren<Ally>().transform.position;
         totalPlayersInLevel = difficultyProgression.GetTotalPlayersInLevel(gameManager.Level);
+    }
+
+    private void CalculateTargets()
+    {
+        targetY = Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, 0)).y + OffsetFromScreenBottom;
+        goalTargetY = Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height)).y -
+                      OffsetFromScreenTop;
     }
 
     public void SpawnPresetsUntilGoal()
@@ -152,7 +167,7 @@ public class MapManager : MonoBehaviour
         if (distance < 0) // when player is actually below than where it should be
         {
             Vector3 pos = transform1.position;
-            pos.y += distance;
+            pos.y -= distance;
             transform1.position = pos;
         }
         else // usual case, when player is ahead and will slowly come down

@@ -8,7 +8,22 @@ public class MapBoundaries : MonoBehaviour
     [SerializeField] private GameObject mapTopCollider;
     [SerializeField] private GameObject mapBottomCollider;
 
+    private void OnEnable()
+    {
+        CameraScale.OnResolutionChanged += PositionBoundaries;
+    }
+
+    private void OnDisable()
+    {
+        CameraScale.OnResolutionChanged -= PositionBoundaries;
+    }
+
     private void Start()
+    {
+        PositionBoundaries();
+    }
+
+    private void PositionBoundaries()
     {
         mapTopCollider.transform.position = new Vector3(0,
             Camera.main!.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height)).y + 0.12f
