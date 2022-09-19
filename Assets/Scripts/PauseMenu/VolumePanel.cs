@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VolumePanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Slider masterVolumeSlider, effectsVolumeSlider, musicVolumeSlider;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        var audioMixer = FindObjectOfType<SettingsMenu>().audioMixer;
+
+        audioMixer.GetFloat("main-volume", out var masterValue);
+        masterVolumeSlider.value = masterValue;
+
+        audioMixer.GetFloat("effects-volume", out var effectsValue);
+        effectsVolumeSlider.value = effectsValue;
+
+        audioMixer.GetFloat("music-volume", out var musicValue);
+        musicVolumeSlider.value = musicValue;
     }
 }

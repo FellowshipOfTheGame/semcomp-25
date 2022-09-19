@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         gameOver = GameOver.Instance;
         SetLevelView();
-        startAnimation.SetActive(false);
     }
 
     public IEnumerator StartGameDelay()
