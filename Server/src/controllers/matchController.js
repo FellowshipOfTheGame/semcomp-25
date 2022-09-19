@@ -23,7 +23,7 @@ async function start(req, res) {
 
     sessionClient.multi()
         .set(`${userId}_match`, startedAt)
-        .expireat(`${userId}_match`, parseInt((+new Date)/1000) + parseInt(configEnv.MATCH_RESPONSE_TIMEOUT))
+        //.expireat(`${userId}_match`, parseInt((+new Date)/1000) + parseInt(configEnv.MATCH_RESPONSE_TIMEOUT))
         .exec( (err, results) => {
 
             if (err) {
@@ -122,9 +122,12 @@ async function savepoint(req, res) {
     //     return res.status(400).json({ message: "incorrect signature" })
     // }
 
+    // return await sessionClient.multi()
+    //    .set(`${userId}_match_savepoint`)
+
     return await sessionClient.multi()
         .get(`${userId}_match`)
-        .expireat(`${userId}_match`, parseInt((+new Date)/1000) + parseInt(configEnv.MATCH_RESPONSE_TIMEOUT))
+        //.expireat(`${userId}_match`, parseInt((+new Date)/1000) + parseInt(configEnv.MATCH_RESPONSE_TIMEOUT))
         .exec( async (err, results) => {
 
             const startedAt = parseInt(results[0])

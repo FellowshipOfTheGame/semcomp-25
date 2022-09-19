@@ -111,12 +111,14 @@ module.exports = {
         
     },
     async getRanking(req, res) { 
-        if(!req.user)
+        const userId = req.user.provider_id;
+        
+        if(!userId)
             return res.status(400).json({ message: "invalid user session" })
         
         try {
-            var allPlayers = await Score.findAll()
-
+            var playersRank = await Score.getRaking()
+            var personalRank = await Score.getPlayerRaking(userId)
         } catch (err) {
             logger.error({
                 message: `at User.getRanking(): failed to find user ${req.user.id}`
@@ -124,7 +126,9 @@ module.exports = {
             console.log(err)
             return res.status(500).json({ message: "internal server error" })
         }
-    
-        return res.status(200).json(allPlayers) 
+        
+        const rankingData = { personal: personalRank, ranking: playersRank } 
+
+        return res.status(200).json(rankingData) 
     }
 }   

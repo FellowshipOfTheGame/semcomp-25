@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 })
 
 // Routes Configurations
-  
+console.log(`${configEnv.SERVER_PATH_PREFIX}/match/`)
 app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
 app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)
