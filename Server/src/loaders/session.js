@@ -1,6 +1,5 @@
 const config = require('../config')
 const redis = require('../loaders/redis')
-const session = redis.session;
 
 const sessionOpts = {
     resave: false,
@@ -14,7 +13,7 @@ const sessionOpts = {
     },
     secret: config.COOKIE_SIGNATURE_KEY,
     resave: false,
-    store: redis.sessionStore,
+    store: redis.redisClient,
 }
 
 module.exports = {
@@ -23,5 +22,5 @@ module.exports = {
     // Obs: HTTPS behind proxy need to activate `trust proxy` in express  
     // Find about this method in:
     // https://medium.com/swlh/session-management-in-nodejs-using-redis-as-session-store-64186112aa9  
-    sessionLoader: () => session(sessionOpts)
+    sessionLoader: () => redis.session(sessionOpts)
 }
