@@ -15,6 +15,7 @@ module.exports = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || undefined,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET|| undefined,
     GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL ||  "http://localhost:3000/session/login/callback",
+    GOOGLE_CLIENT_ID_ANDROID: process.env.GOOGLE_CLIENT_ID_ANDROID || undefined,
 
     PROJECT_ID: process.env.PROJECT_ID,
     API_KEY: process.env.APIKEY,
@@ -31,6 +32,13 @@ module.exports = {
     COOKIE_SIGNATURE_KEY: process.env.COOKIE_SIGNATURE_KEY || "ABCDEFGHIJKLU",
     SESSION_SECURE: process.env.SESSION_SECURE == "1" || false, 
     SESSION_HTTP_ONLY: process.env.SESSION_HTTP_ONLY == "1" || false,
-    SESSION_SAME_SITE: process.env.SESSION_SAME_SITE || "strict",
+    SESSION_SAME_SITE: process.env.SESSION_SAME_SITE || "none",
     SESSION_MAX_AGE: process.env.SESSION_MAX_AGE || 3600000,
+    
+    REQUEST_SIGNATURE_KEY: process.env.REQUEST_SIGNATURE_KEY || "MINAHSENHASUPERSECRETA",
+    RESPONSE_SIGNATURE_KEY: process.env.RESPONSE_SIGNATURE_KEY || "MINAHSENHAHYPERSECRETA",
+
+    // Timeout to confirm connection alive
+    // Unit: seconds
+    MATCH_RESPONSE_TIMEOUT: process.env.MATCH_RESPONSE_TIMEOUT || 10
 }

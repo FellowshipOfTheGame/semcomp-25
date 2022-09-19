@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  semcomp25:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./logs:/var/log/app
+      - ./node_modules:/app/node_modules
+      - ./:/app
+    depends_on:
+      - semcomp25-redis
+  semcomp25-redis:
+    image: redis:7.0.4
+    volumes:
+      - ./redis-data:/data
+
+networks:
+  default:
+    name: semcomp25

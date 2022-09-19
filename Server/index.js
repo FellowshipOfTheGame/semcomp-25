@@ -1,6 +1,8 @@
 const express = require('express')
 const cors  = require('cors')
 const morgan = require('morgan')
+const fs = require('fs');
+const path = require('path')
 
 const { logger } = require('./src/config/logger')
 
@@ -19,9 +21,10 @@ require('./src/loaders/passport')(passport)
 const configEnv = require('./src/config')
 
 // Routes
-// const playerRoutes = require('./src/routes/players');
+const playerRoutes = require('./src/routes/players');
 const sessionRoutes = require('./src/routes/session');
 const matchRoutes = require('./src/routes/match')
+const viewsRoutes = require('./src/routes/views')
 
 const app = express()
 // app.set('trust proxy', true)
@@ -70,28 +73,36 @@ app.use((req, res, next) => {
 // Routes Configurations
   
 app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
-// app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
+app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/match/`, matchRoutes)
-
-//POST request to create a new task in todo list
-app.post("/create", (req, res) => {
-    //Code to add a new data to the database will go here
-});
-
-//POST request to delete a task in todo list
-app.post("/delete", (req, res) => {
-    //Code to delete a data from the database will go here
-});
+app.use(`${configEnv.SERVER_PATH_PREFIX}/api/`, viewsRoutes)
+app.use(configEnv.SERVER_PATH_PREFIX, express.static(path.join(__dirname, 'src/public')));
 
 main().catch(err => console.log(err));
 
 async function main() {
 
-    app.listen(configEnv.SERVER_PORT, (error) => {
-        if (error) throw error
-        logger.info({
-            message: `Starting HTTP server on port ${configEnv.SERVER_PORT}.`
-        }) 
-    })
+    if(configEnv.ENABLE_HTTPS) { 
+
+        var httpsCredentials = {
+            key:  configEnv.CERTIFICATE_KEY_PATH && fs.readFileSync(configEnv.CERTIFICATE_KEY_PATH),
+            cert: configEnv.CERTIFICATE_CERT_PATH && fs.readFileSync(configEnv.CERTIFICATE_CERT_PATH),
+            ca:   configEnv.CERTIFICATE_CA_PATH && fs.readFileSync(configEnv.CERTIFICATE_CA_PATH)
+        }
+    
+        https.createServer(httpsCredentials, app).listen(configEnv.SERVER_PORT , (error) => {
+            if (error) throw error
+            logger.info({
+                message: `Starting HTTPS server on port ${configEnv.SERVER_PORT}.`
+            }) 
+        })
+    } else {
+        app.listen(configEnv.SERVER_PORT, (error) => {
+            if (error) throw error
+            logger.info({
+                message: `Starting HTTP server on port ${configEnv.SERVER_PORT}.`
+            }) 
+        })
+    }
 };

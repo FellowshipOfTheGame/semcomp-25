@@ -12,7 +12,7 @@
     "url": "git+https://github.com/FellowshipOfTheGame/semcomp-25.git"
   },
   "author": "Mathias (Math-O5)",
-  "license": "ISC",
+  "license": "ISC", 
   "bugs": {
     "url": "https://github.com/FellowshipOfTheGame/semcomp-25/issues"
   },
@@ -23,19 +23,23 @@
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
+    "create-hmac": "^1.1.7",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "firebase": "^8.10.0",
     "ioredis": "^5.2.3",
     "morgan": "^1.10.0",
-    "passport": "^0.5.3",
+    "passport": "^0.6.0",
     "passport-google-id-token": "^0.4.7",
     "passport-google-oauth": "^2.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-google-token": "^0.1.2",
     "passport-google-verify-token": "^2.2.0",
     "redis": "^4.3.0",
+    "start": "^5.1.0",
     "winston-firebase-transport": "^1.1.0"
   },
   "devDependencies": {

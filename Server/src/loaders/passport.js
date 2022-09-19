@@ -1,11 +1,11 @@
 const passport = require('passport');
 let GoogleStrategy = require('passport-google-oauth20').Strategy;
-let GoogleTokenStrategy =  require("passport-google-verify-token").Strategy;
+let GoogleTokenStrategy =  require("./../lib/passport-google-verify-token").Strategy;
 
 // let FacebookStrategy = require('passport-facebook').Strategy;
 
 const configEnv = require('../config')
-// const Player = require('../models/Player');
+const { Player } = require('../models/player');
 const PlayerController = require('../controllers/playerController');
 
 const { logger } = require('../config/logger');
@@ -13,17 +13,16 @@ const { logger } = require('../config/logger');
 module.exports = function (passport) {
 
     passport.serializeUser(function(player, done){
-        // done(null, {
-        //     id: player._id,
-        // });
-         // testin return the google profile
         done(null, player);
     });
  
     passport.deserializeUser(function(obj, done){
         // find user in firebase
-        // User.findById(obj.id, function(err,user){
-        //     done(err, user);    
+        const tableName = configEnv.PROJECT_ID + '/player/' + obj.id 
+
+        // Player.findOneById(tableName, function(err, player){
+        //     console.log("FOUND BEFORE")
+        //     done(err, player);    
         // });
         
         // testin return the google profile
@@ -68,6 +67,7 @@ module.exports = function (passport) {
                 clientID: configEnv.GOOGLE_CLIENT_ID,
                 // If other clients (such as android / ios apps) also access the google api:
                 // audience: [CLIENT_ID_FOR_THE_BACKEND, CLIENT_ID_ANDROID, CLIENT_ID_IOS, CLIENT_ID_SPA]
+                audience: [configEnv.GOOGLE_CLIENT_ID_ANDROID],
                 clientSecret: configEnv.GOOGLE_CLIENT_SECRET,
                 // getGoogleCerts: optionalCustomGetGoogleCerts
             },
