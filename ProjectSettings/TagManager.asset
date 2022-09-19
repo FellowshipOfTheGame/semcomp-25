@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ally
+  - Ball
+  - MapTop
+  - Goal
+  - Allies
+  - Empty
+  - Enemy
+  - pw_freeze
+  - pw_slow
+  - pw_invisible-ball
+  - pw_new-life
+  - pw_big-ball
+  - pw_small-ball
+  - pw_l
+  - LateralWall
   layers:
   - Default
   - TransparentFX
@@ -40,4 +55,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Fx
+    uniqueID: 921996975
+    locked: 0
+  - name: RaycastBlocker
+    uniqueID: 3718749701
     locked: 0
