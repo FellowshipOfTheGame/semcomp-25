@@ -84,7 +84,7 @@ public class RetryMenu : MonoBehaviour
     public void InternetConnectionLost(IEnumerator retryEnumerator, bool closeable = false)
     {
         numTries++;
-        message.SetText($"Erro de conexão ({numTries}x)\nNão foi possível se conectar com nosso servidor.");
+        message.SetText($"Erro de conexão ({numTries}x)\nNão foi possível se conectar com nosso servidor");
         Open(closeable ? Mode.CloseableConfirm : Mode.Confirm, retryEnumerator);
     }
 }
