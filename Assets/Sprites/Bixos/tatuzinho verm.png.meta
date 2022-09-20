@@ -1,22 +1,40 @@
 fileFormatVersion: 2
-guid: 3008e0efee7ae9f4f8cc132192e2a7a7
+guid: 3d0a54f28ed59c649bc728edca0ad8a1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9190349761339524105
-    second: miquinho_png_0
+      213: 2418393529979083100
+    second: tatuzinho verm_0
   - first:
-      213: -5028971745169930904
-    second: miquinho_png_1
+      213: -6228407406428379477
+    second: tatuzinho verm_1
   - first:
-      213: 1126174614990996969
-    second: miquinho_png_2
+      213: -7630468394946558922
+    second: tatuzinho verm_2
   - first:
-      213: 7646876330979916026
-    second: miquinho_png_3
+      213: -5857181861989657479
+    second: tatuzinho verm_1
   - first:
-      213: -3986046089687713998
-    second: miquinho_png_4
+      213: 5869012891251419488
+    second: tatuzinho verm_3
+  - first:
+      213: 4211218082529739044
+    second: tatuzinho verm_4
+  - first:
+      213: -1245176160728887927
+    second: tatuzinho verm_6
+  - first:
+      213: 5039820231046149203
+    second: tatuzinho verm_7
+  - first:
+      213: -7222455214326580585
+    second: tatuzinho verm_2
+  - first:
+      213: -8884448764834398212
+    second: tatuzinho verm_9
+  - first:
+      213: 1690867025106674459
+    second: tatuzinho verm_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -61,7 +79,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 320
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,106 +148,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: miquinho_png_0
+      name: tatuzinho verm_0
       rect:
         serializedVersion: 2
-        x: 53
-        y: 257
-        width: 415
-        height: 546
-      alignment: 9
-      pivot: {x: 0.5, y: 0.3}
+        x: 163
+        y: 261
+        width: 278
+        height: 502
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9040d365a6eaa8f70800000000000000
-      internalID: 9190349761339524105
+      spriteID: c5991813a1cdf8120800000000000000
+      internalID: 2418393529979083100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_1
+      name: tatuzinho verm_1
       rect:
         serializedVersion: 2
-        x: 637
+        x: 673
         y: 248
-        width: 326
-        height: 467
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8658ba7a7d0853ab0800000000000000
-      internalID: -5028971745169930904
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: miquinho_png_2
-      rect:
-        serializedVersion: 2
-        x: 1111
-        y: 223
-        width: 353
-        height: 335
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e5c99978d9f0af00800000000000000
-      internalID: 1126174614990996969
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: miquinho_png_3
-      rect:
-        serializedVersion: 2
-        x: 1622
-        y: 192
-        width: 326
-        height: 467
-      alignment: 9
+        width: 255
+        height: 432
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af8766512892f1a60800000000000000
-      internalID: 7646876330979916026
+      spriteID: 974de33112c17bea0800000000000000
+      internalID: -5857181861989657479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_4
+      name: tatuzinho verm_3
       rect:
         serializedVersion: 2
-        x: 2068
-        y: 122
-        width: 416
-        height: 545
-      alignment: 9
+        x: 1662
+        y: 224
+        width: 256
+        height: 432
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23734dd4338bea8c0800000000000000
-      internalID: -3986046089687713998
+      spriteID: 069aa35112ce27150800000000000000
+      internalID: 5869012891251419488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tatuzinho verm_4
+      rect:
+        serializedVersion: 2
+        x: 2180
+        y: 162
+        width: 278
+        height: 501
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42103e8b880417a30800000000000000
+      internalID: 4211218082529739044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tatuzinho verm_2
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 282
+        width: 283
+        height: 241
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79a75efaf3fa4cb90800000000000000
+      internalID: -7222455214326580585
       vertices: []
       indices: 
       edges: []

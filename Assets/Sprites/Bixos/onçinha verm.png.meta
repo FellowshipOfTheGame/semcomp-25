@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 3008e0efee7ae9f4f8cc132192e2a7a7
+guid: 74edb99f238110d4a988151f77081fd9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9190349761339524105
-    second: miquinho_png_0
+      213: -1082626241112807478
+    second: "on\xE7inha verm_0"
   - first:
-      213: -5028971745169930904
-    second: miquinho_png_1
+      213: -2067745414889994181
+    second: "on\xE7inha verm_1"
   - first:
-      213: 1126174614990996969
-    second: miquinho_png_2
+      213: 1831894072539171167
+    second: "on\xE7inha verm_2"
   - first:
-      213: 7646876330979916026
-    second: miquinho_png_3
+      213: -4684823871042187978
+    second: "on\xE7inha verm_3"
   - first:
-      213: -3986046089687713998
-    second: miquinho_png_4
+      213: 8966436165939420587
+    second: "on\xE7inha verm_4"
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -61,7 +61,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 357
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,106 +130,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: miquinho_png_0
+      name: "on\xE7inha verm_0"
       rect:
         serializedVersion: 2
-        x: 53
-        y: 257
-        width: 415
-        height: 546
-      alignment: 9
-      pivot: {x: 0.5, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9040d365a6eaa8f70800000000000000
-      internalID: 9190349761339524105
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: miquinho_png_1
-      rect:
-        serializedVersion: 2
-        x: 637
-        y: 248
-        width: 326
-        height: 467
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8658ba7a7d0853ab0800000000000000
-      internalID: -5028971745169930904
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: miquinho_png_2
-      rect:
-        serializedVersion: 2
-        x: 1111
-        y: 223
-        width: 353
-        height: 335
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e5c99978d9f0af00800000000000000
-      internalID: 1126174614990996969
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: miquinho_png_3
-      rect:
-        serializedVersion: 2
-        x: 1622
-        y: 192
-        width: 326
-        height: 467
-      alignment: 9
+        x: 61
+        y: 253
+        width: 399
+        height: 489
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af8766512892f1a60800000000000000
-      internalID: 7646876330979916026
+      spriteID: ac764f17b2db9f0f0800000000000000
+      internalID: -1082626241112807478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_4
+      name: "on\xE7inha verm_1"
       rect:
         serializedVersion: 2
-        x: 2068
-        y: 122
-        width: 416
-        height: 545
-      alignment: 9
+        x: 654
+        y: 253
+        width: 293
+        height: 445
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23734dd4338bea8c0800000000000000
-      internalID: -3986046089687713998
+      spriteID: b380a832084ed43e0800000000000000
+      internalID: -2067745414889994181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "on\xE7inha verm_2"
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 242
+        width: 316
+        height: 250
+      alignment: 9
+      pivot: {x: 0.51, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5947d304f13c6910800000000000000
+      internalID: 1831894072539171167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "on\xE7inha verm_3"
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 209
+        width: 294
+        height: 442
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63d8243b2892cfeb0800000000000000
+      internalID: -4684823871042187978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "on\xE7inha verm_4"
+      rect:
+        serializedVersion: 2
+        x: 2072
+        y: 175
+        width: 400
+        height: 490
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: badd80ccf2e2f6c70800000000000000
+      internalID: 8966436165939420587
       vertices: []
       indices: 
       edges: []

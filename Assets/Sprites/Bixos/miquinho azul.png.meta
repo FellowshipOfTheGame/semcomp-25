@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 3008e0efee7ae9f4f8cc132192e2a7a7
+guid: a35798c8634262445858cfaf9cd191dc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9190349761339524105
-    second: miquinho_png_0
+      213: 2038111883099957395
+    second: miquinho azul_0
   - first:
-      213: -5028971745169930904
-    second: miquinho_png_1
+      213: 1055934958755420133
+    second: miquinho azul_1
   - first:
-      213: 1126174614990996969
-    second: miquinho_png_2
+      213: 2614132706460327693
+    second: miquinho azul_2
   - first:
-      213: 7646876330979916026
-    second: miquinho_png_3
+      213: -6102573668869498345
+    second: miquinho azul_3
   - first:
-      213: -3986046089687713998
-    second: miquinho_png_4
+      213: 5320410081581115522
+    second: miquinho azul_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,7 +130,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: miquinho_png_0
+      name: miquinho azul_0
       rect:
         serializedVersion: 2
         x: 53
@@ -138,20 +138,20 @@ TextureImporter:
         width: 415
         height: 546
       alignment: 9
-      pivot: {x: 0.5, y: 0.3}
+      pivot: {x: 0.59, y: 0.35}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9040d365a6eaa8f70800000000000000
-      internalID: 9190349761339524105
+      spriteID: 398eca495f3d84c10800000000000000
+      internalID: 2038111883099957395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_1
+      name: miquinho azul_1
       rect:
         serializedVersion: 2
         x: 637
@@ -159,20 +159,20 @@ TextureImporter:
         width: 326
         height: 467
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.32}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8658ba7a7d0853ab0800000000000000
-      internalID: -5028971745169930904
+      spriteID: 5e7988a104f67ae00800000000000000
+      internalID: 1055934958755420133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_2
+      name: miquinho azul_2
       rect:
         serializedVersion: 2
         x: 1111
@@ -186,14 +186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e5c99978d9f0af00800000000000000
-      internalID: 1126174614990996969
+      spriteID: d0f5c44a8d3474420800000000000000
+      internalID: 2614132706460327693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_3
+      name: miquinho azul_3
       rect:
         serializedVersion: 2
         x: 1622
@@ -201,20 +201,20 @@ TextureImporter:
         width: 326
         height: 467
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.56}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af8766512892f1a60800000000000000
-      internalID: 7646876330979916026
+      spriteID: 71a916bb49d4f4ba0800000000000000
+      internalID: -6102573668869498345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_4
+      name: miquinho azul_4
       rect:
         serializedVersion: 2
         x: 2068
@@ -222,14 +222,14 @@ TextureImporter:
         width: 416
         height: 545
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.6, y: 0.56}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23734dd4338bea8c0800000000000000
-      internalID: -3986046089687713998
+      spriteID: 288ac0cc7c4e5d940800000000000000
+      internalID: 5320410081581115522
       vertices: []
       indices: 
       edges: []

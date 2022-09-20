@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +29,7 @@ public class MapManager : MonoBehaviour
     private GameManager gameManager;
     private DifficultyProgression difficultyProgression;
     private BallController ballController;
+    private SpriteRotation spriteRotation;
     
     /* Field related */
     private Field[] fields = new Field[2];
@@ -40,6 +40,7 @@ public class MapManager : MonoBehaviour
         difficultyProgression = FindObjectOfType<DifficultyProgression>();
         fields = GetComponentsInChildren<Field>();
         ballController = FindObjectOfType<BallController>();
+        spriteRotation = FindObjectOfType<SpriteRotation>();
     }
 
     private void OnEnable()
@@ -112,6 +113,7 @@ public class MapManager : MonoBehaviour
         if (preset.HasGoal())
         {
             goalPositions.Add(preset.GetGoal());
+            spriteRotation.NextEnemy();
         }
     }
 

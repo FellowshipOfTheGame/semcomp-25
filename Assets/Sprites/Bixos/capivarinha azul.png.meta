@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 3008e0efee7ae9f4f8cc132192e2a7a7
+guid: 2e689a2144e5a5c4eae27729dd099706
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9190349761339524105
-    second: miquinho_png_0
+      213: 2037987733956491526
+    second: capivarinha azul_0
   - first:
-      213: -5028971745169930904
-    second: miquinho_png_1
+      213: -4189522432264034743
+    second: capivarinha azul_1
   - first:
-      213: 1126174614990996969
-    second: miquinho_png_2
+      213: 1408665450351756127
+    second: capivarinha azul_2
   - first:
-      213: 7646876330979916026
-    second: miquinho_png_3
+      213: -8068072288925774644
+    second: capivarinha azul_3
   - first:
-      213: -3986046089687713998
-    second: miquinho_png_4
+      213: 4152908180450079971
+    second: capivarinha azul_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -61,7 +61,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 323
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,106 +130,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: miquinho_png_0
+      name: capivarinha azul_0
       rect:
         serializedVersion: 2
-        x: 53
-        y: 257
-        width: 415
-        height: 546
+        x: 162
+        y: 260
+        width: 276
+        height: 503
       alignment: 9
-      pivot: {x: 0.5, y: 0.3}
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9040d365a6eaa8f70800000000000000
-      internalID: 9190349761339524105
+      spriteID: 609741bdb03684c10800000000000000
+      internalID: 2037987733956491526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_1
+      name: capivarinha azul_1
       rect:
         serializedVersion: 2
-        x: 637
-        y: 248
-        width: 326
-        height: 467
+        x: 668
+        y: 253
+        width: 263
+        height: 418
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8658ba7a7d0853ab0800000000000000
-      internalID: -5028971745169930904
+      spriteID: 9462f5e7b83dbd5c0800000000000000
+      internalID: -4189522432264034743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_2
+      name: capivarinha azul_2
       rect:
         serializedVersion: 2
-        x: 1111
-        y: 223
-        width: 353
-        height: 335
+        x: 1146
+        y: 277
+        width: 286
+        height: 253
       alignment: 9
-      pivot: {x: 0.5, y: 0.4}
+      pivot: {x: 0.5, y: 0.35}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e5c99978d9f0af00800000000000000
-      internalID: 1126174614990996969
+      spriteID: f53059f73c59c8310800000000000000
+      internalID: 1408665450351756127
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_3
+      name: capivarinha azul_3
       rect:
         serializedVersion: 2
-        x: 1622
-        y: 192
-        width: 326
-        height: 467
+        x: 1657
+        y: 241
+        width: 263
+        height: 412
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.53}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af8766512892f1a60800000000000000
-      internalID: 7646876330979916026
+      spriteID: ccc086ceff2780090800000000000000
+      internalID: -8068072288925774644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miquinho_png_4
+      name: capivarinha azul_4
       rect:
         serializedVersion: 2
-        x: 2068
-        y: 122
-        width: 416
-        height: 545
+        x: 2177
+        y: 166
+        width: 279
+        height: 502
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.53}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23734dd4338bea8c0800000000000000
-      internalID: -3986046089687713998
+      spriteID: 3e47a80bcf712a930800000000000000
+      internalID: 4152908180450079971
       vertices: []
       indices: 
       edges: []
