@@ -18,12 +18,14 @@ public class PauseMenu : MonoBehaviour
 
     private ScoreSystem scoreSystem;
 
-    [SerializeField] private RetryMenu retryMenu;
-    
+    [SerializeField] private RetryMenu retryMenu;    
     [SerializeField] private Slider masterVolumeSlider, effectsVolumeSlider, musicVolumeSlider;
 
-    private void Awake()
+    private AudioManager audioManager;
+
+    private void Start()
     {
+        audioManager = AudioManager.instance;
         Resume();
         scoreSystem = FindObjectOfType<ScoreSystem>();
     }
@@ -53,6 +55,7 @@ public class PauseMenu : MonoBehaviour
     // Exit the Pause Menu
     public void Resume()
     {
+        audioManager.PlaySFX("Button");
         // Exit the Pause Menu in the canvas
         pauseMenuUI.SetActive(false);
 
@@ -66,6 +69,8 @@ public class PauseMenu : MonoBehaviour
     // Open the Pause Menu
     public void Pause()
     {
+        audioManager.PlaySFX("Button");
+
         menuLabelText.text = "PAUSADO";
         // Show the Pause Menu in the canvas
         pauseMenuUI.SetActive(true);
@@ -82,6 +87,7 @@ public class PauseMenu : MonoBehaviour
     // Open the Main Menu
     public void FinishAndLoadMenu()
     {
+        audioManager.PlaySFX("Button");
 #if !UNITY_EDITOR
         StartCoroutine(FinishAndLoadMenuEnumerator());
 #else
@@ -93,6 +99,7 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator FinishAndLoadMenuEnumerator()
     {
+
         var matchData = new MatchData()
         {
             score = scoreSystem.ScoreAmount
@@ -128,26 +135,10 @@ public class PauseMenu : MonoBehaviour
     
     public void Volume()
     {
+        audioManager.PlaySFX("Button");
+
         menuLabelText.text = "VOLUME";
-        
-        // var audioMixer = FindObjectOfType<SettingsMenu>().audioMixer;
-        
-        // audioMixer.GetFloat("main-volume", out var masterValue);
-        // masterVolumeSlider.value = Mathf.Log10(masterValue);
-        // masterVolumeSlider.value = masterValue;
-        // masterVolumeSlider.value = Remap(masterValue, -80f, 0f, 0f, 1f);
-        
-        // audioMixer.GetFloat("effects-volume", out var effectsValue);
-        // sfxVolumeSlider.value = Mathf.Log10(effectsValue);
-        // effectsVolumeSlider.value = effectsValue;
-        // effecttmp = effectsValue;
-        // sfxVolumeSlider.value = Remap(effectsValue, -80f, 0f, 0f, 1f);
-        
-        // audioMixer.GetFloat("music-volume", out var musicValue);
-        // musicVolumeSlider.value = Mathf.Log10(musicVolume);
-        // musicVolumeSlider.value = musicValue;
-        // musicVolumeSlider.value = Remap(musicValue, -80f, 0f, 0f, 1f);
-                
+                        
         volumePanel.SetActive(true);
     }
     

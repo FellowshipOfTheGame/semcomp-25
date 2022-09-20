@@ -1,0 +1,138 @@
+/* General Configurations */
+@font-face { font-family: Traffic; src: url(font/TRAFFIC3.TTF); }
+@font-face { font-family: TrafficText; src: url(font/TRAFFIC2_0.ttf); }
+
+html { scroll-behavior: smooth; }
+
+body { 
+    background: url("images/bg.jpg") no-repeat 30% bottom fixed;
+    background-size: cover;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin:  0;
+    padding: 0;
+    min-height: 100vh;
+
+    font-family: Traffic;
+    color: #ffffff;
+    
+}
+
+/* Header */
+header img { 
+    max-height: 300px;
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 800px) {
+    header img { max-height: 150px; }
+}
+
+/* Footer */
+footer { 
+    width: 100%;
+    text-align: center;
+    background-color: #2d383c;
+    border-top: solid 2px #f2c859;
+}
+
+footer a { color: #fff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Placa - CSS */
+.placa { 
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #2f734e;
+    background-image: linear-gradient(#2f734e, #195030);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 25px;
+}
+.placa > * {
+    padding: 20px;
+    background-color: transparent;
+    border: solid 3px;
+    border-radius: 15px;
+}
+.placa > * > *:first-child { margin-top: 0; }
+.placa p, .placa li, .placa a { font-family: TrafficText; }
+.placa p { margin-bottom: 0;}
+
+.placa.yellow { color: #000; background-image: linear-gradient(#f2c859, #e5842b); }
+.placa.yellow > * { border-color: #000; }
+.placa.red { background-image: linear-gradient(#cb515c, #8b1b26); }
+
+@media screen and (max-width: 440px) {
+    .placa { text-align: center; }
+}
+
+/* Botão */
+.button { 
+    display: block;
+    border-radius: 3px;
+    padding: 5px;
+
+    color: #fff;
+    text-align: center;
+    font-family: TrafficText;
+    text-decoration: none;
+    background-image: linear-gradient(#2f734e, #195030);
+}
+.button:hover { filter: brightness(1.05); }
+.button > * { 
+    display: block;
+    border: solid 2px;
+    border-radius: 3px;
+    padding: 12px 20px;
+}
+
+.button.yellow { 
+    color: #000;
+    background-color: #f2c859;
+    background-image: linear-gradient(#f2c859, #e5842b);
+}
+.button.red {
+    background-color: #cb515c;
+    background-image: linear-gradient(#cb515c, #8b1b26);
+}
+
+
+/* Main - General */
+main { 
+    flex-grow: 1;
+    margin: 20px;
+}
+
+/* Main - Home*/
+
+
+/* Main - Informações */
+main#about { 
+    margin: 40px;
+    padding: 40px;
+    max-width: 1000px;
+
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 3px;
+}
+
+main#about section { 
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: solid 1px #ccc;
+}
+main#about section:first-child { 
+    margin-top: 0; 
+    padding-top: 0; 
+    border-top: none;
+}
+main#about section *:first-child { margin-top: 0; }
+main#about p { font-family: TrafficText; }
+main#about a { color: #1f71aa; text-decoration: none; }
+main#about a:hover { text-decoration: underline; }
