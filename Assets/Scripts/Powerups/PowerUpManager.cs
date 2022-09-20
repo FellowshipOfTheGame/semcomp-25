@@ -160,6 +160,7 @@ public class PowerUpManager : MonoBehaviour
     }
     public void ChangeEnemyTime(float duration, float timeFactor)
     {
+        audioManager.PlaySFX("Slow");
         barHorizontalMovement.ChangeSpeedFactorTemporarily(duration, timeFactor);
     }
 
