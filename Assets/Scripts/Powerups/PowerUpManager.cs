@@ -197,6 +197,7 @@ public class PowerUpManager : MonoBehaviour
         }
         else
         {
+            audioManager.PlaySFX("ScoreBonus");
             scoreManager.AddPowerupScore(score);
         }
 
