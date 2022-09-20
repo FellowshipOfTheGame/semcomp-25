@@ -59,6 +59,7 @@ public class PowerUpManager : MonoBehaviour
     }
     public void AddLife(int n)
     {
+        audioManager.PlaySFX("ExtraLife");
         lives += n;
     }
     public void LoseLife()
