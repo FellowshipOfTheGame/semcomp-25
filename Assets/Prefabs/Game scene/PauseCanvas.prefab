@@ -3929,7 +3929,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7246899708432274366}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: FinishAndLoadMenu
+        m_MethodName: ReloadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
