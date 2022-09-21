@@ -9,7 +9,7 @@ public static class PlayerStatusRequestHandler
     {
         RaycastBlockEvent.Invoke(true);
         
-        var request = WebRequestFactory.AuthGet(Endpoints.UserStatus);
+        var request = WebRequestFactory.AuthGet(Endpoints.PlayerStatus);
         yield return request.SendWebRequest();
 
         RaycastBlockEvent.Invoke(false);

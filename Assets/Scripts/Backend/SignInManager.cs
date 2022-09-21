@@ -10,7 +10,7 @@ public class SignInManager : MonoBehaviour
     private GoogleSignInConfiguration configuration;
     private const string WebClientID = "560143319104-d5bakq1kpie2f25cq1rkfncig5fkajsu.apps.googleusercontent.com";
 
-    [SerializeField] private Button signInButton, signOutButton, playButton;
+    [SerializeField] private Button signInButton, signOutButton, playButton, rankingButton;
     [SerializeField] private RetryMenu retryMenu;
 
     private void Awake()
@@ -40,6 +40,7 @@ public class SignInManager : MonoBehaviour
         signInButton.gameObject.SetActive(true);
         signOutButton.gameObject.SetActive(false);
         playButton.gameObject.SetActive(false);
+        rankingButton.interactable = false;
     }
 
     private void Start()
@@ -49,8 +50,6 @@ public class SignInManager : MonoBehaviour
 
     private IEnumerator ValidateCookie()
     {
-        RaycastBlockEvent.Invoke(true);
-        
 #if UNITY_ANDROID
         var authCookie = PlayerPrefs.GetString(SessionAuthRequestHandler.AuthKey, string.Empty);
 
@@ -59,16 +58,13 @@ public class SignInManager : MonoBehaviour
             signInButton.gameObject.SetActive(true);
             signOutButton.gameObject.SetActive(false);
             playButton.gameObject.SetActive(false);
-            
-            RaycastBlockEvent.Invoke(false);
-            
+            rankingButton.interactable = false;
+
             yield break;
         }
 #endif
         
         yield return SessionAuthRequestHandler.ValidateSession(OnValidateSuccess, OnValidateFailure);
-        
-        RaycastBlockEvent.Invoke(false);
     }
 
     private void OnValidateSuccess()
@@ -85,6 +81,7 @@ public class SignInManager : MonoBehaviour
                 signInButton.gameObject.SetActive(true);
                 signOutButton.gameObject.SetActive(false);
                 playButton.gameObject.SetActive(false);
+                rankingButton.interactable = false;
                 break;
             default:
                 retryMenu.InternetConnectionLost(ValidateCookie(), true);
@@ -112,7 +109,6 @@ public class SignInManager : MonoBehaviour
         }
         else if (task.IsCanceled)
         {
-            retryMenu.AuthenticationFaulted();
             Debug.LogError("Error: canceled\n" + task.Exception);
         }
         else
@@ -124,16 +120,12 @@ public class SignInManager : MonoBehaviour
 
     private IEnumerator LoginEnumerator(string idToken)
     {
-        RaycastBlockEvent.Invoke(true);
-        
         yield return SessionAuthRequestHandler.Login(
             new SessionData(idToken),
             OnSignInSuccess,
             req => OnSignInFailure(req, idToken)
         );
-        
-        RaycastBlockEvent.Invoke(false);
-        
+
         GoogleSignIn.DefaultInstance.SignOut();
     }
 
@@ -143,6 +135,7 @@ public class SignInManager : MonoBehaviour
         signInButton.gameObject.SetActive(false);
         signOutButton.gameObject.SetActive(true);
         playButton.gameObject.SetActive(true);
+        rankingButton.interactable = true;
     }
 
     private void OnSignInFailure(UnityWebRequest req, string idToken)
@@ -173,6 +166,7 @@ public class SignInManager : MonoBehaviour
         signInButton.gameObject.SetActive(true);
         signOutButton.gameObject.SetActive(false);
         playButton.gameObject.SetActive(false);
+        rankingButton.interactable = false;
     }
 
     private void OnSignOutFailure(UnityWebRequest req)
