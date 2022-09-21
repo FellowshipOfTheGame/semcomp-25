@@ -34,17 +34,17 @@ routes.get('/informacoes', async (req, res) => {
     })
 })
 
-routes.get('/codigo-login', async (req, res) => { 
-    ejs.renderFile(`${templates}/index.html`, 
-        {
-            title: 'Código de Login',
-            main:  'access-code.html',
-            public: publicUrl,
-        },
-        function(err, html) { 
-        return res.send(html)
-    })
-})
+// routes.get('/codigo-login', async (req, res) => { 
+//     ejs.renderFile(`${templates}/index.html`, 
+//         {
+//             title: 'Código de Login',
+//             main:  'access-code.html',
+//             public: publicUrl,
+//         },
+//         function(err, html) { 
+//         return res.send(html)
+//     })
+// })
 
 routes.get('*', async (req, res) => { 
     ejs.renderFile(`${templates}/index.html`, 

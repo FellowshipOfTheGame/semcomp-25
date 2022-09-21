@@ -46,13 +46,13 @@ async function finish(req, res) {
 
     logger.info(`User ${userId} is trying to finish a match`)
 
-    // const reqSign = createHmac('sha256', configEnv.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
-    // if(sign !== reqSign) {
-    //     logger.warn({
-    //         message: `at Race.finish(): Invalid signature for user ${userId}`
-    //     })    
-    //     return res.status(400).json({ message: "incorrect signature" })
-    // }
+    const reqSign = createHmac('sha256', configEnv.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
+    if(sign !== reqSign) {
+        logger.warn({
+            message: `at Race.finish(): Invalid signature for user ${userId}`
+        })    
+        return res.status(400).json({ message: "incorrect signature" })
+    }
 
     return await sessionClient.multi()
         .get(`${userId}_match`)
@@ -113,14 +113,14 @@ async function savepoint(req, res) {
 
     logger.info(`User ${userId} is trying to save a match`)
 
-    // const reqSign = createHmac('sha256', configEnv.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
-    // if(sign !== reqSign) {
-    //     logger.warn({
-    //         message: `at match.savepoint(): Invalid signature for user ${userId}`
-    //     })    
+    const reqSign = createHmac('sha256', configEnv.REQUEST_SIGNATURE_KEY).update(JSON.stringify({score, sign: ""})).digest('base64')
+    if(sign !== reqSign) {
+        logger.warn({
+            message: `at match.savepoint(): Invalid signature for user ${userId}`
+        })    
 
-    //     return res.status(400).json({ message: "incorrect signature" })
-    // }
+        return res.status(400).json({ message: "incorrect signature" })
+    }
 
     // return await sessionClient.multi()
     //    .set(`${userId}_match_savepoint`)
