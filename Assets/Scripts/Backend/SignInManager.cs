@@ -78,14 +78,13 @@ public class SignInManager : MonoBehaviour
 
     private void OnValidateFailure(UnityWebRequest req)
     {
-        signInButton.gameObject.SetActive(true);
-        signOutButton.gameObject.SetActive(false);
-        playButton.gameObject.SetActive(false);
-
         switch (req.responseCode)
         {
             case 401:
                 retryMenu.SessionExpiredInMenu();
+                signInButton.gameObject.SetActive(true);
+                signOutButton.gameObject.SetActive(false);
+                playButton.gameObject.SetActive(false);
                 break;
             default:
                 retryMenu.InternetConnectionLost(ValidateCookie(), true);

@@ -29,6 +29,8 @@ public class PowerUpManager : MonoBehaviour
     // and this object attached here
     [SerializeField] private BarHorizontalMovement barHorizontalMovement;
 
+    private AudioManager audioManager;
+
     private IEnumerator coroutine;
 
     private void Awake()
@@ -37,12 +39,14 @@ public class PowerUpManager : MonoBehaviour
         isInvisible = false;
         // Set the initial speed factor (static variable) to 1.0f
         barHorizontalMovement.ChangeSpeedFactorTemporarily(0.0f, 0.0f);
+
     }
 
     private void Start()
     {
         initialBallRadius = this.GetComponent<CircleCollider2D>().radius;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();        
+        audioManager = AudioManager.instance;
     }
     public void SetPowerUpHud(Sprite sprite, float duration)
     {
@@ -55,6 +59,7 @@ public class PowerUpManager : MonoBehaviour
     }
     public void AddLife(int n)
     {
+        audioManager.PlaySFX("ExtraLife");
         lives += n;
     }
     public void LoseLife()
@@ -76,6 +81,7 @@ public class PowerUpManager : MonoBehaviour
     // Turns the ball invisible to enemy collision
     public void ChangeTemporarilyVisibility(float invisibilityTime)
     {
+        audioManager.PlaySFX("PhantomBall");
         coroutine = GhostBallAnim(invisibilityTime);
         StartCoroutine(coroutine);
     }
@@ -155,11 +161,17 @@ public class PowerUpManager : MonoBehaviour
     }
     public void ChangeEnemyTime(float duration, float timeFactor)
     {
+        audioManager.PlaySFX("Slow");
         barHorizontalMovement.ChangeSpeedFactorTemporarily(duration, timeFactor);
     }
 
     private IEnumerator ChangeBallSizeAndWait(float radius, float time)
     {
+        if (radius > this.transform.localScale.x)
+            audioManager.PlaySFX("GrowBall");
+        else
+            audioManager.PlaySFX("ShrinkBall");
+
         yield return StartCoroutine(ScaleAnimation(0.5f, radius));
         yield return new WaitForSeconds(time);
         yield return StartCoroutine(ScaleAnimation(radius, 0.5f));
@@ -173,6 +185,7 @@ public class PowerUpManager : MonoBehaviour
         }
         else
         {
+            audioManager.PlaySFX("TimeBonus");
             timeManager.AddTime(time);
         }
     }
@@ -185,6 +198,7 @@ public class PowerUpManager : MonoBehaviour
         }
         else
         {
+            audioManager.PlaySFX("ScoreBonus");
             scoreManager.AddPowerupScore(score);
         }
 

@@ -439,6 +439,10 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 7246899708665393630}
   volumePanel: {fileID: 7246899709970852656}
   menuLabelText: {fileID: 7246899709172978432}
+  retryMenu: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  effectsVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
 --- !u!114 &7246899708432274365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,10 +1784,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 7246899709068699045}
   m_HandleRect: {fileID: 7246899708519004778}
   m_Direction: 0
-  m_MinValue: 0.0001
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2387,6 +2391,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8599997562954800416, guid: 6167e058671fabd4195cb01d19e2fc82, type: 3}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Button
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7246899709713022207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,10 +2562,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 7246899708354169165}
   m_HandleRect: {fileID: 7246899708721636445}
   m_Direction: 0
-  m_MinValue: 0.0001
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2944,7 +2960,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7246899708432274366}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
+        m_MethodName: FinishAndLoadMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3265,6 +3281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a6535dbfdb4464abfead1ca7283249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolumeSlider: {fileID: 7246899709363604780}
+  effectsVolumeSlider: {fileID: 7246899709713830746}
+  musicVolumeSlider: {fileID: 7246899710082265002}
 --- !u!1 &7246899710003316975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3618,10 +3637,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 7246899709372831454}
   m_HandleRect: {fileID: 7246899709938604066}
   m_Direction: 0
-  m_MinValue: 0.0001
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3910,7 +3929,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7246899708432274366}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: ReloadScene
+        m_MethodName: FinishAndLoadMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

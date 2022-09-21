@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -17,10 +18,14 @@ public class PauseMenu : MonoBehaviour
 
     private ScoreSystem scoreSystem;
 
-    [SerializeField] private RetryMenu retryMenu;
+    [SerializeField] private RetryMenu retryMenu;    
+    [SerializeField] private Slider masterVolumeSlider, effectsVolumeSlider, musicVolumeSlider;
 
-    private void Awake()
+    private AudioManager audioManager;
+
+    private void Start()
     {
+        audioManager = AudioManager.instance;
         Resume();
         scoreSystem = FindObjectOfType<ScoreSystem>();
     }
@@ -50,6 +55,7 @@ public class PauseMenu : MonoBehaviour
     // Exit the Pause Menu
     public void Resume()
     {
+        audioManager.PlaySFX("Button");
         // Exit the Pause Menu in the canvas
         pauseMenuUI.SetActive(false);
 
@@ -63,6 +69,8 @@ public class PauseMenu : MonoBehaviour
     // Open the Pause Menu
     public void Pause()
     {
+        audioManager.PlaySFX("Button");
+
         menuLabelText.text = "PAUSADO";
         // Show the Pause Menu in the canvas
         pauseMenuUI.SetActive(true);
@@ -79,6 +87,7 @@ public class PauseMenu : MonoBehaviour
     // Open the Main Menu
     public void FinishAndLoadMenu()
     {
+        audioManager.PlaySFX("Button");
 #if !UNITY_EDITOR
         StartCoroutine(FinishAndLoadMenuEnumerator());
 #else
@@ -90,6 +99,7 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator FinishAndLoadMenuEnumerator()
     {
+
         var matchData = new MatchData()
         {
             score = scoreSystem.ScoreAmount
@@ -121,10 +131,19 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    private float effecttmp;
+    
     public void Volume()
     {
+        audioManager.PlaySFX("Button");
+
         menuLabelText.text = "VOLUME";
-                
+                        
         volumePanel.SetActive(true);
+    }
+    
+    float Remap(float value, float min1, float max1, float min2, float max2) 
+    {
+        return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
     }
 }

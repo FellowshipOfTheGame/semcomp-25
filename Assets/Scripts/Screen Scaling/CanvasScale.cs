@@ -6,7 +6,22 @@ using UnityEngine.UI;
 
 public class CanvasScale : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        CameraScale.OnResolutionChanged += ScaleCanvas;
+    }
+
+    private void OnDisable()
+    {
+        CameraScale.OnResolutionChanged -= ScaleCanvas;
+    }
+
     private void Awake()
+    {
+        ScaleCanvas();
+    }
+
+    private void ScaleCanvas()
     {
         if (Screen.height > Screen.width)
         {
