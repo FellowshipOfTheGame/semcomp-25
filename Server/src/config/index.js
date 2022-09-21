@@ -32,7 +32,7 @@ module.exports = {
     COOKIE_SIGNATURE_KEY: process.env.COOKIE_SIGNATURE_KEY || "ABCDEFGHIJKLU",
     SESSION_SECURE: process.env.SESSION_SECURE == "1" || false, 
     SESSION_HTTP_ONLY: process.env.SESSION_HTTP_ONLY == "1" || false,
-    SESSION_SAME_SITE: process.env.SESSION_SAME_SITE || "none",
+    SESSION_SAME_SITE: process.env.SESSION_SAME_SITE || "None",
     SESSION_MAX_AGE: process.env.SESSION_MAX_AGE || 3600000,
     
     REQUEST_SIGNATURE_KEY: process.env.REQUEST_SIGNATURE_KEY || "MINAHSENHASUPERSECRETA",
