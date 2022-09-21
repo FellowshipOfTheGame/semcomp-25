@@ -135,4 +135,11 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  Musics: []
+  Musics:
+  - name: GameMusic
+    clip: {fileID: 8300000, guid: 361ffe5d4a94a724a9926622e1115a07, type: 3}
+    output: {fileID: -8103179610439550046, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
