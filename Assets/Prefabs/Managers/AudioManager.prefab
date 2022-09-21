@@ -72,4 +72,67 @@ MonoBehaviour:
     pitch: 1.4
     loop: 0
     source: {fileID: 0}
+  - name: TimeBonus
+    clip: {fileID: 8300000, guid: 29131a2766e13b64fabfc60d38dfc8c7, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrowBall
+    clip: {fileID: 8300000, guid: dc8faa44dafd6d14d8faac1ae6d70c39, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ShrinkBall
+    clip: {fileID: 8300000, guid: d5be570e245a5ea4f8f567cfb88fb858, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PhantomBall
+    clip: {fileID: 8300000, guid: 5bdd8ea3b51c09b4ea57af1ae456fecb, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Button
+    clip: {fileID: 8300000, guid: 79fdfb5744eb25c429eb3fe4da1ee277, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bouncer
+    clip: {fileID: 8300000, guid: a8336c444fb3da846a2e84d2d3b539a0, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ScoreBonus
+    clip: {fileID: 8300000, guid: 4535f796ab012b64385d849c10930eea, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Slow
+    clip: {fileID: 8300000, guid: a96313ad796e77c499362b5c24abe5c8, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ExtraLife
+    clip: {fileID: 8300000, guid: 3a1101a70fb863243ba0090b0995cab0, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   Musics: []

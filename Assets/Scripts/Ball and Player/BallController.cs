@@ -46,6 +46,7 @@ public class BallController : MonoBehaviour
     private PowerUpManager powerUpManager;
     private Camera camera1;
     private Timer timer;
+    private MapBoundaries mapBoundaries;
 
     [SerializeField] private RetryMenu retryMenu;
     
@@ -63,6 +64,7 @@ public class BallController : MonoBehaviour
         playerManager = FindObjectOfType<PlayerInputManager>();
         camera1 = Camera.main;
         timer = FindObjectOfType<Timer>();
+        mapBoundaries = FindObjectOfType<MapBoundaries>();
     }
 
     private void Start()
@@ -118,14 +120,14 @@ public class BallController : MonoBehaviour
         line.enabled = false;
     }
     
-    public void SetBallFx(bool val)
+    private void SetBallFx(bool val)
     {
         if (throwFx)
             throwFx.SetActive(val);
     }
 
     private bool canAim=true;
-    public void SetCanAim(bool val)
+    private void SetCanAim(bool val)
     {
         canAim = val;
     }
@@ -158,7 +160,7 @@ public class BallController : MonoBehaviour
         {
             var position1 = currentPlayer.transform.position;
             transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
-            
+
             Vector3 mousePosition = camera1!.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
 
@@ -174,7 +176,7 @@ public class BallController : MonoBehaviour
                 }
             }
 
-            if (mousePressed )
+            if (mousePressed)
             {
                 // come�a a mirar
                 line.enabled = true;
@@ -227,6 +229,8 @@ public class BallController : MonoBehaviour
         
         lockedOntoPlayer = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
+        mapBoundaries.ActivateBoundaries(true);
+        SetBallFx(true);
         
         Vector2 newVelocity = (mousePosition - transform.position).normalized * (throwSpeed * forceLevel);
         rb2d.velocity = newVelocity;
@@ -287,6 +291,8 @@ public class BallController : MonoBehaviour
         lockedOntoPlayer = true;
         rb2d.velocity = Vector2.zero;
         rb2d.bodyType = RigidbodyType2D.Kinematic;
+        mapBoundaries.ActivateBoundaries(false);
+        SetBallFx(false);
         
         var position1 = currentPlayer.transform.position;
         transform.position = new Vector2(position1.x, position1.y + offsetFromPlayer);
@@ -370,6 +376,7 @@ public class BallController : MonoBehaviour
                 {
                     powerUpManager.LoseLife();
                     SetBallToPlayer(currentPlayer);
+                    mapManager.StartTransition(currentPlayer.transform.parent);
                 }
             }
         }
@@ -399,6 +406,8 @@ public class BallController : MonoBehaviour
         gameManager.SetLevelProgress(0f);
         gameManager.SetLevelView(); // finally updates text UI with the levels
 
+        SetCanAim(false);
+        
         GameObject nextPlayer = mapManager.GetFirstPlayerOfLevel(gameManager.Level);
         nextPlayer = nextPlayer.GetComponentInChildren<Ally>().gameObject;
         SetBallToPlayer(nextPlayer);
@@ -415,5 +424,6 @@ public class BallController : MonoBehaviour
         rb2d.simulated = true;
 
         timer.SetPaused(false);
+        SetCanAim(true);
     }
 }
