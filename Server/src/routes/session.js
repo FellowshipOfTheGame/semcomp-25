@@ -14,8 +14,9 @@ const SessionController = require('../controllers/sessionController');
 // Routes
 routes.get('/login', passport.authenticate('google', { scope: ['profile', 'email'], access_type: 'online' }))
 routes.get('/login/callback', passport.authenticate('google', { failureRedirect: `${config.SERVER_PATH_PREFIX}/?auth=failed` }), SessionController.loginCallback)
-routes.get('/login/google-fail',  (req, res) => res.send(`Falied log in`))
-routes.get('/login/google-success', SessionMiddleware.isAuth, (req, res) => res.send(`Success log in ${req.user}`))
+// routes.get('/login/google-fail',  (req, res) => res.send(`Falied log in`))
+// routes.get('/login/google-success', SessionMiddleware.isAuth, (req, res) => res.send(`Success log in ${req.user}`))
+routes.post('/login/get-session', SessionController.getSession)
 
 const configEnv = require('../config')
 

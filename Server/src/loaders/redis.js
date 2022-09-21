@@ -4,15 +4,25 @@ const config = require("../config")
 const { logger } = require("../config/logger")
 
 var redisStore = require('connect-redis')(session);
-var sessionClient  = redis.createClient({
+
+// Redis Database 1 - Sessions Storages
+const sessionClient  = redis.createClient({
     db: 1,
     url: config.REDIS_HOST,
     port: config.REDIS_PORT,
     legacyMode: true,
 });
 
+// Redis Database 2 - OTP Codes Storages
+const otpClient = redis.createClient({ 
+    db: 2,
+    url: config.REDIS_HOST,
+    port: config.REDIS_PORT, 
+})
+
+
 // Redis Clients Logs
-const clientList = [ sessionClient ]
+const clientList = [ sessionClient, otpClient ]
 
 clientList.forEach(async instanceClient => {
     instanceClient.on('connect', () => {
@@ -33,6 +43,7 @@ clientList.forEach(async instanceClient => {
 //Configure redis client
 module.exports = {
     sessionClient,
+    otpClient,
     sessionStore: new redisStore({ client: sessionClient, ttl: 3600 }),
     session
 }

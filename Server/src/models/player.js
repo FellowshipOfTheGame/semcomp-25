@@ -37,6 +37,7 @@ class SchemaPlayer {
     }
 
     async create(Player) {
+        console.log(Player)
         const pathTable = configEnv.PROJECT_ID + '/player/' + Player.provider_id
 
         db.ref(pathTable).set({

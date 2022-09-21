@@ -40,6 +40,7 @@
     "passport-google-verify-token": "^2.2.0",
     "redis": "^4.3.0",
     "start": "^5.1.0",
+    "uuidv4": "^6.2.13",
     "winston-firebase-transport": "^1.1.0"
   },
   "devDependencies": {

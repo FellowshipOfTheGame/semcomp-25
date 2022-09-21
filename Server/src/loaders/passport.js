@@ -27,25 +27,22 @@ module.exports = function (passport) {
                 callbackURL: configEnv.GOOGLE_CALLBACK_URL,
             },
             function(accessToken, refreshToken, params, profile, done) {
-                console.log(params)
-     
-                // PlayerController.findOrCreate(profile, (err, player) => {
-                //     if (err) {
-                //         logger.error({
-                //             message: `at Google Login: ${err}`
-                //         })
-                //         return done(null, null, { message: "unable to create or find user" })
-                //     }
+                const provider = 'google'
 
-                //     if (!player) {
-                //         return done(null, null, { message: "user not created or not found" });
-                //     }
-                    
-                //     return done(null, player);
-                // });
+                PlayerController.findOrCreate(profile.id, provider, profile._json, (err, player) => {
+                    if (err) {
+                        logger.error({
+                            message: `at Google Login: ${err}`
+                        })
+                        return done(null, null, { message: "unable to create or find user" })
+                    }
 
-                // while testing, just return the google profile 
-                return done(null, profile);
+                    if (!player) {
+                        return done(null, null, { message: "user not created or not found" });
+                    }
+
+                    return done(null, player);
+                });
             }
         ));
     }
