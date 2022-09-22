@@ -400,6 +400,7 @@ public class BallController : MonoBehaviour
         mapManager.SpawnPresetsUntilGoal();
         mapManager.RepositionFields();
 
+        mapBoundaries.ActivateBoundaries(false);
         yield return new WaitForSeconds(2f);
         rb2d.simulated = false; // so the ball doesnt hit the map boundaries when doing the transition
 
@@ -422,7 +423,7 @@ public class BallController : MonoBehaviour
         }
         
         rb2d.simulated = true;
-
+        mapBoundaries.ActivateBoundaries(true);
         timer.SetPaused(false);
         SetCanAim(true);
     }

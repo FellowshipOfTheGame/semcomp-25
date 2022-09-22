@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float startMouseX = 0;
     [SerializeField] bool selected = false;
     [SerializeField] private GameObject selectedObj;
+    
     public float Range => range;
     public bool Selected => selected;
     public void SetStartX(float _x)
