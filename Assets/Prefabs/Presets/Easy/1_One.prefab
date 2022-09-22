@@ -799,7 +799,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: prefabs.Array.size
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: prefabs.Array.data[0]
@@ -812,15 +812,15 @@ PrefabInstance:
     - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: prefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+      objectReference: {fileID: 6937274488717889214, guid: d1aea5dc98cad4447b273d69559d100f, type: 3}
     - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: prefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+      objectReference: {fileID: 8457201566428304096, guid: a9ba20ee939354f4c811e0c2f55859ec, type: 3}
     - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: prefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+      objectReference: {fileID: 3679992401158754688, guid: a24bf99c5d9dd3144aeddf21a8cf0c8b, type: 3}
     - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: prefabs.Array.data[5]
       value: 
@@ -828,7 +828,11 @@ PrefabInstance:
     - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: prefabs.Array.data[6]
       value: 
-      objectReference: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+      objectReference: {fileID: 6271351332442257762, guid: d5e304fda8dc9504e88119a359f13d19, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: prefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 5936134752859431962, guid: 1808102593f0be24492c274131b9fa2b, type: 3}
     - target: {fileID: 7767148560556528034, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: m_RootOrder
       value: 3
