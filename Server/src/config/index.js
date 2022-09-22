@@ -25,7 +25,8 @@ module.exports = {
     MESSAGING_SENDER_ID: process.env.MESSAGINGSENDERID,
     APP_ID: process.env.APPID,
     MEASUREMENT_ID: process.env.MEASUREMENTID,
-
+    ADMIN_DATABASEURL: process.env.ADMIN_DATABASEURL,
+    
     REDIS_HOST: process.env.REDIS_HOST || "localhost",
     REDIS_PORT: process.env.REDIS_PORT ||  6379,
 

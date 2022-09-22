@@ -8,15 +8,15 @@ var redisStore = require('connect-redis')(session);
 // Redis Database 1 - Sessions Storages
 const sessionClient  = redis.createClient({
     db: 1,
-    url: config.REDIS_HOST,
+    host: config.REDIS_HOST,
     port: config.REDIS_PORT,
     legacyMode: true,
-});
+})
 
 // Redis Database 2 - OTP Codes Storages
 const otpClient = redis.createClient({ 
     db: 2,
-    url: config.REDIS_HOST,
+    host: config.REDIS_HOST,
     port: config.REDIS_PORT, 
 })
 

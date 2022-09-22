@@ -3,7 +3,9 @@ const configEnv = require("../config");
 const { logger } = require("../config/logger");
 
 // Import app from SDKs
-const { initializeApp } = require("firebase/app");
+// const { initializeApp } = require("firebase/app");
+const { initializeApp } = require("firebase-admin/app")
+const admin = require("firebase-admin");
 const { get } = require('../routes/session');
 
 /**
@@ -17,16 +19,12 @@ class FirebaseClient {
     }
 
     _connect() {
+        let serviceAccount = require("./serviceAccountKey.json");
+
         // Web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: configEnv.API_KEY,
-            authDomain: configEnv.AUTH_DOMAIN,
-            databaseURL: configEnv.DATABASE_URL,
-            projectId: configEnv.PROJECT_ID,
-            storageBucket: configEnv.STORAGE_BUCKET,
-            messagingSenderId: configEnv.MESSAGING_SENDER_ID,
-            appId: configEnv.APP_ID,
-            measurementId: configEnv.MEASUREMENT_ID
+            databaseURL: configEnv.ADMIN_DATABASEURL,
+            credential: admin.credential.cert(serviceAccount),
         }
     
         // Initialize Firebase

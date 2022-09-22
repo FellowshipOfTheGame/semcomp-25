@@ -4,12 +4,20 @@ const {
     transports
 } = require('winston');
 const { FirebaseTransport, StorageType } = require('winston-firebase-transport');
-
+const admin = require("firebase-admin");
 const configEnv = require('./index')
 
 const format = winston.format.printf(({ level, message, label }) => {
     return `[${level}] [${new Date().toUTCString()}] ${message}`;
 });
+
+let serviceAccount = require("../loaders/serviceAccountKey.json");
+
+// Web app's Firebase configuration
+const firebaseConfig = {
+    databaseURL: configEnv.ADMIN_DATABASEURL,
+    credential: admin.credential.cert(serviceAccount),
+}
 
 const logger = winston.createLogger({
     transports: [
@@ -29,16 +37,9 @@ const logger = winston.createLogger({
             maxFiles: 512,        // No more storage then 1 GB
         }),
         new FirebaseTransport({ 
-			firebaseConfig: {
-                apiKey: configEnv.API_KEY,
-                authDomain: configEnv.AUTH_DOMAIN,
-                databaseURL: configEnv.DATABASE_URL,
-                projectId: configEnv.PROJECT_ID,
-                storageBucket: configEnv.STORAGE_BUCKET,
-                messagingSenderId: configEnv.MESSAGING_SENDER_ID,
-                appId: configEnv.APP_ID,
-                measurementId: configEnv.MEASUREMENT_ID
-            },     
+     
+        
+			firebaseConfig: firebaseConfig,     
 			logger: {
 				level: 'info',
                 format: winston.format.combine(
