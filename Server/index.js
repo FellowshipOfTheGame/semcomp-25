@@ -9,8 +9,6 @@ const { logger } = require('./src/config/logger')
 const passport = require('passport');
 
 const bodyParser = require('body-parser')
-// const cookieParser = require('cookie-parser');
-// const cookieSession = require('cookie-session');
 const session = require('./src/loaders/session')
 
 // Singletons & Libraries Loaders
@@ -27,20 +25,13 @@ const matchRoutes = require('./src/routes/match')
 const viewsRoutes = require('./src/routes/views')
 
 const app = express()
-// app.set('trust proxy', true)
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(bodyParser.json())
+app.set('trust proxy', true)
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'))
-// app.use(session.cookieLoader())
 app.use(session.sessionLoader())
 
-// app.use(cookieSession({
-//     name: 'gameSession',
-//     keys: ['key1', 'key2'],
-//     maxAge: 24 * 60 * 60 * 1000 // 24 hours
-// }))
 app.use(passport.initialize());
 app.use(passport.session());
 

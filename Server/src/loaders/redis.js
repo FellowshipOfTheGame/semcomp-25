@@ -8,7 +8,7 @@ var redisStore = require('connect-redis')(session);
 // Redis Database 1 - Sessions Storages
 const sessionClient  = redis.createClient({
     db: 1,
-    host: config.REDIS_HOST,
+    url: config.REDIS_HOST,
     port: config.REDIS_PORT,
     legacyMode: true,
 })
@@ -16,8 +16,9 @@ const sessionClient  = redis.createClient({
 // Redis Database 2 - OTP Codes Storages
 const otpClient = redis.createClient({ 
     db: 2,
-    host: config.REDIS_HOST,
+    url: config.REDIS_HOST,
     port: config.REDIS_PORT, 
+    legacyMode: true,
 })
 
 
@@ -43,7 +44,7 @@ clientList.forEach(async instanceClient => {
 //Configure redis client
 module.exports = {
     sessionClient,
-    otpClient,
     sessionStore: new redisStore({ client: sessionClient, ttl: 3600 }),
+    otpClient,
     session
 }

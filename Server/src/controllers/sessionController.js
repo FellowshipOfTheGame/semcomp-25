@@ -1,10 +1,15 @@
 // Dependencies
-const { v4: uuidv4, validate: uuidValidate } = require('uuid')
+const { v4: uuidv4} = require('uuid')
+const validate = require('uuid-validate');
 
 const configEnv = require('../config')
 const { otpClient: redis } = require("../loaders/redis")
 const sessionOpts = require('../loaders/session')
 const { logger } = require('../config/logger');
+
+function uuidValidateV4(uuid) {
+  return uuidValidate(uuid) && uuidVersion(uuid) === 4;
+}
 
 // Exporting controller async functions
 module.exports = { 
@@ -13,29 +18,25 @@ module.exports = {
     getSession
 }
 
-
 // Controller Functions
 async function loginCallback(req, res) { 
     const otpCode = uuidv4()
-
     redis.set(`otp-${otpCode}`, req.sessionID, "EX", 3*60, (err) => { // Expire in 3 minutes        
         if(err){
             logger.error({
                 message: `at Session.loginCallback(): Error in set opt to session ${req.sessionID}`
             })
-            // return res.status(500).json({ message: "internal server error" })
-            return res.redirect(`${config.SERVER_PATH_PREFIX}/?auth=failed`)
+            return res.redirect(`${configEnv.SERVER_PATH_PREFIX}/?auth=failed`)
 
         }
-        // return res.json({ message: "ok", otpCode: otpCode })
-        res.redirect(`${config.SERVER_PATH_PREFIX}/codigo-login?code=${otpCode}`)
+        res.redirect(`${configEnv.SERVER_PATH_PREFIX}/codigo-login?code=${otpCode}`)
     }) 
 }
 
 async function getSession(req, res) { 
     const otpCode = req.body?.code
 
-    if(!uuidValidate(otpCode)) 
+    if(!validate(otpCode)) 
         return res.status(400).json({ message: "invalid field @code" })
 
     redis.multi()
@@ -51,7 +52,8 @@ async function getSession(req, res) {
             return res.status(500).json({ message: "internal server error" })
         }
         
-        const sessionID = results[0][1]
+        console.log(results)
+        const sessionID = results[0]
         
         if(sessionID === null) {
             logger.warn({

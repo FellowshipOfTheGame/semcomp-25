@@ -1,12 +1,9 @@
-const firebase = require('firebase');
 const configEnv = require("../config");
 const { logger } = require("../config/logger");
 
-// Import app from SDKs
-// const { initializeApp } = require("firebase/app");
 const { initializeApp } = require("firebase-admin/app")
 const admin = require("firebase-admin");
-const { get } = require('../routes/session');
+const firebase = require('firebase');
 
 /**
  * Database Singleton (using Firebase)
