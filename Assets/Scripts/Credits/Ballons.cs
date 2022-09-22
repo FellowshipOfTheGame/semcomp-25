@@ -9,6 +9,7 @@ public class Ballons : MonoBehaviour
     [SerializeField] private float _fadeInTime;
     [SerializeField] private float _activeTime;
     [SerializeField] private float _fadeOutTime;
+    [SerializeField] private float _delayToStart;
 
     [SerializeField] private Image _ballon_1;
     [SerializeField] private Image _ballon_2;
@@ -39,9 +40,12 @@ public class Ballons : MonoBehaviour
         _names.Add(_b3_names); _names.Add(_b4_names);
     }
 
-    void Start()
+    IEnumerator Start()
     {
         SetOpacityToZeroForAll();
+
+        yield return new WaitForSeconds(_delayToStart);
+
         StartCoroutine(BallonFadeInAndOut(0));
     }
 
@@ -79,9 +83,13 @@ public class Ballons : MonoBehaviour
 
     IEnumerator BallonFadeInAndOut(int index)
     {
-        Debug.Log(index);
         if (index >= _ballons.Count)
-            yield break;
+        {
+            //yield break;
+            yield return new WaitForSeconds(_delayToStart);
+            index = 0;
+        }
+            
 
         StartCoroutine(SetOpacityToZero(_ballons[index], _fadeInTime, false));
         StartCoroutine(SetTMPTextColorToZero(_titles[index], _fadeInTime, false));
