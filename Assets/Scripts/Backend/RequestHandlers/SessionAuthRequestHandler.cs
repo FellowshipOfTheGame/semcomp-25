@@ -37,7 +37,7 @@ public static class SessionAuthRequestHandler
         }
     }
 
-    public static IEnumerator GetSession(SessionData data, Action OnSuccess, Action<UnityWebRequest> OnFailure = null)
+    public static IEnumerator GetSession(SessionByCodeData data, Action OnSuccess, Action<UnityWebRequest> OnFailure = null)
     {
         RaycastBlockEvent.Invoke(true);
         

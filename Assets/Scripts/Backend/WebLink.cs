@@ -2,7 +2,7 @@
 
 public class WebLink : MonoBehaviour
 {
-	public static void OpenLinkJSPlugin(string url)
+	public static void OpenURL(string url)
 	{
 #if UNITY_WEBGL && !UNITY_EDITOR
 		openWindow(url);
