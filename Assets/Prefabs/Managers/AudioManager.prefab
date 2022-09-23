@@ -149,31 +149,31 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Jaguar
+  - name: Onca
     clip: {fileID: 8300000, guid: 8fb9643af911a024e83d04fc19f37321, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.5
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Mico
     clip: {fileID: 8300000, guid: 449cce3f6106df142b42cee37cbb43df, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.5
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Tatu
     clip: {fileID: 8300000, guid: 5e34df3f0ee140e48aa6c4e53c6a6390, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.5
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Capivara
     clip: {fileID: 8300000, guid: ef7021fd1561c814a843f6f6388133e9, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.5
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
