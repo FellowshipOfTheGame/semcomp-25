@@ -14,7 +14,8 @@ public class RetryMenu : MonoBehaviour
     {
         Confirm,
         CloseableConfirm,
-        Alert
+        Alert,
+        Return
     }
 
     private Mode mode;
@@ -43,6 +44,7 @@ public class RetryMenu : MonoBehaviour
             case Mode.CloseableConfirm:
                 Close();
                 break;
+            case Mode.Return:
             case Mode.Confirm:
                 SceneManager.LoadScene(0);
                 break;
@@ -76,13 +78,13 @@ public class RetryMenu : MonoBehaviour
     
     public void SessionExpiredInGame()
     {
-        message.SetText("Sua sessão expirou\nPor favor, retorne ao menu e faça login novamente");
-        Open(Mode.Alert);
+        message.SetText("Sua sessão expirou. Por favor, retorne ao menu e faça login novamente");
+        Open(Mode.Return);
     }
 
     public void SessionExpiredInMenu()
     {
-        message.SetText("Sua sessão expirou\nPor favor, faça login novamente");
+        message.SetText("Sua sessão expirou. Por favor, faça login novamente");
         Open(Mode.Alert);
     }
     

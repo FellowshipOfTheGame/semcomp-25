@@ -19,7 +19,6 @@ public class PauseMenu : MonoBehaviour
     private ScoreSystem scoreSystem;
 
     [SerializeField] private RetryMenu retryMenu;    
-    [SerializeField] private Slider masterVolumeSlider, effectsVolumeSlider, musicVolumeSlider;
 
     private AudioManager audioManager;
 
