@@ -26,14 +26,19 @@ public class Destructible : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        AudioManager.instance.PlaySFX("Glass");
         if (currentSprite >= spriteCount)
         {
+            if (fxObj.name == "MadeiraFx")
+                AudioManager.instance.PlaySFX("Madeira2");
+            else
+                AudioManager.instance.PlaySFX("Glass");
+
             SpawnFx(transform);
             DestroyThis();
         }
         else
         {
+            AudioManager.instance.PlaySFX("Madeira1");
             spriteRenderer.sprite = sprites[currentSprite];
             currentSprite++;
         }
