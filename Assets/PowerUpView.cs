@@ -7,7 +7,11 @@ public class PowerUpView : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] TMP_Text counter;
-    
+
+    public Image GetImage()
+    {
+        return image;
+    }
     public void SetImage(Sprite _sprite)
     {
         image.sprite = _sprite;

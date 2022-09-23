@@ -46,15 +46,22 @@ public class BarHorizontalMovement : MonoBehaviour
         transform.position = pos;
     }
 
+    bool changedSpeed = false;
+
     // Called to change the speed factor, used to move the enemy bar
-    public void ChangeSpeedFactorTemporarily(float waitTime, float factor)
+    public bool ChangeSpeedFactorTemporarily(float waitTime, float factor)
     {
+        bool res = changedSpeed;
+        if (changedSpeed)
+            StopCoroutine(coroutine);
         coroutine = WaitAndChangeSpeedFactor(waitTime, factor);
         StartCoroutine(coroutine);
+        return res;
     }
 
     private IEnumerator WaitAndChangeSpeedFactor(float waitTime, float factor)
     {
+        changedSpeed = true;
         // Change the speedfactor to the new factor
         speedFactor = factor;
 
@@ -62,7 +69,9 @@ public class BarHorizontalMovement : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         // Return the factor to 1.0 (default)
-        speedFactor = 1.0f;
+        speedFactor = 1.0f; 
+        changedSpeed = false;
+
     }
 }
 
