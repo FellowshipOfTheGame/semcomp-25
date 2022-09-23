@@ -69,15 +69,22 @@ public class BallController : MonoBehaviour
 
     private void Start()
     {
-#if !UNITY_EDITOR
+        // Comment this region to debug offline
+        #region Online
+        
         timer.SetPaused(true);
         playerManager.SetCanMove(false);
         PauseMenu.isGamePaused = true;
-
         StartCoroutine(StartMatch());
-#else
-        StartCoroutine(gameManager.StartGameDelay());
-#endif
+            
+        #endregion
+        
+        // Uncomment this region to debug offline
+        #region OfflineDebug
+        
+        // StartCoroutine(gameManager.StartGameDelay());
+        
+        #endregion
     }
 
     private IEnumerator StartMatch()
@@ -239,9 +246,10 @@ public class BallController : MonoBehaviour
     public IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.5f);
-        
-#if !UNITY_EDITOR
 
+        // Comment this region to debug offline
+        #region ServerCommunication
+        
         var matchData = new MatchData()
         {
             score = scoreSystem.ScoreAmount
@@ -256,10 +264,14 @@ public class BallController : MonoBehaviour
                 Destroy(gameObject);
             },
             req => OnHTTPFailure(req, GameOver())));
-#else
-        gameManager.GameOverScene(scoreSystem.ScoreAmount);
-        Destroy(gameObject);
-#endif
+        
+        #endregion
+        
+        // Uncomment this region to debug offline
+        #region OfflineDebug
+            // gameManager.GameOverScene(scoreSystem.ScoreAmount);
+            // Destroy(gameObject);
+        #endregion
     }
 
     public void SetGameOver()
