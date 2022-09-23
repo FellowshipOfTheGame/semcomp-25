@@ -138,21 +138,21 @@ MonoBehaviour:
   - name: Freeze
     clip: {fileID: 8300000, guid: 85a63228bb786674083dcf826e16a5e7, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.3
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Glass
     clip: {fileID: 8300000, guid: 03bfc963b7cca4f4b88c5490ef6954ca, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.3
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Jaguar
     clip: {fileID: 8300000, guid: 8fb9643af911a024e83d04fc19f37321, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 0.3
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
