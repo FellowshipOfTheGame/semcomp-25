@@ -21,15 +21,6 @@ public class PasteFromClipboard : MonoBehaviour
 
     public void Paste()
     {
-        // inputField.interactable = false;
-// #if UNITY_ANDROID
-//         TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, true);
-// #endif
-        
-#if UNITY_WEBGL
-        WebGLCopyAndPasteAPI.GetClipboard(inputField.text);
-#else
         inputField.text = GUIUtility.systemCopyBuffer;
-#endif
     }
 }
