@@ -103,10 +103,19 @@ public class PowerUpManager : MonoBehaviour
         isInvisible = false;
     }
 
+    IEnumerator scaleCoroutine;
+    [SerializeField] private List<Sprite> scaleSprites;
     public void ChangeTemporarilyBallSize(float radius, float time)
     {
-        coroutine = ChangeBallSizeAndWait(radius, time);
-        StartCoroutine(coroutine);
+        if (isScaling)
+        {
+            powerUpHud.DeleteViews(scaleSprites[0]);
+            powerUpHud.DeleteViews(scaleSprites[1]);
+            StopCoroutine(scaleCoroutine);
+            transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        }
+        scaleCoroutine = ChangeBallSizeAndWait(radius, time);
+        StartCoroutine(scaleCoroutine);
     }
 
     private IEnumerator ColorAnimation(SpriteRenderer _sprite, Color startColor, Color endColor, float speed=0.02f)
@@ -157,16 +166,17 @@ public class PowerUpManager : MonoBehaviour
         } while (t <= 1f);
 
         transform.localScale = new Vector3(finish, finish, 1f);
-
     }
+
     public void ChangeEnemyTime(float duration, float timeFactor)
     {
         audioManager.PlaySFX("Slow");
         barHorizontalMovement.ChangeSpeedFactorTemporarily(duration, timeFactor);
     }
-
+    private bool isScaling = false;
     private IEnumerator ChangeBallSizeAndWait(float radius, float time)
     {
+        isScaling = true;
         if (radius > this.transform.localScale.x)
             audioManager.PlaySFX("GrowBall");
         else
@@ -175,6 +185,7 @@ public class PowerUpManager : MonoBehaviour
         yield return StartCoroutine(ScaleAnimation(0.5f, radius));
         yield return new WaitForSeconds(time);
         yield return StartCoroutine(ScaleAnimation(radius, 0.5f));
+        isScaling = false;
     }
     public void AddTime(int time)
     {
@@ -229,13 +240,15 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] GameObject icePrefab;
     [SerializeField] float iceSpeed = 10f;
 
+    IEnumerator speedCoroutine;
     public void IceBall(GameObject ball)
     {
         Vector3 pos = ball.transform.position;
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
         GameObject fx = Instantiate(icePrefab, pos, Quaternion.identity,ball.transform);
         //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
-        StartCoroutine(changeSpeedFx(rb, fx,freezeDuration, iceSpeed));
+        speedCoroutine = changeSpeedFx(rb, fx, freezeDuration, iceSpeed);
+        StartCoroutine(speedCoroutine);
     }
     [SerializeField] GameObject lamaPrefab;
     [SerializeField] float lamaSpeed = 3f;
@@ -245,7 +258,8 @@ public class PowerUpManager : MonoBehaviour
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
         GameObject fx = Instantiate(lamaPrefab, pos, Quaternion.identity, ball.transform);
         //fx.GetComponent<AnimationManager>().PlayAnim("FxEnd");
-        StartCoroutine(changeSpeedFx(rb, fx, freezeDuration, lamaSpeed));
+        speedCoroutine = changeSpeedFx(rb, fx, freezeDuration, lamaSpeed);
+        StartCoroutine(speedCoroutine);
     }
 
     private IEnumerator changeSpeedFx(Rigidbody2D body,GameObject fx,float duration,float speed)

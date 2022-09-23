@@ -183,6 +183,18 @@ PrefabInstance:
       propertyPath: barHorizontalMovement
       value: 
       objectReference: {fileID: 5799698163461289308}
+    - target: {fileID: 3698216701625935198, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
+      propertyPath: scaleSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698216701625935198, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
+      propertyPath: scaleSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0909b960905d6ea4b9da16c6c0acdebf, type: 3}
+    - target: {fileID: 3698216701625935198, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
+      propertyPath: scaleSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 39f4c8be903a31842ad86d0c5c50be48, type: 3}
     - target: {fileID: 5636276234246029799, guid: 79b32160a76f2434bbe83fb3b344efd0, type: 3}
       propertyPath: retryMenu
       value: 
