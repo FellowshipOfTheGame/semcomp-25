@@ -26,7 +26,7 @@ public class Destructible : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        //Debug.Log(col.gameObject.CompareTag(BALL_TAG));
+        AudioManager.instance.PlaySFX("Glass");
         if (currentSprite >= spriteCount)
         {
             SpawnFx(transform);
