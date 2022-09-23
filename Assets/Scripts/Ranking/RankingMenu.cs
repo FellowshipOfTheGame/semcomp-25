@@ -48,7 +48,7 @@ public class RankingMenu : MonoBehaviour
         if(data.personal.position > playerRankingsUI.Length - 1)
         {
             var personal = data.personal;
-            playerRankingsUI[playerRankingsUI.Length - 1].SetStatus(personal.name, personal.top_score, personal.position);
+            playerRankingsUI[playerRankingsUI.Length - 1].SetStatus(personal.name, personal.score, personal.position);
             playerRankingsUI[playerRankingsUI.Length - 1].IsDisplayed(true);
             playerRankingsUI[playerRankingsUI.Length - 1].IsPersonal(true);
         }
