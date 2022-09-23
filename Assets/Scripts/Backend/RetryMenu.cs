@@ -64,13 +64,18 @@ public class RetryMenu : MonoBehaviour
 
     public void AuthenticationFaulted()
     {
-        message.SetText("Erro ao efetuar login. Por favor, tente novamente mais tarde.\nSe o erro persistir, reporte um bug pressionando o botão de inseto");
+        message.SetText("Erro ao efetuar login. Por favor, tente novamente mais tarde. Se o erro persistir, reporte um bug pressionando o botão de inseto");
         Open(Mode.Alert);
+    }
+    
+    public void InvalidLoginCode()
+    {
+        Open(Mode.Alert);
+        message.SetText("O código inserido é inválido. Tente novamente, e se o erro persistir, reporte um bug pressionando o botão de inseto");
     }
     
     public void SessionExpiredInGame()
     {
-        numTries++;
         message.SetText("Sua sessão expirou\nPor favor, retorne ao menu e faça login novamente");
         Open(Mode.Alert);
     }
