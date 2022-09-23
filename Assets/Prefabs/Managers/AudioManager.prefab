@@ -159,7 +159,7 @@ MonoBehaviour:
   - name: Mico
     clip: {fileID: 8300000, guid: 449cce3f6106df142b42cee37cbb43df, type: 3}
     output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
-    volume: 1
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         gameOver = GameOver.Instance;
         SetLevelView();
         AudioManager.instance.PlayMusic("GameMusic");
+        AudioManager.instance.PlaySFX("Bora");
     }
 
     public IEnumerator StartGameDelay()
