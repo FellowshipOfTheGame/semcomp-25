@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8599997562954800417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8599997562954800419}
+  - component: {fileID: 8599997562954800416}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8599997562954800419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599997562954800417}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.6213143, y: -0.67720854, z: -9.44188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8599997562954800416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599997562954800417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7dfd609d825d84987bc686cbb0bc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX:
+  - name: Goal
+    clip: {fileID: 8300000, guid: d6103093f2ba3ca4e8fd84b8e37203dc, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WrongPass
+    clip: {fileID: 8300000, guid: 6540cc37bd90afa49915ff5355cd26ab, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HitWall
+    clip: {fileID: 8300000, guid: 22c8d6499c4fafb4ab475b357e42ac31, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PassAlly
+    clip: {fileID: 8300000, guid: 22c8d6499c4fafb4ab475b357e42ac31, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.7
+    pitch: 1.4
+    loop: 0
+    source: {fileID: 0}
+  - name: TimeBonus
+    clip: {fileID: 8300000, guid: 29131a2766e13b64fabfc60d38dfc8c7, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrowBall
+    clip: {fileID: 8300000, guid: dc8faa44dafd6d14d8faac1ae6d70c39, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ShrinkBall
+    clip: {fileID: 8300000, guid: d5be570e245a5ea4f8f567cfb88fb858, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PhantomBall
+    clip: {fileID: 8300000, guid: 5bdd8ea3b51c09b4ea57af1ae456fecb, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Button
+    clip: {fileID: 8300000, guid: 79fdfb5744eb25c429eb3fe4da1ee277, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bouncer
+    clip: {fileID: 8300000, guid: a8336c444fb3da846a2e84d2d3b539a0, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ScoreBonus
+    clip: {fileID: 8300000, guid: 4535f796ab012b64385d849c10930eea, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Slow
+    clip: {fileID: 8300000, guid: a96313ad796e77c499362b5c24abe5c8, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ExtraLife
+    clip: {fileID: 8300000, guid: 3a1101a70fb863243ba0090b0995cab0, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Freeze
+    clip: {fileID: 8300000, guid: 85a63228bb786674083dcf826e16a5e7, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Glass
+    clip: {fileID: 8300000, guid: 03bfc963b7cca4f4b88c5490ef6954ca, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Onca
+    clip: {fileID: 8300000, guid: 8fb9643af911a024e83d04fc19f37321, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Mico
+    clip: {fileID: 8300000, guid: 449cce3f6106df142b42cee37cbb43df, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Tatu
+    clip: {fileID: 8300000, guid: 5e34df3f0ee140e48aa6c4e53c6a6390, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Capivara
+    clip: {fileID: 8300000, guid: ef7021fd1561c814a843f6f6388133e9, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bora
+    clip: {fileID: 8300000, guid: 6eafbed19404cd144911821409a1629f, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Madeira1
+    clip: {fileID: 8300000, guid: 18457dcdc5ddf364e8020bffa20a4523, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Madeira2
+    clip: {fileID: 8300000, guid: 9541650431b5cf7488148320cf4407c0, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  Musics:
+  - name: GameMusic
+    clip: {fileID: 8300000, guid: 361ffe5d4a94a724a9926622e1115a07, type: 3}
+    output: {fileID: -8103179610439550046, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}

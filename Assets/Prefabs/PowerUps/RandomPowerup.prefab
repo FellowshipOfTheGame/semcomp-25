@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8388363448592920307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7767148560556528034}
+  - component: {fileID: 783303765822937793}
+  m_Layer: 0
+  m_Name: RandomPowerup
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7767148560556528034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388363448592920307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &783303765822937793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388363448592920307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b34f1d0cec81cd4081c9f6ed6f9edfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 6937274488717889214, guid: d1aea5dc98cad4447b273d69559d100f, type: 3}
+  - {fileID: 8457201566428304096, guid: a9ba20ee939354f4c811e0c2f55859ec, type: 3}
+  - {fileID: 3679992401158754688, guid: a24bf99c5d9dd3144aeddf21a8cf0c8b, type: 3}
+  - {fileID: 5908293766306188998, guid: adf137174b526b94c8a95ced43f1d1b2, type: 3}
+  - {fileID: 8018843807902038624, guid: 010beef60cf17fa4b97188242ba201e3, type: 3}
+  - {fileID: 6271351332442257762, guid: d5e304fda8dc9504e88119a359f13d19, type: 3}
+  - {fileID: 5936134752859431962, guid: 1808102593f0be24492c274131b9fa2b, type: 3}
+  - {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+  spawnChance: 0100000001000000010000000100000001000000010000000100000001000000
