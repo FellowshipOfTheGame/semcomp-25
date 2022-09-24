@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7"
 
 services:
   semcomp25:
@@ -6,19 +6,14 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - REDIS_HOST=cache
+      - REDIS_HOST=semcomp25-redis
     depends_on:
-      - semcomp25-redis
-    links:
       - semcomp25-redis
 
   semcomp25-redis:
-    container_name: cache
     image: redis:7.0.4
     restart: always
     ports:
       - "6379:6379"
-    expose:
-      - "6379"
     volumes:
       - ./redis-data:/data

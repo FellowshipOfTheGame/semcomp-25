@@ -23,6 +23,7 @@ const playerRoutes = require('./src/routes/players');
 const sessionRoutes = require('./src/routes/session');
 const matchRoutes = require('./src/routes/match')
 const viewsRoutes = require('./src/routes/views')
+const adminRoutes = require('./src/routes/admin')
 
 const app = express()
 app.set('trust proxy', true)
@@ -66,6 +67,7 @@ app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message
 app.use(`${configEnv.SERVER_PATH_PREFIX}/match/`, matchRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)
+app.use(`${configEnv.SERVER_PATH_PREFIX}/admin/`, adminRoutes)
 app.use(configEnv.SERVER_PATH_PREFIX, express.static(path.join(__dirname, 'src/public')));
 app.use(`${configEnv.SERVER_PATH_PREFIX}/`, viewsRoutes)
 

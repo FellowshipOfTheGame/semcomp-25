@@ -63,7 +63,7 @@ class SchemaScore {
 
         const query = await ScoreTable.orderByChild('top_score').limitToLast(10)
         
-        await query.once('value', snapshot => {            
+       await query.once('value', snapshot => {            
             snapshot.forEach(childSnapshot => {
                 const scoreValue = {
                     name: childSnapshot.val().name,
@@ -71,7 +71,10 @@ class SchemaScore {
                 }
                 scoreList.push(scoreValue)
             })
+        }).catch(erro => {
+            console.log(erro)
         })
+    
     
         return scoreList;
     }
@@ -101,7 +104,6 @@ class SchemaScore {
                 index += 1                 
             })
         })
-    
         return personalRank;
     }
 

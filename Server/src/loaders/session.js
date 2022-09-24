@@ -1,3 +1,4 @@
+
 const config = require('../config')
 const redis = require('../loaders/redis')
 
@@ -6,7 +7,7 @@ const sessionOpts = {
     name: "gameSession",
     saveUninitialized: false,
     cookie: {
-        secure: config.SESSION_SECURE, 
+        secure: true, 
         httpOnly: config.SESSION_HTTP_ONLY, 
         sameSite: config.SESSION_SAME_SITE, 
         maxAge: 3600000 * 24 * 7
