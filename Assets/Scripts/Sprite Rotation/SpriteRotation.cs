@@ -29,7 +29,12 @@ public class SpriteRotation : MonoBehaviour
         _player = (Bixos)(Random.Range((int)_player + 1, (int)_player + enumCount) % enumCount);
         // gets a random enemy from Enum Bixos not considering the chosen for the player
         _enemy = (Bixos)(Random.Range((int)_player + 1, (int)_player + enumCount) % enumCount);
-        enemySprite = enemySprites[(int)_enemy];
+        enemySprite = enemySprites[(int)_enemy];        
+    }
+
+    private void Start()
+    {
+        AudioManager.instance.PlaySFX(_player.ToString());
     }
     
     // Called when a goal has been spawned so the next enemies are different

@@ -37,6 +37,7 @@ public class BounceAnim : PowerUp
     }
     public override void Collected(Collider2D col)
     {
+        FindObjectOfType<AudioManager>().PlaySFX("Bouncer");
         StartCoroutine(PlayBounceAnim());
     }
 }
