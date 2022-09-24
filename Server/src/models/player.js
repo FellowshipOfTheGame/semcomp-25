@@ -1,5 +1,6 @@
 const { firebase, db } = require('../loaders/firebase')
-const configEnv = require("../config")
+const configEnv = require("../config");
+const { use } = require('passport');
 
 class SchemaPlayer {
 
@@ -36,6 +37,7 @@ class SchemaPlayer {
     }
 
     async create(Player) {
+        console.log(Player)
         const pathTable = configEnv.PROJECT_ID + '/player/' + Player.provider_id
 
         db.ref(pathTable).set({
@@ -54,25 +56,55 @@ class SchemaPlayer {
 
 class SchemaScore {
 
-    async findAll() {
+    async getRaking() {
         const pathTable = configEnv.PROJECT_ID + '/score/'
         const ScoreTable = db.ref(pathTable)
         let scoreList = [];
-        const query = await ScoreTable.orderByChild('top_score').limitToLast(10)
-    
-        await query.once('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
 
+        const query = await ScoreTable.orderByChild('top_score').limitToLast(10)
+        
+       await query.once('value', snapshot => {            
+            snapshot.forEach(childSnapshot => {
                 const scoreValue = {
                     name: childSnapshot.val().name,
                     score: childSnapshot.val().top_score
                 }
-
                 scoreList.push(scoreValue)
-            });
-        });
-
+            })
+        }).catch(erro => {
+            console.log(erro)
+        })
+    
+    
         return scoreList;
+    }
+
+    async getPlayerRaking(userId) {
+        const pathTable = configEnv.PROJECT_ID + '/score/'
+        const ScoreTable = db.ref(pathTable)
+        let personalRank = null;
+
+        if(!userId) {
+            return null
+        }
+
+        const query = await ScoreTable.orderByChild('top_score')
+        
+        await query.once('value', snapshot => {       
+            let index = 0;
+
+            snapshot.forEach(childSnapshot => {
+                if(childSnapshot.key == userId) {
+                    personalRank = {
+                        name : childSnapshot.val().name,
+                        position: snapshot.numChildren() - index,
+                        score: childSnapshot.val().top_score
+                    }
+                }   
+                index += 1                 
+            })
+        })
+        return personalRank;
     }
 
     async findOneById(provider_id) {

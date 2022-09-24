@@ -4,3 +4,4 @@ src/loaders/.semcomp25-pkey.json
 */*.log
 /logs
 /redis-data
+/src/loaders/serviceAccountKey.json

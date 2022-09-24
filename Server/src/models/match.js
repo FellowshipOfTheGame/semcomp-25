@@ -16,9 +16,10 @@ class SchemaMatch {
                 return null;
             }
         }).catch((error) => {
-            console.error(error);
+            logger.error({
+                message: `Could not find match `
+            });
         });
-        
     }
 
     async create(match) {
