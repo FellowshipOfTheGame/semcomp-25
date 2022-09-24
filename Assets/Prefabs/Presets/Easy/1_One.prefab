@@ -833,6 +833,10 @@ PrefabInstance:
       propertyPath: prefabs.Array.data[7]
       value: 
       objectReference: {fileID: 5936134752859431962, guid: 1808102593f0be24492c274131b9fa2b, type: 3}
+    - target: {fileID: 783303765822937793, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
+      propertyPath: spawnChance.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7767148560556528034, guid: 5b303cd5d31ba3c43982b77dd44e0335, type: 3}
       propertyPath: m_RootOrder
       value: 3
