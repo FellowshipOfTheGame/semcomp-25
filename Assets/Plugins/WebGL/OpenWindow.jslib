@@ -2,10 +2,10 @@ var OpenWindowPlugin = {
     openWindow: function(link)
     {
     	var url = Pointer_stringify(link);
-        document.onmouseup = function()
+        document.onmousedown = function()
         {
         	window.open(url);
-        	document.onmouseup = null;
+        	document.onmousedown = null;
         }
     }
 };
