@@ -10,7 +10,7 @@ const PlayerController = require('../controllers/playerController')
 
 // Routes 
 routes.get('/status', SessionMiddleware.isAuth, PlayerController.getInfoWithSession)
-routes.get('/rank', SessionMiddleware.isAuth, PlayerController.getRanking);
+routes.get('/ranking', PlayerController.getRanking);
 
 // Export routes
 module.exports = routes;

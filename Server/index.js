@@ -9,8 +9,6 @@ const { logger } = require('./src/config/logger')
 const passport = require('passport');
 
 const bodyParser = require('body-parser')
-// const cookieParser = require('cookie-parser');
-// const cookieSession = require('cookie-session');
 const session = require('./src/loaders/session')
 
 // Singletons & Libraries Loaders
@@ -25,29 +23,23 @@ const playerRoutes = require('./src/routes/players');
 const sessionRoutes = require('./src/routes/session');
 const matchRoutes = require('./src/routes/match')
 const viewsRoutes = require('./src/routes/views')
+const adminRoutes = require('./src/routes/admin')
 
 const app = express()
-// app.set('trust proxy', true)
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(bodyParser.json())
+app.set('trust proxy', true)
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'))
-// app.use(session.cookieLoader())
 app.use(session.sessionLoader())
 
-// app.use(cookieSession({
-//     name: 'gameSession',
-//     keys: ['key1', 'key2'],
-//     maxAge: 24 * 60 * 60 * 1000 // 24 hours
-// }))
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Enable cors to all origins (because we are an API after all :P)
 app.use(cors({
     credentials: true,
-    origin: /^https:\/\/[a-zA-Z0-9]*\.ssl\.hwcdn\.net$/,
+    origin: "*",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
@@ -71,13 +63,13 @@ app.use((req, res, next) => {
 })
 
 // Routes Configurations
-  
 app.get(`${configEnv.SERVER_PATH_PREFIX}/ping`, (req, res) => res.json({ message: "pong :)" }))
+app.use(`${configEnv.SERVER_PATH_PREFIX}/match/`, matchRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/player/`, playerRoutes)
 app.use(`${configEnv.SERVER_PATH_PREFIX}/session/`, sessionRoutes)
-app.use(`${configEnv.SERVER_PATH_PREFIX}/match/`, matchRoutes)
-app.use(`${configEnv.SERVER_PATH_PREFIX}/api/`, viewsRoutes)
+app.use(`${configEnv.SERVER_PATH_PREFIX}/admin/`, adminRoutes)
 app.use(configEnv.SERVER_PATH_PREFIX, express.static(path.join(__dirname, 'src/public')));
+app.use(`${configEnv.SERVER_PATH_PREFIX}/`, viewsRoutes)
 
 main().catch(err => console.log(err));
 
