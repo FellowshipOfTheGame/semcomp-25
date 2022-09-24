@@ -10,6 +10,7 @@ public class PasteFromClipboard : MonoBehaviour
         inputField = GetComponent<TMP_InputField>();
     }
 
+#if !UNITY_WEBGL
     private void OnApplicationFocus(bool hasFocus)
     {
         if (hasFocus)
@@ -17,6 +18,7 @@ public class PasteFromClipboard : MonoBehaviour
             Paste();
         }
     }
+#endif
 
     public void Paste()
     {
