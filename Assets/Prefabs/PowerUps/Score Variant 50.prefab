@@ -7,13 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 398032134, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+      propertyPath: m_text
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 843354681, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
       propertyPath: score
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
       propertyPath: m_Name
-      value: Score Variant_50
+      value: Score Variant 50
       objectReference: {fileID: 0}
     - target: {fileID: 6328219604131312218, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
       propertyPath: m_RootOrder

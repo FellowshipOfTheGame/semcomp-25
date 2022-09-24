@@ -1434,7 +1434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.size
-      value: 60
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.data[34]
@@ -1543,11 +1543,19 @@ PrefabInstance:
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.data[60]
       value: 
-      objectReference: {fileID: 11400000, guid: 371c6b79d6335cb4c8df27bf7850417b, type: 2}
+      objectReference: {fileID: 11400000, guid: 5fd2078f1ba507c40bbbf13833ac7a33, type: 2}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.data[61]
       value: 
-      objectReference: {fileID: 11400000, guid: 371c6b79d6335cb4c8df27bf7850417b, type: 2}
+      objectReference: {fileID: 11400000, guid: 447646e7648821346a11c1b7b9185851, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.data[62]
+      value: 
+      objectReference: {fileID: 11400000, guid: 588e2f16b8b8ce148b9819361b4a9041, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.data[63]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a6c4a718a06fd0488bb511426a11e3f, type: 2}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[0].easy
       value: 5
