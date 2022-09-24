@@ -95,8 +95,7 @@ public class Ballons : MonoBehaviour
         StartCoroutine(SetTMPTextColorToZero(_titles[index], _fadeInTime, false));
         StartCoroutine(SetTMPTextColorToZero(_names[index], _fadeInTime, false));
 
-        yield return new WaitForSeconds(_fadeInTime);
-        yield return new WaitForSeconds(_activeTime);
+        yield return new WaitForSeconds(_fadeInTime + _activeTime);
 
         StartCoroutine(SetOpacityToZero(_ballons[index], _fadeOutTime, true));
         StartCoroutine(SetTMPTextColorToZero(_titles[index], _fadeOutTime, true));
