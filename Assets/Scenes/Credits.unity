@@ -548,7 +548,7 @@ MonoBehaviour:
   _fadeInTime: 2
   _activeTime: 5
   _fadeOutTime: 2
-  _delayToStart: 3
+  _delayToStart: 0.5
   _ballon_1: {fileID: 362639665}
   _ballon_2: {fileID: 1672808301}
   _ballon_3: {fileID: 172046738}
@@ -1782,8 +1782,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "J\xF4natas Alves Lopes\nLucas Xavier Ebling Pereira\nThales Darini Souza\nTyago
-    Yuji Teoi"
+  m_text: "J\xF4natas Alves Lopes\nLucas Xavier Ebling Pereira\nLucas Xavier Leite\nThales
+    Darini Souza\nTyago Yuji Teoi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2055,7 +2055,7 @@ MonoBehaviour:
 
 
 
-    SoundTrack'
+    Design de Som'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
