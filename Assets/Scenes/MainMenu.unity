@@ -678,6 +678,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1678201627}
     - target: {fileID: 6146314464139725160, guid: 932218b8faa8c2242bdd9c34d764d868, type: 3}
+      propertyPath: loginPanel
+      value: 
+      objectReference: {fileID: 1533934258581621718}
+    - target: {fileID: 6146314464139725160, guid: 932218b8faa8c2242bdd9c34d764d868, type: 3}
       propertyPath: playButton
       value: 
       objectReference: {fileID: 2118618777}
