@@ -440,9 +440,6 @@ MonoBehaviour:
   volumePanel: {fileID: 7246899709970852656}
   menuLabelText: {fileID: 7246899709172978432}
   retryMenu: {fileID: 0}
-  masterVolumeSlider: {fileID: 0}
-  effectsVolumeSlider: {fileID: 0}
-  musicVolumeSlider: {fileID: 0}
 --- !u!114 &7246899708432274365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,7 +1783,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: -80
   m_MaxValue: 20
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2563,9 +2560,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7246899708721636445}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 20
-  m_WholeNumbers: 0
-  m_Value: 20
+  m_MaxValue: 0
+  m_WholeNumbers: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3638,9 +3635,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7246899709938604066}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 20
-  m_WholeNumbers: 0
-  m_Value: 20
+  m_MaxValue: 0
+  m_WholeNumbers: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

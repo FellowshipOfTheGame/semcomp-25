@@ -21,26 +21,6 @@ public static class SessionAuthRequestHandler
     {
         RaycastBlockEvent.Invoke(true);
         
-        var req = WebRequestFactory.PostJson(Endpoints.Login, JsonUtility.ToJson(data));
-        yield return req.SendWebRequest();
-        
-        RaycastBlockEvent.Invoke(false);
-
-        if (req.result == UnityWebRequest.Result.Success)
-        {
-            SaveAuthCookie(req);
-            OnSuccess?.Invoke();
-        }
-        else
-        {
-            OnFailure?.Invoke(req);
-        }
-    }
-
-    public static IEnumerator GetSession(SessionByCodeData data, Action OnSuccess, Action<UnityWebRequest> OnFailure = null)
-    {
-        RaycastBlockEvent.Invoke(true);
-        
         var req = WebRequestFactory.PostJson(Endpoints.LoginGetSession, JsonUtility.ToJson(data));
         yield return req.SendWebRequest();
         
