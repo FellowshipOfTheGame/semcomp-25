@@ -29,7 +29,8 @@ class SchemaMatch {
             created_at: firebase.database.ServerValue.TIMESTAMP,
             started_at: match.startedAt,
             finished_at: match.finishedAt,
-            score: match.score
+            score: match.score,
+            score_history: match.scoreHistory
         });
 
         return match;

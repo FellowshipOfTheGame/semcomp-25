@@ -24,6 +24,8 @@ async function start(req, res) {
     sessionClient.multi()
         .set(`${userId}_match`, startedAt)
         //.expireat(`${userId}_match`, parseInt((+new Date)/1000) + parseInt(configEnv.MATCH_RESPONSE_TIMEOUT))
+        .del(`${userId}_scores`)
+        .rPush(`${userId}_scores`, ['0'])
         .exec( (err, results) => {
 
             if (err) {
@@ -57,10 +59,14 @@ async function finish(req, res) {
     return await sessionClient.multi()
         .get(`${userId}_match`)
         .del(`${userId}_match`)
+        .rPush(`${userId}_scores`)
+        .lRange(`${userId}_scores`, 0, -1)
+        .del(`${userId}_scores`)
         .exec( async (err, results) => {
             const startedAt = parseInt(results[0])
             const hasDeleted = results[1]
             const finishedAt = new Date().getTime()
+            const scoreHistory = results[3]
 
             if (err) {
                 logger.error(`Failed to finish match for user: ${userId}`)
@@ -81,7 +87,8 @@ async function finish(req, res) {
                     userId,
                     score: score,
                     startedAt,
-                    finishedAt: finishedAt
+                    finishedAt: finishedAt,
+                    scoreHistory
                 })   
 
                 // update score 
@@ -127,6 +134,7 @@ async function savepoint(req, res) {
 
     return await sessionClient.multi()
         .get(`${userId}_match`)
+        .rPush(`${userId}_scores`, [String(score)])
         //.expireat(`${userId}_match`, parseInt((+new Date)/1000) + parseInt(configEnv.MATCH_RESPONSE_TIMEOUT))
         .exec( async (err, results) => {
 
