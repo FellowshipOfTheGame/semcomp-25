@@ -28,7 +28,7 @@ module.exports = function (passport) {
             },
             function(accessToken, refreshToken, params, profile, done) {
                 const provider = 'google'
-
+    
                 PlayerController.findOrCreate(profile.id, provider, profile._json, (err, player) => {
                     if (err) {
                         logger.error({
