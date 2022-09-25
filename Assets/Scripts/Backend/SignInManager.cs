@@ -5,38 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using Google;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class SignInManager : MonoBehaviour
 {
-    // private GoogleSignInConfiguration configuration;
-    // private const string WebClientID = "560143319104-d5bakq1kpie2f25cq1rkfncig5fkajsu.apps.googleusercontent.com";
-
     [SerializeField] private Button signInButton, signOutButton, playButton, rankingButton;
     [SerializeField] private RetryMenu retryMenu;
     [SerializeField] private TMP_InputField inputCode;
+    // [SerializeField] private Button inputCodeConfirmButton;
+    [SerializeField] private GameObject loginPanel;
 
     private void Awake()
-    {
-#if UNITY_ANDROID
-        // Google sign-in plugin
-        // try
-        // {
-        //     configuration = new GoogleSignInConfiguration
-        //     {
-        //         WebClientId = WebClientID,
-        //         RequestIdToken = true,
-        //         RequestEmail = true,
-        //         UseGameSignIn = false
-        //     };
-        //     
-        //     GoogleSignIn.Configuration = configuration;
-        // }
-        // catch (GoogleSignIn.SignInException e)
-        // {
-        //     Debug.LogError(e);
-        // }
-#endif
-        
+    {        
         signInButton.gameObject.SetActive(true);
         signOutButton.gameObject.SetActive(false);
         playButton.gameObject.SetActive(false);
@@ -50,7 +30,6 @@ public class SignInManager : MonoBehaviour
 
     private IEnumerator ValidateCookie()
     {
-#if UNITY_ANDROID
         var authCookie = PlayerPrefs.GetString(SessionAuthRequestHandler.AuthKey, string.Empty);
 
         if (string.IsNullOrEmpty(authCookie))
@@ -62,7 +41,6 @@ public class SignInManager : MonoBehaviour
 
             yield break;
         }
-#endif
         
         yield return SessionAuthRequestHandler.ValidateSession(OnValidateSuccess, OnValidateFailure);
     }
@@ -88,77 +66,27 @@ public class SignInManager : MonoBehaviour
                 break;
         }
         
-        Debug.Log("Session validation failed");
+        // Debug.Log("Session validation failed");
     }
 
     public void SignIn()
     {
         WebLink.OpenURL(Endpoints.Login);
-#if UNITY_ANDROID
-        // GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
-#endif
     }
 
     public void InputCode()
     {
         if (string.IsNullOrEmpty(inputCode.text)) return;
-        StartCoroutine(GetSessionEnumerator());
+        loginPanel.SetActive(false);
+        StartCoroutine(SignInEnumerator());
     }
 
-    private IEnumerator GetSessionEnumerator()
-    {
-        yield return SessionAuthRequestHandler.GetSession(
-            new SessionByCodeData(inputCode.text.Trim()),
-            OnGetSessionSuccess,
-            OnGetSessionFailure);
-    }
-
-    private void OnGetSessionSuccess()
-    {
-        OnSignInSuccess();
-    }
-
-    private void OnGetSessionFailure(UnityWebRequest req)
-    {
-        switch (req.responseCode)
-        {
-            case 400:
-                retryMenu.InvalidLoginCode();
-                break;
-            default:
-                retryMenu.InternetConnectionLost(GetSessionEnumerator(), true);
-                break;
-        }
-    }
-    
-    // Google sign-in plugin
-    private void OnAuthenticationFinished(Task<GoogleSignInUser> task)
-    {
-        if (task.IsFaulted)
-        {
-            retryMenu.AuthenticationFaulted();
-            Debug.LogError("Error: faulted\n" + task.Exception);
-        }
-        else if (task.IsCanceled)
-        {
-            Debug.LogError("Error: canceled\n" + task.Exception);
-        }
-        else
-        {
-            StartCoroutine(LoginEnumerator(task.Result.IdToken));
-            Debug.Log($"Token: {task.Result.IdToken}");
-        }
-    }
-
-    private IEnumerator LoginEnumerator(string idToken)
+    private IEnumerator SignInEnumerator()
     {
         yield return SessionAuthRequestHandler.Login(
-            new SessionData(idToken),
+            new SessionData(inputCode.text.Trim()),
             OnSignInSuccess,
-            req => OnSignInFailure(req, idToken)
-        );
-
-        GoogleSignIn.DefaultInstance.SignOut();
+            OnSignInFailure);
     }
 
     private void OnSignInSuccess()
@@ -170,17 +98,21 @@ public class SignInManager : MonoBehaviour
         rankingButton.interactable = true;
     }
 
-    private void OnSignInFailure(UnityWebRequest req, string idToken)
+    private void OnSignInFailure(UnityWebRequest req)
     {
-        retryMenu.InternetConnectionLost(LoginEnumerator(idToken), true);
-        Debug.LogError($"Error: {req.result}");
+        switch (req.responseCode)
+        {
+            case 400:
+                retryMenu.InvalidLoginCode();
+                break;
+            default:
+                retryMenu.InternetConnectionLost(SignInEnumerator(), true);
+                break;
+        }
     }
 
     public void SignOut()
     {
-#if UNITY_ANDROID
-        // GoogleSignIn.DefaultInstance.SignOut();
-#endif
         StartCoroutine(SignOutEnumerator());
     }
 
@@ -204,6 +136,6 @@ public class SignInManager : MonoBehaviour
     private void OnSignOutFailure(UnityWebRequest req)
     {
         retryMenu.InternetConnectionLost(SignOutEnumerator(), true);
-        Debug.LogError($"Error: {req.result}");
+        // Debug.LogError($"Error: {req.result}");
     }
 }

@@ -97,7 +97,6 @@ public class BallController : MonoBehaviour
                 timer.SetPaused(false);
                 PauseMenu.isGamePaused = false;
                 StartCoroutine(gameManager.StartGameDelay());
-                Debug.Log("Match start");
             },
             req =>
             {

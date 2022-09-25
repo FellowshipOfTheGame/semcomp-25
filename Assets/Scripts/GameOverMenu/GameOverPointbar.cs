@@ -247,11 +247,11 @@ public class GameOverPointbar : MonoBehaviour
 
         float diffPercentage = Mathf.Abs(_goalRatio) + Mathf.Abs(_passRatio) + Mathf.Abs(_wallRatio) + Mathf.Abs(_powerUpRatio) + 2 * HEAD_TAIL_PERCENTAGE - 1.0f;
         
-        Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
-        Debug.Log("GOAL: " + _goalRatio);
-        Debug.Log("PASS: " + _passRatio);
-        Debug.Log("WALL: " + _wallRatio);
-        Debug.Log("PW: " + _powerUpRatio);
+        // Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
+        // Debug.Log("GOAL: " + _goalRatio);
+        // Debug.Log("PASS: " + _passRatio);
+        // Debug.Log("WALL: " + _wallRatio);
+        // Debug.Log("PW: " + _powerUpRatio);
 
         if (Mathf.Abs(diffPercentage) > 0.01f)
         {
@@ -261,11 +261,11 @@ public class GameOverPointbar : MonoBehaviour
             _powerUpRatio -= diffPercentage * _powerUpRatio;
         }
         
-        Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
-        Debug.Log("GOAL: " + _goalRatio);
-        Debug.Log("PASS: " + _passRatio);
-        Debug.Log("WALL: " + _wallRatio);
-        Debug.Log("PW: " + _powerUpRatio);
+        // Debug.Log("TOTAL PERCENTAGE: " + (_goalRatio + _passRatio + _wallRatio + _powerUpRatio + 2 * HEAD_TAIL_PERCENTAGE));
+        // Debug.Log("GOAL: " + _goalRatio);
+        // Debug.Log("PASS: " + _passRatio);
+        // Debug.Log("WALL: " + _wallRatio);
+        // Debug.Log("PW: " + _powerUpRatio);
             
     }
 

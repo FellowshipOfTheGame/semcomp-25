@@ -1655,18 +1655,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3206530004559112788}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &4122556280066069597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,7 +1773,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clique aqui para colar
+  m_text: "Cole o c\xF3digo aqui"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b568b9ad9ad29d42a5f1bee31387aa3, type: 2}
   m_sharedMaterial: {fileID: -705979859449889294, guid: 5b568b9ad9ad29d42a5f1bee31387aa3, type: 2}
