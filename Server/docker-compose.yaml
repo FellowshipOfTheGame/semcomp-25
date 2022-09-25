@@ -5,13 +5,10 @@ services:
     build: .
     ports:
       - "3000:3000"
-    environment:
-      - REDIS_HOST=redis://semcomp25-redis
     depends_on:
       - semcomp25-redis
     volumes:
       - ./logs:/app/logs
-      - ./:/app
 
   semcomp25-redis:
     image: redis:7.0.4
