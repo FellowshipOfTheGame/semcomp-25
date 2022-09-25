@@ -678,6 +678,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1678201627}
     - target: {fileID: 6146314464139725160, guid: 932218b8faa8c2242bdd9c34d764d868, type: 3}
+      propertyPath: loginPanel
+      value: 
+      objectReference: {fileID: 1533934258581621718}
+    - target: {fileID: 6146314464139725160, guid: 932218b8faa8c2242bdd9c34d764d868, type: 3}
       propertyPath: playButton
       value: 
       objectReference: {fileID: 2118618777}
@@ -2453,7 +2457,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -2464,24 +2472,48 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1857247291}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 854287526}
+    - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 854287526}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlaySFX
       objectReference: {fileID: 0}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: PlaySFX
       objectReference: {fileID: 0}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: AudioManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4122556280040252120, guid: bc08e914b9127264b8ec1c4a218d4a0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName

@@ -1,8 +1,7 @@
 var OpenWindowPlugin = {
-    openWindow: function(link)
+    openWindow: function(url)
     {
-    	var url = Pointer_stringify(link);
-        window.open(url);
+        window.open(UTF8ToString(url));
     }
 };
 

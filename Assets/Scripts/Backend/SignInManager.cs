@@ -1,18 +1,14 @@
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-using Google;
 using TMPro;
-using UnityEngine.Serialization;
 
 public class SignInManager : MonoBehaviour
 {
     [SerializeField] private Button signInButton, signOutButton, playButton, rankingButton;
     [SerializeField] private RetryMenu retryMenu;
     [SerializeField] private TMP_InputField inputCode;
-    // [SerializeField] private Button inputCodeConfirmButton;
     [SerializeField] private GameObject loginPanel;
 
     private void Awake()

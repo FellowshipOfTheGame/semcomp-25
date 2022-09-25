@@ -28,16 +28,7 @@ public class PauseMenu : MonoBehaviour
         Resume();
         scoreSystem = FindObjectOfType<ScoreSystem>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Check if the user press ESC button
-        /*if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SwitchPaused();
-        }*/
-    }
+    
     public void SwitchPaused()
     {
         // IF the game is already paused, exits the pause menu
@@ -139,10 +130,5 @@ public class PauseMenu : MonoBehaviour
         menuLabelText.text = "VOLUME";
                         
         volumePanel.SetActive(true);
-    }
-    
-    float Remap(float value, float min1, float max1, float min2, float max2) 
-    {
-        return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
     }
 }
