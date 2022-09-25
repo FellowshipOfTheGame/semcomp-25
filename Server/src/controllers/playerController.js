@@ -71,8 +71,6 @@ module.exports = {
         if(!req.user)
             return res.status(400).json({ message: "invalid user session" })
         
-        console.log(req.user)
-
         let userInfo = { 
             message: "incomplete", 
             name: req.user.first_name + ' ' + req.user.surname_name,
@@ -117,9 +115,8 @@ module.exports = {
          //   return res.status(400).json({ message: "invalid user session" })
         
         try {
-            console.log("UE")
             var playersRank = await Score.getRaking()
-            var personalRank = null // await Score.getPlayerRaking(userId)
+            var personalRank = await Score.getPlayerRaking(userId)
         } catch (err) {
             logger.error({
                 message: `at User.getRanking(): failed to find user ${req.user.id}`

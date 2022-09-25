@@ -3,8 +3,8 @@ const configEnv = require("../config")
 
 class SchemaMatch {
     
-    async findOneById(provider_id) {
-        const pathTable = configEnv.PROJECT_ID + '/match/' + provider_id
+    async findOneById(userId) {
+        const pathTable = configEnv.PROJECT_ID + '/match/' + `{userId}`
 
         // find one user
         return db.ref(pathTable).get().then((snapshot) => {
@@ -30,7 +30,50 @@ class SchemaMatch {
             started_at: match.startedAt,
             finished_at: match.finishedAt,
             score: match.score,
-            score_history: match.scoreHistory
+        });
+
+        return match;
+    }
+}
+
+var schemaMatchHistory = {
+     score: function (value) {
+       return !isNaN(value) && parseInt(value) == value && value < Number.MAX_SAFE_INTEGER 
+     },
+}
+
+class SchemaMatchHistory {
+
+    
+    async findOneById(userId) {
+        const pathTable = configEnv.PROJECT_ID + '/match-history/' + `${userId}`
+
+        // find one user
+        return db.ref(pathTable).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                return snapshot.val();
+            } else {
+                console.log("No data available");
+                return null;
+            }
+        }).catch((error) => {
+            logger.error({
+                message: `Could not find match `
+            });
+        });
+    }
+
+    async createOrUpdate(match) {
+        const pathTable = configEnv.PROJECT_ID + '/match-history/' + `${match.userId}`
+        
+        db.ref(pathTable).set({
+            created_at: firebase.database.ServerValue.TIMESTAMP,
+            match_id: match.matchId,
+            score_history: match.scoreHistory,
+            time_history: match.timeHistory,
+            rem_time_history: match.remTimeHistory,
+            is_paused_history: match.pausedHistory
         });
 
         return match;
@@ -38,5 +81,7 @@ class SchemaMatch {
 }
 
 module.exports = {
-    match: new SchemaMatch()
+    match: new SchemaMatch(),
+    MatchHistory: new SchemaMatchHistory(),
+    schemaMatchHistory,
 }

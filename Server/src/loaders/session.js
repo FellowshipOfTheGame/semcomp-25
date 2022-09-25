@@ -7,7 +7,7 @@ const sessionOpts = {
     name: "gameSession",
     saveUninitialized: false,
     cookie: {
-        secure: true, 
+        secure: false, 
         httpOnly: config.SESSION_HTTP_ONLY, 
         sameSite: config.SESSION_SAME_SITE, 
         maxAge: 3600000 * 24 * 7

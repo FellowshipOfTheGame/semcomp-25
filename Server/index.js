@@ -26,7 +26,7 @@ const viewsRoutes = require('./src/routes/views')
 const adminRoutes = require('./src/routes/admin')
 
 const app = express()
-app.set('trust proxy', true)
+// app.set('trust proxy', true)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
