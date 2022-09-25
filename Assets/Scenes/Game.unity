@@ -1434,7 +1434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.size
-      value: 68
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: presetSOList.Array.data[34]
@@ -1572,6 +1572,14 @@ PrefabInstance:
       propertyPath: presetSOList.Array.data[67]
       value: 
       objectReference: {fileID: 11400000, guid: c8218ddb0215a3b49bb7572fc77c03aa, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.data[68]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9726785d6bdc69741859a51540cd7dba, type: 2}
+    - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
+      propertyPath: presetSOList.Array.data[69]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f166894c331ce046bceeceab6546c47, type: 2}
     - target: {fileID: 3538776694070950586, guid: 9e779d78a78a8c640ac8274cd19e263e, type: 3}
       propertyPath: levelProgression.Array.data[0].easy
       value: 5
