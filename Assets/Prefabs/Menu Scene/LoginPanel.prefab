@@ -1265,7 +1265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Agora \xE9 s\xF3 clicar aqui embaixo pra colar o c\xF3digo:"
+  m_text: "Agora \xE9 s\xF3 colar o c\xF3digo aqui embaixo:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b568b9ad9ad29d42a5f1bee31387aa3, type: 2}
   m_sharedMaterial: {fileID: -705979859449889294, guid: 5b568b9ad9ad29d42a5f1bee31387aa3, type: 2}
@@ -1347,7 +1347,6 @@ GameObject:
   - component: {fileID: 4122556280032255316}
   - component: {fileID: 4122556280032255318}
   - component: {fileID: 4122556280032255322}
-  - component: {fileID: 3696090293910794264}
   m_Layer: 5
   m_Name: InputCode
   m_TagString: Untagged
@@ -1504,7 +1503,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 5b568b9ad9ad29d42a5f1bee31387aa3, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -1523,35 +1522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287c3be1dc00f0745a74c343d3117759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3696090293910794264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4122556280032255313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4122556280032255322}
-          m_TargetAssemblyTypeName: PasteFromClipboard, Assembly-CSharp
-          m_MethodName: Paste
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &4122556280040252122
 GameObject:
   m_ObjectHideFlags: 0
