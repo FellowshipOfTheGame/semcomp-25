@@ -3,7 +3,7 @@ var session = require('express-session');
 const config = require("../config")
 const { logger } = require("../config/logger")
 
-var redisStore = require('connect-redis')(session);
+var redisStore = require('connect-redis')(session)
 
 // Redis Database 1 - Sessions Storages
 const sessionClient  = redis.createClient({

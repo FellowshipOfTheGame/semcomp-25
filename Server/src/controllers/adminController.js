@@ -25,5 +25,4 @@ module.exports = {
             countGame: countGamesList
         });
     }
-
 }
