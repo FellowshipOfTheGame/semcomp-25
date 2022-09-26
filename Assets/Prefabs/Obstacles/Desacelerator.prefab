@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6926710620043022635}
   - component: {fileID: 1557910777477648374}
   - component: {fileID: 686868285019702308}
+  - component: {fileID: 240523752825799098}
   m_Layer: 0
   m_Name: Desacelerator
   m_TagString: Untagged
@@ -74,6 +75,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -8
+--- !u!210 &240523752825799098
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517058811042069102}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -4
 --- !u!1 &6579536129348199250
 GameObject:
   m_ObjectHideFlags: 0
