@@ -73,7 +73,7 @@ class SchemaMatchHistory {
             score_history: match.scoreHistory,
             time_history: match.timeHistory,
             rem_time_history: match.remTimeHistory,
-            is_paused_history: match.pausedHistory
+            paused_history: match.pausedHistory
         });
 
         return match;

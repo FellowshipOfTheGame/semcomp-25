@@ -17,6 +17,7 @@ routes.delete('/delete/logs', async (req, res) => {
     res.status(200).send("Log deleted!");
 })
 
-routes.get('/match/count', adminController.gamesCount)
+routes.get('/match/gamecount', adminController.gamesCount)
+routes.get('/match/history', adminController.getMatchHistory)
 
 module.exports = routes;

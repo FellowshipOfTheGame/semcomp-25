@@ -57,8 +57,9 @@ async function finish(req, res) {
     const userId = req.user.provider_id
 
     const matchInfo = {
-        score: parseInt(req.body.score),
+        score: req.body.score,
         rem_time: req.body.rem_time,
+        paused_time: req.body.paused_time,
         sign: ""
     }
 
@@ -77,14 +78,13 @@ async function finish(req, res) {
     }
 
     matchInfo.time = new Date().getTime()
-    matchInfo.is_paused = '0'
 
     return await matchClient.multi()
         .get(`${userId}_match`)
         .rPush(`${userId}_scores`, [String(matchInfo.score)])
         .rPush(`${userId}_times`, [matchInfo.time])
         .rPush(`${userId}_rem_time`, [String(matchInfo.rem_time)])
-        .rPush(`${userId}_paused`, [String(matchInfo.is_paused)])
+        .rPush(`${userId}_paused`, [String(matchInfo.paused_time)])
         .lRange(`${userId}_scores`, 0, -1)
         .lRange(`${userId}_times`, 0, -1)
         .lRange(`${userId}_rem_time`, 0, -1)
@@ -161,15 +161,15 @@ async function savepoint(req, res) {
     const matchInfo = {
         score: parseInt(req.body.score),
         rem_time: req.body.rem_time,
-        is_paused: (req.body.is_paused === false)? '0' : '1',
+        paused_time: req.body.paused_time,
         sign: ""
     }
 
     const sign  = req.body?.sign?.toString().trim()
     
-    if (userId === undefined || matchInfo.score === undefined || 
-        (matchInfo.is_paused != '0' && matchInfo.is_paused != '1')) 
+    if (userId === undefined || matchInfo.score === undefined) {
         return res.status(400).end()
+    }
 
     logger.info(`User ${userId} is trying to save a match`)
 
@@ -189,7 +189,7 @@ async function savepoint(req, res) {
         .rPush(`${userId}_scores`, [String(matchInfo.score)])
         .rPush(`${userId}_times`, [matchInfo.time])
         .rPush(`${userId}_rem_time`, [matchInfo.rem_time])
-        .rPush(`${userId}_paused`, [String(matchInfo.is_paused)])
+        .rPush(`${userId}_paused`, [String(matchInfo.paused_time)])
         //.expireat(`${userId}_match`, parseInt((+new Date)/1000) + parseInt(configEnv.MATCH_RESPONSE_TIMEOUT))
         .exec( async (err, results) => {
 
