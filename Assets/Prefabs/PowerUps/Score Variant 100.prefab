@@ -55,6 +55,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Score Variant 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8000740028316782815, guid: d1f1ae0d82206f4439bdf7f9a93cb3d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.72521
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000740028316782815, guid: d1f1ae0d82206f4439bdf7f9a93cb3d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.72521
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000740028316782815, guid: d1f1ae0d82206f4439bdf7f9a93cb3d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.72521
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000740028316782815, guid: d1f1ae0d82206f4439bdf7f9a93cb3d7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.006
+      objectReference: {fileID: 0}
     - target: {fileID: 8000740029534167613, guid: d1f1ae0d82206f4439bdf7f9a93cb3d7, type: 3}
       propertyPath: m_text
       value: 100

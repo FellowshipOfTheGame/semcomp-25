@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     public static bool isGamePaused = false;
+    public static float PausedTime;
 
     // Receive the PauseMenu game object
     public GameObject pauseMenuUI;
@@ -21,12 +22,15 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private RetryMenu retryMenu;    
 
     private AudioManager audioManager;
+    private Timer timer;
 
     private void Start()
     {
         audioManager = AudioManager.instance;
         Resume();
         scoreSystem = FindObjectOfType<ScoreSystem>();
+        timer = FindObjectOfType<Timer>();
+        PausedTime = 0f;
     }
     
     public void SwitchPaused()
@@ -67,11 +71,38 @@ public class PauseMenu : MonoBehaviour
 
         // Freeze the game
         Time.timeScale = 0f;
-
+        
         // Set true meaning that the game is paused
         isGamePaused = true;
+        
+        StartCoroutine(CountPausedTime());
 
         //BackgroundImage.SetActive(true);
+    }
+
+    private IEnumerator CountPausedTime()
+    {
+        while (isGamePaused)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            PausedTime += 1f;
+            Debug.Log($"Paused for {PausedTime}");
+        }
+        
+        var matchData = new MatchData()
+        {
+            score = scoreSystem.ScoreAmount,
+            rem_time = Mathf.RoundToInt(timer.CurrentTime),
+            paused_time = Mathf.RoundToInt(PausedTime)
+        };
+        
+        Debug.Log(PausedTime);
+
+        yield return MatchRequestHandler.SaveMatch(
+            matchData,
+            req => Debug.Log($"{req.responseCode}: {req.downloadHandler.text}"),
+            OnFailure: req => Debug.LogError($"{req.responseCode}: {req.downloadHandler.text}")
+        );
     }
 
     // Open the Main Menu

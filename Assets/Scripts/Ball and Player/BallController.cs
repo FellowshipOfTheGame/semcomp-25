@@ -76,20 +76,43 @@ public class BallController : MonoBehaviour
         playerManager.SetCanMove(false);
         PauseMenu.isGamePaused = true;
         StartCoroutine(StartMatch());
-            
+
         #endregion
-        
+
         // Uncomment this region to debug offline
+
         #region OfflineDebug
-        
+
         // StartCoroutine(gameManager.StartGameDelay());
-        
+
         #endregion
+    }
+
+    private void SaveMatch()
+    {
+        var matchData = new MatchData()
+        {
+            score = scoreSystem.ScoreAmount,
+            rem_time = Mathf.RoundToInt(timer.CurrentTime),
+            paused_time = Mathf.RoundToInt(PauseMenu.PausedTime)
+        };
+
+        StartCoroutine(MatchRequestHandler.SaveMatch(matchData));
+        // req => Debug.Log($"{req.responseCode}: {req.downloadHandler.text}"),
+        // OnFailure: req => Debug.LogError($"{req.responseCode}: {req.downloadHandler.text}")
     }
 
     private IEnumerator StartMatch()
     {
+        var matchData = new MatchData()
+        {
+            score = 0,
+            rem_time = 60,
+            paused_time = 0
+        };
+        
         yield return MatchRequestHandler.StartMatch(
+            matchData,
             () =>
             {
                 retryMenu.Close();
@@ -97,6 +120,7 @@ public class BallController : MonoBehaviour
                 timer.SetPaused(false);
                 PauseMenu.isGamePaused = false;
                 StartCoroutine(gameManager.StartGameDelay());
+                InvokeRepeating(nameof(SaveMatch), 30f, 30f);
             },
             req =>
             {
@@ -217,9 +241,7 @@ public class BallController : MonoBehaviour
     private float GetForceLevel(Vector2 from, Vector2 to)
     {
         float distance = Vector2.Distance(from, to);
-
         float distancePercent = distance / maxDistance;
-
         return Mathf.Clamp(distancePercent, 0.3f, 1f);
     }
 
@@ -247,7 +269,7 @@ public class BallController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // Comment this region to debug offline
-        #region ServerCommunication
+        #region Online
         
         var matchData = new MatchData()
         {
