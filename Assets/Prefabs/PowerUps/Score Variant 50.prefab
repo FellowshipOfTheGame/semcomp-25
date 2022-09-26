@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: score
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1594527716, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.018
+      objectReference: {fileID: 0}
     - target: {fileID: 6328219604131312215, guid: 8f0ba904a81b4604ab45d6a530aa7972, type: 3}
       propertyPath: m_Name
       value: Score Variant 50
