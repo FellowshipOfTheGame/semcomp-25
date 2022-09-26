@@ -4,8 +4,8 @@ html {
 }
 
 body { 
-    background: url("images/bg.jpg") no-repeat 30% bottom fixed;
-    background-size: cover;
+    /* background: url("images/bg.jpg") no-repeat 100% bottom fixed; */
+    /* background-size: cover; */
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -14,15 +14,25 @@ body {
     min-height: 100vh;
     font-family: 'Montserrat';
     color: #f6f646;
-    
+    background: url("images/background_1.png") ;
 }
 
 /* Header */
 header img { 
-    max-height: 300px;
-    max-width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+    /* max-height: 300px; */
+    /* max-width: 100%; */
+    /* /padding: 7px; */
+    /* padding: 0px; */
+    /* box-sizing: border-box; */
+    /* width: 100%; */
+    /* margin: 0; */
+    /* flex-grow: 1; */
+}
+
+#header-logo {
+    width: 100%;
+    flex-grow: 1;
+    opacity: 100%;
 }
 
 @media screen and (max-width: 800px) {
@@ -35,6 +45,7 @@ footer {
     text-align: center;
     background-color: #2d383c;
     border-top: solid 2px #f2c859;
+    opacity: 100%;
 }
 
 footer a { color: #fff; text-decoration: none; }
@@ -109,7 +120,7 @@ main {
 
 /* Main - Informações */
 main#about { 
-    margin: 40px;
+    margin: 0px 40px 40px 40px;
     padding: 40px;
     max-width: 1000px;
 
@@ -117,6 +128,7 @@ main#about {
     background-color: #fff;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     border-radius: 3px;
+    opacity: 100%;
 }
 
 main#about section { 
