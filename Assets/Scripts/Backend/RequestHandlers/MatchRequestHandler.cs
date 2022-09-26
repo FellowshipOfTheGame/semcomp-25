@@ -5,18 +5,18 @@ using UnityEngine.Networking;
 
 public static class MatchRequestHandler
 {
-    public static IEnumerator StartMatch(Action OnSuccess = null, Action<UnityWebRequest> OnFailure = null)
+    public static IEnumerator StartMatch(MatchData matchData, Action OnSuccess = null, Action<UnityWebRequest> OnFailure = null)
     {
         RaycastBlockEvent.Invoke(true);
         
-        var request = WebRequestFactory.AuthPostJson(Endpoints.MatchStart);
+        var data = JsonUtility.ToJson(matchData);
+        var request = WebRequestFactory.AuthPostJson(Endpoints.MatchStart, data);
         yield return request.SendWebRequest();
 
         RaycastBlockEvent.Invoke(false);
         
         if (request.result == UnityWebRequest.Result.Success)
         {
-            
             SessionAuthRequestHandler.SaveAuthCookie(request);
             OnSuccess?.Invoke();
         }
@@ -32,9 +32,7 @@ public static class MatchRequestHandler
         
         matchData.sign = Cryptography.GetSignature(matchData);
         var data = JsonUtility.ToJson(matchData);
-        
         var request = WebRequestFactory.AuthPostJson(Endpoints.MatchFinish, data);
-        
         yield return request.SendWebRequest();
 
         RaycastBlockEvent.Invoke(false);
@@ -49,7 +47,27 @@ public static class MatchRequestHandler
             catch
             {
                 OnFailure?.Invoke(request);
+                Debug.LogError(request.downloadHandler.text);
             }
+        }
+        else
+        {
+            OnFailure?.Invoke(request);
+            Debug.LogError(request.downloadHandler.text);
+        }
+    }
+
+    public static IEnumerator SaveMatch(MatchData matchData, Action<UnityWebRequest> OnSuccess = null, Action<UnityWebRequest> OnFailure = null)
+    {
+        matchData.sign = Cryptography.GetSignature(matchData);
+        var data = JsonUtility.ToJson(matchData);
+        // Debug.Log(data);
+        var request = WebRequestFactory.AuthPostJson(Endpoints.MatchSave, data);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            OnSuccess?.Invoke(request);
         }
         else
         {

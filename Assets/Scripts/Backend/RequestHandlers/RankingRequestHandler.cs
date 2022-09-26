@@ -17,7 +17,7 @@ public static class RankingRequestHandler
         if (request.result == UnityWebRequest.Result.Success)
         {
             SessionAuthRequestHandler.SaveAuthCookie(request);
-            Debug.Log(request.downloadHandler.text);
+            // Debug.Log(request.downloadHandler.text);
             var rankingData = JsonUtility.FromJson<RankingData>(request.downloadHandler.text);
             OnSuccess?.Invoke(rankingData);
         }
