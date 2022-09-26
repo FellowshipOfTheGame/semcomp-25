@@ -76,8 +76,6 @@ public class BallController : MonoBehaviour
         playerManager.SetCanMove(false);
         PauseMenu.isGamePaused = true;
         StartCoroutine(StartMatch());
-        
-        InvokeRepeating(nameof(SaveMatch), 10f, 10f);
 
         #endregion
 
@@ -122,6 +120,7 @@ public class BallController : MonoBehaviour
                 timer.SetPaused(false);
                 PauseMenu.isGamePaused = false;
                 StartCoroutine(gameManager.StartGameDelay());
+                InvokeRepeating(nameof(SaveMatch), 30f, 30f);
             },
             req =>
             {
