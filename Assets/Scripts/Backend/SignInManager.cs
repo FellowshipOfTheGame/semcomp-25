@@ -26,6 +26,7 @@ public class SignInManager : MonoBehaviour
 
     private IEnumerator ValidateCookie()
     {
+#if !UNITY_WEBGL && !UNITY_EDITOR
         var authCookie = PlayerPrefs.GetString(SessionAuthRequestHandler.AuthKey, string.Empty);
 
         if (string.IsNullOrEmpty(authCookie))
@@ -37,6 +38,7 @@ public class SignInManager : MonoBehaviour
 
             yield break;
         }
+#endif
         
         yield return SessionAuthRequestHandler.ValidateSession(OnValidateSuccess, OnValidateFailure);
     }
