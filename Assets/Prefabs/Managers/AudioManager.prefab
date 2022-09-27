@@ -226,6 +226,13 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Booster
+    clip: {fileID: 8300000, guid: 834301bb920d7e54b84ba433ebe3291a, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   Musics:
   - name: GameMusic
     clip: {fileID: 8300000, guid: 361ffe5d4a94a724a9926622e1115a07, type: 3}
