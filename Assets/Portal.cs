@@ -21,6 +21,7 @@ public class Portal : PowerUp
     }
     public override void Collected(Collider2D col)
     {
+        AudioManager.instance.PlaySFX("Portal");
         CalculateTargetRotation();
         Manager.Teleport(targetPortal.position,rotated*speed);
     }
