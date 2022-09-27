@@ -40,7 +40,7 @@ public class GameOver : MonoBehaviour
             randomMarmosetIndex = Random.Range(0, _sadMarmossets.transform.childCount);
             _currentMarmoset = _sadMarmossets.transform.GetChild(randomMarmosetIndex).gameObject;
         }
-        else if (score > highscore)
+        else if (score >= highscore)
         {
             randomMarmosetIndex = Random.Range(0, _happyMarmossets.transform.childCount);
             _currentMarmoset = _happyMarmossets.transform.GetChild(randomMarmosetIndex).gameObject;
