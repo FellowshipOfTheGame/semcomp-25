@@ -198,6 +198,34 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Wall1
+    clip: {fileID: 8300000, guid: ba8fb1ddaf5d8da499e09e5b207896c4, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Wall2
+    clip: {fileID: 8300000, guid: f37c7c03e2e8979478f8cb265e4cfefc, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Wall3
+    clip: {fileID: 8300000, guid: 48392f257c3f5074b84f24eb10442977, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Portal
+    clip: {fileID: 8300000, guid: e90a95268d478bb4ea486b4cccce8717, type: 3}
+    output: {fileID: 1557117526385683851, guid: 5b2acf946f478764e816491a856d5739, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   Musics:
   - name: GameMusic
     clip: {fileID: 8300000, guid: 361ffe5d4a94a724a9926622e1115a07, type: 3}
