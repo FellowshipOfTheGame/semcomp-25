@@ -4,7 +4,7 @@ const configEnv = require("../config")
 class SchemaMatch {
     
     async findOneById(userId) {
-        const pathTable = configEnv.PROJECT_ID + '/match/' + `{userId}`
+        const pathTable = configEnv.PROJECT_ID + '/match/' + `${userId}`
 
         // find one user
         return db.ref(pathTable).get().then((snapshot) => {

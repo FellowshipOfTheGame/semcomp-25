@@ -5,7 +5,7 @@
 // models
 const { StorageType } = require('winston-firebase-transport');
 const { admin } = require('../models/admin');
-const { MatchHistory } = require('../models/match');
+const { match, MatchHistory } = require('../models/match');
 const player = require('../models/player');
 const { Score } = require('../models/player');
 
@@ -44,6 +44,18 @@ module.exports = {
         }
         
         const matchInfo = await MatchHistory.findOneById(queryObject.id);
+        
+        res.status(200).json(matchInfo)
+    },
+
+    async getScoreHistory(req, res) {
+        const queryObject = url.parse(req.url, true).query;
+        console.log(queryObject);
+        if(queryObject.id === undefined) {
+            res.status(400).end()
+        }
+        
+        const matchInfo = await match.findOneById(queryObject.id);
         
         res.status(200).json(matchInfo)
     }
