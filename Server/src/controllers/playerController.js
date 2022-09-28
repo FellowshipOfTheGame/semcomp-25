@@ -18,16 +18,26 @@ module.exports = {
         try {
             player = await Player.findOneById(provider_id);
         } catch (err) {
-            console.log("Fail")
+            logger.error({
+                message: `Fail to find player.`
+            }) 
             return cb(err, null);
         }
 
         if (player) {
-                console.log("Found player")
+            
+            logger.info({
+                message: `Player ${player.provider_id} logged successfully from ${provider}`
+            });
+
             if (player.is_banned === false)
                  return cb(null, player);
-             else
-                 return cb(null, null)
+            
+            logger.error({
+                message: `Player ${player.provider_id} tried to log in, but is banned.`
+            });
+
+            return cb(null, null)
         }
 
         try {
@@ -43,8 +53,9 @@ module.exports = {
             Score.createOrUpdate({ provider_id: player.provider_id, name: player.first_name + ' ' + player.surname_name, top_score: 0 })
 
         } catch (err) {
-            console.log("Error create user")
-            console.log(err)
+            logger.error({
+                message: `Error create user.`
+            }) 
             return cb(err, null);
         }
 
@@ -60,8 +71,6 @@ module.exports = {
         if(!req.user)
             return res.status(400).json({ message: "invalid user session" })
         
-        console.log(req.user)
-
         let userInfo = { 
             message: "incomplete", 
             name: req.user.first_name + ' ' + req.user.surname_name,
@@ -100,12 +109,14 @@ module.exports = {
         
     },
     async getRanking(req, res) { 
-        if(!req.user)
-            return res.status(400).json({ message: "invalid user session" })
+        const userId = req.user.provider_id;
+        
+        //if(!userId)
+         //   return res.status(400).json({ message: "invalid user session" })
         
         try {
-            var allPlayers = await Score.findAll()
-
+            var playersRank = await Score.getRaking()
+            var personalRank = await Score.getPlayerRaking(userId)
         } catch (err) {
             logger.error({
                 message: `at User.getRanking(): failed to find user ${req.user.id}`
@@ -113,7 +124,9 @@ module.exports = {
             console.log(err)
             return res.status(500).json({ message: "internal server error" })
         }
-    
-        return res.status(200).json(allPlayers) 
+        
+        const rankingData = { personal: personalRank, ranking: playersRank } 
+
+        return res.status(200).json(rankingData) 
     }
 }   

@@ -1,31 +1,38 @@
-/* General Configurations */
-@font-face { font-family: Traffic; src: url(font/TRAFFIC3.TTF); }
-@font-face { font-family: TrafficText; src: url(font/TRAFFIC2_0.ttf); }
-
-html { scroll-behavior: smooth; }
+html { 
+    scroll-behavior: smooth; 
+    background-color: #195030;
+}
 
 body { 
-    background: url("images/bg.jpg") no-repeat 30% bottom fixed;
-    background-size: cover;
-
+    /* background: url("images/bg.jpg") no-repeat 100% bottom fixed; */
+    /* background-size: cover; */
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     margin:  0;
     padding: 0;
     min-height: 100vh;
-
-    font-family: Traffic;
-    color: #ffffff;
-    
+    font-family: 'Montserrat';
+    color: #f6f646;
+    background: url("images/background_1.png") ;
 }
 
 /* Header */
 header img { 
-    max-height: 300px;
-    max-width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+    /* max-height: 300px; */
+    /* max-width: 100%; */
+    /* /padding: 7px; */
+    /* padding: 0px; */
+    /* box-sizing: border-box; */
+    /* width: 100%; */
+    /* margin: 0; */
+    /* flex-grow: 1; */
+}
+
+#header-logo {
+    width: 100%;
+    flex-grow: 1;
+    opacity: 100%;
 }
 
 @media screen and (max-width: 800px) {
@@ -38,6 +45,7 @@ footer {
     text-align: center;
     background-color: #2d383c;
     border-top: solid 2px #f2c859;
+    opacity: 100%;
 }
 
 footer a { color: #fff; text-decoration: none; }
@@ -59,7 +67,7 @@ footer a:hover { text-decoration: underline; }
     border-radius: 15px;
 }
 .placa > * > *:first-child { margin-top: 0; }
-.placa p, .placa li, .placa a { font-family: TrafficText; }
+.placa p, .placa li, .placa a { font-family: 'Montserrat'; }
 .placa p { margin-bottom: 0;}
 
 .placa.yellow { color: #000; background-image: linear-gradient(#f2c859, #e5842b); }
@@ -78,7 +86,7 @@ footer a:hover { text-decoration: underline; }
 
     color: #fff;
     text-align: center;
-    font-family: TrafficText;
+    font-family: mont;
     text-decoration: none;
     background-image: linear-gradient(#2f734e, #195030);
 }
@@ -112,7 +120,7 @@ main {
 
 /* Main - Informações */
 main#about { 
-    margin: 40px;
+    margin: 0px 40px 40px 40px;
     padding: 40px;
     max-width: 1000px;
 
@@ -120,6 +128,7 @@ main#about {
     background-color: #fff;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     border-radius: 3px;
+    opacity: 100%;
 }
 
 main#about section { 
@@ -133,6 +142,6 @@ main#about section:first-child {
     border-top: none;
 }
 main#about section *:first-child { margin-top: 0; }
-main#about p { font-family: TrafficText; }
+main#about p { font-family: 'Montserrat'; }
 main#about a { color: #1f71aa; text-decoration: none; }
 main#about a:hover { text-decoration: underline; }

@@ -17,15 +17,6 @@ module.exports = function (passport) {
     });
  
     passport.deserializeUser(function(obj, done){
-        // find user in firebase
-        const tableName = configEnv.PROJECT_ID + '/player/' + obj.id 
-
-        // Player.findOneById(tableName, function(err, player){
-        //     console.log("FOUND BEFORE")
-        //     done(err, player);    
-        // });
-        
-        // testin return the google profile
         done(null, obj);
     });
 
@@ -36,28 +27,22 @@ module.exports = function (passport) {
                 callbackURL: configEnv.GOOGLE_CALLBACK_URL,
             },
             function(accessToken, refreshToken, params, profile, done) {
-                console.log(params)
-     
-                // PlayerController.findOrCreate(profile, (err, player) => {
-                //     if (err) {
-                //         logger.error({
-                //             message: `at Google Login: ${err}`
-                //         })
-                //         return done(null, null, { message: "unable to create or find user" })
-                //     }
+                const provider = 'google'
+    
+                PlayerController.findOrCreate(profile.id, provider, profile._json, (err, player) => {
+                    if (err) {
+                        logger.error({
+                            message: `at Google Login: ${err}`
+                        })
+                        return done(null, null, { message: "unable to create or find user" })
+                    }
 
-                //     if (!player) {
-                //         return done(null, null, { message: "user not created or not found" });
-                //     }
-                    
-                //     return done(null, player);
-                // });
+                    if (!player) {
+                        return done(null, null, { message: "user not created or not found" });
+                    }
 
-                // while testing, just return the google profile 
-                console.log(profile);
-                console.log("This re: " + refreshToken);
-                console.log("This is the accessToken: " + accessToken)
-                return done(null, profile);
+                    return done(null, player);
+                });
             }
         ));
     }
@@ -73,6 +58,7 @@ module.exports = function (passport) {
             },
             function(parsedToken, googleId, done) {
                 const provider = 'google'
+
                 PlayerController.findOrCreate(googleId, provider, parsedToken, (err, player) => {
                     if (err) {
                         logger.error({
@@ -84,7 +70,7 @@ module.exports = function (passport) {
                     if (!player) {
                         return done(null, null, { message: "user not created or not found" });
                     }
-                    
+
                     return done(null, player);
                 });
             }

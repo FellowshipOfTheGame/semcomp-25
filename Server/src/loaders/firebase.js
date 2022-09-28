@@ -1,10 +1,9 @@
-const firebase = require('firebase');
 const configEnv = require("../config");
 const { logger } = require("../config/logger");
 
-// Import app from SDKs
-const { initializeApp } = require("firebase/app");
-const { get } = require('../routes/session');
+const firebase = require('firebase');
+const { initializeApp } = require("firebase-admin/app")
+const admin = require("firebase-admin");
 
 /**
  * Database Singleton (using Firebase)
@@ -17,26 +16,22 @@ class FirebaseClient {
     }
 
     _connect() {
+        let serviceAccount = require("./serviceAccountKey.json");
+
         // Web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: configEnv.API_KEY,
-            authDomain: configEnv.AUTH_DOMAIN,
             databaseURL: configEnv.DATABASE_URL,
-            projectId: configEnv.PROJECT_ID,
-            storageBucket: configEnv.STORAGE_BUCKET,
-            messagingSenderId: configEnv.MESSAGING_SENDER_ID,
-            appId: configEnv.APP_ID,
-            measurementId: configEnv.MEASUREMENT_ID
+            credential: admin.credential.cert(serviceAccount),
         }
     
         // Initialize Firebase
         let app;
         
         try {
-            if (!firebase.apps.length)
+            if (!admin.apps.length)
                 app = initializeApp(firebaseConfig);
             else
-               app = firebase.app(); // if already initialized, use that one
+               app = admin.app(); // if already initialized, use that one
 
             logger.info({
                 message: `at Firebase: connect successful`
@@ -49,7 +44,7 @@ class FirebaseClient {
     } 
 
     getFirebaseDatabase() {
-        return firebase.database()
+        return admin.database()
     }
 }
 const fbClient = new FirebaseClient()
