@@ -34,6 +34,7 @@ def plot_game_count():
     if not game_count:
         game_count = get_game_count()
     
+    print(game_count['countPlayers'])
     game_count_dict = game_count['countGames']
     game_count_dict.sort(key = lambda x : -x['top_score'])
 
@@ -52,7 +53,7 @@ def plot_game_score_evolution(id):
     if not userId: 
         return render_template('index.html')
 
-    if not score_history or score_history[userId] != userId:
+    if not score_history or userId in score_history.keys():
         score_history = get_score_history(userId)
 
     score_history_parse = {
