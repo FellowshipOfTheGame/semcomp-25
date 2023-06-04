@@ -21,13 +21,13 @@ module.exports = {
 // Controller Functions
 async function loginCallback(req, res) { 
     const otpCode = uuidv4()
+
     redis.set(`otp-${otpCode}`, req.sessionID, "EX", 3*60, (err) => { // Expire in 3 minutes        
         if(err){
             logger.error({
                 message: `at Session.loginCallback(): Error in set opt to session ${req.sessionID}`
             })
             return res.redirect(`${configEnv.SERVER_PATH_PREFIX}/?auth=failed`)
-
         }
         res.redirect(`${configEnv.SERVER_PATH_PREFIX}/codigo-login?code=${otpCode}`)
     }) 
@@ -52,7 +52,6 @@ async function getSession(req, res) {
             return res.status(500).json({ message: "internal server error" })
         }
         
-        console.log(results)
         const sessionID = results[0]
         
         if(sessionID === null) {
