@@ -56,12 +56,23 @@ public class GameOver : MonoBehaviour
 
     public void OnGameOver(int highScore)
     {
-        int totalPoints = _scoreSystem.ScoreAmount;
+        var totalPoints = _scoreSystem.ScoreAmount;
+
+        #region Offline
+        
+        if (totalPoints > ScoreSystem.HighScore)
+        {
+            ScoreSystem.HighScore = totalPoints;
+        }
+
+        highScore = ScoreSystem.HighScore;
+        
+        #endregion
 
         LoadMarmoset(totalPoints, highScore);
         
         GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
-        GameObject.FindObjectOfType<PlayerInputManager>().SetCanMove(false);
+        FindObjectOfType<PlayerInputManager>().SetCanMove(false);
 
         _gameOverPointsView.text = totalPoints + "";
         _highScoreView.text = "Melhor Pontuação: " + highScore + "";

@@ -860,6 +860,8 @@ MonoBehaviour:
   - {fileID: 3397308834356829574}
   - {fileID: 3397308834473575722}
   retryMenu: {fileID: 0}
+  offlineRankingsPath: finalRankings
+  offlinePersonalPlayerName: Eu
 --- !u!114 &3674941283946327033
 MonoBehaviour:
   m_ObjectHideFlags: 0

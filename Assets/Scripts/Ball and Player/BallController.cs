@@ -69,21 +69,21 @@ public class BallController : MonoBehaviour
 
     private void Start()
     {
-        // Comment this region to debug offline
+        // Comment this region to set offline
         #region Online
         
-        timer.SetPaused(true);
-        playerManager.SetCanMove(false);
-        PauseMenu.isGamePaused = true;
-        StartCoroutine(StartMatch());
+        // timer.SetPaused(true);
+        // playerManager.SetCanMove(false);
+        // PauseMenu.isGamePaused = true;
+        // StartCoroutine(StartMatch());
 
         #endregion
 
-        // Uncomment this region to debug offline
+        // Uncomment this region to set offline
 
-        #region OfflineDebug
+        #region Offline
 
-        // StartCoroutine(gameManager.StartGameDelay());
+        StartCoroutine(gameManager.StartGameDelay());
 
         #endregion
     }
@@ -268,30 +268,32 @@ public class BallController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        // Comment this region to debug offline
+        // Comment this region to set offline
         #region Online
         
-        var matchData = new MatchData()
-        {
-            score = scoreSystem.ScoreAmount
-        };
-
-        yield return StartCoroutine(MatchRequestHandler.FinishMatch(
-            matchData,
-            data =>
-            {
-                retryMenu.Close();
-                gameManager.GameOverScene(data.top_score);
-                Destroy(gameObject);
-            },
-            req => OnHTTPFailure(req, GameOver())));
+        // var matchData = new MatchData()
+        // {
+        //     score = scoreSystem.ScoreAmount
+        // };
+        //
+        // yield return StartCoroutine(MatchRequestHandler.FinishMatch(
+        //     matchData,
+        //     data =>
+        //     {
+        //         retryMenu.Close();
+        //         gameManager.GameOverScene(data.top_score);
+        //         Destroy(gameObject);
+        //     },
+        //     req => OnHTTPFailure(req, GameOver())
+        //     )
+        // );
         
         #endregion
         
-        // Uncomment this region to debug offline
-        #region OfflineDebug
-            // gameManager.GameOverScene(scoreSystem.ScoreAmount);
-            // Destroy(gameObject);
+        // Uncomment this region to set offline
+        #region Offline
+            gameManager.GameOverScene(ScoreSystem.HighScore);
+            Destroy(gameObject);
         #endregion
     }
 

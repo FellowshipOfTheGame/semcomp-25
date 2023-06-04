@@ -21,3 +21,9 @@ public struct RankingData
     public RankingPersonalData personal;
     public RankingPlayerData[] ranking;
 }
+
+[System.Serializable]
+public struct RankingDataOffline
+{
+    public RankingPlayerData[] ranking;
+}

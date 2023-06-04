@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -14,7 +12,23 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] bool enableWallHitScore;
     [SerializeField] bool enableSuccessfulPassScore;
     [SerializeField] bool enableGoalScore;
-    
+
+    private const string HighScoreKey = "HighScore";
+
+    public static int HighScore
+    {
+        get => PlayerPrefs.GetInt(HighScoreKey);
+        set
+        {
+            if (value < HighScore)
+            {
+                Debug.LogWarning($"Decreasing high score from {HighScore} to value");
+            }
+            
+            PlayerPrefs.SetInt(HighScoreKey, value);
+        }
+    }
+
     private int scoreAmount;
     public int ScoreAmount
     {
