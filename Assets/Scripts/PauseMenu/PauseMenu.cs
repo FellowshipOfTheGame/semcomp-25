@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -109,13 +106,24 @@ public class PauseMenu : MonoBehaviour
     public void FinishAndLoadMenu()
     {
         audioManager.PlaySFX("Button");
-#if !UNITY_EDITOR
-        StartCoroutine(FinishAndLoadMenuEnumerator());
-#else
+
+        // Comment this region to set offline
+        
+        #region Online
+        
+        // StartCoroutine(FinishAndLoadMenuEnumerator());
+        
+        #endregion Online
+        
+        // Uncomment this region to set offline
+
+        #region Offline
+        
         Time.timeScale = 1f;
         isGamePaused = false;
         SceneManager.LoadScene(0);
-#endif
+        
+        #endregion Offline
     }
 
     private IEnumerator FinishAndLoadMenuEnumerator()
@@ -141,25 +149,18 @@ public class PauseMenu : MonoBehaviour
 
     public void ReloadScene()
     {
-        // StartCoroutine(FinishAndLoadSceneEnumerator(SceneManager.GetActiveScene().buildIndex));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    // Quit the game
+    
     public void QuitGame()
     {
-        Debug.Log("Quit the game");
         Application.Quit();
     }
 
-    private float effecttmp;
-    
     public void Volume()
     {
         audioManager.PlaySFX("Button");
-
         menuLabelText.text = "VOLUME";
-                        
         volumePanel.SetActive(true);
     }
 }

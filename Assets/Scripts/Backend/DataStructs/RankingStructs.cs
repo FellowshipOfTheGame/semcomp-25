@@ -1,6 +1,4 @@
-﻿using UnityEngine.Serialization;
-
-[System.Serializable]
+﻿[System.Serializable]
 public struct RankingPlayerData
 {
     public string name;
