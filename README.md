@@ -2,6 +2,10 @@
 
 # Semcopa
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<a href="https://fog-icmc.itch.io/semcopa"><img alt="Disponível no itch.io" src="https://static.itch.io/images/badge-color.svg" height="54" /></a> <a href="https://play.google.com/store/apps/details?id=com.FellowshipOfTheGame.Semcopa"><img alt="Disponível no Google Play" src="https://play.google.com/intl/pt-BR/badges/static/images/badges/pt-br_badge_web_generic.png" height="60" /></a>
+
 Venha se divertir com a bicharada e conquistar a Semcopa!
 
 https://github.com/FellowshipOfTheGame/semcomp-25/assets/25937648/530ebe77-c39c-4f34-9f3b-0b4e2d55169b
