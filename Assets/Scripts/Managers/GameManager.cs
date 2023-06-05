@@ -70,8 +70,7 @@ public class GameManager : MonoBehaviour
     public void PassLevel(bool changeUI)
     {
         level++;
-        if (changeUI)
-            SetLevelView();
+        if (changeUI) SetLevelView();
     }
 
     public void SetLevelView()
