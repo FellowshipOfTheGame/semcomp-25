@@ -1,12 +1,7 @@
 var OpenWindowPlugin = {
-    openWindow: function(link)
+    openWindow: function(url)
     {
-    	var url = Pointer_stringify(link);
-        document.onmouseup = function()
-        {
-        	window.open(url);
-        	document.onmouseup = null;
-        }
+        window.open(UTF8ToString(url));
     }
 };
 

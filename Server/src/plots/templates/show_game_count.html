@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>PlayerId</th>
+            <th>Username</th>
+            <th>TopScore</th>
+            <th>GameCount</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <th>{{ item['playerId'] }}</th>
+            <th>{{ item['username'] }}</th>
+            <th>{{ item['top_score'] }}</th>
+            <th>{{ item['count_game'] }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+<script>
+
+</script>

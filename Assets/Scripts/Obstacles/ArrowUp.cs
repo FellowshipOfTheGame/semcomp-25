@@ -34,12 +34,14 @@ public class ArrowUp : MonoBehaviour
     {
         if (!collision.CompareTag("Ball"))
             return;
+
         BallUp();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Ball"))
             return;
+        AudioManager.instance.PlaySFX("Booster");
         lastVel = ballRb.velocity;
         t = 0;
     }

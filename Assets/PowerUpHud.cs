@@ -7,6 +7,7 @@ public class PowerUpHud : MonoBehaviour
     [SerializeField] private GameObject PowerUpViewPrefab;
     private bool hasLifeView=false;
     [SerializeField] private PowerUpView lifeView;
+
     public void CreateTimer(Sprite powerUpSprite, float time)
     {
         GameObject obj=Instantiate(PowerUpViewPrefab, transform);
@@ -14,7 +15,16 @@ public class PowerUpHud : MonoBehaviour
         view.SetImage(powerUpSprite);
         view.StartTimer(time);
     }
-
+    public void DeleteViews(Sprite checkSprite)
+    {
+        foreach(Transform powerUp in transform)
+        {
+            if (powerUp.GetComponent<PowerUpView>().GetImage().sprite == checkSprite)
+            {
+                Destroy(powerUp.gameObject);
+            }
+        }
+    }
     public void SetLifeView(Sprite powerUpSprite, int lives)
     {
         if (!hasLifeView)

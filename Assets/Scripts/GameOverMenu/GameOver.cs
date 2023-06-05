@@ -40,7 +40,7 @@ public class GameOver : MonoBehaviour
             randomMarmosetIndex = Random.Range(0, _sadMarmossets.transform.childCount);
             _currentMarmoset = _sadMarmossets.transform.GetChild(randomMarmosetIndex).gameObject;
         }
-        else if (score > highscore)
+        else if (score >= highscore)
         {
             randomMarmosetIndex = Random.Range(0, _happyMarmossets.transform.childCount);
             _currentMarmoset = _happyMarmossets.transform.GetChild(randomMarmosetIndex).gameObject;
@@ -56,12 +56,23 @@ public class GameOver : MonoBehaviour
 
     public void OnGameOver(int highScore)
     {
-        int totalPoints = _scoreSystem.ScoreAmount;
+        var totalPoints = _scoreSystem.ScoreAmount;
+
+        #region Offline
+        
+        if (totalPoints > ScoreSystem.HighScore)
+        {
+            ScoreSystem.HighScore = totalPoints;
+        }
+
+        highScore = ScoreSystem.HighScore;
+        
+        #endregion
 
         LoadMarmoset(totalPoints, highScore);
         
         GameObject.FindWithTag("Ball").GetComponent<BallController>().enabled = false;
-        GameObject.FindObjectOfType<PlayerInputManager>().SetCanMove(false);
+        FindObjectOfType<PlayerInputManager>().SetCanMove(false);
 
         _gameOverPointsView.text = totalPoints + "";
         _highScoreView.text = "Melhor Pontuação: " + highScore + "";

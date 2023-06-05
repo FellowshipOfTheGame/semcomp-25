@@ -28,17 +28,34 @@ public class Destructible : MonoBehaviour
     {
         if (currentSprite >= spriteCount)
         {
-            if (fxObj.name == "MadeiraFx")
-                AudioManager.instance.PlaySFX("Madeira2");
-            else
-                AudioManager.instance.PlaySFX("Glass");
+            switch(fxObj.name)
+            {
+                case "MadeiraFx":
+                    AudioManager.instance.PlaySFX("Madeira2");
+                    break;
+                case "VidroFx":
+                    AudioManager.instance.PlaySFX("Glass");
+                    break;
+                case "PedraFx":
+                    AudioManager.instance.PlaySFX("Wall3");
+                    break;
+            }
 
             SpawnFx(transform);
             DestroyThis();
         }
         else
         {
-            AudioManager.instance.PlaySFX("Madeira1");
+            switch(fxObj.name)
+            {
+                case "MadeiraFx":
+                    AudioManager.instance.PlaySFX("Madeira1");
+                    break;
+                case "PedraFx":
+                    AudioManager.instance.PlaySFX("Wall1");
+                    break;
+            }
+
             spriteRenderer.sprite = sprites[currentSprite];
             currentSprite++;
         }

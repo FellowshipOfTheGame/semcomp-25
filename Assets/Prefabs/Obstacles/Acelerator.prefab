@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 2593628272729327836}
   - component: {fileID: 5570413129681261479}
   - component: {fileID: 6215031434104067585}
+  - component: {fileID: 4999952895785671219}
   m_Layer: 0
   m_Name: Acelerator
   m_TagString: Untagged
@@ -156,6 +157,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7, y: 5.2}
   m_EdgeRadius: 0
+--- !u!210 &4999952895785671219
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850922021099922329}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -4
 --- !u!1 &3465424799446284685
 GameObject:
   m_ObjectHideFlags: 0

@@ -78,6 +78,42 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a20107c8d2b3e9d4ab0f05085d0a3fd4, type: 2}
   - {fileID: 11400000, guid: c105367b5fe6c244887624fcc2a9ff90, type: 2}
   - {fileID: 11400000, guid: b84ba109c55961f43bb2350fa094c954, type: 2}
+  - {fileID: 11400000, guid: 1d97ca2c849be6e459d5a54754dfff6d, type: 2}
+  - {fileID: 11400000, guid: f0f716f20defc784daf69417b6ec0a35, type: 2}
+  - {fileID: 11400000, guid: d4ff593c1be081d4fa47ab2bacb96189, type: 2}
+  - {fileID: 11400000, guid: bb2cf6b2e6bf69840adcc6518b4b7e85, type: 2}
+  - {fileID: 11400000, guid: 83a82d517e299a742afdd732e7c37270, type: 2}
+  - {fileID: 11400000, guid: 08e1a83948a4b3c46b4d25dd4a9e1e0d, type: 2}
+  - {fileID: 11400000, guid: 6d1f69dfae4d7654f9ecd8e9d4869514, type: 2}
+  - {fileID: 11400000, guid: 62ee646de5de1734983aea7576c528ff, type: 2}
+  - {fileID: 11400000, guid: 4ea300fb5815aeb4d8d2be11cda47380, type: 2}
+  - {fileID: 11400000, guid: d05cb0ed1f0a0f846b183ec1fb885219, type: 2}
+  - {fileID: 11400000, guid: 27711afb8cb5af54892739766bf6a8d5, type: 2}
+  - {fileID: 11400000, guid: 527229e4800762a47959dd63f2003acf, type: 2}
+  - {fileID: 11400000, guid: ebeb1bc9de9fb1e43a00f8a10915e6cd, type: 2}
+  - {fileID: 11400000, guid: 23f1b88e1776faa42a904014023e5748, type: 2}
+  - {fileID: 11400000, guid: 15d9f5d7ab9f07548b1b07ba5f6288a3, type: 2}
+  - {fileID: 11400000, guid: 560c42a025c4af843b3b397732cc7d27, type: 2}
+  - {fileID: 11400000, guid: bb166a713785189468d30ce47c296e18, type: 2}
+  - {fileID: 11400000, guid: 5aad3549d04c25c4abb4d095a34b442d, type: 2}
+  - {fileID: 11400000, guid: f4f277a7818839f4a8ebc9d157995f08, type: 2}
+  - {fileID: 11400000, guid: 890b69860c83d0846849ff0b60b95d60, type: 2}
+  - {fileID: 11400000, guid: 9942ea1941e94564cb83a4b16241f62d, type: 2}
+  - {fileID: 11400000, guid: 475b3047508b5194f86a3dc192635655, type: 2}
+  - {fileID: 11400000, guid: 9548e9d8a8e55804eba17d0570e1b836, type: 2}
+  - {fileID: 11400000, guid: b3a2a506c3d602845a712cfb7a464874, type: 2}
+  - {fileID: 11400000, guid: 2da3923389ae23e4caabfb8123bb6aac, type: 2}
+  - {fileID: 11400000, guid: 371c6b79d6335cb4c8df27bf7850417b, type: 2}
+  - {fileID: 11400000, guid: 5fd2078f1ba507c40bbbf13833ac7a33, type: 2}
+  - {fileID: 11400000, guid: 447646e7648821346a11c1b7b9185851, type: 2}
+  - {fileID: 11400000, guid: 588e2f16b8b8ce148b9819361b4a9041, type: 2}
+  - {fileID: 11400000, guid: 5a6c4a718a06fd0488bb511426a11e3f, type: 2}
+  - {fileID: 11400000, guid: d8ff35d2a40063c49bade670f7108f5a, type: 2}
+  - {fileID: 11400000, guid: 78709a8aeffbd7b43b298285cc465a4b, type: 2}
+  - {fileID: 11400000, guid: 35cb316bf5934d346b53e9b24cb43a21, type: 2}
+  - {fileID: 11400000, guid: c8218ddb0215a3b49bb7572fc77c03aa, type: 2}
+  - {fileID: 11400000, guid: 9726785d6bdc69741859a51540cd7dba, type: 2}
+  - {fileID: 11400000, guid: 5f166894c331ce046bceeceab6546c47, type: 2}
   goalPresetSOList:
   - {fileID: 11400000, guid: b09f7ba08b3c66140bbad3fbfb524b1b, type: 2}
   - {fileID: 11400000, guid: 75a92a9e7d08b114bb96a17c642d47e4, type: 2}
@@ -89,59 +125,59 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 63ac906c0b34cbe4bad5e170ebcf1b00, type: 2}
   - {fileID: 11400000, guid: 84cc3bb7293d4b54a97859e00f123133, type: 2}
   levelProgression:
-  - easy: 8
+  - easy: 5
     normal: 0
     hard: 0
     goalDifficulty: 0
-  - easy: 6
-    normal: 2
-    hard: 0
-    goalDifficulty: 0
-  - easy: 7
-    normal: 3
-    hard: 0
-    goalDifficulty: 0
-  - easy: 7
-    normal: 5
+  - easy: 4
+    normal: 1
     hard: 0
     goalDifficulty: 0
   - easy: 5
+    normal: 1
+    hard: 0
+    goalDifficulty: 0
+  - easy: 7
+    normal: 2
+    hard: 0
+    goalDifficulty: 0
+  - easy: 6
+    normal: 3
+    hard: 0
+    goalDifficulty: 1
+  - easy: 5
+    normal: 4
+    hard: 0
+    goalDifficulty: 1
+  - easy: 3
+    normal: 6
+    hard: 0
+    goalDifficulty: 1
+  - easy: 2
     normal: 7
-    hard: 0
-    goalDifficulty: 1
-  - easy: 0
-    normal: 12
-    hard: 0
-    goalDifficulty: 1
-  - easy: 0
-    normal: 13
-    hard: 0
-    goalDifficulty: 1
-  - easy: 0
-    normal: 10
     hard: 3
     goalDifficulty: 1
+  - easy: 1
+    normal: 8
+    hard: 0
+    goalDifficulty: 1
   - easy: 0
-    normal: 10
-    hard: 5
+    normal: 9
+    hard: 0
     goalDifficulty: 1
   - easy: 0
     normal: 7
-    hard: 8
+    hard: 2
     goalDifficulty: 2
   - easy: 0
     normal: 5
-    hard: 10
+    hard: 4
     goalDifficulty: 2
   - easy: 0
     normal: 3
-    hard: 12
-    goalDifficulty: 2
-  - easy: 0
-    normal: 2
-    hard: 13
+    hard: 6
     goalDifficulty: 2
   - easy: 0
     normal: 0
-    hard: 15
+    hard: 9
     goalDifficulty: 2

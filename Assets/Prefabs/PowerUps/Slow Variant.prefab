@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoDestroy: 1
-  duration: 3
+  duration: 10
   timeScale: 0.5
   hasIceFx: 0
   icePrefab: {fileID: 0}

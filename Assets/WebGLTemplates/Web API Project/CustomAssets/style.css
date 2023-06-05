@@ -1,0 +1,7 @@
+html {
+    height: 100vh;
+    background-image: url('background.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: auto;
+}
